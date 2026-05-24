@@ -1,0 +1,6 @@
+# CF Pages — fall back to index.html for any missing routes
+/blog        /resources.html  302
+/docs        /resources.html  302
+/about       /company.html    302
+/jobs        /company.html    302
+/demo        /contact.html    302

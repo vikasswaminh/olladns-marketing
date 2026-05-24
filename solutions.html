@@ -1,0 +1,333 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <title>Solutions · olladns</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="site.css"/>
+  <style>
+    .solution-deep{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:center;padding:80px 0;border-bottom:1px solid var(--line)}
+    @media (max-width:900px){.solution-deep{grid-template-columns:1fr}}
+    .solution-deep .panel{padding:32px;background:var(--panel);border:1px solid var(--line);border-radius:14px}
+    .meta-row{display:grid;grid-template-columns:1fr 1fr;gap:0;border:1px solid var(--line);border-radius:8px;background:var(--bg-2);overflow:hidden;margin-top:14px}
+    .meta-row .it{padding:14px 16px;border-right:1px solid var(--line)}
+    .meta-row .it:nth-child(even){border-right:0}
+    .meta-row .it:nth-child(n+3){border-top:1px solid var(--line)}
+    .meta-row .v{font-family:var(--mono);font-size:22px;color:var(--accent);font-weight:600}
+    .meta-row .l{font-size:11.5px;color:var(--muted);margin-top:2px}
+  </style>
+</head>
+<body data-screen-label="Marketing — Solutions">
+
+<div id="site-nav"></div>
+
+<section class="page-hero">
+  <div class="grid-bg"></div>
+  <div class="container" style="position:relative">
+    <span class="eyebrow">Solutions</span>
+    <h1 class="gradient-text">Built for the way <em>your</em> security team works.</h1>
+    <p class="lede" style="font-size:19px">Whether you run a 200-tenant MSP, a 14-site enterprise, or a 6-school district, olladns adapts to the shape of your environment — not the other way around.</p>
+  </div>
+</section>
+
+<!-- Pick-a-segment -->
+<section class="section">
+  <div class="container">
+    <div class="row row-3">
+      <a class="solution-card" href="#msp">
+        <div class="badge-ic" data-ic="server"></div>
+        <h3>MSPs &amp; MSSPs</h3>
+        <p class="muted">Multi-tenant from day one. Brand the portal, bill per device, ship reports to every customer on autopilot.</p>
+        <span class="arrow">Explore MSP <span data-ic="arrow"></span></span>
+      </a>
+      <a class="solution-card" href="#enterprise">
+        <div class="badge-ic" data-ic="building"></div>
+        <h3>Enterprise</h3>
+        <p class="muted">Federated identity, granular roles, SIEM integration, 12-month retention — without an on-prem appliance.</p>
+        <span class="arrow">Explore Enterprise <span data-ic="arrow"></span></span>
+      </a>
+      <a class="solution-card" href="#k12">
+        <div class="badge-ic" data-ic="school"></div>
+        <h3>K-12 &amp; Education</h3>
+        <p class="muted">CIPA-compliant filtering, SafeSearch enforcement, transparent block pages, and Chromebook coverage off-network.</p>
+        <span class="arrow">Explore K-12 <span data-ic="arrow"></span></span>
+      </a>
+      <a class="solution-card" href="#healthcare">
+        <div class="badge-ic" data-ic="heart"></div>
+        <h3>Healthcare</h3>
+        <p class="muted">HIPAA-ready logging, medical-device-safe categories, BAA on every plan, and audit trails to spare.</p>
+        <span class="arrow">Explore Healthcare <span data-ic="arrow"></span></span>
+      </a>
+      <a class="solution-card" href="#smb">
+        <div class="badge-ic" data-ic="building"></div>
+        <h3>Small Business</h3>
+        <p class="muted">Enterprise-grade protection in 15 minutes. No appliance, no training, no consultant required.</p>
+        <span class="arrow">Explore SMB <span data-ic="arrow"></span></span>
+      </a>
+      <a class="solution-card" href="#federal">
+        <div class="badge-ic" data-ic="shield"></div>
+        <h3>Public sector</h3>
+        <p class="muted">FedRAMP Moderate (in process), StateRAMP authorized, US-only resolvers, government-grade SLAs.</p>
+        <span class="arrow">Explore Public sector <span data-ic="arrow"></span></span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- DEEP DIVES -->
+<section style="padding:0" id="msp">
+  <div class="container">
+    <div class="solution-deep">
+      <div>
+        <span class="eyebrow">MSPs &amp; MSSPs</span>
+        <h2 style="margin-top:14px">Onboard a new tenant in under five minutes.</h2>
+        <p class="lede" style="margin-top:18px">olladns is built multi-tenant top to bottom. White-label the console with your logo and domain. Manage every customer from one operator pane. Bill from real usage, not seat licenses.</p>
+        <ul style="margin:24px 0 0;padding:0;list-style:none;display:flex;flex-direction:column;gap:10px">
+          <li class="flex"><span data-ic="check" class="accent"></span> Hierarchical tenants — partner, customer, site, group, device</li>
+          <li class="flex"><span data-ic="check" class="accent"></span> White-label portal at your own subdomain</li>
+          <li class="flex"><span data-ic="check" class="accent"></span> ConnectWise, Autotask, &amp; HaloPSA usage sync</li>
+          <li class="flex"><span data-ic="check" class="accent"></span> Per-tenant branded reports, scheduled automatically</li>
+          <li class="flex"><span data-ic="check" class="accent"></span> 35% partner margin, no minimum commitment</li>
+        </ul>
+        <a class="btn primary lg" style="margin-top:32px" href="contact.html">Apply to the partner program <span data-ic="arrow"></span></a>
+      </div>
+      <div class="panel">
+        <div style="font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin-bottom:8px">MSP Console · Tenants</div>
+        <div style="display:flex;flex-direction:column;gap:8px">
+          <div style="display:grid;grid-template-columns:30px 1fr 60px 60px 60px;gap:10px;padding:10px 12px;background:var(--bg-2);border:1px solid var(--line);border-radius:6px;align-items:center;font-size:12px">
+            <div style="width:24px;height:24px;border-radius:5px;background:linear-gradient(135deg,#22d3ee,#a78bfa);display:grid;place-items:center;color:#031;font-weight:700;font-size:10px">NW</div>
+            <div><div style="font-weight:600">Northwind Labs</div><div class="muted tiny">442 devices · 8 sites</div></div>
+            <div style="font-family:var(--mono);font-size:11px;text-align:right">2.4M</div>
+            <div style="font-family:var(--mono);font-size:11px;text-align:right;color:var(--bad)">148</div>
+            <div><span class="pill good" style="font-size:9px;padding:1px 6px">healthy</span></div>
+          </div>
+          <div style="display:grid;grid-template-columns:30px 1fr 60px 60px 60px;gap:10px;padding:10px 12px;background:var(--bg-2);border:1px solid var(--line);border-radius:6px;align-items:center;font-size:12px">
+            <div style="width:24px;height:24px;border-radius:5px;background:linear-gradient(135deg,#f59e0b,#ef4444);display:grid;place-items:center;color:#fff;font-weight:700;font-size:10px">CR</div>
+            <div><div style="font-weight:600">Cobalt Rivers Capital</div><div class="muted tiny">198 devices · 3 sites</div></div>
+            <div style="font-family:var(--mono);font-size:11px;text-align:right">1.1M</div>
+            <div style="font-family:var(--mono);font-size:11px;text-align:right;color:var(--bad)">62</div>
+            <div><span class="pill good" style="font-size:9px;padding:1px 6px">healthy</span></div>
+          </div>
+          <div style="display:grid;grid-template-columns:30px 1fr 60px 60px 60px;gap:10px;padding:10px 12px;background:var(--bg-2);border:1px solid var(--line);border-radius:6px;align-items:center;font-size:12px">
+            <div style="width:24px;height:24px;border-radius:5px;background:linear-gradient(135deg,#10b981,#22d3ee);display:grid;place-items:center;color:#fff;font-weight:700;font-size:10px">LP</div>
+            <div><div style="font-weight:600">Larson Plumbing Co.</div><div class="muted tiny">22 devices · 1 site</div></div>
+            <div style="font-family:var(--mono);font-size:11px;text-align:right">88K</div>
+            <div style="font-family:var(--mono);font-size:11px;text-align:right;color:var(--bad)">4</div>
+            <div><span class="pill good" style="font-size:9px;padding:1px 6px">healthy</span></div>
+          </div>
+          <div style="display:grid;grid-template-columns:30px 1fr 60px 60px 60px;gap:10px;padding:10px 12px;background:var(--bg-2);border:1px solid var(--line);border-radius:6px;align-items:center;font-size:12px">
+            <div style="width:24px;height:24px;border-radius:5px;background:linear-gradient(135deg,#a78bfa,#f472b6);display:grid;place-items:center;color:#fff;font-weight:700;font-size:10px">SP</div>
+            <div><div style="font-weight:600">Saxon &amp; Pine Architects</div><div class="muted tiny">61 devices · 2 sites</div></div>
+            <div style="font-family:var(--mono);font-size:11px;text-align:right">340K</div>
+            <div style="font-family:var(--mono);font-size:11px;text-align:right;color:var(--warn)">28</div>
+            <div><span class="pill warn" style="font-size:9px;padding:1px 6px">review</span></div>
+          </div>
+          <div style="display:grid;grid-template-columns:30px 1fr 60px 60px 60px;gap:10px;padding:10px 12px;background:var(--bg-2);border:1px solid var(--line);border-radius:6px;align-items:center;font-size:12px">
+            <div style="width:24px;height:24px;border-radius:5px;background:linear-gradient(135deg,#ef4444,#fb923c);display:grid;place-items:center;color:#fff;font-weight:700;font-size:10px">MD</div>
+            <div><div style="font-weight:600">Meridian Diagnostics</div><div class="muted tiny">187 devices · 5 sites</div></div>
+            <div style="font-family:var(--mono);font-size:11px;text-align:right">1.8M</div>
+            <div style="font-family:var(--mono);font-size:11px;text-align:right;color:var(--bad)">94</div>
+            <div><span class="pill good" style="font-size:9px;padding:1px 6px">healthy</span></div>
+          </div>
+          <div class="muted tiny" style="text-align:center;padding:8px">+ 214 more tenants</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section style="padding:0" id="enterprise">
+  <div class="container">
+    <div class="solution-deep">
+      <div class="panel" style="order:-1">
+        <div style="font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin-bottom:14px">Sites · Acme Corp</div>
+        <div class="meta-row">
+          <div class="it"><div class="v">12</div><div class="l">Sites worldwide</div></div>
+          <div class="it"><div class="v">1,082</div><div class="l">Devices</div></div>
+          <div class="it"><div class="v">14.2M</div><div class="l">Queries / 24h</div></div>
+          <div class="it"><div class="v">412.8K</div><div class="l">Blocks / 24h</div></div>
+        </div>
+        <div style="margin-top:18px;display:flex;flex-direction:column;gap:8px">
+          <div style="display:flex;align-items:center;gap:10px;padding:10px;background:var(--bg-2);border:1px solid var(--line);border-radius:6px;font-size:12.5px">
+            <span style="width:6px;height:6px;border-radius:50%;background:var(--good);box-shadow:0 0 8px var(--good)"></span>
+            <span style="font-weight:600">HQ — New York</span>
+            <span class="muted mono tiny" style="margin-left:auto">2.4M · 192.0.2.0/24</span>
+          </div>
+          <div style="display:flex;align-items:center;gap:10px;padding:10px;background:var(--bg-2);border:1px solid var(--line);border-radius:6px;font-size:12.5px">
+            <span style="width:6px;height:6px;border-radius:50%;background:var(--good);box-shadow:0 0 8px var(--good)"></span>
+            <span style="font-weight:600">London — Soho</span>
+            <span class="muted mono tiny" style="margin-left:auto">612K · 203.0.113.0/24</span>
+          </div>
+          <div style="display:flex;align-items:center;gap:10px;padding:10px;background:var(--bg-2);border:1px solid var(--line);border-radius:6px;font-size:12.5px">
+            <span style="width:6px;height:6px;border-radius:50%;background:var(--good);box-shadow:0 0 8px var(--good)"></span>
+            <span style="font-weight:600">Singapore APAC</span>
+            <span class="muted mono tiny" style="margin-left:auto">334K · 198.18.0.0/24</span>
+          </div>
+          <div style="display:flex;align-items:center;gap:10px;padding:10px;background:var(--bg-2);border:1px solid var(--line);border-radius:6px;font-size:12.5px">
+            <span style="width:6px;height:6px;border-radius:50%;background:var(--warn)"></span>
+            <span style="font-weight:600">Roaming — Global</span>
+            <span class="muted mono tiny" style="margin-left:auto">4.8M · 614 endpoints</span>
+          </div>
+        </div>
+      </div>
+      <div>
+        <span class="eyebrow">Enterprise</span>
+        <h2 style="margin-top:14px">A federated security stack, with DNS as the keystone.</h2>
+        <p class="lede" style="margin-top:18px">Replace your on-prem secure web gateway, retire those forwarder VMs, and unify policy across every office and remote endpoint. olladns deploys in a day and survives the audit.</p>
+        <ul style="margin:24px 0 0;padding:0;list-style:none;display:flex;flex-direction:column;gap:10px">
+          <li class="flex"><span data-ic="check" class="accent"></span> SSO with Entra ID, Okta, Ping, Google, generic SAML</li>
+          <li class="flex"><span data-ic="check" class="accent"></span> Granular RBAC — 7 built-in roles, custom policies</li>
+          <li class="flex"><span data-ic="check" class="accent"></span> 12-month query retention with hot search</li>
+          <li class="flex"><span data-ic="check" class="accent"></span> Private resolver IPs, BYOIP, on-prem gateway options</li>
+          <li class="flex"><span data-ic="check" class="accent"></span> 99.999% multi-region SLA with credit guarantee</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section style="padding:0" id="k12">
+  <div class="container">
+    <div class="solution-deep">
+      <div>
+        <span class="eyebrow">K-12 &amp; Education</span>
+        <h2 style="margin-top:14px">CIPA-compliant filtering that doesn&rsquo;t break learning.</h2>
+        <p class="lede" style="margin-top:18px">Block the categories you must — adult content, gambling, weapons, self-harm — while still letting students reach research, video, and educational tools. olladns gives you the audit trail E-Rate and your school board need.</p>
+        <ul style="margin:24px 0 0;padding:0;list-style:none;display:flex;flex-direction:column;gap:10px">
+          <li class="flex"><span data-ic="check" class="accent"></span> One-click CIPA-baseline policy</li>
+          <li class="flex"><span data-ic="check" class="accent"></span> SafeSearch enforced on Google, Bing, YouTube</li>
+          <li class="flex"><span data-ic="check" class="accent"></span> Chromebook + iPad off-network coverage via MDM</li>
+          <li class="flex"><span data-ic="check" class="accent"></span> Self-harm &amp; threat keyword alerts → counselor email</li>
+          <li class="flex"><span data-ic="check" class="accent"></span> Transparent block page with appeal link</li>
+        </ul>
+      </div>
+      <div class="panel">
+        <div style="font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin-bottom:14px">CIPA Baseline · Blocked categories</div>
+        <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:8px">
+          <div class="pill" style="justify-content:space-between"><span>Adult Content</span><span class="accent" data-ic="check"></span></div>
+          <div class="pill" style="justify-content:space-between"><span>Gambling</span><span class="accent" data-ic="check"></span></div>
+          <div class="pill" style="justify-content:space-between"><span>Weapons</span><span class="accent" data-ic="check"></span></div>
+          <div class="pill" style="justify-content:space-between"><span>Drugs &amp; Alcohol</span><span class="accent" data-ic="check"></span></div>
+          <div class="pill" style="justify-content:space-between"><span>Self-harm</span><span class="accent" data-ic="check"></span></div>
+          <div class="pill" style="justify-content:space-between"><span>Hate &amp; Violence</span><span class="accent" data-ic="check"></span></div>
+          <div class="pill" style="justify-content:space-between"><span>Anonymizers</span><span class="accent" data-ic="check"></span></div>
+          <div class="pill" style="justify-content:space-between"><span>Phishing</span><span class="accent" data-ic="check"></span></div>
+        </div>
+        <div style="border-top:1px solid var(--line);margin-top:18px;padding-top:18px">
+          <div style="font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin-bottom:12px">Allowed for learning</div>
+          <div style="display:flex;gap:6px;flex-wrap:wrap">
+            <span class="pill good">Khan Academy</span>
+            <span class="pill good">YouTube (SafeSearch)</span>
+            <span class="pill good">Wikipedia</span>
+            <span class="pill good">Google Classroom</span>
+            <span class="pill good">Canvas LMS</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section style="padding:0" id="healthcare">
+  <div class="container">
+    <div class="solution-deep">
+      <div class="panel" style="order:-1">
+        <div style="font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin-bottom:14px">Compliance posture</div>
+        <div style="display:flex;flex-direction:column;gap:10px">
+          <div style="display:flex;align-items:center;gap:12px;padding:14px;background:var(--bg-2);border:1px solid var(--line);border-radius:8px">
+            <div style="width:34px;height:34px;border-radius:8px;background:rgba(34,197,94,.10);color:#22c55e;display:grid;place-items:center" data-ic="shield-check"></div>
+            <div><div style="font-weight:600">HIPAA</div><div class="muted tiny">BAA on every plan · 12-month query retention</div></div>
+          </div>
+          <div style="display:flex;align-items:center;gap:12px;padding:14px;background:var(--bg-2);border:1px solid var(--line);border-radius:8px">
+            <div style="width:34px;height:34px;border-radius:8px;background:rgba(34,197,94,.10);color:#22c55e;display:grid;place-items:center" data-ic="shield-check"></div>
+            <div><div style="font-weight:600">SOC 2 Type II</div><div class="muted tiny">Audited annually · report on request</div></div>
+          </div>
+          <div style="display:flex;align-items:center;gap:12px;padding:14px;background:var(--bg-2);border:1px solid var(--line);border-radius:8px">
+            <div style="width:34px;height:34px;border-radius:8px;background:rgba(34,197,94,.10);color:#22c55e;display:grid;place-items:center" data-ic="shield-check"></div>
+            <div><div style="font-weight:600">ISO 27001:2022</div><div class="muted tiny">Certified · scope: all services</div></div>
+          </div>
+          <div style="display:flex;align-items:center;gap:12px;padding:14px;background:var(--bg-2);border:1px solid var(--line);border-radius:8px">
+            <div style="width:34px;height:34px;border-radius:8px;background:rgba(245,158,11,.10);color:#f59e0b;display:grid;place-items:center" data-ic="shield-alert"></div>
+            <div><div style="font-weight:600">HITRUST CSF</div><div class="muted tiny">In progress · expected Q3 2026</div></div>
+          </div>
+        </div>
+      </div>
+      <div>
+        <span class="eyebrow">Healthcare</span>
+        <h2 style="margin-top:14px">Filter the network without disrupting the OR.</h2>
+        <p class="lede" style="margin-top:18px">Medical device categories pre-allowed. PHI never leaves your network. BAA included. Audit logs that hold up to compliance reviews.</p>
+        <ul style="margin:24px 0 0;padding:0;list-style:none;display:flex;flex-direction:column;gap:10px">
+          <li class="flex"><span data-ic="check" class="accent"></span> Pre-built &ldquo;medical safe&rdquo; policy that won&rsquo;t break devices</li>
+          <li class="flex"><span data-ic="check" class="accent"></span> EHR &amp; PACS-aware allow-lists for Epic, Cerner, Meditech</li>
+          <li class="flex"><span data-ic="check" class="accent"></span> Tamper-evident audit logs · WORM-mode S3 export</li>
+          <li class="flex"><span data-ic="check" class="accent"></span> Phishing protection tuned for patient-portal lookalikes</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section style="padding:0" id="smb">
+  <div class="container">
+    <div class="solution-deep">
+      <div>
+        <span class="eyebrow">Small Business</span>
+        <h2 style="margin-top:14px">Enterprise security. Without the enterprise IT team.</h2>
+        <p class="lede" style="margin-top:18px">If you have a router, you can deploy olladns in 15 minutes. Sensible defaults block 99% of threats out-of-the-box. You only see the console when you want to.</p>
+        <ul style="margin:24px 0 0;padding:0;list-style:none;display:flex;flex-direction:column;gap:10px">
+          <li class="flex"><span data-ic="check" class="accent"></span> Plain-English block page — no IT jargon</li>
+          <li class="flex"><span data-ic="check" class="accent"></span> Weekly email digest of what we blocked &amp; saved</li>
+          <li class="flex"><span data-ic="check" class="accent"></span> One-click presets: Office, Retail, Construction, Hospitality</li>
+          <li class="flex"><span data-ic="check" class="accent"></span> Live chat support, US-based, 24/5</li>
+        </ul>
+      </div>
+      <div class="panel">
+        <div style="font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin-bottom:14px">Weekly digest · Sample</div>
+        <div style="padding:18px;background:var(--bg-2);border:1px solid var(--line);border-radius:8px">
+          <div style="font-weight:600;margin-bottom:8px">This week, olladns protected your business.</div>
+          <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:14px">
+            <div><div class="muted tiny">Threats stopped</div><div style="font-family:var(--mono);font-size:24px;color:var(--accent);font-weight:600">142</div></div>
+            <div><div class="muted tiny">Phishing blocks</div><div style="font-family:var(--mono);font-size:24px;color:var(--accent);font-weight:600">38</div></div>
+            <div><div class="muted tiny">Bandwidth saved</div><div style="font-family:var(--mono);font-size:24px;color:var(--accent);font-weight:600">4.2GB</div></div>
+          </div>
+          <div style="margin-top:18px;padding-top:14px;border-top:1px solid var(--line)">
+            <div class="muted tiny" style="margin-bottom:8px">Top threats blocked</div>
+            <div style="font-family:var(--mono);font-size:11.5px;color:var(--text-2);line-height:1.8">
+              tracker.adsvc.io<br/>
+              login-microsoft-secure.cf<br/>
+              paypal-verify-update.top<br/>
+              crypt0-mining-pool.click
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="section">
+  <div class="container">
+    <div class="cta-block">
+      <h2>Find the fit for your team.</h2>
+      <p class="lede">15-minute call with a real engineer (no SDRs). We&rsquo;ll walk through your stack and tell you honestly if olladns makes sense.</p>
+      <div class="cta">
+        <a class="btn primary lg" href="contact.html">Book a fit call <span data-ic="arrow"></span></a>
+        <a class="btn lg" href="pricing.html">See pricing</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div id="site-footer"></div>
+
+<script src="chrome.js"></script>
+<script>
+  mountChrome('solutions');
+  document.querySelectorAll('[data-ic]').forEach(el=>{
+    el.innerHTML = icon(el.getAttribute('data-ic'),{size: el.classList.contains('badge-ic')?22:14, sw: el.classList.contains('accent')?2.2:1.8});
+  });
+</script>
+</body>
+</html>

@@ -1,0 +1,237 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <title>Contact · Request a demo · olladns</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="site.css"/>
+  <style>
+    .contact-grid{display:grid;grid-template-columns:1.2fr 1fr;gap:64px;align-items:start;padding:80px 0}
+    @media (max-width:900px){.contact-grid{grid-template-columns:1fr;gap:32px;padding:48px 0}}
+
+    .form-card{padding:36px;background:var(--panel);border:1px solid var(--line);border-radius:14px}
+    .field-row{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+    @media (max-width:600px){.field-row{grid-template-columns:1fr}}
+
+    .seg{display:flex;gap:0;background:var(--bg-2);border:1px solid var(--line);border-radius:8px;overflow:hidden;padding:4px}
+    .seg button{flex:1;padding:8px 12px;font-size:13px;color:var(--muted);border-radius:5px}
+    .seg button.active{background:var(--bg-3);color:var(--text);font-weight:500}
+
+    .contact-meta-card{padding:24px;border:1px solid var(--line);border-radius:10px;background:var(--panel);display:flex;flex-direction:column;gap:8px}
+    .contact-meta-card .ic{width:36px;height:36px;border-radius:8px;background:var(--accent-soft);color:var(--accent);display:grid;place-items:center;border:1px solid var(--accent-line)}
+    .contact-meta-card h4{margin:8px 0 4px}
+    .contact-meta-card a{color:var(--accent);font-family:var(--mono);font-size:13.5px}
+
+    .success{display:none;padding:24px;border:1px solid rgba(34,197,94,.4);background:rgba(34,197,94,.06);border-radius:10px;color:var(--text);margin-bottom:18px}
+    .success.show{display:block}
+    .success .who{display:flex;gap:10px;align-items:center;color:var(--good);font-weight:600;margin-bottom:6px}
+  </style>
+</head>
+<body data-screen-label="Marketing — Contact">
+
+<div id="site-nav"></div>
+
+<section style="position:relative;overflow:hidden">
+  <div class="grid-bg"></div>
+  <div class="container" style="position:relative">
+    <div class="contact-grid">
+      <!-- LEFT: Form -->
+      <div>
+        <span class="eyebrow">Start a conversation</span>
+        <h1 style="font-size:48px;margin-top:14px">Request a demo, a trial, or honest advice.</h1>
+        <p class="lede" style="margin-top:18px">A real engineer reads every form. We&rsquo;ll get back within a business day with a calendar link and the documents you asked for. No SDR auto-replies, no &ldquo;circling back.&rdquo;</p>
+
+        <div class="form-card" style="margin-top:32px">
+          <div id="success" class="success">
+            <div class="who"><span data-ic="check" style="width:20px;height:20px;border-radius:50%;background:var(--good);color:#03150a;display:grid;place-items:center"></span>Thanks — we&rsquo;ll be in touch within one business day.</div>
+            <div class="muted" style="font-size:13.5px">Our security engineering team will email you from <span class="mono" style="color:var(--accent)">team@olladns.com</span> with a calendar link and the requested materials.</div>
+          </div>
+
+          <div style="margin-bottom:22px">
+            <label class="muted tiny" style="text-transform:uppercase;letter-spacing:.08em;font-weight:600;margin-bottom:8px;display:block">I&rsquo;m interested in…</label>
+            <div class="seg" role="tablist">
+              <button class="active" data-int="demo">Product demo</button>
+              <button data-int="trial">Free trial</button>
+              <button data-int="enterprise">Enterprise quote</button>
+              <button data-int="msp">MSP partnership</button>
+              <button data-int="other">Just questions</button>
+            </div>
+          </div>
+
+          <form class="form" id="contact-form">
+            <div class="field-row">
+              <div class="field">
+                <label>First name</label>
+                <input type="text" placeholder="Riley" required/>
+              </div>
+              <div class="field">
+                <label>Last name</label>
+                <input type="text" placeholder="Singh" required/>
+              </div>
+            </div>
+            <div class="field-row">
+              <div class="field">
+                <label>Work email</label>
+                <input type="email" placeholder="riley@yourcompany.com" required/>
+              </div>
+              <div class="field">
+                <label>Company</label>
+                <input type="text" placeholder="Acme Corp" required/>
+              </div>
+            </div>
+            <div class="field-row">
+              <div class="field">
+                <label>Role</label>
+                <select>
+                  <option>Security analyst / SOC</option>
+                  <option>Security engineer / DFIR</option>
+                  <option>CISO / Director of Security</option>
+                  <option>IT manager / Sysadmin</option>
+                  <option>MSP / MSSP operator</option>
+                  <option>Network engineer</option>
+                  <option>Other</option>
+                </select>
+              </div>
+              <div class="field">
+                <label>Devices to protect</label>
+                <select>
+                  <option>Under 50</option>
+                  <option>50 – 250</option>
+                  <option>250 – 1,000</option>
+                  <option>1,000 – 5,000</option>
+                  <option>5,000 – 25,000</option>
+                  <option>25,000+</option>
+                </select>
+              </div>
+            </div>
+            <div class="field">
+              <label>Anything else we should know?</label>
+              <textarea rows="4" placeholder="Existing tools, the timeline you're working against, the compliance frameworks you care about, the question that keeps you up at 3am…"></textarea>
+            </div>
+
+            <div style="display:flex;align-items:center;gap:14px;flex-wrap:wrap">
+              <button class="btn primary lg" type="submit">Send message <span data-ic="arrow"></span></button>
+              <div class="muted tiny" style="flex:1;min-width:200px">By submitting, you agree to receive a reply from our team. No spam, ever.</div>
+            </div>
+          </form>
+        </div>
+      </div>
+
+      <!-- RIGHT: meta -->
+      <aside style="display:flex;flex-direction:column;gap:14px;position:sticky;top:88px;align-self:flex-start">
+        <div class="contact-meta-card">
+          <div class="ic" data-ic="bolt"></div>
+          <h4>Talk to sales</h4>
+          <p class="muted" style="font-size:13.5px">For enterprise quotes, MSP partnerships, and security questionnaires.</p>
+          <a href="mailto:sales@olladns.com">sales@olladns.com</a>
+        </div>
+        <div class="contact-meta-card">
+          <div class="ic" data-ic="code"></div>
+          <h4>Talk to engineering</h4>
+          <p class="muted" style="font-size:13.5px">For API, deployment, integration, or hard technical questions.</p>
+          <a href="mailto:team@olladns.com">team@olladns.com</a>
+        </div>
+        <div class="contact-meta-card">
+          <div class="ic" data-ic="shield"></div>
+          <h4>Security disclosure</h4>
+          <p class="muted" style="font-size:13.5px">Found a bug? We pay. Hall-of-fame for responsible disclosure.</p>
+          <a href="mailto:security@olladns.com">security@olladns.com</a>
+          <a href="#" style="font-family:inherit;color:var(--text-2);font-size:13px;margin-top:4px">PGP key →</a>
+        </div>
+        <div class="contact-meta-card">
+          <div class="ic" data-ic="alert-tri" style="background:rgba(245,158,11,.10);border-color:rgba(245,158,11,.28);color:var(--warn)"></div>
+          <h4>Existing customer support</h4>
+          <p class="muted" style="font-size:13.5px">Open a ticket from inside your console, or email us.</p>
+          <a href="mailto:support@olladns.com">support@olladns.com</a>
+        </div>
+      </aside>
+    </div>
+  </div>
+</section>
+
+<!-- Offices -->
+<section class="section" style="border-top:1px solid var(--line)">
+  <div class="container">
+    <div class="section-head">
+      <span class="eyebrow">Offices</span>
+      <h2>Two hubs, lots of remote.</h2>
+    </div>
+    <div class="row row-2">
+      <div class="card" style="padding:32px;display:flex;flex-direction:column;gap:14px">
+        <div class="feature-ic" data-ic="building"></div>
+        <h3>Brooklyn, NY · HQ</h3>
+        <div class="muted">
+          <div>61 Greenpoint Avenue, Floor 4</div>
+          <div>Brooklyn, NY 11222</div>
+          <div style="margin-top:10px">Monday – Friday, 9am – 7pm ET</div>
+        </div>
+        <a class="muted tiny" style="margin-top:auto">Open in Maps →</a>
+      </div>
+      <div class="card" style="padding:32px;display:flex;flex-direction:column;gap:14px">
+        <div class="feature-ic" data-ic="building"></div>
+        <h3>Berlin · DE</h3>
+        <div class="muted">
+          <div>Sonnenallee 67, 4. OG</div>
+          <div>12045 Berlin, Germany</div>
+          <div style="margin-top:10px">Mo – Fr, 09:00 – 18:00 CET</div>
+        </div>
+        <a class="muted tiny" style="margin-top:auto">In Maps öffnen →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Quick-answer section -->
+<section class="section" style="background:var(--bg-1)">
+  <div class="container" style="max-width:900px">
+    <div class="section-head">
+      <span class="eyebrow">Before you write</span>
+      <h2>Three quick answers.</h2>
+    </div>
+    <div class="row row-3">
+      <div class="card" style="padding:24px">
+        <h4>Yes, there&rsquo;s a free trial.</h4>
+        <p class="muted" style="margin-top:8px;font-size:14px">14 days, no credit card, every feature, up to 250 devices. Start it without us if you want — the form will still create your tenant.</p>
+      </div>
+      <div class="card" style="padding:24px">
+        <h4>Yes, we&rsquo;ll send the SOC 2 report.</h4>
+        <p class="muted" style="margin-top:8px;font-size:14px">Mutual NDA, then the report ships within a business day. Same for ISO, pen test, CAIQ, and our DPA template.</p>
+      </div>
+      <div class="card" style="padding:24px">
+        <h4>Yes, we&rsquo;ll do a live POC.</h4>
+        <p class="muted" style="margin-top:8px;font-size:14px">Bring your real DNS traffic. We&rsquo;ll set up a parallel resolver pair and show you what we&rsquo;d have caught last week.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div id="site-footer"></div>
+
+<script src="chrome.js"></script>
+<script>
+  mountChrome();
+  document.querySelectorAll('[data-ic]').forEach(el=>{
+    el.innerHTML = icon(el.getAttribute('data-ic'),{size: el.classList.contains('feature-ic')?18:14, sw:1.8});
+  });
+
+  // Segmented toggle
+  document.querySelectorAll('.seg button').forEach(b=>{
+    b.addEventListener('click', ()=>{
+      document.querySelectorAll('.seg button').forEach(x=>x.classList.remove('active'));
+      b.classList.add('active');
+    });
+  });
+
+  // Form submit
+  document.getElementById('contact-form').addEventListener('submit', (e)=>{
+    e.preventDefault();
+    const ok = document.getElementById('success');
+    ok.classList.add('show');
+    ok.scrollIntoView ? null : null; // intentionally do nothing
+    window.scrollTo({top: document.querySelector('.form-card').getBoundingClientRect().top + window.scrollY - 100, behavior:'smooth'});
+    e.target.reset();
+  });
+</script>
+</body>
+</html>

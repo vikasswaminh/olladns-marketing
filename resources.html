@@ -1,0 +1,298 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <title>Resources · olladns</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="site.css"/>
+  <style>
+    .res-tabs{display:flex;gap:6px;border-bottom:1px solid var(--line);margin-bottom:40px;flex-wrap:wrap}
+    .res-tab{padding:10px 18px;color:var(--muted);font-size:14px;font-weight:500;border-bottom:2px solid transparent;cursor:pointer}
+    .res-tab.active{color:var(--accent);border-bottom-color:var(--accent)}
+
+    .changelog-item{display:grid;grid-template-columns:130px 1fr;gap:32px;padding:32px 0;border-bottom:1px solid var(--line)}
+    .changelog-item .meta-side{position:sticky;top:88px;align-self:flex-start}
+    .changelog-item .date{color:var(--accent);font-family:var(--mono);font-size:13px;letter-spacing:.04em}
+    .changelog-item .ver{font-size:12px;color:var(--muted);font-family:var(--mono);margin-top:4px}
+    .changelog-item h3{margin:0 0 12px}
+    .changelog-item ul{margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:8px}
+    .changelog-item li{padding-left:18px;position:relative;color:var(--text-2);font-size:14.5px}
+    .changelog-item li::before{content:"";position:absolute;left:0;top:9px;width:6px;height:6px;border-radius:50%;background:var(--accent)}
+    @media (max-width:900px){.changelog-item{grid-template-columns:1fr;gap:8px}.changelog-item .meta-side{position:static}}
+
+    .doc-card{padding:24px;border:1px solid var(--line);border-radius:10px;background:var(--panel);display:flex;flex-direction:column;gap:8px;transition:.15s}
+    .doc-card:hover{border-color:var(--line-2);transform:translateY(-2px)}
+    .doc-card .ic-wrap{width:36px;height:36px;border-radius:8px;background:var(--accent-soft);color:var(--accent);display:grid;place-items:center;margin-bottom:6px}
+    .doc-card h4{font-size:16px}
+    .doc-card .arr{color:var(--accent);font-size:13px;margin-top:auto;padding-top:14px;display:inline-flex;align-items:center;gap:6px}
+  </style>
+</head>
+<body data-screen-label="Marketing — Resources">
+
+<div id="site-nav"></div>
+
+<section class="page-hero">
+  <div class="grid-bg"></div>
+  <div class="container" style="position:relative">
+    <span class="eyebrow">Resources</span>
+    <h1 class="gradient-text">Read, learn, build with us.</h1>
+    <p class="lede" style="font-size:19px">Threat research, deployment guides, the API, what shipped last week — all the materials your security team will actually use.</p>
+  </div>
+</section>
+
+<section class="section" style="padding-top:48px">
+  <div class="container">
+    <div class="res-tabs">
+      <a class="res-tab active" href="#library">Library</a>
+      <a class="res-tab" href="#blog">Blog</a>
+      <a class="res-tab" href="#docs">Docs &amp; API</a>
+      <a class="res-tab" href="#changelog">Changelog</a>
+      <a class="res-tab" href="#security">Trust &amp; Security</a>
+    </div>
+
+    <!-- LIBRARY -->
+    <div id="library">
+      <div style="display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:24px;flex-wrap:wrap;gap:14px">
+        <h2 style="font-size:32px">Featured library</h2>
+        <div class="tag-row">
+          <span class="pill accent">All</span>
+          <span class="pill">Threat research</span>
+          <span class="pill">Deployment</span>
+          <span class="pill">Case studies</span>
+          <span class="pill">Webinars</span>
+          <span class="pill">Whitepapers</span>
+        </div>
+      </div>
+      <div class="row row-3">
+        <a class="resource">
+          <div class="thumb"><div class="pattern"></div><span data-ic="ai" style="font-size:32px;position:relative;z-index:1"></span></div>
+          <div class="tag">THREAT RESEARCH · 9 min read</div>
+          <h4>The 2025 phishing-as-a-service playbook</h4>
+          <p>A teardown of three active PhaaS kits and how olladns&rsquo;s phishing model catches them within hours of registration.</p>
+        </a>
+        <a class="resource">
+          <div class="thumb" style="background:linear-gradient(135deg,#a78bfa22,#22d3ee22)"><div class="pattern"></div><span data-ic="bolt" style="font-size:32px;position:relative;z-index:1"></span></div>
+          <div class="tag">WHITEPAPER · 24 pages</div>
+          <h4>Why DNS is the cheapest, deepest security layer</h4>
+          <p>The first-principles case for moving phishing and malware controls left, to the resolver. With references.</p>
+        </a>
+        <a class="resource">
+          <div class="thumb"><div class="pattern"></div><span data-ic="play" style="font-size:30px;position:relative;z-index:1"></span></div>
+          <div class="tag">WEBINAR · 38 min</div>
+          <h4>Migrating off a legacy SWG without breaking your workday</h4>
+          <p>Live walkthrough of a 14-site enterprise rollout, with the rollback plan, the diff, and the &ldquo;oh no&rdquo; moment.</p>
+        </a>
+        <a class="resource">
+          <div class="thumb"><div class="pattern"></div><span data-ic="book" style="font-size:30px;position:relative;z-index:1"></span></div>
+          <div class="tag">GUIDE · 18 min read</div>
+          <h4>The DNS-first deployment checklist</h4>
+          <p>The 24 questions to answer before you touch your first resolver, plus the templates we hand to enterprise customers.</p>
+        </a>
+        <a class="resource">
+          <div class="thumb"><div class="pattern"></div><span data-ic="shield-alert" style="font-size:30px;position:relative;z-index:1"></span></div>
+          <div class="tag">THREAT RESEARCH · 12 min read</div>
+          <h4>Anatomy of a Cobalt Strike beaconing campaign</h4>
+          <p>How we caught a coordinated C2 ring across 38 customers in under four minutes, using DGA + timing signals.</p>
+        </a>
+        <a class="resource">
+          <div class="thumb"><div class="pattern"></div><span data-ic="heart" style="font-size:30px;position:relative;z-index:1"></span></div>
+          <div class="tag">CASE STUDY · 5 min read</div>
+          <h4>Bramble Health: phishing-down-73% playbook</h4>
+          <p>Step-by-step of how a 9-clinic medical group deployed olladns without OR disruption.</p>
+        </a>
+      </div>
+    </div>
+
+    <!-- BLOG -->
+    <div id="blog" style="margin-top:80px">
+      <div style="display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:24px">
+        <h2 style="font-size:32px">From the blog</h2>
+        <a class="muted" href="#" style="font-size:14px">All posts →</a>
+      </div>
+      <div class="row row-2" style="gap:14px">
+        <a class="resource" style="flex-direction:row;align-items:center;padding:18px">
+          <div class="thumb" style="width:140px;flex:none;aspect-ratio:1/1"><div class="pattern"></div><span data-ic="sparkle" style="font-size:24px;position:relative;z-index:1"></span></div>
+          <div style="flex:1">
+            <div class="tag">May 22, 2026</div>
+            <h4>Five years of zero-day phishing data, in three charts</h4>
+            <p>What we&rsquo;ve learned about how quickly phishing infrastructure spins up — and how to keep pace.</p>
+          </div>
+        </a>
+        <a class="resource" style="flex-direction:row;align-items:center;padding:18px">
+          <div class="thumb" style="width:140px;flex:none;aspect-ratio:1/1"><div class="pattern"></div><span data-ic="code" style="font-size:24px;position:relative;z-index:1"></span></div>
+          <div style="flex:1">
+            <div class="tag">May 14, 2026</div>
+            <h4>Introducing the olladns Terraform provider</h4>
+            <p>Manage policies, sites, lists, and integrations as code. With a 12-line example to get you started.</p>
+          </div>
+        </a>
+        <a class="resource" style="flex-direction:row;align-items:center;padding:18px">
+          <div class="thumb" style="width:140px;flex:none;aspect-ratio:1/1"><div class="pattern"></div><span data-ic="shield-check" style="font-size:24px;position:relative;z-index:1"></span></div>
+          <div style="flex:1">
+            <div class="tag">May 6, 2026</div>
+            <h4>What we did during the May 4 DNS root incident</h4>
+            <p>Our anycast network rerouted around two failing roots in 11 seconds. Here&rsquo;s the post-mortem and what we changed.</p>
+          </div>
+        </a>
+        <a class="resource" style="flex-direction:row;align-items:center;padding:18px">
+          <div class="thumb" style="width:140px;flex:none;aspect-ratio:1/1"><div class="pattern"></div><span data-ic="users" style="font-size:24px;position:relative;z-index:1"></span></div>
+          <div style="flex:1">
+            <div class="tag">April 28, 2026</div>
+            <h4>Hiring: Detection Engineering at olladns</h4>
+            <p>We&rsquo;re hiring engineers who care more about reducing FPs than shipping models. Here&rsquo;s the work.</p>
+          </div>
+        </a>
+      </div>
+    </div>
+
+    <!-- DOCS -->
+    <div id="docs" style="margin-top:80px">
+      <div style="display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:24px;flex-wrap:wrap;gap:14px">
+        <div>
+          <h2 style="font-size:32px">Docs &amp; API</h2>
+          <p class="muted">Everything you need to deploy, integrate, and build on olladns.</p>
+        </div>
+        <a class="btn primary" href="#">Open full docs <span data-ic="arrow"></span></a>
+      </div>
+      <div class="row row-4">
+        <a class="doc-card"><div class="ic-wrap" data-ic="book"></div><h4>Getting started</h4><p class="muted tiny">Point your first resolver, deploy your first roaming client, see your first block.</p><span class="arr">Read guide <span data-ic="arrow"></span></span></a>
+        <a class="doc-card"><div class="ic-wrap" data-ic="code"></div><h4>REST API reference</h4><p class="muted tiny">Every endpoint. Auth tokens, rate limits, pagination, and SDKs in Go, Python, and TypeScript.</p><span class="arr">Open API docs <span data-ic="arrow"></span></span></a>
+        <a class="doc-card"><div class="ic-wrap" data-ic="cog"></div><h4>Terraform provider</h4><p class="muted tiny">Manage policies, sites, and lists as code. Drift detection on every plan.</p><span class="arr">View provider <span data-ic="arrow"></span></span></a>
+        <a class="doc-card"><div class="ic-wrap" data-ic="devices"></div><h4>Roaming client setup</h4><p class="muted tiny">Jamf, Intune, Kandji, Workspace ONE — silent deploy guides for every MDM.</p><span class="arr">Setup guides <span data-ic="arrow"></span></span></a>
+        <a class="doc-card"><div class="ic-wrap" data-ic="plug"></div><h4>SIEM integration</h4><p class="muted tiny">Stream every query to Splunk, Sentinel, Datadog, or Elastic in minutes.</p><span class="arr">Read connectors <span data-ic="arrow"></span></span></a>
+        <a class="doc-card"><div class="ic-wrap" data-ic="users"></div><h4>Identity sync</h4><p class="muted tiny">Connect Entra ID, Okta, or Google. SCIM provisioning, group mapping.</p><span class="arr">Read identity <span data-ic="arrow"></span></span></a>
+        <a class="doc-card"><div class="ic-wrap" data-ic="shield"></div><h4>Policy cookbook</h4><p class="muted tiny">Real-world policies: CIPA, HIPAA-safe, financial-services hardened, MSP defaults.</p><span class="arr">Open cookbook <span data-ic="arrow"></span></span></a>
+        <a class="doc-card"><div class="ic-wrap" data-ic="activity"></div><h4>Query log search</h4><p class="muted tiny">Query DSL, time windows, regex, exports. The reference for our search.</p><span class="arr">Read search <span data-ic="arrow"></span></span></a>
+      </div>
+
+      <!-- Code sample -->
+      <div class="card" style="margin-top:32px;padding:0;overflow:hidden">
+        <div style="padding:14px 18px;border-bottom:1px solid var(--line);display:flex;align-items:center;gap:10px;background:var(--bg-1)">
+          <span class="pill accent" style="font-size:10.5px">cURL</span>
+          <span style="font-family:var(--mono);font-size:13px;color:var(--text-2)">Add a domain to your block list</span>
+          <span class="pill" style="margin-left:auto;font-size:10px">Copy</span>
+        </div>
+        <pre style="margin:0;padding:22px;font-family:var(--mono);font-size:13px;line-height:1.6;color:var(--text-2);background:var(--bg-1);overflow:auto"><span style="color:var(--muted)"># Block a domain on your default policy</span>
+<span style="color:var(--accent)">curl</span> -X POST https://api.olladns.com/v2/policies/default/blocklist \
+  -H <span style="color:#a78bfa">"Authorization: Bearer $SENTINEL_TOKEN"</span> \
+  -H <span style="color:#a78bfa">"Content-Type: application/json"</span> \
+  -d <span style="color:#22d3ee">'{
+    "pattern": "*.suspicious-domain.com",
+    "note": "Added by Riley — flagged in incident #4821",
+    "expires_at": "2026-07-01T00:00:00Z"
+  }'</span>
+
+<span style="color:var(--good)">→ 201 Created</span>
+{ <span style="color:#a78bfa">"id"</span>: <span style="color:#22d3ee">"bl_8h2kj3"</span>, <span style="color:#a78bfa">"applied_to"</span>: <span style="color:#22d3ee">"480 devices"</span>, <span style="color:#a78bfa">"propagated_in"</span>: <span style="color:#22d3ee">"1.4s"</span> }</pre>
+      </div>
+    </div>
+
+    <!-- CHANGELOG -->
+    <div id="changelog" style="margin-top:80px">
+      <h2 style="font-size:32px;margin-bottom:8px">Changelog</h2>
+      <p class="muted" style="margin-bottom:24px">What shipped, when. <a href="#" class="accent">Subscribe to changelog</a> · <a href="#" class="accent">RSS</a></p>
+
+      <div class="changelog-item">
+        <div class="meta-side">
+          <div class="date">May 22, 2026</div>
+          <div class="ver">v4.2.1</div>
+        </div>
+        <div>
+          <h3>Phishing lookalike model · v4.2</h3>
+          <ul>
+            <li>Trained on 18M new labeled samples; precision lift +1.4pp, FP reduction 36%.</li>
+            <li>Added structural similarity scoring for Punycode &amp; homoglyph domains.</li>
+            <li>Per-tenant brand lists — bring your own logos &amp; we&rsquo;ll watch for lookalikes.</li>
+            <li>The model now writes a short rationale in each detection for analyst review.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="changelog-item">
+        <div class="meta-side">
+          <div class="date">May 14, 2026</div>
+          <div class="ver">v4.1.4</div>
+        </div>
+        <div>
+          <h3>Terraform provider v1.0 (GA)</h3>
+          <ul>
+            <li>Manage policies, sites, lists, integrations, and identity mappings as code.</li>
+            <li>Drift detection on every plan; safe-mode for production policies.</li>
+            <li>Examples for AWS, GCP, Azure, and on-prem deploys in the registry.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="changelog-item">
+        <div class="meta-side">
+          <div class="date">May 6, 2026</div>
+          <div class="ver">v4.1.2</div>
+        </div>
+        <div>
+          <h3>Faster query-log search</h3>
+          <ul>
+            <li>Hot search p99 went from 1.4s → 380ms across 4B events.</li>
+            <li>Regex queries now supported on domain &amp; user fields.</li>
+            <li>Saved searches with per-team sharing; alert when a saved search matches.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="changelog-item">
+        <div class="meta-side">
+          <div class="date">April 28, 2026</div>
+          <div class="ver">v4.0</div>
+        </div>
+        <div>
+          <h3>Microsoft Sentinel native connector</h3>
+          <ul>
+            <li>One-click connector in the Sentinel content hub.</li>
+            <li>Auto-mapped ASIM DNS schema, with built-in analytic rules &amp; workbooks.</li>
+            <li>Backfill up to 30 days of historical events on first connection.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- SECURITY -->
+    <div id="security" style="margin-top:80px">
+      <h2 style="font-size:32px;margin-bottom:8px">Trust &amp; Security</h2>
+      <p class="muted" style="margin-bottom:32px">We host the most sensitive layer of your network. Here&rsquo;s how we earn it.</p>
+
+      <div class="row row-3">
+        <div class="card" style="padding:24px"><div class="feature-ic" data-ic="shield-check"></div><h4 style="margin-top:14px">SOC 2 Type II</h4><p class="muted" style="margin-top:6px">Audited annually by an AICPA-accredited firm. Report available under NDA.</p></div>
+        <div class="card" style="padding:24px"><div class="feature-ic" data-ic="shield-check"></div><h4 style="margin-top:14px">ISO 27001:2022</h4><p class="muted" style="margin-top:6px">Certified, scope: all services and supporting systems.</p></div>
+        <div class="card" style="padding:24px"><div class="feature-ic" data-ic="shield-check"></div><h4 style="margin-top:14px">HIPAA</h4><p class="muted" style="margin-top:6px">BAA included on Enterprise. PHI never logged or transmitted to third parties.</p></div>
+        <div class="card" style="padding:24px"><div class="feature-ic" data-ic="lock"></div><h4 style="margin-top:14px">Encryption in transit</h4><p class="muted" style="margin-top:6px">DoH and DoT on every resolver. TLS 1.3 minimum, automatic cert rotation.</p></div>
+        <div class="card" style="padding:24px"><div class="feature-ic" data-ic="map"></div><h4 style="margin-top:14px">Data residency</h4><p class="muted" style="margin-top:6px">US-only, EU-only, or APAC-only resolver regions available on Business+.</p></div>
+        <div class="card" style="padding:24px"><div class="feature-ic" data-ic="bolt"></div><h4 style="margin-top:14px">Bug bounty</h4><p class="muted" style="margin-top:6px">Public program on HackerOne. Average payout: $1,400. Hall of fame: 184 researchers.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="cta-block">
+      <h2>Have a question about a specific topic?</h2>
+      <p class="lede">Our engineering team answers technical questions directly. No SDRs in the middle.</p>
+      <div class="cta">
+        <a class="btn primary lg" href="contact.html">Ask an engineer <span data-ic="arrow"></span></a>
+        <a class="btn lg" href="#">Subscribe to changelog</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div id="site-footer"></div>
+
+<script src="chrome.js"></script>
+<script>
+  mountChrome('resources');
+  document.querySelectorAll('[data-ic]').forEach(el=>{
+    el.innerHTML = icon(el.getAttribute('data-ic'),{size: el.classList.contains('feature-ic')||el.classList.contains('ic-wrap')?18:14, sw:1.8});
+  });
+</script>
+</body>
+</html>

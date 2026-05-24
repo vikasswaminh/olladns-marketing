@@ -1,0 +1,319 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <title>Product · olladns</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="site.css"/>
+  <style>
+    .feat{display:flex;gap:14px;align-items:flex-start}
+    .feat .ck{width:24px;height:24px;border-radius:6px;background:var(--accent-soft);border:1px solid var(--accent-line);color:var(--accent);flex:none;display:grid;place-items:center;margin-top:2px}
+    .feat .ti{font-weight:600;color:var(--text)}
+    .feat .bo{color:var(--muted);font-size:14px;margin-top:2px}
+    .mini-tbl{width:100%;border-collapse:collapse;font-size:12px;font-family:var(--mono)}
+    .mini-tbl th{text-align:left;padding:8px 14px;border-bottom:1px solid var(--line);background:var(--bg-1);color:var(--muted);font-size:10px;text-transform:uppercase;letter-spacing:.08em}
+    .mini-tbl td{padding:8px 14px;border-bottom:1px solid var(--line)}
+    .mini-tbl tr.flash td{background:rgba(34,211,238,.05)}
+    .ptab{display:inline-flex;align-items:center;gap:4px;padding:4px 9px;border-radius:999px;font-size:10px;font-family:var(--mono);border:1px solid var(--line)}
+    .ptab.block{background:rgba(239,68,68,.10);color:#ef4444;border-color:rgba(239,68,68,.28)}
+    .ptab.allow{background:rgba(34,197,94,.10);color:#22c55e;border-color:rgba(34,197,94,.28)}
+    .model-row{display:grid;grid-template-columns:1fr auto;align-items:center;gap:10px;padding:7px 0;border-bottom:1px solid var(--line)}
+    .model-row:last-child{border-bottom:0}
+    .sw{width:28px;height:14px;border-radius:999px;position:relative}
+    .sw.on{background:var(--accent-soft);border:1px solid var(--accent-line)}
+    .sw.off{background:var(--bg-3);border:1px solid var(--line)}
+    .sw .d{width:10px;height:10px;border-radius:50%;position:absolute;top:1px}
+    .sw.on .d{background:var(--accent);box-shadow:0 0 8px var(--accent);left:15px}
+    .sw.off .d{background:var(--muted);left:2px}
+    .cat-mini{display:flex;align-items:center;gap:10px;padding:10px;border:1px solid var(--line);border-radius:6px;background:var(--bg-2)}
+    .cat-mini .ic{width:24px;height:24px;border-radius:5px;background:var(--bg-3);display:grid;place-items:center}
+    .cat-mini .nm{flex:1;min-width:0;font-size:12px;font-weight:500;color:var(--text);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+    .platform{min-width:140px}
+    .client-row{display:grid;grid-template-columns:1fr 1fr 110px;gap:10px;padding:10px 16px;border-bottom:1px solid var(--line);align-items:center;font-size:12px}
+    .client-row:last-child{border-bottom:0}
+    .pdot{width:7px;height:7px;border-radius:50%;display:inline-block;margin-right:6px}
+    .pdot.good{background:var(--good);box-shadow:0 0 8px var(--good)}
+    .pdot.bad{background:var(--bad);box-shadow:0 0 8px var(--bad)}
+    .pdot.warn{background:var(--warn)}
+    .int-row{display:flex;align-items:center;gap:12px;padding:12px 0;border-top:1px solid var(--line)}
+    .int-row:first-child{border-top:0}
+    .int-row .lo{width:36px;height:36px;border-radius:8px;background:var(--bg-3);display:grid;place-items:center;color:var(--accent);font-family:var(--mono);font-weight:600;font-size:13px;flex:none}
+    .int-row .nm{font-weight:500;color:var(--text);font-size:14px}
+    .int-row .su{color:var(--muted);font-size:12.5px;margin-top:1px}
+  </style>
+</head>
+<body data-screen-label="Marketing — Product">
+
+<div id="site-nav"></div>
+
+<section class="page-hero">
+  <div class="grid-bg"></div>
+  <div class="container" style="position:relative">
+    <span class="eyebrow">The product</span>
+    <h1 class="gradient-text">One console. Every device. Every DNS query.</h1>
+    <p class="lede" style="font-size:19px">From the resolver to the SOC, olladns is the modern DNS security platform. Six interconnected surfaces — built for teams who care about milliseconds and audit trails.</p>
+    <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:24px">
+      <a class="pill" href="#querylog">Query Log</a>
+      <a class="pill" href="#ai">AI Detection</a>
+      <a class="pill" href="#policies">Policies</a>
+      <a class="pill" href="#roaming">Roaming Clients</a>
+      <a class="pill" href="#threats">Threat Intel</a>
+      <a class="pill" href="#integrations">Integrations</a>
+    </div>
+  </div>
+</section>
+
+<!-- QUERY LOG -->
+<section class="section" id="querylog">
+  <div class="container">
+    <div class="row row-1-2" style="gap:56px;align-items:center">
+      <div>
+        <span class="eyebrow">Query Log</span>
+        <h2 style="margin-top:14px">Forensic visibility, streaming live.</h2>
+        <p class="lede" style="margin-top:18px">A high-throughput record of every DNS lookup on your network — searchable in milliseconds, exportable in seconds.</p>
+        <div style="margin-top:32px;display:flex;flex-direction:column;gap:18px">
+          <div class="feat"><div class="ck" data-ic="check"></div><div><div class="ti">Live tail</div><div class="bo">Pause, scroll, filter — the stream waits for you. Up to 50k events/sec per tenant without dropping rows.</div></div></div>
+          <div class="feat"><div class="ck" data-ic="check"></div><div><div class="ti">Click into any row</div><div class="bo">See the resolver, the device, the matched rule, the AI confidence, and the policy chain that produced the verdict.</div></div></div>
+          <div class="feat"><div class="ck" data-ic="check"></div><div><div class="ti">Long retention</div><div class="bo">90 days hot, 13 months cold. Hot search returns in &lt;500ms across 4B events.</div></div></div>
+        </div>
+      </div>
+
+      <div class="product-frame">
+        <div class="pf-bar"><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="url">/query-log</span></div>
+        <div style="padding:14px 16px;border-bottom:1px solid var(--line);display:flex;gap:8px;background:var(--bg-1);flex-wrap:wrap;align-items:center">
+          <span class="pill accent" style="font-size:10px"><span style="width:5px;height:5px;background:#22d3ee;display:inline-block;border-radius:50%;box-shadow:0 0 6px #22d3ee"></span> live · 2,841/s</span>
+          <span class="pill">All actions ▾</span>
+          <span class="pill">All categories ▾</span>
+          <span class="pill">All devices ▾</span>
+          <span class="pill" style="margin-left:auto">⌘K Search</span>
+        </div>
+        <table class="mini-tbl">
+          <thead><tr><th>Time</th><th>Action</th><th>Domain</th><th>Category</th><th>Device</th></tr></thead>
+          <tbody>
+            <tr class="flash"><td style="color:var(--muted)">09:42:18</td><td><span class="ptab block">block</span></td><td>login-microsoft-secure.cf</td><td style="font-family:var(--font)">Phishing</td><td style="color:var(--text-2)">MacBook-Pro-Riley</td></tr>
+            <tr><td style="color:var(--muted)">09:42:17</td><td><span class="ptab allow">allow</span></td><td>api.github.com</td><td style="font-family:var(--font)">Productivity</td><td style="color:var(--text-2)">jenkins-runner-03</td></tr>
+            <tr><td style="color:var(--muted)">09:42:16</td><td><span class="ptab block">block</span></td><td>c2-server-relay.icu</td><td style="font-family:var(--font)">Malware C&amp;C</td><td style="color:var(--text-2)">Win10-Finance-08</td></tr>
+            <tr><td style="color:var(--muted)">09:42:15</td><td><span class="ptab allow">allow</span></td><td>cdn.cloudflare.com</td><td style="font-family:var(--font)">Cloud</td><td style="color:var(--text-2)">vpn-lax-09</td></tr>
+            <tr><td style="color:var(--muted)">09:42:13</td><td><span class="ptab block">block</span></td><td>paypal-verify-update.top</td><td style="font-family:var(--font)">Phishing</td><td style="color:var(--text-2)">iPad-Pro-Mia</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- AI DETECTION -->
+<section class="section" id="ai" style="background:linear-gradient(180deg, transparent, rgba(167,139,250,.04))">
+  <div class="container">
+    <div class="row row-2-3" style="gap:56px;align-items:center">
+      <div class="product-frame">
+        <div class="pf-bar"><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="url">/ai-detection</span></div>
+        <div style="padding:22px;background:var(--bg-1)">
+          <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-bottom:14px">
+            <div class="card" style="padding:14px"><div class="muted" style="font-size:10px;letter-spacing:.08em;text-transform:uppercase">Detections / 24h</div><div style="font-family:var(--mono);font-size:28px;margin-top:4px;color:var(--mag)">744</div></div>
+            <div class="card" style="padding:14px"><div class="muted" style="font-size:10px;letter-spacing:.08em;text-transform:uppercase">FP rate</div><div style="font-family:var(--mono);font-size:28px;margin-top:4px;color:var(--accent)">0.04%</div></div>
+          </div>
+          <div class="card" style="padding:14px">
+            <div style="font-weight:600;font-size:13px;margin-bottom:12px">Models</div>
+            <div class="model-row"><div><div style="font-weight:500;font-size:12.5px">Phishing lookalike</div><div class="muted tiny mono">v4.2.1 · 99.6%</div></div><div class="sw on"><div class="d"></div></div></div>
+            <div class="model-row"><div><div style="font-weight:500;font-size:12.5px">DGA detector</div><div class="muted tiny mono">v3.8.0 · 97.2%</div></div><div class="sw on"><div class="d"></div></div></div>
+            <div class="model-row"><div><div style="font-weight:500;font-size:12.5px">Newly registered domain</div><div class="muted tiny mono">v2.4.4 · 94.1%</div></div><div class="sw on"><div class="d"></div></div></div>
+            <div class="model-row"><div><div style="font-weight:500;font-size:12.5px">Typosquat</div><div class="muted tiny mono">v3.0.2 · 98.4%</div></div><div class="sw on"><div class="d"></div></div></div>
+            <div class="model-row"><div><div style="font-weight:500;font-size:12.5px">C2 beacon timing</div><div class="muted tiny mono">v1.2.0 · 89.7%</div></div><div class="sw off"><div class="d"></div></div></div>
+          </div>
+        </div>
+      </div>
+      <div>
+        <span class="eyebrow">AI Detection</span>
+        <h2 style="margin-top:14px">Five models. One verdict. Zero day-zero excuses.</h2>
+        <p class="lede" style="margin-top:18px">Our models are trained on 180+ billion daily queries across thousands of customers. They see new threats before threat-intel vendors finish writing the report.</p>
+        <div style="margin-top:32px;display:flex;flex-direction:column;gap:18px">
+          <div class="feat"><div class="ck" data-ic="check"></div><div><div class="ti">Phishing lookalike</div><div class="bo">Visual + structural similarity to your protected brands. Catches login-m1crosoft-secure.cf within an hour of registration.</div></div></div>
+          <div class="feat"><div class="ck" data-ic="check"></div><div><div class="ti">DGA &amp; algorithmic C2</div><div class="bo">Statistical n-gram + entropy classifier. Blocks malware command-and-control even when the hostname has never been seen.</div></div></div>
+          <div class="feat"><div class="ck" data-ic="check"></div><div><div class="ti">Feedback loop</div><div class="bo">One click confirms or rejects a detection. Models retrain nightly with your verdicts.</div></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- POLICIES -->
+<section class="section" id="policies">
+  <div class="container">
+    <div class="row row-1-2" style="gap:56px;align-items:center">
+      <div>
+        <span class="eyebrow">Policies</span>
+        <h2 style="margin-top:14px">Filtering rules that map to humans, not IPs.</h2>
+        <p class="lede" style="margin-top:18px">Build policies from 80+ content categories, custom block/allow lists, schedules, and threat sources. Assign them to sites, groups, or individual devices.</p>
+        <div style="margin-top:32px;display:flex;flex-direction:column;gap:18px">
+          <div class="feat"><div class="ck" data-ic="check"></div><div><div class="ti">80+ curated categories</div><div class="bo">From phishing &amp; malware to streaming &amp; social. Each updated continuously by our research team.</div></div></div>
+          <div class="feat"><div class="ck" data-ic="check"></div><div><div class="ti">Identity-aware</div><div class="bo">Sync from Entra ID, Okta, Google Workspace. Engineering gets dev tools, Finance gets locked down.</div></div></div>
+          <div class="feat"><div class="ck" data-ic="check"></div><div><div class="ti">Time-of-day &amp; geofenced rules</div><div class="bo">Strict during business hours, looser after. Different policies for office vs roaming networks.</div></div></div>
+          <div class="feat"><div class="ck" data-ic="check"></div><div><div class="ti">Branded block page</div><div class="bo">Your logo, your support contact, your messaging. Reduce helpdesk tickets to almost zero.</div></div></div>
+        </div>
+      </div>
+
+      <div class="product-frame">
+        <div class="pf-bar"><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="url">/policies</span></div>
+        <div style="padding:18px;background:var(--bg-1)">
+          <div style="display:flex;align-items:center;gap:10px;margin-bottom:14px">
+            <div style="font-weight:600">Default + Strict</div>
+            <span class="pill accent" style="font-size:10px;padding:2px 7px">4 sites · 480 devices</span>
+            <span class="pill" style="margin-left:auto;font-size:10px;padding:2px 7px">edit</span>
+          </div>
+          <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:8px">
+            <div class="cat-mini"><div class="ic" style="color:var(--bad)" data-ic="shield-alert"></div><div class="nm">Phishing &amp; Deception</div><div class="sw on"><div class="d"></div></div></div>
+            <div class="cat-mini"><div class="ic" style="color:var(--bad)" data-ic="shield-alert"></div><div class="nm">Malware &amp; Ransomware</div><div class="sw on"><div class="d"></div></div></div>
+            <div class="cat-mini"><div class="ic" style="color:var(--bad)" data-ic="shield-alert"></div><div class="nm">Botnet C&amp;C</div><div class="sw on"><div class="d"></div></div></div>
+            <div class="cat-mini"><div class="ic" style="color:var(--bad)" data-ic="shield-alert"></div><div class="nm">Cryptomining</div><div class="sw on"><div class="d"></div></div></div>
+            <div class="cat-mini"><div class="ic" style="color:var(--bad)" data-ic="shield-alert"></div><div class="nm">Anonymizers</div><div class="sw on"><div class="d"></div></div></div>
+            <div class="cat-mini"><div class="ic" style="color:var(--bad)" data-ic="shield-alert"></div><div class="nm">Adult Content</div><div class="sw on"><div class="d"></div></div></div>
+            <div class="cat-mini"><div class="ic" style="color:var(--accent)" data-ic="shield-check"></div><div class="nm">Social Media</div><div class="sw off"><div class="d"></div></div></div>
+            <div class="cat-mini"><div class="ic" style="color:var(--accent)" data-ic="shield-check"></div><div class="nm">Streaming</div><div class="sw off"><div class="d"></div></div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ROAMING -->
+<section class="section" id="roaming">
+  <div class="container">
+    <div class="row row-2" style="gap:56px;align-items:center">
+      <div>
+        <span class="eyebrow">Roaming Clients</span>
+        <h2 style="margin-top:14px">Protected anywhere. Felt nowhere.</h2>
+        <p class="lede" style="margin-top:18px">Lightweight clients for every major platform. Encrypted DoH/DoT to the nearest POP. Same policy whether the laptop is on the office Wi-Fi, an airport, or a hotel.</p>
+        <div style="margin-top:32px;display:flex;gap:14px;flex-wrap:wrap">
+          <div class="card platform" style="padding:14px 18px"><div style="font-weight:600">macOS</div><div class="muted tiny">Intel · Apple Silicon</div></div>
+          <div class="card platform" style="padding:14px 18px"><div style="font-weight:600">Windows</div><div class="muted tiny">10 · 11</div></div>
+          <div class="card platform" style="padding:14px 18px"><div style="font-weight:600">iOS</div><div class="muted tiny">MDM-deployable</div></div>
+          <div class="card platform" style="padding:14px 18px"><div style="font-weight:600">Android</div><div class="muted tiny">EMM-deployable</div></div>
+          <div class="card platform" style="padding:14px 18px"><div style="font-weight:600">ChromeOS</div><div class="muted tiny">DoH config</div></div>
+          <div class="card platform" style="padding:14px 18px"><div style="font-weight:600">Linux</div><div class="muted tiny">systemd-resolved</div></div>
+        </div>
+        <p class="muted" style="font-size:13px;margin-top:24px">Push silently via Jamf, Intune, Kandji, Workspace ONE, or Google Endpoint Management. No popups, no certificates to install, no user interaction.</p>
+      </div>
+      <div class="product-frame">
+        <div class="pf-bar"><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="url">/roaming</span></div>
+        <div style="padding:0;background:var(--bg-1)">
+          <div style="padding:18px;border-bottom:1px solid var(--line);display:grid;grid-template-columns:repeat(4,1fr);gap:14px">
+            <div><div class="muted" style="font-size:10px;letter-spacing:.08em;text-transform:uppercase">Active</div><div style="font-family:var(--mono);font-size:22px;margin-top:3px">614</div></div>
+            <div><div class="muted" style="font-size:10px;letter-spacing:.08em;text-transform:uppercase">Protected</div><div style="font-family:var(--mono);font-size:22px;margin-top:3px;color:var(--good)">608</div></div>
+            <div><div class="muted" style="font-size:10px;letter-spacing:.08em;text-transform:uppercase">Alerts</div><div style="font-family:var(--mono);font-size:22px;margin-top:3px;color:var(--warn)">4</div></div>
+            <div><div class="muted" style="font-size:10px;letter-spacing:.08em;text-transform:uppercase">Stale</div><div style="font-family:var(--mono);font-size:22px;margin-top:3px;color:var(--bad)">2</div></div>
+          </div>
+          <div class="client-row"><div class="mono" style="color:var(--text)">MacBook-Pro-Riley<div class="muted tiny" style="font-family:var(--font)">r.singh@acme.io</div></div><div style="color:var(--text-2)">macOS 14.4</div><div><span class="pdot good"></span>protected</div></div>
+          <div class="client-row"><div class="mono" style="color:var(--text)">iPhone-15-CEO<div class="muted tiny" style="font-family:var(--font)">j.doe@acme.io</div></div><div style="color:var(--text-2)">iOS 17.5</div><div><span class="pdot good"></span>protected</div></div>
+          <div class="client-row"><div class="mono" style="color:var(--text)">Win10-Finance-08<div class="muted tiny" style="font-family:var(--font)">t.nguyen@acme.io</div></div><div style="color:var(--text-2)">Windows 11</div><div><span class="pdot bad"></span>alert</div></div>
+          <div class="client-row"><div class="mono" style="color:var(--text)">Pixel-8-Dev<div class="muted tiny" style="font-family:var(--font)">a.kowalski@acme.io</div></div><div style="color:var(--text-2)">Android 14</div><div><span class="pdot good"></span>protected</div></div>
+          <div class="client-row"><div class="mono" style="color:var(--text)">Surface-IT-3<div class="muted tiny" style="font-family:var(--font)">m.chen@acme.io</div></div><div style="color:var(--text-2)">Windows 11</div><div><span class="pdot warn"></span>stale</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- THREAT INTEL -->
+<section class="section" id="threats" style="background:linear-gradient(180deg, transparent, rgba(34,211,238,.04))">
+  <div class="container">
+    <div class="section-head">
+      <span class="eyebrow">Threat Intelligence</span>
+      <h2>200+ feeds, four research labs, one stream.</h2>
+      <p class="lede">Curated indicator feeds from public, commercial, and our own honeypot network — deduplicated, scored for confidence, and applied to your resolvers within 60 seconds of a new IOC.</p>
+    </div>
+    <div class="row row-4">
+      <div class="card" style="padding:22px"><div class="muted" style="font-size:11px;letter-spacing:.08em;text-transform:uppercase">Active feeds</div><div style="font-family:var(--mono);font-size:32px;margin-top:6px;color:var(--accent);font-weight:600">217</div></div>
+      <div class="card" style="padding:22px"><div class="muted" style="font-size:11px;letter-spacing:.08em;text-transform:uppercase">IOC updates / day</div><div style="font-family:var(--mono);font-size:32px;margin-top:6px;color:var(--accent);font-weight:600">3.8M</div></div>
+      <div class="card" style="padding:22px"><div class="muted" style="font-size:11px;letter-spacing:.08em;text-transform:uppercase">Median feed-to-block</div><div style="font-family:var(--mono);font-size:32px;margin-top:6px;color:var(--accent);font-weight:600">38s</div></div>
+      <div class="card" style="padding:22px"><div class="muted" style="font-size:11px;letter-spacing:.08em;text-transform:uppercase">Internal honeypots</div><div style="font-family:var(--mono);font-size:32px;margin-top:6px;color:var(--accent);font-weight:600">2,140</div></div>
+    </div>
+    <div style="margin-top:32px" class="card">
+      <div style="font-weight:600;margin-bottom:14px">A few of our feed sources</div>
+      <div class="tag-row">
+        <span class="pill">Spamhaus</span>
+        <span class="pill">Mandiant</span>
+        <span class="pill">Recorded Future</span>
+        <span class="pill">Abuse.ch</span>
+        <span class="pill">PhishTank</span>
+        <span class="pill">CISA AIS</span>
+        <span class="pill">VirusTotal Intel</span>
+        <span class="pill">OpenPhish</span>
+        <span class="pill">URLhaus</span>
+        <span class="pill">Internal honeypots</span>
+        <span class="pill">+207 more</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- INTEGRATIONS -->
+<section class="section" id="integrations">
+  <div class="container">
+    <div class="section-head">
+      <span class="eyebrow">Integrations</span>
+      <h2>Slots into the stack you already operate.</h2>
+      <p class="lede">Identity, SIEM, MDM, alerting — wire olladns to the rest of your security graph in minutes, not weeks.</p>
+    </div>
+
+    <div class="row row-2">
+      <div class="card">
+        <div class="muted" style="font-size:11px;letter-spacing:.12em;text-transform:uppercase;font-weight:600;margin-bottom:14px">IDENTITY</div>
+        <div class="int-row"><div class="lo">EN</div><div style="flex:1"><div class="nm">Microsoft Entra ID</div><div class="su">Sync users + groups, SSO</div></div><span class="pill good" style="font-size:10px">connect</span></div>
+        <div class="int-row"><div class="lo">OK</div><div style="flex:1"><div class="nm">Okta</div><div class="su">SCIM provisioning + SSO</div></div><span class="pill good" style="font-size:10px">connect</span></div>
+        <div class="int-row"><div class="lo">GO</div><div style="flex:1"><div class="nm">Google Workspace</div><div class="su">Directory + SSO</div></div><span class="pill good" style="font-size:10px">connect</span></div>
+      </div>
+      <div class="card">
+        <div class="muted" style="font-size:11px;letter-spacing:.12em;text-transform:uppercase;font-weight:600;margin-bottom:14px">SIEM</div>
+        <div class="int-row"><div class="lo">MS</div><div style="flex:1"><div class="nm">Microsoft Sentinel</div><div class="su">Native log analytics connector</div></div><span class="pill good" style="font-size:10px">connect</span></div>
+        <div class="int-row"><div class="lo">SP</div><div style="flex:1"><div class="nm">Splunk</div><div class="su">HEC token, 1-click</div></div><span class="pill good" style="font-size:10px">connect</span></div>
+        <div class="int-row"><div class="lo">DD</div><div style="flex:1"><div class="nm">Datadog</div><div class="su">Logs + dashboards</div></div><span class="pill good" style="font-size:10px">connect</span></div>
+        <div class="int-row"><div class="lo">EL</div><div style="flex:1"><div class="nm">Elastic</div><div class="su">ECS-formatted streams</div></div><span class="pill good" style="font-size:10px">connect</span></div>
+      </div>
+      <div class="card">
+        <div class="muted" style="font-size:11px;letter-spacing:.12em;text-transform:uppercase;font-weight:600;margin-bottom:14px">MDM</div>
+        <div class="int-row"><div class="lo">JF</div><div style="flex:1"><div class="nm">Jamf Pro</div><div class="su">Push roaming client + profile</div></div><span class="pill good" style="font-size:10px">connect</span></div>
+        <div class="int-row"><div class="lo">IN</div><div style="flex:1"><div class="nm">Intune</div><div class="su">Windows + iOS deployment</div></div><span class="pill good" style="font-size:10px">connect</span></div>
+        <div class="int-row"><div class="lo">KA</div><div style="flex:1"><div class="nm">Kandji</div><div class="su">macOS Blueprint</div></div><span class="pill good" style="font-size:10px">connect</span></div>
+        <div class="int-row"><div class="lo">WS</div><div style="flex:1"><div class="nm">Workspace ONE</div><div class="su">Cross-platform</div></div><span class="pill good" style="font-size:10px">connect</span></div>
+      </div>
+      <div class="card">
+        <div class="muted" style="font-size:11px;letter-spacing:.12em;text-transform:uppercase;font-weight:600;margin-bottom:14px">ALERTS</div>
+        <div class="int-row"><div class="lo">SL</div><div style="flex:1"><div class="nm">Slack</div><div class="su">Channel routing per severity</div></div><span class="pill good" style="font-size:10px">connect</span></div>
+        <div class="int-row"><div class="lo">PD</div><div style="flex:1"><div class="nm">PagerDuty</div><div class="su">Page on critical</div></div><span class="pill good" style="font-size:10px">connect</span></div>
+        <div class="int-row"><div class="lo">MT</div><div style="flex:1"><div class="nm">Microsoft Teams</div><div class="su">Adaptive cards</div></div><span class="pill good" style="font-size:10px">connect</span></div>
+        <div class="int-row"><div class="lo">WH</div><div style="flex:1"><div class="nm">Webhooks</div><div class="su">Pipe to anything</div></div><span class="pill good" style="font-size:10px">connect</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="cta-block">
+      <h2>Want to see it on your own DNS traffic?</h2>
+      <p class="lede">Free 14-day trial. Connect 50 devices in 15 minutes. No commitment.</p>
+      <div class="cta">
+        <a class="btn primary lg" href="contact.html">Start free trial <span data-ic="arrow"></span></a>
+        <a class="btn lg" href="../index.html">Tour the live demo</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div id="site-footer"></div>
+
+<script src="chrome.js"></script>
+<script>
+  mountChrome('product');
+  // Inject icons in any [data-ic="name"] element
+  document.querySelectorAll('[data-ic]').forEach(el=>{
+    const name = el.getAttribute('data-ic');
+    const size = el.classList.contains('ck') ? 13 : (el.classList.contains('ic') ? 13 : 14);
+    el.innerHTML = icon(name,{size,sw: el.classList.contains('ck')?2.2:1.8});
+  });
+</script>
+</body>
+</html>

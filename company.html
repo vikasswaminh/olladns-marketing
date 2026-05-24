@@ -1,0 +1,384 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <title>Company · olladns</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="site.css"/>
+  <style>
+    .timeline{display:grid;grid-template-columns:140px 1fr;gap:48px;padding:32px 0;border-bottom:1px solid var(--line)}
+    @media (max-width:900px){.timeline{grid-template-columns:1fr;gap:8px}}
+    .timeline .yr{font-family:var(--mono);font-size:28px;font-weight:600;color:var(--accent);letter-spacing:-.02em}
+    .timeline h3{font-size:22px;margin-bottom:8px}
+
+    .team-card{padding:20px;border:1px solid var(--line);border-radius:10px;background:var(--panel);display:flex;flex-direction:column;gap:6px}
+    .team-card .av{width:54px;height:54px;border-radius:50%;background:linear-gradient(135deg,#22d3ee,#a78bfa);margin-bottom:10px}
+    .team-card .nm{font-weight:600;font-size:15px}
+    .team-card .ti{color:var(--muted);font-size:13px}
+    .team-card .bg{color:var(--text-2);font-size:12.5px;margin-top:6px}
+
+    .value-card{padding:28px;border:1px solid var(--line);border-radius:10px;background:var(--panel);display:flex;flex-direction:column;gap:8px}
+    .value-card .num{font-family:var(--mono);color:var(--accent);font-size:13px;letter-spacing:.08em}
+    .value-card h3{font-size:20px;margin:6px 0}
+
+    .job-row{display:grid;grid-template-columns:1fr 200px 130px 50px;gap:24px;padding:18px 22px;border:1px solid var(--line);border-radius:8px;align-items:center;background:var(--panel);margin-bottom:8px;transition:.15s;cursor:pointer}
+    .job-row:hover{border-color:var(--line-2);background:var(--bg-2)}
+    .job-row .ti{font-weight:600;font-size:15.5px}
+    .job-row .tm{color:var(--muted);font-size:13px;margin-top:2px}
+    .job-row .lo{color:var(--text-2);font-size:13.5px}
+    .job-row .tg{color:var(--accent);font-size:13px}
+    @media (max-width:900px){.job-row{grid-template-columns:1fr}}
+  </style>
+</head>
+<body data-screen-label="Marketing — Company">
+
+<div id="site-nav"></div>
+
+<section class="page-hero">
+  <div class="grid-bg"></div>
+  <div class="container" style="position:relative">
+    <span class="eyebrow">Company</span>
+    <h1 class="gradient-text">Built by people who&rsquo;ve been on the other side of the pager.</h1>
+    <p class="lede" style="font-size:19px">We&rsquo;re engineers, threat researchers, and former SOC analysts who got tired of watching phishing slip past tools nobody trusted. olladns is the platform we wanted to use.</p>
+  </div>
+</section>
+
+<!-- MISSION -->
+<section class="section" style="padding:80px 0">
+  <div class="container" style="max-width:880px">
+    <div class="text-center">
+      <span class="eyebrow">Our mission</span>
+      <h2 style="margin-top:18px;font-size:42px">Make the cheapest, fastest layer of network defense the strongest.</h2>
+      <p class="lede" style="font-size:18px;margin:24px auto 0">DNS is the most ubiquitous protocol in the security stack and the most under-instrumented. Every threat starts with a lookup, every breach leaves a query log. We&rsquo;re building the platform that turns those facts into outcomes — for teams of three and teams of three hundred.</p>
+    </div>
+  </div>
+</section>
+
+<!-- STATS -->
+<section style="padding:0 0 80px">
+  <div class="container">
+    <div class="stat-strip">
+      <div class="item"><div class="v">2021</div><div class="l">Founded</div></div>
+      <div class="item"><div class="v">142</div><div class="l">People (and growing)</div></div>
+      <div class="item"><div class="v">$74M</div><div class="l">Series B · 2024</div></div>
+      <div class="item"><div class="v">4,213</div><div class="l">Active customers</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- VALUES -->
+<section class="section">
+  <div class="container">
+    <div class="section-head">
+      <span class="eyebrow">How we work</span>
+      <h2>Six things we believe.</h2>
+    </div>
+    <div class="row row-3">
+      <div class="value-card">
+        <div class="num">01</div>
+        <h3>The query log is the source of truth.</h3>
+        <p class="muted">Dashboards can lie. Numbers can be rounded. The raw record of what was asked, when, by whom, and what the verdict was — that&rsquo;s where the actual security work happens.</p>
+      </div>
+      <div class="value-card">
+        <div class="num">02</div>
+        <h3>False positives are the enemy.</h3>
+        <p class="muted">Every wrong block is a helpdesk ticket and a step toward analysts disabling rules. We measure FPs as a first-class metric and tune for them obsessively.</p>
+      </div>
+      <div class="value-card">
+        <div class="num">03</div>
+        <h3>Speed is a feature.</h3>
+        <p class="muted">If our resolver adds more than ~5ms to a lookup, people notice — and they shouldn&rsquo;t. We measure p50, p99, and p99.9 latency every week, in every region.</p>
+      </div>
+      <div class="value-card">
+        <div class="num">04</div>
+        <h3>Default to honest.</h3>
+        <p class="muted">No marketing math, no &ldquo;up to&rdquo; statistics, no benchmark cherry-picking. If we don&rsquo;t lead on something, we&rsquo;ll tell you the truth and try to fix it.</p>
+      </div>
+      <div class="value-card">
+        <div class="num">05</div>
+        <h3>Build for the SOC.</h3>
+        <p class="muted">Designed by people who&rsquo;ve been woken up at 3am. Every screen, every alert, every drawer is shaped by that experience — not by a focus group.</p>
+      </div>
+      <div class="value-card">
+        <div class="num">06</div>
+        <h3>Ship the unsexy.</h3>
+        <p class="muted">Audit logs, role-based access, RBAC migration tools, IPv6 support — the boring features that earn the boring trust that makes the rest possible.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- HISTORY -->
+<section class="section" style="background:linear-gradient(180deg, transparent, rgba(34,211,238,.04))">
+  <div class="container" style="max-width:980px">
+    <div class="section-head">
+      <span class="eyebrow">History</span>
+      <h2>Four years, two oceans, one stubborn idea.</h2>
+    </div>
+
+    <div class="timeline">
+      <div class="yr">2021</div>
+      <div>
+        <h3>Founded in a Brooklyn brownstone</h3>
+        <p class="muted">Three engineers — two from a fintech SOC, one from a CDN&rsquo;s resolver team — agreed that DNS-layer security needed a serious rebuild. They drafted the initial architecture on the back of a Manhattan-bound G-train.</p>
+      </div>
+    </div>
+    <div class="timeline">
+      <div class="yr">2022</div>
+      <div>
+        <h3>First customer · Seed round</h3>
+        <p class="muted">Northwind Labs went live in February. By November, 60 customers; $4M seed from Wing VC, Heavybit, and a small angel syndicate of security CTOs.</p>
+      </div>
+    </div>
+    <div class="timeline">
+      <div class="yr">2023</div>
+      <div>
+        <h3>AI Detection · Berlin office</h3>
+        <p class="muted">First production ML model — phishing lookalike, v1. Opened a Berlin engineering office for threat research, anchored by two former Mandiant analysts.</p>
+      </div>
+    </div>
+    <div class="timeline">
+      <div class="yr">2024</div>
+      <div>
+        <h3>Series B · 43 POPs · 1,000 customers</h3>
+        <p class="muted">$74M Series B led by Index Ventures. Rolled out 43-POP anycast network. Passed the 1,000-customer mark. Shipped the MSP console, opened the public bug bounty.</p>
+      </div>
+    </div>
+    <div class="timeline">
+      <div class="yr">2025</div>
+      <div>
+        <h3>4,000+ customers · ISO 27001</h3>
+        <p class="muted">Crossed 4,000 customers across 62 countries. Achieved ISO 27001 certification. Shipped Terraform provider v1, Sentinel native connector, and the v4 model series.</p>
+      </div>
+    </div>
+    <div class="timeline">
+      <div class="yr">2026</div>
+      <div>
+        <h3>The next chapter</h3>
+        <p class="muted">FedRAMP Moderate in progress. APAC research lab opening Q3. New product surfaces around identity-bound policy and zero-trust DNS that we&rsquo;re excited to talk about soon.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- LEADERSHIP -->
+<section class="section">
+  <div class="container">
+    <div class="section-head">
+      <span class="eyebrow">Leadership</span>
+      <h2>The team running things.</h2>
+      <p class="lede">A short list of people you can email directly. We don&rsquo;t hide behind support inboxes.</p>
+    </div>
+    <div class="row row-4">
+      <div class="team-card">
+        <div class="av"></div>
+        <div class="nm">Ada Berenson</div>
+        <div class="ti">Co-founder &amp; CEO</div>
+        <div class="bg">Prev: Stripe Radar, Bloomberg security engineering. Loves bouldering, queries that return in &lt;100ms.</div>
+      </div>
+      <div class="team-card">
+        <div class="av" style="background:linear-gradient(135deg,#f59e0b,#ef4444)"></div>
+        <div class="nm">Daniel Okoye</div>
+        <div class="ti">Co-founder &amp; CTO</div>
+        <div class="bg">Prev: Cloudflare DNS team, Mandiant IR. Wrote his first BIND config in 2003 and has been refining the opinion since.</div>
+      </div>
+      <div class="team-card">
+        <div class="av" style="background:linear-gradient(135deg,#10b981,#22d3ee)"></div>
+        <div class="nm">Sasha Lindgren</div>
+        <div class="ti">Co-founder &amp; Chief Security Officer</div>
+        <div class="bg">Prev: Recorded Future, NCC Group. Runs detection engineering, threat research, and the bug bounty.</div>
+      </div>
+      <div class="team-card">
+        <div class="av" style="background:linear-gradient(135deg,#a78bfa,#f472b6)"></div>
+        <div class="nm">Marisol Quintero</div>
+        <div class="ti">VP of Engineering</div>
+        <div class="bg">Prev: Datadog logs platform, MongoDB Atlas. Caretaker of the resolver fleet and our 4ms median.</div>
+      </div>
+      <div class="team-card">
+        <div class="av" style="background:linear-gradient(135deg,#22c55e,#10b981)"></div>
+        <div class="nm">Jonas Weller</div>
+        <div class="ti">Head of Threat Research</div>
+        <div class="bg">Prev: Mandiant, BfV. Runs the Berlin lab and the honeypot network. Speaks four languages, two badly.</div>
+      </div>
+      <div class="team-card">
+        <div class="av" style="background:linear-gradient(135deg,#fb923c,#a78bfa)"></div>
+        <div class="nm">Imani Reeves</div>
+        <div class="ti">VP of Customer Success</div>
+        <div class="bg">Prev: Snyk, Datadog. Has personally onboarded over 400 SOCs and remembers most of their resolver IPs.</div>
+      </div>
+      <div class="team-card">
+        <div class="av" style="background:linear-gradient(135deg,#ef4444,#fb923c)"></div>
+        <div class="nm">Henrik Aas</div>
+        <div class="ti">VP of Product</div>
+        <div class="bg">Prev: Linear, GitHub. Cares deeply about empty states and not adding settings panels.</div>
+      </div>
+      <div class="team-card">
+        <div class="av" style="background:linear-gradient(135deg,#22d3ee,#10b981)"></div>
+        <div class="nm">Priya Vasquez</div>
+        <div class="ti">VP of Finance &amp; Ops</div>
+        <div class="bg">Prev: Notion, Stripe. Closes the books before standup, which is somehow not magic.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- INVESTORS -->
+<section class="section" id="press" style="background:var(--bg-1)">
+  <div class="container">
+    <div class="row row-2" style="gap:48px;align-items:center">
+      <div>
+        <span class="eyebrow">Backed by</span>
+        <h2 style="margin-top:14px">Patient capital, with security operator pedigree.</h2>
+        <p class="lede" style="margin-top:18px">Our investors are funds and individuals who&rsquo;ve actually run security teams or built protocol-level infrastructure. They get it.</p>
+      </div>
+      <div class="logos-grid" style="background:var(--line)">
+        <div class="cell">INDEX</div>
+        <div class="cell">⌬ WING</div>
+        <div class="cell">heavybit</div>
+        <div class="cell">FW Ventures</div>
+        <div class="cell">SignalFire ⏧</div>
+        <div class="cell">Bessemer</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRESS -->
+<section class="section">
+  <div class="container">
+    <div class="section-head">
+      <span class="eyebrow">In the press</span>
+      <h2>What people are saying about olladns.</h2>
+    </div>
+    <div class="row row-3">
+      <div class="card">
+        <div class="muted tiny" style="text-transform:uppercase;letter-spacing:.1em;font-weight:600">Dark Reading · May 2026</div>
+        <h3 style="margin-top:8px;font-size:18px">&ldquo;The DNS layer is getting a serious upgrade — and olladns is leading it.&rdquo;</h3>
+      </div>
+      <div class="card">
+        <div class="muted tiny" style="text-transform:uppercase;letter-spacing:.1em;font-weight:600">SC Magazine · Mar 2026</div>
+        <h3 style="margin-top:8px;font-size:18px">&ldquo;The Query Log feature alone is worth a serious look from any SOC running over 500 endpoints.&rdquo;</h3>
+      </div>
+      <div class="card">
+        <div class="muted tiny" style="text-transform:uppercase;letter-spacing:.1em;font-weight:600">The Stack · Feb 2026</div>
+        <h3 style="margin-top:8px;font-size:18px">&ldquo;A rare example of AI in security that actually moves the precision-recall curve, not the marketing one.&rdquo;</h3>
+      </div>
+    </div>
+    <div class="text-center" style="margin-top:24px">
+      <a class="muted" href="#">Full press kit →</a>
+    </div>
+  </div>
+</section>
+
+<!-- CAREERS -->
+<section class="section" id="careers" style="background:linear-gradient(180deg, transparent, rgba(34,211,238,.04))">
+  <div class="container">
+    <div class="section-head">
+      <span class="eyebrow">Careers</span>
+      <h2>Come work on the boring, important stuff.</h2>
+      <p class="lede">Remote-first within US &amp; EU time zones. Office hubs in Brooklyn and Berlin. Top-decile pay, transparent bands, real equity, no bullshit.</p>
+    </div>
+
+    <div class="row row-4" style="margin-bottom:32px">
+      <div class="card" style="padding:20px">
+        <div class="feature-ic" data-ic="building"></div>
+        <h4 style="margin-top:14px">Remote-first</h4>
+        <p class="muted tiny" style="margin-top:6px">142 people across 26 cities. Quarterly on-sites in Brooklyn or Berlin.</p>
+      </div>
+      <div class="card" style="padding:20px">
+        <div class="feature-ic" data-ic="heart"></div>
+        <h4 style="margin-top:14px">Real benefits</h4>
+        <p class="muted tiny" style="margin-top:6px">Full health, 401k match, $2k/yr learning budget, 6mo parental leave for any parent.</p>
+      </div>
+      <div class="card" style="padding:20px">
+        <div class="feature-ic" data-ic="clock"></div>
+        <h4 style="margin-top:14px">Sane hours</h4>
+        <p class="muted tiny" style="margin-top:6px">No-meeting Wednesdays, 35h workweeks in EU, on-call only if you build it.</p>
+      </div>
+      <div class="card" style="padding:20px">
+        <div class="feature-ic" data-ic="bolt"></div>
+        <h4 style="margin-top:14px">Real ownership</h4>
+        <p class="muted tiny" style="margin-top:6px">Meaningful equity, transparent strike prices, secondary windows on tender events.</p>
+      </div>
+    </div>
+
+    <h3 style="margin-bottom:14px">Open roles · 11</h3>
+    <div>
+      <div class="job-row">
+        <div><div class="ti">Senior Detection Engineer</div><div class="tm">Threat Research · IC4</div></div>
+        <div class="lo">Berlin or Remote (EU)</div>
+        <div class="tg">Engineering</div>
+        <div data-ic="arrow"></div>
+      </div>
+      <div class="job-row">
+        <div><div class="ti">Staff ML Engineer · Phishing Detection</div><div class="tm">AI Detection · IC5</div></div>
+        <div class="lo">Brooklyn or Remote (US)</div>
+        <div class="tg">Engineering</div>
+        <div data-ic="arrow"></div>
+      </div>
+      <div class="job-row">
+        <div><div class="ti">Senior Frontend Engineer · Console</div><div class="tm">Product · IC4</div></div>
+        <div class="lo">Remote (US/EU)</div>
+        <div class="tg">Engineering</div>
+        <div data-ic="arrow"></div>
+      </div>
+      <div class="job-row">
+        <div><div class="ti">Resolver Reliability Engineer</div><div class="tm">Infrastructure · IC4</div></div>
+        <div class="lo">Remote (US)</div>
+        <div class="tg">Engineering</div>
+        <div data-ic="arrow"></div>
+      </div>
+      <div class="job-row">
+        <div><div class="ti">Solutions Engineer · Enterprise</div><div class="tm">Go-to-market · IC4</div></div>
+        <div class="lo">New York or San Francisco</div>
+        <div class="tg">GTM</div>
+        <div data-ic="arrow"></div>
+      </div>
+      <div class="job-row">
+        <div><div class="ti">Designer · Console</div><div class="tm">Product · IC4</div></div>
+        <div class="lo">Brooklyn or Remote (US)</div>
+        <div class="tg">Design</div>
+        <div data-ic="arrow"></div>
+      </div>
+      <div class="job-row">
+        <div><div class="ti">Content Lead · Threat Research</div><div class="tm">Marketing · IC4</div></div>
+        <div class="lo">Remote</div>
+        <div class="tg">Marketing</div>
+        <div data-ic="arrow"></div>
+      </div>
+      <div class="job-row">
+        <div><div class="ti">Customer Success Manager · EMEA</div><div class="tm">Customer Success · IC3</div></div>
+        <div class="lo">Berlin or London</div>
+        <div class="tg">GTM</div>
+        <div data-ic="arrow"></div>
+      </div>
+    </div>
+    <p class="muted text-center" style="margin-top:24px">Don&rsquo;t see your role? <a href="contact.html" class="accent">Tell us anyway</a>.</p>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="cta-block">
+      <h2>Want to chat — about the product, the company, or just DNS?</h2>
+      <p class="lede">We answer every email. No CAPTCHAs, no &ldquo;tier 1.&rdquo;</p>
+      <div class="cta">
+        <a class="btn primary lg" href="contact.html">Contact us <span data-ic="arrow"></span></a>
+        <a class="btn lg" href="#careers">See open roles</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div id="site-footer"></div>
+
+<script src="chrome.js"></script>
+<script>
+  mountChrome('company');
+  document.querySelectorAll('[data-ic]').forEach(el=>{
+    el.innerHTML = icon(el.getAttribute('data-ic'),{size: el.classList.contains('feature-ic')?18:14, sw:1.8});
+  });
+</script>
+</body>
+</html>
