@@ -16,6 +16,19 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      # Cache wrangler global install between runs
+      - name: Cache npm global
+        uses: actions/cache@v4
+        with:
+          path: |
+            ~/.npm
+            ~/.cache/wrangler
+          key: wrangler-${{ runner.os }}-v1
+
       - name: Deploy to Cloudflare Pages
         uses: cloudflare/wrangler-action@v3
         with:
