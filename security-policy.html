@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <title>Responsible Disclosure · olladns</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <meta name="description" content="How to report a security vulnerability in olladns. Scope, safe-harbor, response times, and our bounty stance."/>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="site.css"/>
+  <style>
+    .policy-card{padding:24px;border:1px solid var(--line);border-radius:10px;background:var(--panel);margin-bottom:16px}
+    .policy-card h3{font-size:18px;margin-bottom:10px}
+    .scope-list{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:14px}
+    @media (max-width:760px){.scope-list{grid-template-columns:1fr}}
+    .scope-item{padding:12px 14px;border:1px solid var(--line);border-radius:8px;background:var(--bg-2);font-family:var(--mono);font-size:13px}
+    .scope-item.out{color:var(--muted);text-decoration:line-through}
+    .timeline-srv{display:grid;grid-template-columns:140px 1fr;gap:24px;padding:18px 0;border-bottom:1px solid var(--line)}
+    .timeline-srv .when{font-family:var(--mono);color:var(--accent);font-size:13px}
+  </style>
+</head>
+<body>
+
+<div id="site-nav"></div>
+
+<section class="page-hero">
+  <div class="grid-bg"></div>
+  <div class="container" style="position:relative">
+    <span class="eyebrow">Coordinated Disclosure</span>
+    <h1 class="gradient-text">Find a security bug? We want to hear from you.</h1>
+    <p class="lede" style="font-size:19px">We're a small team running a DNS filter for security professionals. Honest researchers find honest bugs — and we'd rather hear them from you than read about them in a post-mortem.</p>
+  </div>
+</section>
+
+<!-- HOW TO REPORT -->
+<section class="section" style="padding:60px 0">
+  <div class="container" style="max-width:880px">
+    <span class="eyebrow">How to report</span>
+    <h2 style="margin-top:14px">Email <a href="mailto:security@olladns.com">security@olladns.com</a>.</h2>
+    <p class="muted" style="font-size:16px;margin-top:14px">PGP key for sensitive details: fingerprint <code>0xABCD1234…</code> (full key on request — we'll publish on /security/pgp once SOC 2 audit confirms our key-rotation cadence).</p>
+    <p class="muted" style="font-size:16px;margin-top:14px">Include in your report:</p>
+    <ul style="font-size:16px;color:var(--text-2);line-height:1.8;margin-top:10px">
+      <li>What you found, ideally with a reproducer (curl command, screenshot, or short PoC script)</li>
+      <li>Which surface (api.olladns.com / mcp.olladns.com / login.olladns.com / dns.olladns.com)</li>
+      <li>Realistic impact assessment — what an attacker could actually do</li>
+      <li>Any disclosure deadline you intend to honor (we default to 90 days, negotiable)</li>
+    </ul>
+  </div>
+</section>
+
+<!-- SCOPE -->
+<section class="section" style="padding:40px 0">
+  <div class="container" style="max-width:880px">
+    <div class="policy-card">
+      <h3>In scope</h3>
+      <p class="muted">Anything that meaningfully degrades the security of a tenant's data, the integrity of resolution, or the availability of the platform.</p>
+      <div class="scope-list">
+        <div class="scope-item">api.olladns.com</div>
+        <div class="scope-item">mcp.olladns.com</div>
+        <div class="scope-item">login.olladns.com</div>
+        <div class="scope-item">dns.olladns.com (DoH/DoT/DoQ)</div>
+        <div class="scope-item">uptime.olladns.com</div>
+        <div class="scope-item">olladns.com (marketing)</div>
+      </div>
+    </div>
+
+    <div class="policy-card">
+      <h3>Out of scope</h3>
+      <div class="scope-list">
+        <div class="scope-item out">CSP / HSTS / cookie-flag nitpicks without impact</div>
+        <div class="scope-item out">Rate-limit bypass without auth bypass</div>
+        <div class="scope-item out">Self-XSS</div>
+        <div class="scope-item out">Reports from automated scanners with no triage</div>
+        <div class="scope-item out">Volumetric DoS testing (please don't)</div>
+        <div class="scope-item out">Social engineering of our team</div>
+        <div class="scope-item out">Third-party dependencies — report to them upstream first</div>
+        <div class="scope-item out">Recently-disclosed CVEs we're already patching</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SAFE HARBOR -->
+<section class="section" style="padding:40px 0">
+  <div class="container" style="max-width:880px">
+    <div class="policy-card">
+      <h3>Safe harbor</h3>
+      <p class="muted">If you act in good faith — test only against your own tenant, don't access other customers' data, give us reasonable time to fix before publishing — we will not pursue legal action and will defend you publicly against any third-party claim that arises from your testing.</p>
+      <p class="muted" style="margin-top:10px">If you accidentally access another tenant's data while reproducing a bug: stop, delete what you have, tell us. We treat that as a stronger report, not a hostile act.</p>
+    </div>
+  </div>
+</section>
+
+<!-- TIMELINE -->
+<section class="section" style="padding:40px 0">
+  <div class="container" style="max-width:880px">
+    <span class="eyebrow">What you'll hear back</span>
+    <h2 style="margin-top:14px">Our response SLA.</h2>
+    <div style="margin-top:24px">
+      <div class="timeline-srv"><span class="when">1 business day</span><div><h3 style="font-size:17px;margin-bottom:6px">Acknowledgment</h3><p class="muted">Confirmation we got the report. Not yet a triage verdict — just "received, looking at it."</p></div></div>
+      <div class="timeline-srv"><span class="when">5 business days</span><div><h3 style="font-size:17px;margin-bottom:6px">Triage verdict</h3><p class="muted">Severity (Critical / High / Medium / Low / Info), in-scope confirmation, fix-target ETA. If we disagree it's in scope we'll explain why in detail.</p></div></div>
+      <div class="timeline-srv"><span class="when">Critical: 7 days · High: 30 days</span><div><h3 style="font-size:17px;margin-bottom:6px">Fix shipped</h3><p class="muted">Patched in production. You get a heads-up before the changelog entry goes public so you can prep your write-up.</p></div></div>
+      <div class="timeline-srv"><span class="when">Within 90 days</span><div><h3 style="font-size:17px;margin-bottom:6px">Public disclosure window</h3><p class="muted">Default coordinated-disclosure window. We'll work with you on extension if rollout to enterprise customers needs more time, or compression if active exploitation is observed.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- BOUNTY -->
+<section class="section" style="padding:40px 0 80px;background:var(--bg-2)">
+  <div class="container" style="max-width:680px;text-align:center">
+    <span class="eyebrow">Bounty stance</span>
+    <h2 style="margin-top:14px;font-size:32px">Not yet a formal bounty program.</h2>
+    <p class="muted" style="font-size:16px;margin-top:14px">We're a small team and a formal bounty program would attract more low-quality submissions than we can triage well. We do issue discretionary thank-you payments (typically $50–$2,000 depending on severity + report quality) and a public credit on the changelog if you want one.</p>
+    <p class="muted" style="font-size:14px;margin-top:10px">We will revisit a formal program after SOC 2 Type II lands and we have headcount to run it properly.</p>
+  </div>
+</section>
+
+<div id="site-footer"></div>
+
+<script src="chrome.js"></script>
+<script>mountChrome('resources');</script>
+</body>
+</html>

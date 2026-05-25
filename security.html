@@ -1,0 +1,161 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <title>Security · olladns</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <meta name="description" content="How olladns protects your DNS query data — architecture, encryption, access control, hosting, retention, and the compliance work in progress."/>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="site.css"/>
+  <style>
+    .ctrl-card{padding:24px;border:1px solid var(--line);border-radius:10px;background:var(--panel);display:flex;flex-direction:column;gap:8px}
+    .ctrl-card .num{font-family:var(--mono);color:var(--accent);font-size:13px;letter-spacing:.08em}
+    .ctrl-card h3{font-size:19px;margin:6px 0}
+    .status-row{display:flex;align-items:center;gap:10px;padding:14px 18px;border:1px solid var(--line);border-radius:8px;background:var(--panel);margin-bottom:8px}
+    .status-row .dot{width:8px;height:8px;border-radius:50%}
+    .status-row .dot.green{background:#22c55e}
+    .status-row .dot.amber{background:#f59e0b}
+    .status-row .lbl{flex:1;font-weight:500}
+    .status-row .meta{color:var(--muted);font-size:13px;font-family:var(--mono)}
+  </style>
+</head>
+<body>
+
+<div id="site-nav"></div>
+
+<section class="page-hero">
+  <div class="grid-bg"></div>
+  <div class="container" style="position:relative">
+    <span class="eyebrow">Security &amp; Trust</span>
+    <h1 class="gradient-text">Built for the people who get paged when something breaks.</h1>
+    <p class="lede" style="font-size:19px">olladns runs the same playbook we used as customers — encrypted-by-default DNS, scoped agent tokens, actor-attributed audit, and an honest answer to every CISO question. Here is the unvarnished posture, current today.</p>
+  </div>
+</section>
+
+<!-- POSTURE -->
+<section class="section" style="padding:60px 0">
+  <div class="container">
+    <div class="section-head">
+      <span class="eyebrow">Posture, current today</span>
+      <h2>What's done. What's in flight.</h2>
+      <p class="muted">No marketing-speak. If a control is amber it means we're working on it and have a target month.</p>
+    </div>
+    <div style="max-width:880px;margin:32px auto 0">
+      <div class="status-row"><span class="dot green"></span><span class="lbl">DNS encryption: DoH, DoT, DoQ on standard ports</span><span class="meta">live</span></div>
+      <div class="status-row"><span class="dot green"></span><span class="lbl">DNSSEC validation enabled on every resolver</span><span class="meta">live</span></div>
+      <div class="status-row"><span class="dot green"></span><span class="lbl">TLS 1.3 only, modern ciphers, HSTS preloaded</span><span class="meta">live</span></div>
+      <div class="status-row"><span class="dot green"></span><span class="lbl">Scoped API keys with 12 resource:action scopes, optional expiry, instant rotation/revocation</span><span class="meta">live</span></div>
+      <div class="status-row"><span class="dot green"></span><span class="lbl">Tamper-attributed audit log — every config change tags actor (human or agent token)</span><span class="meta">live</span></div>
+      <div class="status-row"><span class="dot green"></span><span class="lbl">Tenant isolation — server-stamped tenant_id on every write, never user-supplied</span><span class="meta">live</span></div>
+      <div class="status-row"><span class="dot green"></span><span class="lbl">Per-tenant + per-IP rate limiting at the edge (Caddy + fail2ban)</span><span class="meta">live</span></div>
+      <div class="status-row"><span class="dot green"></span><span class="lbl">Bcrypt password hashing, JWT sessions, no plaintext anywhere</span><span class="meta">live</span></div>
+      <div class="status-row"><span class="dot green"></span><span class="lbl">Public responsible-disclosure policy (see <a href="security-policy.html">/security-policy</a>)</span><span class="meta">live</span></div>
+      <div class="status-row"><span class="dot amber"></span><span class="lbl">SOC 2 Type II audit</span><span class="meta">observation in progress</span></div>
+      <div class="status-row"><span class="dot amber"></span><span class="lbl">SAML / OIDC SSO</span><span class="meta">roadmap</span></div>
+      <div class="status-row"><span class="dot amber"></span><span class="lbl">India region (Mumbai) for DPDP data-residency</span><span class="meta">roadmap</span></div>
+      <div class="status-row"><span class="dot amber"></span><span class="lbl">Penetration test (annual, third-party)</span><span class="meta">scheduled</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ARCHITECTURE -->
+<section class="section" style="padding:60px 0;background:var(--bg-2)">
+  <div class="container">
+    <div class="section-head">
+      <span class="eyebrow">Architecture</span>
+      <h2>How a DNS query flows through olladns.</h2>
+    </div>
+    <div class="row row-2" style="margin-top:32px">
+      <div class="ctrl-card">
+        <div class="num">DATA PLANE</div>
+        <h3>Resolver isolation</h3>
+        <p class="muted">Per-tenant DoH paths route queries to per-tenant AdGuard Home client configs. Tenants never see each other's queries. DoT uses SNI to carry tenant id. Plain Do53 is intentionally not exposed on the public LXC.</p>
+      </div>
+      <div class="ctrl-card">
+        <div class="num">CONTROL PLANE</div>
+        <h3>Rust API, scope-aware</h3>
+        <p class="muted">Axum + sqlx. Every write endpoint requires a scoped capability — humans get role-based access via JWT, agents get explicit resource:action scopes via X-API-Key. Cross-tenant writes are structurally impossible.</p>
+      </div>
+      <div class="ctrl-card">
+        <div class="num">ANALYTICS</div>
+        <h3>ClickHouse, tenant-partitioned</h3>
+        <p class="muted">Query logs partition by tenant_id + day. 30-day default TTL, configurable per tenant. Anonymization toggle blanks client IPs at ingest. Bulk export ships CSV and NDJSON.</p>
+      </div>
+      <div class="ctrl-card">
+        <div class="num">AUDIT</div>
+        <h3>Actor-attributed, immutable</h3>
+        <p class="muted">Every config change writes one row with actor_type (user / api_key / system), actor id, tenant id, action, and JSON metadata. Filterable by API-key id so you can audit a single agent's actions. Tamper-evident hash chain is on the roadmap.</p>
+      </div>
+      <div class="ctrl-card">
+        <div class="num">EDGE</div>
+        <h3>Caddy TLS, fail2ban, DDoS-hardened</h3>
+        <p class="muted">TLS terminator + reverse proxy with per-key, per-IP rate limits. fail2ban watches Caddy 4xx storms and bans abusive IPs at the kernel firewall. Wildcard cert via Let's Encrypt with Cloudflare DNS-01 challenge.</p>
+      </div>
+      <div class="ctrl-card">
+        <div class="num">AGENT</div>
+        <h3>MCP server, scope-passthrough</h3>
+        <p class="muted">FastMCP sidecar at mcp.olladns.com auto-generates tools from the OpenAPI spec and forwards the caller's X-API-Key on every upstream call. Sensitive ops (login, password change, key mint/rotate/delete) are excluded — humans only.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DATA -->
+<section class="section" style="padding:60px 0">
+  <div class="container">
+    <div class="section-head">
+      <span class="eyebrow">Your data</span>
+      <h2>What we collect, where it lives, when it goes away.</h2>
+    </div>
+    <div style="max-width:880px;margin:32px auto 0;display:flex;flex-direction:column;gap:16px">
+      <div class="ctrl-card">
+        <h3>Query logs</h3>
+        <p class="muted">Each DNS query stores timestamp, client IP, query name, query type, response code, latency, and the blocklist that caught it (if any). Per-tenant retention defaults to 30 days; configurable up to 1 year on paid plans. Tenants who enable anonymization replace client_ip with an empty string at ingest — no separate reversible hash, just gone.</p>
+      </div>
+      <div class="ctrl-card">
+        <h3>Account data</h3>
+        <p class="muted">Email, bcrypt'd password hash, tenant id, role. Contact email is optional and used only for billing + incident notifications. We do not have or want your phone number.</p>
+      </div>
+      <div class="ctrl-card">
+        <h3>API keys</h3>
+        <p class="muted">Sha-256 hash of the key value only — we cannot recover a lost key. Label, scopes, optional expires_at, last_used_at. Deletion is permanent and instant.</p>
+      </div>
+      <div class="ctrl-card">
+        <h3>Audit log</h3>
+        <p class="muted">Same retention as query logs (per-tenant configurable). Survives user deletion via ON DELETE SET NULL — the row remains, the foreign key goes to NULL, so the historical record of "key #9 modified policy X on date Y" is preserved even after that key is revoked.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- HOSTING -->
+<section class="section" style="padding:60px 0;background:var(--bg-2)">
+  <div class="container">
+    <div class="section-head">
+      <span class="eyebrow">Hosting &amp; subprocessors</span>
+      <h2>Where olladns runs.</h2>
+    </div>
+    <div style="max-width:760px;margin:32px auto 0">
+      <p class="muted" style="font-size:15px">olladns runs on a hardened Linux container (LXC) provisioned at a tier-3 datacenter, with full-disk encryption and isolated network namespaces. Cloudflare fronts the marketing site and provides DNS for the olladns.com zone (Cloudflare DNS only — the resolver itself is ours). Let's Encrypt issues TLS certificates via DNS-01 challenge.</p>
+      <p class="muted" style="font-size:15px;margin-top:18px">India region (Mumbai) for data-residency-sensitive customers is on the roadmap. Until it ships, we cannot guarantee in-country storage — be explicit about that in your DPA negotiations.</p>
+      <p style="margin-top:24px"><a href="#" class="btn ghost">Full subprocessor list (coming with the legal page)</a></p>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="section" style="padding:60px 0">
+  <div class="container" style="max-width:680px;text-align:center">
+    <span class="eyebrow">Questions</span>
+    <h2 style="margin-top:18px">Security inquiry, vendor risk questionnaire, or DPA?</h2>
+    <p class="muted" style="font-size:16px;margin-top:14px">Write to <a href="mailto:security@olladns.com">security@olladns.com</a>. We respond within one business day with the SIG Lite + the current SOC 2 readiness status.</p>
+    <p class="muted" style="font-size:14px;margin-top:14px">Reporting a vulnerability? See <a href="security-policy.html">/security-policy</a> for our disclosure process and bounty stance.</p>
+  </div>
+</section>
+
+<div id="site-footer"></div>
+
+<script src="chrome.js"></script>
+<script>mountChrome('resources');</script>
+</body>
+</html>

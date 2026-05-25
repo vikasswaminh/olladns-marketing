@@ -1,0 +1,190 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <title>Changelog · olladns</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <meta name="description" content="Every release of olladns, what shipped, and what we explicitly chose not to ship."/>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="site.css"/>
+  <style>
+    .release{padding:32px 0;border-bottom:1px solid var(--line);display:grid;grid-template-columns:160px 1fr;gap:48px}
+    @media (max-width:880px){.release{grid-template-columns:1fr;gap:12px}}
+    .release .ver{font-family:var(--mono);font-size:22px;font-weight:600;color:var(--accent);letter-spacing:-.01em}
+    .release .ver .date{display:block;color:var(--muted);font-size:12px;font-weight:400;margin-top:4px;letter-spacing:0}
+    .release h3{font-size:21px;margin-bottom:10px}
+    .release .body{color:var(--text-2);font-size:15px;line-height:1.65}
+    .release .body ul{margin:8px 0 0;padding-left:20px}
+    .release .body li{margin-bottom:6px}
+    .release .body code{font-family:var(--mono);font-size:13px;background:var(--bg-2);padding:1px 6px;border-radius:4px}
+    .tag{display:inline-block;font-family:var(--mono);font-size:11px;padding:2px 8px;border-radius:4px;background:var(--bg-2);color:var(--muted);margin-right:6px}
+    .tag.feat{background:rgba(34,211,238,.12);color:#22d3ee}
+    .tag.fix{background:rgba(34,197,94,.12);color:#22c55e}
+    .tag.sec{background:rgba(245,158,11,.12);color:#f59e0b}
+    .tag.brk{background:rgba(239,68,68,.12);color:#ef4444}
+  </style>
+</head>
+<body>
+
+<div id="site-nav"></div>
+
+<section class="page-hero">
+  <div class="grid-bg"></div>
+  <div class="container" style="position:relative">
+    <span class="eyebrow">Changelog</span>
+    <h1 class="gradient-text">Every release. What shipped. What didn't.</h1>
+    <p class="lede" style="font-size:19px">Honest version history. Feature flags, design rollbacks, security fixes — all of it. If we shipped something only to walk it back, you'll see that here too.</p>
+  </div>
+</section>
+
+<section class="section" style="padding:40px 0 80px">
+  <div class="container" style="max-width:880px">
+
+    <div class="release">
+      <div class="ver">v0.20<span class="date">2026-05-25</span></div>
+      <div>
+        <h3><span class="tag feat">feat</span> Curated MCP tool descriptions</h3>
+        <div class="body">
+          <p>All 33 MCP tools now carry hand-written <code>when / why / sharp edges</code> descriptions instead of auto-generated <code>"Executes GET /api/v1/..."</code> fallbacks. Measurably improves how AI agents (Claude, Cursor, Continue) pick the right tool on the first try.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="release">
+      <div class="ver">v0.19<span class="date">2026-05-25</span></div>
+      <div>
+        <h3><span class="tag brk">breaking</span> Dashboard is now read-only</h3>
+        <div class="body">
+          <p>The four configuration screens (Policies, Categories, Users, Settings) are gone. Configuration happens via REST API or via the MCP server — agents do the typing, humans review via the Audit Log.</p>
+          <ul>
+            <li>New: Audit Log viewer with actor pills (human session vs specific agent token), filterable by actor type</li>
+            <li>Net <code>−326 LoC</code> of dashboard code</li>
+            <li>Sidebar's "Configure" group now points users at the REST API + MCP endpoint</li>
+            <li>Three follow-up fixes: CSP allowing inline-script removal, structural HTML repair, pre-login 401 noise suppression + post-login hard-reload</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="release">
+      <div class="ver">v0.18<span class="date">2026-05-25</span></div>
+      <div>
+        <h3><span class="tag feat">feat</span> Threat-intel toggles — NRD + TLD blocking</h3>
+        <div class="body">
+          <p>One-click toggles wrap existing primitives. Turn on <code>newly_registered_domains</code> to subscribe to the Hagezi NRD blocklist; pass a TLD list to block whole suffixes via wildcard rules.</p>
+          <p>Future toggles (parked-domain, DGA classifier, typosquat) are reserved in the response shape but return null — they need real classifiers and feeds, landing in a future release.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="release">
+      <div class="ver">v0.17<span class="date">2026-05-25</span></div>
+      <div>
+        <h3><span class="tag feat">feat</span> Per-tenant DNS rewrites</h3>
+        <div class="body">
+          <p>The ControlD-style Redirect feature: override any DNS answer for any domain. Five kinds — A, AAAA, CNAME, NXDOMAIN, REFUSED. Coexists cleanly with custom block/allow rules.</p>
+          <p>Implemented via AGH's <code>$dnsrewrite</code> modifier joined to the existing per-tenant client tag.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="release">
+      <div class="ver">v0.16<span class="date">2026-05-25</span></div>
+      <div>
+        <h3><span class="tag feat">feat</span> Blocklist catalog expanded 5 → 30 · CSV/NDJSON query log export</h3>
+        <div class="body">
+          <ul>
+            <li>25 new curated lists across 14 categories (threat, phishing, ads, tracking, adult, gambling, social, AI, fakenews, telemetry, NRD, TLDs, bypass)</li>
+            <li>New <code>GET /api/v1/analytics/export?format=csv|ndjson</code> for SOC handover and audit prep. Cap 10M rows per call</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="release">
+      <div class="ver">v0.15<span class="date">2026-05-25</span></div>
+      <div>
+        <h3><span class="tag feat">feat</span> Full OpenAPI annotation · MCP exclusions for sensitive ops</h3>
+        <div class="body">
+          <p>All 35 API endpoints documented in the OpenAPI 3.1 spec at <code>/api/v1/openapi.json</code>. MCP server uses FastMCP's <code>RouteMap(MCPType.EXCLUDE)</code> to hide eight humans-only operations (login, password change, key mint/rotate/delete, tenant create/delete, user delete) from agents regardless of scope grant.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="release">
+      <div class="ver">v0.14<span class="date">2026-05-25</span></div>
+      <div>
+        <h3><span class="tag feat">feat</span> MCP server live at mcp.olladns.com</h3>
+        <div class="body">
+          <p>Agent-native config plane. FastMCP sidecar auto-generates tools from the OpenAPI spec, forwards the caller's <code>X-API-Key</code> on every upstream call, and respects per-key scopes end-to-end. Both stdio (Claude Desktop, Cursor) and Streamable HTTP transports.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="release">
+      <div class="ver">v0.13<span class="date">2026-05-25</span></div>
+      <div>
+        <h3><span class="tag feat">feat</span> OpenAPI 3.1 spec generation (utoipa)</h3>
+        <div class="body">
+          <p>Single source of truth for the API. Drives MCP tool generation, external SDK codegen, and human-readable docs.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="release">
+      <div class="ver">v0.12<span class="date">2026-05-24</span></div>
+      <div>
+        <h3><span class="tag feat">feat</span> Agent-completeness API gaps closed</h3>
+        <div class="body">
+          <ul>
+            <li><code>GET /tenants/me</code> — caller's own tenant (UUID, DoH URL, endpoints)</li>
+            <li><code>PATCH /tenants/:id</code> — rename + contact_email</li>
+            <li><code>POST /auth/change-password</code> — self-service, JWT-only</li>
+            <li><span class="tag fix">fix</span> <code>doh_url</code> no longer leaks <code>:8443</code></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="release">
+      <div class="ver">v0.11<span class="date">2026-05-24</span></div>
+      <div>
+        <h3><span class="tag feat">feat</span> <span class="tag sec">sec</span> Scoped API keys + actor-attributed audit log</h3>
+        <div class="body">
+          <p>Foundation for agent delegation. Twelve resource:action scopes (<code>analytics:read</code>, <code>policies:write</code>, etc.); optional expiry; one-call rotation. Every audit row records actor type (user / api_key / system) and actor id — every config change is now traceable to a specific human session or a specific agent token.</p>
+          <p>Pre-v0.11 keys are auto-promoted to a <code>legacy:full</code> backstop scope for backward compatibility.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="release">
+      <div class="ver">v0.10<span class="date">2026-05-24</span></div>
+      <div>
+        <h3><span class="tag feat">feat</span> Dashboard SPA · api.olladns.com split</h3>
+        <div class="body">
+          <p>Alpine.js + fetch single-page app on <code>login.olladns.com</code>. API and dashboard now live on separate hostnames with proper CORS.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="release">
+      <div class="ver">v0.9<span class="date">2026-05-23</span></div>
+      <div>
+        <h3><span class="tag sec">sec</span> Hardening · DNSSEC · fail2ban · drop public :53</h3>
+        <div class="body">
+          <p>DNSSEC validation enabled on every resolver. sysctl hardening. Cloudflare token scoped to the single zone. fail2ban watching Caddy 4xx storms. Plain port 53 no longer exposed publicly — DDoS amplification surface eliminated.</p>
+        </div>
+      </div>
+    </div>
+
+    <p class="muted" style="font-size:13px;margin-top:32px;text-align:center">Earlier versions (v0.1–v0.8) covered the initial DNS plane, AGH integration, ClickHouse ingest, per-tenant policy/blocklist subscriptions, audit logging, and the original v0.7 switch from Vector to a Rust AGH poller. See the <a href="https://github.com/vikasswaminh/qdns" target="_blank">git history</a> for the full record.</p>
+
+  </div>
+</section>
+
+<div id="site-footer"></div>
+
+<script src="chrome.js"></script>
+<script>mountChrome('resources');</script>
+</body>
+</html>

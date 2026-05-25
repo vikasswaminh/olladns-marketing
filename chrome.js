@@ -118,8 +118,9 @@
               <li><a href="resources.html">Library</a></li>
               <li><a href="resources.html#docs">Docs</a></li>
               <li><a href="resources.html#blog">Blog</a></li>
-              <li><a href="resources.html#changelog">Changelog</a></li>
-              <li><a href="resources.html#security">Trust &amp; Security</a></li>
+              <li><a href="changelog.html">Changelog</a></li>
+              <li><a href="security.html">Trust &amp; Security</a></li>
+              <li><a href="security-policy.html">Report a vulnerability</a></li>
             </ul>
           </div>
           <div>
