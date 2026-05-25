@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <title>Subprocessors · olladns</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <meta name="description" content="Every vendor that processes customer data on olladns's behalf. Updated as the list changes; subscribe for notice."/>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="../site.css"/>
+  <style>
+    .legal-prose{max-width:900px;margin:0 auto;font-size:16px;line-height:1.7;color:var(--text-2)}
+    .legal-prose h2{font-size:22px;margin:36px 0 10px;color:var(--text-strong)}
+    .legal-prose p{margin:0 0 14px}
+    .legal-prose code{font-family:var(--mono);font-size:13.5px;background:var(--bg-2);padding:1px 6px;border-radius:4px}
+    .legal-meta{font-size:13px;color:var(--muted);font-family:var(--mono);margin-bottom:24px}
+    .sp-table{width:100%;border-collapse:collapse;margin:14px 0;font-size:14px}
+    .sp-table th, .sp-table td{text-align:left;padding:12px 14px;border:1px solid var(--line);vertical-align:top}
+    .sp-table th{background:var(--bg-2);color:var(--text-strong);font-weight:600}
+    .sp-table td.tag{font-family:var(--mono);font-size:12px;color:var(--accent);white-space:nowrap}
+  </style>
+</head>
+<body>
+
+<div id="site-nav"></div>
+
+<section class="page-hero">
+  <div class="grid-bg"></div>
+  <div class="container" style="position:relative">
+    <span class="eyebrow">Legal</span>
+    <h1 class="gradient-text">Subprocessors</h1>
+    <p class="lede" style="font-size:18px">Every vendor that processes customer data on olladns's behalf. We'll give you 30 days' notice before adding a new one — subscribe via the email on this page.</p>
+  </div>
+</section>
+
+<section class="section" style="padding:40px 0 80px">
+  <div class="container">
+    <div class="legal-prose">
+      <div class="legal-meta">Effective: 2026-05-25 · Version 1.0 · subscribe at <a href="mailto:subprocessors@olladns.com?subject=subscribe">subprocessors@olladns.com</a></div>
+
+      <h2>Current subprocessors</h2>
+
+      <table class="sp-table">
+        <thead>
+          <tr>
+            <th>Subprocessor</th>
+            <th>Purpose</th>
+            <th>Data type</th>
+            <th>Location</th>
+            <th>DPA</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Cloudflare, Inc.</strong></td>
+            <td>Marketing-site CDN + DNS hosting for olladns.com zone</td>
+            <td>Edge access logs (no customer DNS query content)</td>
+            <td>Global edge</td>
+            <td><a href="https://www.cloudflare.com/cloudflare-customer-dpa/" target="_blank">link</a></td>
+          </tr>
+          <tr>
+            <td><strong>Stripe, Inc.</strong></td>
+            <td>Payment processing for self-serve plans</td>
+            <td>Billing email, card token (we never see card numbers)</td>
+            <td>USA</td>
+            <td><a href="https://stripe.com/legal/dpa" target="_blank">link</a></td>
+          </tr>
+          <tr>
+            <td><strong>Postmark / ActiveCampaign</strong></td>
+            <td>Transactional email (login codes, billing receipts, security alerts)</td>
+            <td>Email address, message content</td>
+            <td>USA</td>
+            <td><a href="https://postmarkapp.com/eu-privacy" target="_blank">link</a></td>
+          </tr>
+          <tr>
+            <td><strong>(Hosting provider — name on request)</strong></td>
+            <td>Compute, storage, and network for the resolver + control plane</td>
+            <td>All customer data (DNS queries, tenant config, audit logs, account data)</td>
+            <td>USA (Mumbai region in progress)</td>
+            <td>BAA-style DPA, available on request to enterprise customers under NDA</td>
+          </tr>
+          <tr>
+            <td><strong>Let's Encrypt (ISRG)</strong></td>
+            <td>TLS certificate issuance for *.olladns.com via ACME DNS-01</td>
+            <td>Public DNS records only (no customer data)</td>
+            <td>USA</td>
+            <td>No customer data processed; <a href="https://letsencrypt.org/privacy/" target="_blank">policy</a></td>
+          </tr>
+          <tr>
+            <td><strong>Anthropic, Inc.</strong></td>
+            <td>MCP server protocol partner — relays MCP requests from Claude clients to mcp.olladns.com</td>
+            <td>None — your X-API-Key flows directly to our service; Anthropic does not see customer DNS data</td>
+            <td>USA</td>
+            <td>No data shared by olladns; customer's own agreement with Anthropic applies to their Claude usage</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h2>What we don't use</h2>
+      <p>To save you from asking: we do not run customer data through any analytics SDK (Mixpanel, Segment, Amplitude, Pendo, FullStory, Hotjar, Posthog), CRM enrichment service (Clearbit, ZoomInfo), advertising platform (Google, Meta, LinkedIn pixels), or data broker. We are not on Google Tag Manager. We do not use ML model training APIs on customer DNS data.</p>
+
+      <h2>Subprocessor change notice</h2>
+      <p>When we add, remove, or change a subprocessor, we'll email everyone subscribed to <a href="mailto:subprocessors@olladns.com?subject=subscribe">subprocessors@olladns.com</a> at least 30 days before the change takes effect. You can object to a change via that address; if we can't move forward without the new subprocessor and you don't accept, we'll let you terminate without penalty and refund prepaid time.</p>
+
+      <h2>Sub-subprocessors</h2>
+      <p>Several of our subprocessors use their own subprocessors (e.g. Cloudflare uses AWS for some functions; Stripe uses many regional acquirers). We rely on their respective DPAs and notification practices for those sub-tiers rather than reproducing them here. If you need a specific sub-subprocessor inventory for compliance purposes, email <a href="mailto:legal@olladns.com">legal@olladns.com</a>.</p>
+
+      <h2>Data Processing Agreement</h2>
+      <p>Our DPA (Standard Contractual Clauses for EU transfers, GDPR Art. 28 obligations, DPDP §11 obligations) is countersigned in your order form for enterprise plans, or auto-included when you accept the <a href="terms.html">Terms of Service</a> on self-serve plans. A standalone signed DPA is available for free on request from <a href="mailto:legal@olladns.com">legal@olladns.com</a>.</p>
+    </div>
+  </div>
+</section>
+
+<div id="site-footer"></div>
+
+<script src="../chrome.js"></script>
+<script>mountChrome('');</script>
+</body>
+</html>

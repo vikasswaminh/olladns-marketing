@@ -137,10 +137,10 @@
         <div class="footer-bottom">
           <div>© 2026 olladns, Inc. · Made with attention in Brooklyn &amp; Berlin</div>
           <div class="links">
-            <a href="#">Terms</a>
-            <a href="#">Privacy</a>
-            <a href="#">DPA</a>
-            <a href="#">Status</a>
+            <a href="/legal/terms.html">Terms</a>
+            <a href="/legal/privacy.html">Privacy</a>
+            <a href="/legal/subprocessors.html">DPA</a>
+            <a href="https://uptime.olladns.com">Status</a>
           </div>
         </div>
       </div>

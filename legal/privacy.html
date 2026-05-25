@@ -1,0 +1,119 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <title>Privacy Policy · olladns</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <meta name="description" content="What olladns collects, why, how long we keep it, who else sees it. Short version: as little as possible."/>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="../site.css"/>
+  <style>
+    .legal-prose{max-width:780px;margin:0 auto;font-size:16px;line-height:1.7;color:var(--text-2)}
+    .legal-prose h2{font-size:22px;margin:36px 0 10px;color:var(--text-strong)}
+    .legal-prose h3{font-size:17px;margin:24px 0 8px;color:var(--text-strong)}
+    .legal-prose p{margin:0 0 14px}
+    .legal-prose ul{margin:8px 0 14px;padding-left:24px}
+    .legal-prose code{font-family:var(--mono);font-size:13.5px;background:var(--bg-2);padding:1px 6px;border-radius:4px}
+    .legal-meta{font-size:13px;color:var(--muted);font-family:var(--mono);margin-bottom:24px}
+    .legal-prose table{width:100%;border-collapse:collapse;margin:14px 0;font-size:14px}
+    .legal-prose th, .legal-prose td{text-align:left;padding:10px 12px;border:1px solid var(--line);vertical-align:top}
+    .legal-prose th{background:var(--bg-2);color:var(--text-strong)}
+  </style>
+</head>
+<body>
+
+<div id="site-nav"></div>
+
+<section class="page-hero">
+  <div class="grid-bg"></div>
+  <div class="container" style="position:relative">
+    <span class="eyebrow">Legal</span>
+    <h1 class="gradient-text">Privacy Policy</h1>
+    <p class="lede" style="font-size:18px">What we collect, why, how long we keep it, who else sees it. Short version: as little as possible, never sold, deletable on request.</p>
+  </div>
+</section>
+
+<section class="section" style="padding:40px 0 80px">
+  <div class="container">
+    <div class="legal-prose">
+      <div class="legal-meta">Effective: 2026-05-25 · Version 1.0 · <a href="../changelog.html">change history</a></div>
+
+      <h2>The 30-second version</h2>
+      <p>We collect DNS queries to do DNS filtering. We collect account data to bill you and keep your tenant secure. We do not sell anything. We do not show ads. We do not run analytics SDKs on our marketing site. Logs default to 30-day retention; you can shorten or anonymize them per tenant.</p>
+
+      <h2>What we collect</h2>
+
+      <h3>DNS queries (the main thing)</h3>
+      <p>Every DNS lookup your endpoints send through olladns is logged with:</p>
+      <table>
+        <tr><th>Field</th><th>Why</th><th>Retention</th></tr>
+        <tr><td>Timestamp</td><td>Time-series analytics</td><td>per-tenant, default 30d, configurable 1-365d</td></tr>
+        <tr><td>Client IP (the device making the lookup)</td><td>Per-client traffic breakdown</td><td>same; can be anonymized at ingest per tenant</td></tr>
+        <tr><td>Query name + type</td><td>Filtering decision + analytics</td><td>same</td></tr>
+        <tr><td>Response code + latency</td><td>SLO monitoring</td><td>same</td></tr>
+        <tr><td>Block reason (if blocked)</td><td>Audit + appeals</td><td>same</td></tr>
+        <tr><td>AI tool tag (classifier output)</td><td>"What AI is my org using?" reporting</td><td>same</td></tr>
+        <tr><td>Tenant id + device slug</td><td>Tenant isolation + per-device attribution</td><td>same</td></tr>
+      </table>
+      <p>If you enable the anonymization toggle, client IP is replaced with an empty string at ingest — not hashed, just gone.</p>
+
+      <h3>Account data</h3>
+      <p>Email, bcrypt'd password hash, role, tenant id. Optional: tenant contact email (for billing + incident notifications). We do not have or want your phone number.</p>
+
+      <h3>API keys</h3>
+      <p>SHA-256 hash of the key value — we cannot recover a lost key. Plus label, scopes, optional expires_at, last_used_at.</p>
+
+      <h3>Webhooks</h3>
+      <p>If you register outbound webhooks, we store the URL and an HMAC signing secret. The secret is shown to you once at creation and never retrievable thereafter.</p>
+
+      <h3>Marketing site</h3>
+      <p>The marketing site at <code>olladns.com</code> serves static HTML from Cloudflare Pages. We do not run Google Analytics, Hotjar, Segment, Mixpanel, FullStory, Pendo, Intercom, Drift, or any other analytics / session-replay product. The only logs are Cloudflare's edge access logs, which we cannot opt out of.</p>
+
+      <h2>What we do NOT collect</h2>
+      <ul>
+        <li>Content of DNS responses (we log the rcode, not the resolved IP)</li>
+        <li>HTTP/HTTPS traffic from your endpoints (we're DNS only)</li>
+        <li>Your users' identities beyond what you supply to us</li>
+        <li>Browser fingerprints, device IDs, ad-tracking identifiers</li>
+        <li>Anything from third-party trackers on our marketing site (there aren't any)</li>
+      </ul>
+
+      <h2>How long we keep it</h2>
+      <p>DNS query logs: per-tenant retention (default 30 days; configurable 1-365). Account data: until you delete your tenant + 30 days for backup retention. Audit logs: same as query logs. Marketing-site visit logs (Cloudflare): 30 days, unconfigurable.</p>
+
+      <h2>Who else sees it</h2>
+      <p>See our <a href="subprocessors.html">subprocessor list</a> for the full inventory of vendors who process data on our behalf. Short version: a hosting provider, Cloudflare for marketing CDN + DNS, Stripe for payments, our email provider for transactional mail. No advertisers, no data brokers.</p>
+
+      <h2>Cross-border transfers</h2>
+      <p>Today, all customer data is hosted in a single US-region datacenter. A Mumbai region is on the roadmap (driven by DPDP residency requirements). Until that ships, EU customers should know that we cannot offer EU-only data residency; the GDPR-required Standard Contractual Clauses are included in our DPA.</p>
+
+      <h2>Your rights</h2>
+      <p>GDPR / DPDP / CCPA all give you the right to access, correct, port, and delete your data. We honor those rights regardless of where you're located. To exercise them: email <a href="mailto:privacy@olladns.com">privacy@olladns.com</a> or use the corresponding endpoint:</p>
+      <ul>
+        <li><strong>Access:</strong> <code>GET /api/v1/tenants/me</code> + <code>GET /api/v1/analytics/export</code></li>
+        <li><strong>Correct:</strong> <code>PATCH /api/v1/tenants/:id</code></li>
+        <li><strong>Port:</strong> <code>GET /api/v1/analytics/export?format=ndjson</code></li>
+        <li><strong>Delete:</strong> <code>DELETE /api/v1/tenants/:id</code> (irreversible; cascades within 30 days)</li>
+      </ul>
+
+      <h2>Children</h2>
+      <p>The service is not directed at children under 13. If you operate a school or family deployment, you (the operator) are responsible for COPPA / DPDP §10 compliance for the end users you onboard.</p>
+
+      <h2>Security</h2>
+      <p>Posture page: <a href="../security.html">/security</a>. Responsible disclosure: <a href="../security-policy.html">/security-policy</a>.</p>
+
+      <h2>Changes</h2>
+      <p>Material changes get 30 days' email notice. Non-material changes post here with an updated effective date.</p>
+
+      <h2>Contact</h2>
+      <p>Privacy questions: <a href="mailto:privacy@olladns.com">privacy@olladns.com</a>. EU representative: contact us and we'll designate one. India DPDP grievance officer: contact us when DPDP rules formalize the role.</p>
+    </div>
+  </div>
+</section>
+
+<div id="site-footer"></div>
+
+<script src="../chrome.js"></script>
+<script>mountChrome('');</script>
+</body>
+</html>

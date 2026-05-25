@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <title>Terms of Service · olladns</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <meta name="description" content="The contract you accept when you use olladns. Plain English, short paragraphs, no surprises."/>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="../site.css"/>
+  <style>
+    .legal-prose{max-width:780px;margin:0 auto;font-size:16px;line-height:1.7;color:var(--text-2)}
+    .legal-prose h2{font-size:22px;margin:36px 0 10px;color:var(--text-strong)}
+    .legal-prose h3{font-size:17px;margin:24px 0 8px;color:var(--text-strong)}
+    .legal-prose p{margin:0 0 14px}
+    .legal-prose ul{margin:8px 0 14px;padding-left:24px}
+    .legal-prose code{font-family:var(--mono);font-size:13.5px;background:var(--bg-2);padding:1px 6px;border-radius:4px}
+    .legal-meta{font-size:13px;color:var(--muted);font-family:var(--mono);margin-bottom:24px}
+  </style>
+</head>
+<body>
+
+<div id="site-nav"></div>
+
+<section class="page-hero">
+  <div class="grid-bg"></div>
+  <div class="container" style="position:relative">
+    <span class="eyebrow">Legal</span>
+    <h1 class="gradient-text">Terms of Service</h1>
+    <p class="lede" style="font-size:18px">Plain English. Short paragraphs. The version dated below applies to your account; we'll email you at least 30 days before any material change.</p>
+  </div>
+</section>
+
+<section class="section" style="padding:40px 0 80px">
+  <div class="container">
+    <div class="legal-prose">
+      <div class="legal-meta">Effective: 2026-05-25 · Version 1.0 · <a href="../changelog.html">change history</a></div>
+
+      <h2>1. Who's who</h2>
+      <p>"olladns", "we", "us" means olladns, Inc., a Delaware C-Corp. "You", "your", "customer" means the legal entity or individual that signed up for an olladns account. "Service" means the DNS filtering platform served at <code>olladns.com</code> and related subdomains.</p>
+
+      <h2>2. The deal</h2>
+      <p>We provide DNS filtering, query analytics, scoped API access, MCP integration, and the dashboard at <code>login.olladns.com</code>. You pay according to the <a href="../pricing.html">pricing page</a>, configure your tenant, and use the service for lawful purposes. That's the whole shape of it.</p>
+
+      <h2>3. What you can do with it</h2>
+      <p>Anything that respects: (a) your own users' rights, (b) applicable law in your jurisdiction, (c) our <a href="#section-acceptable">acceptable use list</a> below. Specifically permitted: filtering DNS for your team, your customers, your school, your kids, your IoT segment, your honeypot, your CTF, your research project.</p>
+
+      <h2 id="section-acceptable">4. What you can't do with it</h2>
+      <ul>
+        <li>Use olladns to filter or surveil third parties without their knowledge or consent, except where you're legally permitted (e.g. as an employer, parent, school, or law-enforcement agent acting under valid authority)</li>
+        <li>Resell or white-label the service without a written reseller agreement</li>
+        <li>Use the service to intercept, sinkhole, or block traffic you don't own or operate</li>
+        <li>Test our infrastructure against published rate limits, or scan adjacent IP space</li>
+        <li>Train ML models on raw query logs and redistribute the model — see §10 (data use)</li>
+      </ul>
+
+      <h2>5. Your data</h2>
+      <p>You own the DNS queries your endpoints generate. We process them to provide filtering and analytics. We do not sell them, do not share them with advertisers, do not train models on them outside our own product (anonymous-aggregate threat intelligence). Full posture on <a href="../security.html">/security</a>; subprocessors on <a href="subprocessors.html">/legal/subprocessors</a>.</p>
+      <p>You can export your query logs at any time via <code>GET /api/v1/analytics/export</code>. You can delete your tenant at any time, which cascades to all stored data within 30 days.</p>
+
+      <h2>6. Our uptime promise</h2>
+      <p>We target 99.9% monthly availability for DoH/DoT/DoQ resolution and 99.5% for the dashboard + API. We publish real numbers at <a href="https://uptime.olladns.com">uptime.olladns.com</a>. SLA credits for paid plans are documented in your order form.</p>
+
+      <h2>7. Payment</h2>
+      <p>Self-serve plans are charged monthly via Stripe at the rates on the pricing page. Annual plans (paid by invoice, NET-30) save 17%. Sales tax / VAT / GST is added where required. Refunds within 14 days for any reason, no questions, no clawback of usage data.</p>
+
+      <h2>8. Termination</h2>
+      <p>You can cancel anytime from the dashboard. We retain query logs for 30 days after cancellation, then irreversibly delete. We can terminate your account for breach of these terms with 7 days' written notice (or immediately if continued use would harm our infrastructure or other customers).</p>
+
+      <h2>9. Limitation of liability</h2>
+      <p>Our aggregate liability to you in any 12-month period is capped at the amount you paid us in that period, or $1,000 if you're on a free plan. We're not liable for indirect, incidental, or consequential damages. This is standard SaaS language and is not negotiable for self-serve customers; enterprise contracts can negotiate the cap upward.</p>
+
+      <h2>10. Threat intelligence sharing</h2>
+      <p>We may aggregate anonymized query patterns (e.g. "this domain saw a spike in queries from N independent tenants") into our threat intelligence feeds. Aggregates never identify you, your users, or your queries. Opt out via <a href="../security.html">privacy controls</a> — but doing so means you don't benefit from peer-derived intelligence either.</p>
+
+      <h2>11. Changes</h2>
+      <p>Material changes get 30 days' email notice. Non-material changes (clarifications, typos, new sub-processor in same jurisdiction) post here with an updated effective date. If you don't agree with a material change, you can cancel within the notice window and we'll refund unused prepaid time.</p>
+
+      <h2>12. Governing law</h2>
+      <p>Delaware. Disputes go to binding arbitration before AAA, seated in San Francisco. You retain the right to small-claims court for claims that qualify.</p>
+
+      <h2>13. Contact</h2>
+      <p>Questions: <a href="mailto:legal@olladns.com">legal@olladns.com</a>. Security: <a href="mailto:security@olladns.com">security@olladns.com</a>. Everything else: <a href="../contact.html">/contact</a>.</p>
+    </div>
+  </div>
+</section>
+
+<div id="site-footer"></div>
+
+<script src="../chrome.js"></script>
+<script>mountChrome('');</script>
+</body>
+</html>
