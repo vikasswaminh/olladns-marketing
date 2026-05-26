@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <title>olladns vs ControlD · Where each one wins</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <meta name="description" content="When to pick olladns over ControlD, and when to pick ControlD over olladns. Honest comparison."/>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="../site.css"/>
+  <style>
+    .vs-prose{max-width:780px;margin:0 auto;font-size:16px;line-height:1.7;color:var(--text-2)}
+    .vs-prose h2{font-size:24px;margin:40px 0 12px;color:var(--text-strong)}
+    .vs-prose h3{font-size:18px;margin:24px 0 8px;color:var(--text-strong)}
+    .vs-prose code{font-family:var(--mono);font-size:13.5px;background:var(--bg-2);padding:1px 6px;border-radius:4px}
+    .pick-card{padding:24px;border:1px solid var(--line);border-radius:10px;background:var(--panel);margin:20px 0}
+    .pick-card h3{margin-top:0;font-size:18px}
+    .pick-card.us{border-color:var(--accent)}
+    .pick-card.them{border-color:var(--line-2)}
+  </style>
+</head>
+<body>
+
+<div id="site-nav"></div>
+
+<section class="page-hero">
+  <div class="grid-bg"></div>
+  <div class="container" style="position:relative">
+    <span class="eyebrow">Comparison</span>
+    <h1 class="gradient-text">olladns vs ControlD</h1>
+    <p class="lede" style="font-size:18px">ControlD does the SMB / router-agent story better than anyone. olladns does the agent-native API + transparent classifier story better than anyone. Pick by which fits your team.</p>
+  </div>
+</section>
+
+<section class="section" style="padding:40px 0 80px">
+  <div class="container">
+    <div class="vs-prose">
+
+      <h2>The one-paragraph version</h2>
+      <p>Pick <strong>ControlD</strong> if you need their <code>ctrld</code> router agent to drop into pfSense / OpenWrt / Asus-Merlin and bring LAN-device topology + per-device policy with zero code on your side. Pick <strong>olladns</strong> if you want to configure DNS filtering from Claude/Cursor/Continue via MCP, mint per-task scoped agent tokens, or trust the classifier behind every block decision because you can read the source.</p>
+
+      <h2>Where olladns wins</h2>
+
+      <div class="pick-card us">
+        <h3>1. Agent-native config + scoped delegation</h3>
+        <p>ControlD's API is solid and their MCP server work is on their roadmap. olladns ships an MCP server live at <code>mcp.olladns.com</code> today with 54 tools and 5 hand-curated workflow compositions (<code>enable_strict_mode</code>, <code>set_kids_profile</code>, <code>security_brief</code>, <code>block_domain</code>, <code>allow_domain</code>). Your scoped API tokens carry explicit resource:action grants; each token's actions show up in the audit log under its own actor id.</p>
+      </div>
+
+      <div class="pick-card us">
+        <h3>2. Per-tenant rule categories that coexist without trampling</h3>
+        <p>ControlD's rule engine is powerful but you have to track which kind of rule overrides which. olladns has five rule categories (block / allow / rewrite / TLD-block / catch-all) that each live behind their own endpoint and discriminate at storage so flipping one category never silently clobbers another. Setting up allowlist-only mode while keeping your existing block/allow lists and rewrites intact is one PUT.</p>
+      </div>
+
+      <div class="pick-card us">
+        <h3>3. Transparent threat intelligence</h3>
+        <p>ControlD's threat-intel comes via feeds — opaque, vendor-dependent, recurring cost. Our DGA classifier is ~280 lines of feature-based Rust you can read; our typosquat detector is Damerau-Levenshtein + a Unicode homoglyph map. Per-tenant protect-list is just a list of your own domains. Zero recurring cost, no vendor in the loop, and "why did this fire?" has a code-review-able answer.</p>
+      </div>
+
+      <div class="pick-card us">
+        <h3>4. Webhooks signed end-to-end</h3>
+        <p>Both products have webhooks but olladns ships HMAC-SHA256 signing per-row + a per-tenant signing secret out of the box, with the event subscription on per-action-pattern wildcards (<code>policy.*</code>, <code>audit.*</code>). Plug into Slack / PagerDuty / SIEM by URL in one POST.</p>
+      </div>
+
+      <h2>Where ControlD wins</h2>
+
+      <div class="pick-card them">
+        <h3>1. <code>ctrld</code> router agent</h3>
+        <p>This is ControlD's killer feature for SMB and home networks. One binary, drops into OpenWrt / pfSense / OPNsense / Asus-Merlin / Synology / GL.iNet / Firewalla / DD-WRT. Brings every LAN device into the dashboard with its hostname + MAC, applies per-device policy from a single config. olladns has nothing equivalent; we expect your router to do DoH/DoT upstream natively or you front it with your own forwarder.</p>
+      </div>
+
+      <div class="pick-card them">
+        <h3>2. Global anycast + PoP footprint</h3>
+        <p>ControlD inherits Windscribe's PoP footprint — 100+ PoPs across multiple continents. olladns runs in one US region with Mumbai on the roadmap. If your endpoints are globally distributed and latency matters more than agent-native config, ControlD is faster today.</p>
+      </div>
+
+      <div class="pick-card them">
+        <h3>3. "Redirect" feature for DNS-driven geo-unblock</h3>
+        <p>ControlD's <em>Redirect</em> action proxies queries to their residential exit nodes for geo-unblock. We have DNS rewrites (CNAME / A / NXDOMAIN), but we don't operate residential proxy infra. If you need DNS-based geo-spoofing as part of the product, ControlD has it; we don't.</p>
+      </div>
+
+      <div class="pick-card them">
+        <h3>4. Free-tier categorical resolvers + brand recognition</h3>
+        <p>ControlD's <code>p0</code>-<code>p3</code> free public resolvers on stable IPs are a brand-recognition play that puts them in every "best DNS provider" listicle. olladns doesn't run free public resolvers (single IP — can't park multiple presets on it).</p>
+      </div>
+
+      <h2>How to decide</h2>
+
+      <h3>Pick olladns if…</h3>
+      <ul>
+        <li>Your team is AI-tools-native and wants config from inside Claude/Cursor</li>
+        <li>You're delegating DNS-config access to multiple automation pipelines (one scoped token each)</li>
+        <li>You want to be able to audit / explain every classifier verdict</li>
+        <li>You're an Indian mid-market team waiting on DPDP residency</li>
+      </ul>
+
+      <h3>Pick ControlD if…</h3>
+      <ul>
+        <li>You need a router agent that "just works" on pfSense / OpenWrt / Asus / etc.</li>
+        <li>You want per-LAN-device visibility without configuring DoH on every endpoint</li>
+        <li>You need global anycast performance today</li>
+        <li>The DNS-driven geo-unblock feature is part of your product story</li>
+        <li>You're chasing a customer who recognizes ControlD's brand from <code>p0</code>-<code>p3</code></li>
+      </ul>
+
+      <h2>What we'd build like ControlD</h2>
+      <p>Their <code>ctrld</code> router agent is genuinely the right design for the SMB segment and we've called it out as the model in our internal notes. The reason we haven't shipped an equivalent is segment focus — we're targeting AI-native B2B startups and Indian mid-market enterprise first, where teams already configure their own routers / use OS-native DoH and want the agent-native config story instead. If our ICP shifts toward SMB, expect us to fork <code>ctrld</code>-shaped behavior (with our own branding).</p>
+
+      <p><a href="../comparison.html">See the full feature matrix →</a></p>
+    </div>
+  </div>
+</section>
+
+<div id="site-footer"></div>
+
+<script src="../chrome.js"></script>
+<script>mountChrome('');</script>
+</body>
+</html>

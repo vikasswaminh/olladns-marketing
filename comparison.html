@@ -1,0 +1,143 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <title>olladns vs NextDNS vs ControlD · Feature comparison</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <meta name="description" content="Side-by-side comparison of olladns, NextDNS, and ControlD. Where we win, where we don't, and what's still in development."/>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="site.css"/>
+  <style>
+    .cmp-table{width:100%;border-collapse:collapse;margin:14px 0;font-size:14px}
+    .cmp-table th, .cmp-table td{text-align:left;padding:12px 14px;border:1px solid var(--line);vertical-align:top}
+    .cmp-table th{background:var(--bg-2);color:var(--text-strong);font-weight:600}
+    .cmp-table th.feat{width:32%}
+    .cmp-table th.product{width:22.66%;text-align:center}
+    .cmp-table td.center{text-align:center;font-family:var(--mono);font-size:13px}
+    .cmp-table .yes{color:#22c55e;font-weight:600}
+    .cmp-table .no{color:#ef4444}
+    .cmp-table .partial{color:#f59e0b}
+    .cmp-table .note{display:block;color:var(--muted);font-size:11.5px;margin-top:2px;font-family:var(--sans)}
+    .cmp-table .me{background:rgba(34,211,238,0.06)}
+    .cmp-table .me-strong{font-weight:600;color:var(--accent)}
+    .cmp-section h2{font-size:20px;margin:40px 0 10px;color:var(--text-strong)}
+    .cmp-section h2 .pill{display:inline-block;font-size:11px;font-family:var(--mono);padding:2px 8px;border-radius:4px;background:var(--bg-2);color:var(--muted);margin-left:8px;vertical-align:middle}
+  </style>
+</head>
+<body>
+
+<div id="site-nav"></div>
+
+<section class="page-hero">
+  <div class="grid-bg"></div>
+  <div class="container" style="position:relative">
+    <span class="eyebrow">Comparison</span>
+    <h1 class="gradient-text">olladns vs NextDNS vs ControlD</h1>
+    <p class="lede" style="font-size:18px">Honest side-by-side. We list where olladns wins, where it doesn't, and what's still in development. Every claim about ourselves is verifiable in our public <a href="changelog.html">changelog</a>; claims about competitors come from their public docs as of mid-2026.</p>
+    <div class="flex" style="margin-top:24px;gap:12px;flex-wrap:wrap">
+      <a class="btn primary" href="vs/nextdns.html">olladns vs NextDNS →</a>
+      <a class="btn ghost" href="vs/controld.html">olladns vs ControlD →</a>
+    </div>
+  </div>
+</section>
+
+<section class="section" style="padding:40px 0 80px">
+  <div class="container" style="max-width:1080px">
+
+    <div class="cmp-section">
+      <h2>Agent + API surface <span class="pill">olladns differentiator</span></h2>
+      <table class="cmp-table">
+        <thead><tr><th class="feat">Feature</th><th class="product me-strong">olladns</th><th class="product">NextDNS</th><th class="product">ControlD</th></tr></thead>
+        <tbody>
+          <tr><td>OpenAPI 3.1 spec served at runtime<span class="note">/api/v1/openapi.json with 54 paths, 54 operations carrying x-required-scopes</span></td><td class="center me yes">✓</td><td class="center no">—</td><td class="center no">—</td></tr>
+          <tr><td>MCP server (Anthropic spec)<span class="note">Configure DNS from Claude / Cursor / Continue without leaving the editor</span></td><td class="center me yes">✓ <span class="note">54 tools incl. 5 curated workflows</span></td><td class="center no">—</td><td class="center no">—</td></tr>
+          <tr><td>Scoped API tokens (resource:action)<span class="note">e.g. analytics:read, policies:write</span></td><td class="center me yes">✓ <span class="note">16 scopes</span></td><td class="center partial">single capability</td><td class="center partial">single capability</td></tr>
+          <tr><td>Actor-attributed audit log<span class="note">Every change tagged 'user #N' or 'agent #N'</span></td><td class="center me yes">✓</td><td class="center partial">user only</td><td class="center partial">user only</td></tr>
+          <tr><td>Outbound webhooks (HMAC-signed)</td><td class="center me yes">✓</td><td class="center yes">✓</td><td class="center partial">via integrations</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="cmp-section">
+      <h2>Threat intelligence</h2>
+      <table class="cmp-table">
+        <thead><tr><th class="feat">Feature</th><th class="product me-strong">olladns</th><th class="product">NextDNS</th><th class="product">ControlD</th></tr></thead>
+        <tbody>
+          <tr><td>Curated blocklists<span class="note">Ads, malware, phishing, trackers, NRD, etc.</span></td><td class="center me yes">30 categorized</td><td class="center yes">~100</td><td class="center yes">~40</td></tr>
+          <tr><td>DGA classifier (algorithmic-domain detection)<span class="note">olladns: transparent feature-based, open source, 0 USD/yr</span></td><td class="center me yes">✓ <span class="note">explainable</span></td><td class="center yes">✓ <span class="note">opaque</span></td><td class="center yes">✓ <span class="note">opaque</span></td></tr>
+          <tr><td>Typosquat detection (per-tenant protect list)</td><td class="center me yes">✓ <span class="note">Damerau-Levenshtein + Cyrillic homoglyphs</span></td><td class="center no">—</td><td class="center no">—</td></tr>
+          <tr><td>NRD (newly-registered domains) blocking</td><td class="center me yes">✓ <span class="note">snapshot feed</span></td><td class="center yes">✓ <span class="note">real-time</span></td><td class="center yes">✓ <span class="note">real-time</span></td></tr>
+          <tr><td>Parked-domain detection<span class="note">olladns: deferred, needs paid passive-DNS feed</span></td><td class="center partial">roadmap</td><td class="center yes">✓</td><td class="center yes">✓</td></tr>
+          <tr><td>DoH/VPN/proxy bypass blocking<span class="note">Block known evasion endpoints</span></td><td class="center me yes">✓</td><td class="center partial">via lists</td><td class="center partial">via lists</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="cmp-section">
+      <h2>Per-tenant rule engine</h2>
+      <table class="cmp-table">
+        <thead><tr><th class="feat">Feature</th><th class="product me-strong">olladns</th><th class="product">NextDNS</th><th class="product">ControlD</th></tr></thead>
+        <tbody>
+          <tr><td>Custom block / allow rules with wildcards</td><td class="center me yes">✓</td><td class="center yes">✓</td><td class="center yes">✓</td></tr>
+          <tr><td>DNS rewrites (A / AAAA / CNAME / NXDOMAIN / REFUSED)</td><td class="center me yes">✓</td><td class="center yes">✓</td><td class="center yes">✓ <span class="note">'Redirect'</span></td></tr>
+          <tr><td>Allowlist-only (default-deny) mode</td><td class="center me yes">✓</td><td class="center yes">✓</td><td class="center yes">✓</td></tr>
+          <tr><td>TLD blocking (.zip, .xyz, etc.)</td><td class="center me yes">✓</td><td class="center yes">✓</td><td class="center yes">✓</td></tr>
+          <tr><td>Per-tenant DNS rewrites coexist with custom rules + TLD blocks + default-deny</td><td class="center me yes">✓ <span class="note">5 categories independent</span></td><td class="center yes">✓</td><td class="center yes">✓</td></tr>
+          <tr><td>Schedule-based service blocking (time-of-day windows)</td><td class="center me yes">✓</td><td class="center yes">✓</td><td class="center yes">✓</td></tr>
+          <tr><td>Safe Search enforcement (Google / Bing / DDG / YouTube / Yandex / Ecosia / Pixabay)</td><td class="center me yes">7 engines</td><td class="center yes">7 engines</td><td class="center yes">core engines</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="cmp-section">
+      <h2>Analytics + reporting</h2>
+      <table class="cmp-table">
+        <thead><tr><th class="feat">Feature</th><th class="product me-strong">olladns</th><th class="product">NextDNS</th><th class="product">ControlD</th></tr></thead>
+        <tbody>
+          <tr><td>Per-tenant query log with rich filters</td><td class="center me yes">✓</td><td class="center yes">✓</td><td class="center yes">✓</td></tr>
+          <tr><td>AI tool classification at ingest<span class="note">ChatGPT, Claude, Gemini, Cursor, etc.</span></td><td class="center me yes">✓</td><td class="center partial">via blocklists</td><td class="center partial">via blocklists</td></tr>
+          <tr><td>Bulk CSV / NDJSON export for SIEM</td><td class="center me yes">✓ <span class="note">10M rows/call</span></td><td class="center yes">✓ <span class="note">UI export</span></td><td class="center yes">✓</td></tr>
+          <tr><td>Per-device identification<span class="note">Each device gets its own DoH URL suffix</span></td><td class="center me yes">✓</td><td class="center yes">✓</td><td class="center yes">✓ <span class="note">via ctrld agent</span></td></tr>
+          <tr><td>Per-tenant log retention (1-365 days, configurable)</td><td class="center me yes">✓</td><td class="center yes">✓</td><td class="center yes">✓</td></tr>
+          <tr><td>Per-tenant log anonymization toggle<span class="note">Drop client IPs at ingest</span></td><td class="center me yes">✓</td><td class="center yes">✓</td><td class="center yes">✓</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="cmp-section">
+      <h2>Deployment + trust</h2>
+      <table class="cmp-table">
+        <thead><tr><th class="feat">Feature</th><th class="product me-strong">olladns</th><th class="product">NextDNS</th><th class="product">ControlD</th></tr></thead>
+        <tbody>
+          <tr><td>DoH / DoT / DoQ + per-tenant routing</td><td class="center me yes">✓</td><td class="center yes">✓</td><td class="center yes">✓</td></tr>
+          <tr><td>SOC 2 Type II report<span class="note">olladns: observation in progress, target Q3 2026</span></td><td class="center partial">in progress</td><td class="center yes">✓</td><td class="center yes">✓</td></tr>
+          <tr><td>India (Mumbai) region for DPDP residency</td><td class="center partial">roadmap</td><td class="center no">—</td><td class="center no">—</td></tr>
+          <tr><td>Anycast / multiple PoPs</td><td class="center no">—</td><td class="center yes">✓ <span class="note">100+ PoPs</span></td><td class="center yes">✓ <span class="note">100+ PoPs</span></td></tr>
+          <tr><td>SAML / OIDC SSO</td><td class="center partial">roadmap</td><td class="center yes">✓</td><td class="center yes">✓</td></tr>
+          <tr><td>Native router agents (OpenWrt / pfSense / etc.)</td><td class="center no">—</td><td class="center yes">✓ <span class="note">CLI</span></td><td class="center yes">✓ <span class="note">ctrld</span></td></tr>
+          <tr><td>Native mobile apps (iOS / Android)</td><td class="center no">—</td><td class="center yes">✓</td><td class="center yes">✓</td></tr>
+          <tr><td>Open responsible-disclosure policy</td><td class="center me yes">✓ <span class="note">90d window</span></td><td class="center yes">✓</td><td class="center yes">✓</td></tr>
+          <tr><td>Public subprocessor list</td><td class="center me yes">✓</td><td class="center yes">✓</td><td class="center yes">✓</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="cmp-section">
+      <h2>Where olladns isn't the right pick</h2>
+      <ul style="font-size:15px;color:var(--text-2);line-height:1.7;margin-top:14px;padding-left:24px">
+        <li><strong>You need global anycast PoPs today.</strong> olladns runs in one US region with a Mumbai region on the roadmap. If sub-20 ms p99 from Sydney matters more than agent-native config, NextDNS or ControlD win on infrastructure today.</li>
+        <li><strong>You need a packaged router agent.</strong> Both NextDNS and ControlD ship CLIs that drop into OpenWrt / pfSense / Asus-Merlin / etc. We don't — your router needs to do DoH/DoT upstream natively, or you front it with your own forwarder.</li>
+        <li><strong>You need native iOS / Android apps.</strong> Out of scope for olladns; configure via OS-native DoH or a third-party DNS-changer app.</li>
+        <li><strong>You need a vendor name a Fortune-500 CISO recognizes.</strong> NextDNS and ControlD are 4+ years older. SOC 2 in progress here; until that lands, large-enterprise procurement teams will need a leap of faith.</li>
+      </ul>
+    </div>
+
+  </div>
+</section>
+
+<div id="site-footer"></div>
+
+<script src="chrome.js"></script>
+<script>mountChrome('');</script>
+</body>
+</html>

@@ -51,7 +51,7 @@
       {key:'product', label:'Product', href:'product.html'},
       {key:'solutions', label:'Solutions', href:'solutions.html'},
       {key:'pricing', label:'Pricing', href:'pricing.html'},
-      {key:'customers', label:'Customers', href:'customers.html'},
+      {key:'compare', label:'Compare', href:'comparison.html'},
       {key:'resources', label:'Resources', href:'resources.html'},
       {key:'company', label:'Company', href:'company.html'},
     ];

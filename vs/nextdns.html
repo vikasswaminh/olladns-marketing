@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <title>olladns vs NextDNS · Where each one wins</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <meta name="description" content="When to pick olladns over NextDNS, and when to pick NextDNS over olladns. Honest comparison from someone who's read both products' docs."/>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="../site.css"/>
+  <style>
+    .vs-prose{max-width:780px;margin:0 auto;font-size:16px;line-height:1.7;color:var(--text-2)}
+    .vs-prose h2{font-size:24px;margin:40px 0 12px;color:var(--text-strong)}
+    .vs-prose h3{font-size:18px;margin:24px 0 8px;color:var(--text-strong)}
+    .vs-prose code{font-family:var(--mono);font-size:13.5px;background:var(--bg-2);padding:1px 6px;border-radius:4px}
+    .vs-prose blockquote{margin:16px 0;padding:14px 18px;border-left:3px solid var(--accent);background:var(--bg-2);color:var(--text);font-size:15px}
+    .pick-card{padding:24px;border:1px solid var(--line);border-radius:10px;background:var(--panel);margin:20px 0}
+    .pick-card h3{margin-top:0;font-size:18px}
+    .pick-card.us{border-color:var(--accent)}
+    .pick-card.them{border-color:var(--line-2)}
+  </style>
+</head>
+<body>
+
+<div id="site-nav"></div>
+
+<section class="page-hero">
+  <div class="grid-bg"></div>
+  <div class="container" style="position:relative">
+    <span class="eyebrow">Comparison</span>
+    <h1 class="gradient-text">olladns vs NextDNS</h1>
+    <p class="lede" style="font-size:18px">NextDNS is a great product — we use them as the reference architecture in places. Here's where olladns is a better choice, where NextDNS is, and how to decide.</p>
+  </div>
+</section>
+
+<section class="section" style="padding:40px 0 80px">
+  <div class="container">
+    <div class="vs-prose">
+
+      <h2>The one-paragraph version</h2>
+      <p>Pick <strong>NextDNS</strong> if you need global anycast PoPs today, native mobile/router agents, and the brand recognition of a 5-year-old product. Pick <strong>olladns</strong> if your team lives in Claude/Cursor/Continue and you want to configure DNS filtering by chatting with your AI editor, or if you need per-tenant scoped agent tokens with first-class actor-attributed audit. We overlap on ~80% of the feature surface — the 20% that differs is the deciding factor.</p>
+
+      <h2>Where olladns wins</h2>
+
+      <div class="pick-card us">
+        <h3>1. Agent-native configuration</h3>
+        <p>NextDNS has a great CLI and dashboard. olladns has an MCP server at <code>mcp.olladns.com</code> with 54 tools auto-generated from our OpenAPI spec. Your engineer asks Claude "block tiktok.com during weekdays 9-5 for the marketing team" and Claude calls 3 of our tools to make it happen — no jumping to a dashboard, no remembering which menu item lives where. NextDNS doesn't have this.</p>
+      </div>
+
+      <div class="pick-card us">
+        <h3>2. Scoped agent tokens with explicit resource:action grants</h3>
+        <p>Our API keys carry an explicit scope list (<code>analytics:read</code>, <code>policies:write</code>, etc. — 16 scopes total) and per-key expiry. Mint one for your CI bot with just the scopes it needs. Audit log tags every change with the specific token that made it (not just "a user did this"). NextDNS has API keys but they're full-capability — there's no per-key scope dispatch.</p>
+      </div>
+
+      <div class="pick-card us">
+        <h3>3. Explainable / transparent threat intelligence</h3>
+        <p>Our DGA classifier is a feature-based scorer (entropy, vowel ratio, n-gram, length) in ~280 lines of Rust you can <em>read</em>. When it flags a domain, you can see exactly which features triggered it. NextDNS uses opaque ML models from upstream feeds — you trust the verdict or you don't. For security-research-minded buyers, the explainability matters.</p>
+      </div>
+
+      <div class="pick-card us">
+        <h3>4. Webhooks first-class</h3>
+        <p>Every audit event fires a HMAC-SHA256-signed outbound webhook to subscribers. Plug into Slack, PagerDuty, Sentinel, or your own SIEM via one POST. NextDNS supports webhooks too but the audit-event integration is less direct.</p>
+      </div>
+
+      <h2>Where NextDNS wins</h2>
+
+      <div class="pick-card them">
+        <h3>1. Global anycast infrastructure</h3>
+        <p>NextDNS has 100+ PoPs across 6 continents. We're in one US region with Mumbai on the roadmap. If sub-20 ms p99 latency from Singapore matters more than agent-native config, NextDNS is the safer pick today.</p>
+      </div>
+
+      <div class="pick-card them">
+        <h3>2. Packaged endpoint clients</h3>
+        <p>NextDNS ships native macOS/Windows/iOS/Android apps and an open-source CLI that drops into OpenWrt, Asus-Merlin, pfSense, etc. olladns expects you to use OS-native DoH or your router's built-in DoH/DoT upstream — fine for sophisticated teams, friction for everyone else.</p>
+      </div>
+
+      <div class="pick-card them">
+        <h3>3. Brand recognition + SOC 2 + battle-testing</h3>
+        <p>NextDNS has been live since 2019, has SOC 2 Type II, and has every Fortune-500 procurement team familiar with the name. olladns is in SOC 2 observation now; report expected Q3 2026. If your CISO's first question is "Are you SOC 2?", we can't say yes yet.</p>
+      </div>
+
+      <div class="pick-card them">
+        <h3>4. Larger curated blocklist catalog</h3>
+        <p>NextDNS ships ~100 curated lists; olladns ships 30 across 14 categories. We've prioritized depth (per-tenant rule coexistence, transparent classifiers) over breadth here. If a customer asks for a specific list we don't have, adding it is one row in our migration table.</p>
+      </div>
+
+      <h2>How to decide</h2>
+
+      <h3>Pick olladns if…</h3>
+      <ul>
+        <li>Your team uses Claude / Cursor / Continue / Cline daily</li>
+        <li>You want to mint scoped tokens for CI, SOC tooling, or per-team automation</li>
+        <li>"Why did this domain get flagged?" needs an answer beyond "the vendor said so"</li>
+        <li>You're a small/mid security shop that values transparency + control over vendor pedigree</li>
+        <li>You're in India and DPDP residency is on your near-term roadmap</li>
+      </ul>
+
+      <h3>Pick NextDNS if…</h3>
+      <ul>
+        <li>You need global anycast performance today</li>
+        <li>Your endpoints are heterogeneous (mobile, kiosks, IoT, routers without DoH support)</li>
+        <li>Your procurement gate requires SOC 2 Type II</li>
+        <li>You want a packaged consumer-grade app to hand out to non-technical users</li>
+      </ul>
+
+      <h2>Where we agree</h2>
+      <p>Both products do per-tenant routing via DoH path, both support DoT/DoQ, both have per-tenant blocklist subscriptions, both have safe-search enforcement, parental controls, custom block/allow rules with wildcards, DNS rewrites, schedule-based blocking, query log + analytics, NRD blocking, TLD blocking. The 80% overlap is real — DNS filtering has converged on a known shape. The 20% is where each product places its bets.</p>
+
+      <p><a href="../comparison.html">See the full feature matrix →</a></p>
+    </div>
+  </div>
+</section>
+
+<div id="site-footer"></div>
+
+<script src="../chrome.js"></script>
+<script>mountChrome('');</script>
+</body>
+</html>
