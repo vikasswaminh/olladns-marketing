@@ -42,7 +42,17 @@
 
       <div class="pick-card us">
         <h3>1. Agent-native config + scoped delegation</h3>
-        <p>ControlD's API is solid and their MCP server work is on their roadmap. olladns ships an MCP server live at <code>mcp.olladns.com</code> today with 54 tools and 5 hand-curated workflow compositions (<code>enable_strict_mode</code>, <code>set_kids_profile</code>, <code>security_brief</code>, <code>block_domain</code>, <code>allow_domain</code>). Your scoped API tokens carry explicit resource:action grants; each token's actions show up in the audit log under its own actor id.</p>
+        <p>ControlD's API is solid and their MCP server work is on their roadmap. olladns ships an MCP server live at <code>mcp.olladns.com</code> today with 49 tools and 5 hand-curated workflow compositions (<code>enable_strict_mode</code>, <code>set_kids_profile</code>, <code>security_brief</code>, <code>block_domain</code>, <code>allow_domain</code>). Your scoped API tokens carry explicit resource:action grants; each token's actions show up in the audit log under its own actor id.</p>
+      </div>
+
+      <div class="pick-card us">
+        <h3>1b. Dashboard is intentionally read-only — config is API/MCP only</h3>
+        <p>ControlD's product (like every other DNS-filter vendor) is dashboard-first with API as the advanced surface. We inverted that on purpose at v0.19: every config change goes through versionable, auditable, scriptable APIs. The dashboard is for inspection. The result: zero drift between environments, every change carries an actor, and "what changed and when" is always answerable from the audit log instead of forensic git-blame across the team's browser histories.</p>
+      </div>
+
+      <div class="pick-card us">
+        <h3>1c. Per-device DoH URL + per-device analytics out of the box</h3>
+        <p>ControlD does per-device through their <code>ctrld</code> agent (which is excellent, see below). olladns does it through the DoH URL itself: <code>dns.olladns.com/dns-query/&lt;tenant&gt;--&lt;slug&gt;</code>. Every analytics endpoint slices by device slug. You don't need our agent on the box; you just point any DoH client (OS-native, your router, a browser, a script) at the per-device URL.</p>
       </div>
 
       <div class="pick-card us">
@@ -102,7 +112,7 @@
       </ul>
 
       <h2>What we'd build like ControlD</h2>
-      <p>Their <code>ctrld</code> router agent is genuinely the right design for the SMB segment and we've called it out as the model in our internal notes. The reason we haven't shipped an equivalent is segment focus — we're targeting AI-native B2B startups and Indian mid-market enterprise first, where teams already configure their own routers / use OS-native DoH and want the agent-native config story instead. If our ICP shifts toward SMB, expect us to fork <code>ctrld</code>-shaped behavior (with our own branding).</p>
+      <p>Their <code>ctrld</code> router agent is genuinely the right design for the SMB segment and we've called it out as the model in our internal notes. The reason we haven't shipped an equivalent is segment focus — we're targeting AI-native B2B startups and Indian mid-market enterprise first, where teams already configure their own routers / use OS-native DoH and want the agent-native config story instead. If our ICP shifts toward SMB, our roadmap is to fork <code>ctrld</code> directly (it's MIT-licensed) rather than re-implement — the open-source code is the right base; only the upstream URL and packaging need to change.</p>
 
       <p><a href="../comparison.html">See the full feature matrix →</a></p>
     </div>

@@ -86,7 +86,9 @@
         <ul style="margin:24px 0 0;padding:0;list-style:none;display:flex;flex-direction:column;gap:10px">
           <li class="flex"><span data-ic="check" class="accent"></span> Hierarchical tenants — partner, customer, site, group, device</li>
           <li class="flex"><span data-ic="check" class="accent"></span> White-label portal at your own subdomain</li>
-          <li class="flex"><span data-ic="check" class="accent"></span> ConnectWise, Autotask, &amp; HaloPSA usage sync</li>
+          <li class="flex"><span data-ic="check" class="accent"></span> <strong>Provision new tenants via API</strong> — your existing onboarding flow keeps owning the UX</li>
+          <li class="flex"><span data-ic="check" class="accent"></span> <strong>Per-tenant scoped API tokens</strong> for usage sync into ConnectWise, Autotask, HaloPSA</li>
+          <li class="flex"><span data-ic="check" class="accent"></span> <strong>MCP server</strong> — let your AI assistant onboard the next customer at 2am</li>
           <li class="flex"><span data-ic="check" class="accent"></span> Per-tenant branded reports, scheduled automatically</li>
           <li class="flex"><span data-ic="check" class="accent"></span> 35% partner margin, no minimum commitment</li>
         </ul>
@@ -177,7 +179,10 @@
         <p class="lede" style="margin-top:18px">Replace your on-prem secure web gateway, retire those forwarder VMs, and unify policy across every office and remote endpoint. olladns deploys in a day and survives the audit.</p>
         <ul style="margin:24px 0 0;padding:0;list-style:none;display:flex;flex-direction:column;gap:10px">
           <li class="flex"><span data-ic="check" class="accent"></span> SSO with Entra ID, Okta, Ping, Google, generic SAML</li>
-          <li class="flex"><span data-ic="check" class="accent"></span> Granular RBAC — 7 built-in roles, custom policies</li>
+          <li class="flex"><span data-ic="check" class="accent"></span> Granular RBAC — admin / viewer roles + <strong>16 scoped permissions for API tokens</strong></li>
+          <li class="flex"><span data-ic="check" class="accent"></span> <strong>Policy-as-code</strong> — ship custom rules from CI; diff between staging and prod</li>
+          <li class="flex"><span data-ic="check" class="accent"></span> <strong>HMAC-signed webhooks</strong> to Splunk, Sentinel, Datadog — every audit event, every threat</li>
+          <li class="flex"><span data-ic="check" class="accent"></span> <strong>Per-device identification</strong> — every lookup tagged to the laptop that made it</li>
           <li class="flex"><span data-ic="check" class="accent"></span> 12-month query retention with hot search</li>
           <li class="flex"><span data-ic="check" class="accent"></span> Private resolver IPs, BYOIP, on-prem gateway options</li>
           <li class="flex"><span data-ic="check" class="accent"></span> 99.999% multi-region SLA with credit guarantee</li>
@@ -198,7 +203,10 @@
           <li class="flex"><span data-ic="check" class="accent"></span> One-click CIPA-baseline policy</li>
           <li class="flex"><span data-ic="check" class="accent"></span> SafeSearch enforced on Google, Bing, YouTube</li>
           <li class="flex"><span data-ic="check" class="accent"></span> Chromebook + iPad off-network coverage via MDM</li>
-          <li class="flex"><span data-ic="check" class="accent"></span> Self-harm &amp; threat keyword alerts → counselor email</li>
+          <li class="flex"><span data-ic="check" class="accent"></span> <strong>Per-device DoH URLs</strong> — every Chromebook gets its own; query log filterable by student device</li>
+          <li class="flex"><span data-ic="check" class="accent"></span> <strong>Read-only viewer role</strong> for teachers and IT staff who shouldn't edit policy</li>
+          <li class="flex"><span data-ic="check" class="accent"></span> <strong>Audit log</strong> for board reviews and E-Rate audits — every change attributed</li>
+          <li class="flex"><span data-ic="check" class="accent"></span> Self-harm &amp; threat keyword alerts → counselor email <strong>via webhook</strong></li>
           <li class="flex"><span data-ic="check" class="accent"></span> Transparent block page with appeal link</li>
         </ul>
       </div>
@@ -260,8 +268,11 @@
         <ul style="margin:24px 0 0;padding:0;list-style:none;display:flex;flex-direction:column;gap:10px">
           <li class="flex"><span data-ic="check" class="accent"></span> Pre-built &ldquo;medical safe&rdquo; policy that won&rsquo;t break devices</li>
           <li class="flex"><span data-ic="check" class="accent"></span> EHR &amp; PACS-aware allow-lists for Epic, Cerner, Meditech</li>
+          <li class="flex"><span data-ic="check" class="accent"></span> <strong>Allowlist-only (default-deny) mode</strong> for clinical desktops and infusion-pump segments</li>
+          <li class="flex"><span data-ic="check" class="accent"></span> <strong>Client-IP anonymization at ingest</strong> — query logs that satisfy minimum-necessary</li>
+          <li class="flex"><span data-ic="check" class="accent"></span> <strong>Per-tenant retention</strong> (1&ndash;365 days) — tune to your data-retention policy</li>
           <li class="flex"><span data-ic="check" class="accent"></span> Tamper-evident audit logs · WORM-mode S3 export</li>
-          <li class="flex"><span data-ic="check" class="accent"></span> Phishing protection tuned for patient-portal lookalikes</li>
+          <li class="flex"><span data-ic="check" class="accent"></span> <strong>Typosquat detection</strong> tuned for patient-portal lookalikes (push your portal domains to <code>/policies/protect-list</code>)</li>
         </ul>
       </div>
     </div>
@@ -279,6 +290,8 @@
           <li class="flex"><span data-ic="check" class="accent"></span> Plain-English block page — no IT jargon</li>
           <li class="flex"><span data-ic="check" class="accent"></span> Weekly email digest of what we blocked &amp; saved</li>
           <li class="flex"><span data-ic="check" class="accent"></span> One-click presets: Office, Retail, Construction, Hospitality</li>
+          <li class="flex"><span data-ic="check" class="accent"></span> <strong>"Ask your AI to set it up"</strong> &mdash; connect Claude or Cursor to <code>mcp.olladns.com</code> and skip the console entirely</li>
+          <li class="flex"><span data-ic="check" class="accent"></span> <strong>Slack webhook</strong> for the moments that matter (new threat, policy change)</li>
           <li class="flex"><span data-ic="check" class="accent"></span> Live chat support, US-based, 24/5</li>
         </ul>
       </div>

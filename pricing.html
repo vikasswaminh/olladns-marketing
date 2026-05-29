@@ -70,6 +70,7 @@
           <li class="x">No MCP server access</li>
           <li class="x">No webhooks</li>
           <li class="x">No scoped API keys (JWT only)</li>
+          <li class="x">No REST API write access</li>
           <li>Community support</li>
         </ul>
         <a class="cta ghost" href="../index.html">Sign up</a>
@@ -84,7 +85,8 @@
           <li>1 tenant · 5 users</li>
           <li>All 30 blocklists · all categories</li>
           <li>Configurable retention (1-90 days)</li>
-          <li>MCP server access · 2 scoped API keys</li>
+          <li>MCP server · 10,000 tool calls/mo</li>
+          <li>2 scoped API keys · 100K REST calls/mo</li>
           <li>5 outbound webhooks</li>
           <li>5 named devices</li>
           <li>DGA + typosquat classifiers</li>
@@ -102,7 +104,8 @@
           <li>1 tenant · unlimited users</li>
           <li>Unlimited blocklists + custom URLs</li>
           <li>Retention 1-365 days · per-tenant anonymization</li>
-          <li>Unlimited scoped API keys</li>
+          <li>MCP · 250,000 tool calls/mo</li>
+          <li>Unlimited scoped API keys · 5M REST calls/mo</li>
           <li>Unlimited webhooks · usage analytics</li>
           <li>Unlimited named devices</li>
           <li>Allowlist-only (default-deny) mode</li>
@@ -122,6 +125,7 @@
           <li>India region for DPDP residency</li>
           <li>SOC 2 Type II report under NDA</li>
           <li>Custom SLA (99.9% / 99.95%)</li>
+          <li>Unlimited MCP + REST · negotiated burst limits</li>
           <li>Audit-trail SIEM forwarding</li>
           <li>On-prem option for air-gapped deployments</li>
           <li>Dedicated TAM · 1-hour response</li>
@@ -161,6 +165,8 @@
         <tr><td>Named devices</td><td class="center">0</td><td class="center">5</td><td class="center">Unlimited</td><td class="center">Unlimited</td></tr>
         <tr><td>Query log retention</td><td class="center">30 days</td><td class="center">1-90 days</td><td class="center">1-365 days</td><td class="center">1-365 days</td></tr>
         <tr><td>MCP server access</td><td class="center">—</td><td class="center yes">✓</td><td class="center yes">✓</td><td class="center yes">✓</td></tr>
+        <tr><td>MCP tool calls / month</td><td class="center">—</td><td class="center">10,000</td><td class="center">250,000</td><td class="center">Unlimited</td></tr>
+        <tr><td>REST API calls / month</td><td class="center">read-only</td><td class="center">100,000</td><td class="center">5,000,000</td><td class="center">Unlimited</td></tr>
         <tr><td>Threat-intel (NRD, TLD, bypass, DGA, typosquat)</td><td class="center">NRD only</td><td class="center yes">All</td><td class="center yes">All</td><td class="center yes">All</td></tr>
         <tr><td>Allowlist-only mode</td><td class="center">—</td><td class="center yes">✓</td><td class="center yes">✓</td><td class="center yes">✓</td></tr>
         <tr><td>SAML / OIDC SSO</td><td class="center">—</td><td class="center">—</td><td class="center">roadmap</td><td class="center yes">✓</td></tr>
@@ -191,6 +197,11 @@
       <details>
         <summary>What happens at the soft cap?</summary>
         <p>We email at 80% and 100%. Going over is fine for a month; we ask you to upgrade if it persists. We never auto-bill for overage without your written agreement — no surprises.</p>
+      </details>
+
+      <details>
+        <summary>Why are MCP tool calls metered separately from REST?</summary>
+        <p>An AI agent driving the MCP server can fan-out to dozens of tool calls per user request — listing tenants, fetching policies, scoring detections, applying changes. That's the value, but it's also a different cost profile than a single REST call from a script. We meter them separately so you can size your plan against the agentic workload you actually have. The Pro tier's 10K MCP calls/mo comfortably covers daily use by 2–3 engineers driving Claude / Cursor; Business at 250K covers a SOC of ~20 routinely automating triage.</p>
       </details>
 
       <details>

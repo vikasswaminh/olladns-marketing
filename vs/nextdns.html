@@ -42,8 +42,13 @@
       <h2>Where olladns wins</h2>
 
       <div class="pick-card us">
-        <h3>1. Agent-native configuration</h3>
-        <p>NextDNS has a great CLI and dashboard. olladns has an MCP server at <code>mcp.olladns.com</code> with 54 tools auto-generated from our OpenAPI spec. Your engineer asks Claude "block tiktok.com during weekdays 9-5 for the marketing team" and Claude calls 3 of our tools to make it happen — no jumping to a dashboard, no remembering which menu item lives where. NextDNS doesn't have this.</p>
+        <h3>1. Agent-native configuration (the defining gap)</h3>
+        <p>NextDNS has a great CLI and dashboard. olladns has an MCP server at <code>mcp.olladns.com</code> with 49 tools auto-generated from our OpenAPI spec. Your engineer asks Claude "block tiktok.com during weekdays 9-5 for the marketing team" and Claude calls 3 of our tools to make it happen — no jumping to a dashboard, no remembering which menu item lives where. NextDNS doesn't have this and isn't building it.</p>
+      </div>
+
+      <div class="pick-card us">
+        <h3>1b. Dashboard is intentionally read-only</h3>
+        <p>Every other DNS-filter vendor (including NextDNS) treats the API as an "advanced feature" and the dashboard as the source of truth. We do the opposite: the console is read-only on purpose. Config goes through versionable, auditable, scriptable APIs. The result: zero drift between staging and prod, every change has an actor, no "someone clicked something" forensics.</p>
       </div>
 
       <div class="pick-card us">
@@ -59,6 +64,16 @@
       <div class="pick-card us">
         <h3>4. Webhooks first-class</h3>
         <p>Every audit event fires a HMAC-SHA256-signed outbound webhook to subscribers. Plug into Slack, PagerDuty, Sentinel, or your own SIEM via one POST. NextDNS supports webhooks too but the audit-event integration is less direct.</p>
+      </div>
+
+      <div class="pick-card us">
+        <h3>5. Per-device identification with unique DoH URLs</h3>
+        <p>Every device gets its own DoH URL — <code>dns.olladns.com/dns-query/&lt;tenant&gt;--&lt;slug&gt;</code>. Every analytics endpoint slices by device slug, so you can answer "which laptop looked up that phishing domain" without IP-based heuristics. NextDNS supports this too but charges per-device above their tier limits; we don't.</p>
+      </div>
+
+      <div class="pick-card us">
+        <h3>6. Per-tenant typosquat detection against your protect-list</h3>
+        <p>Push your owned domains (<code>yourcompany.com</code>, <code>internal-tool.com</code>) to <code>/policies/protect-list</code>. Our typosquat detector runs Damerau-Levenshtein ≤ 2 with homoglyph normalization on every incoming lookup — catches campaigns built around <em>your</em> specific brand. NextDNS detects generic lookalikes via its threat feed; per-tenant scoring against your owned brands is an olladns-specific capability.</p>
       </div>
 
       <h2>Where NextDNS wins</h2>
