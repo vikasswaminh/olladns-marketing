@@ -2,12 +2,32 @@
 <html lang="en">
 <head>
   <meta charset="utf-8"/>
-  <title>olladns — AI-driven DNS security for modern security teams</title>
+  <title>olladns — DNS security you configure from code</title>
   <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <meta name="description" content="Multi-tenant DNS filtering platform, built API-first and MCP-native. 57 REST endpoints, 49 MCP tools, transparent classifiers, HMAC-signed webhooks. Dashboard is read-only on purpose."/>
   <link rel="preconnect" href="https://fonts.googleapis.com"/>
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
   <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet"/>
   <link rel="stylesheet" href="site.css"/>
+  <style>
+    .surface-tbl{width:100%;border-collapse:collapse;font-size:14px}
+    .surface-tbl th, .surface-tbl td{padding:14px 18px;border-bottom:1px solid var(--line);vertical-align:top;text-align:left}
+    .surface-tbl th{background:var(--bg-2);color:var(--muted);font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;font-weight:500;width:160px}
+    .surface-tbl td{color:var(--text-2);line-height:1.6}
+    .surface-tbl td code{font-family:var(--mono);font-size:12.5px;background:var(--bg-2);padding:1px 6px;border-radius:4px;color:var(--text)}
+    .surface-tbl tr:last-child th, .surface-tbl tr:last-child td{border-bottom:0}
+    .fit-card{padding:24px;border:1px solid var(--line);border-radius:10px;background:var(--panel);display:flex;flex-direction:column;gap:10px}
+    .fit-card h3{font-size:17px;margin:0;color:var(--text)}
+    .fit-card p{color:var(--muted);font-size:13.5px;line-height:1.6;margin:0}
+    .fit-card code{font-family:var(--mono);font-size:12px;background:var(--bg-2);padding:1px 5px;border-radius:4px;color:var(--text)}
+    .qual{display:grid;grid-template-columns:1fr 1fr;gap:32px}
+    @media (max-width:880px){.qual{grid-template-columns:1fr}}
+    .qual-col h3{font-size:17px;margin:0 0 14px;color:var(--text)}
+    .qual-col ul{margin:0;padding-left:0;list-style:none;display:flex;flex-direction:column;gap:10px}
+    .qual-col li{font-size:14.5px;color:var(--text-2);line-height:1.55;padding-left:24px;position:relative}
+    .qual-col.yes li::before{content:"✓";position:absolute;left:0;color:#22c55e;font-weight:700}
+    .qual-col.no li::before{content:"–";position:absolute;left:0;color:var(--muted);font-weight:700}
+  </style>
 </head>
 <body data-screen-label="Marketing — Home">
 
@@ -20,112 +40,54 @@
   <div class="grid-bg"></div>
   <div class="container hero-inner">
     <div>
-      <span class="eyebrow">v0.33 shipped · DGA + Typosquat detection now live</span>
-      <h1 class="gradient-text" style="margin-top:18px">The AI-native, API-first<br/>DNS security platform.</h1>
-      <p class="lede">olladns blocks phishing, malware C2, DGA, and brand typosquats at the resolver — and gives your team a REST API, an MCP server, and HMAC-signed webhooks so the whole thing operates from code, CI, or your AI editor. Dashboard is read-only on purpose.</p>
+      <span class="eyebrow">v0.34 · Pre-customer, building in public</span>
+      <h1 class="gradient-text" style="margin-top:18px">DNS security<br/>you configure from code.</h1>
+      <p class="lede">olladns is a multi-tenant DNS filtering platform built API-first and MCP-native. Block phishing, malware C2, DGA, and brand typosquats at the resolver. Configure every policy from your terminal, your CI pipeline, or Claude. The dashboard is read-only on purpose.</p>
       <div class="cta">
-        <a class="btn primary lg" href="contact.html">Start free 14-day trial <span id="i-arrow1"></span></a>
-        <a class="btn lg" href="developers.html"><span id="i-play"></span> Developer docs</a>
+        <a class="btn primary lg" href="developers.html">Read the developer docs <span id="i-arrow1"></span></a>
+        <a class="btn lg" href="contact.html">Apply to design partner program</a>
       </div>
       <div class="meta">
         <div class="item"><span class="dot"></span> 57 REST endpoints · 49 MCP tools</div>
-        <div class="item">DoH · DoT · DoQ resolvers</div>
-        <div class="item">OpenAPI 3.1 spec</div>
+        <div class="item">DoH · DoT · DoQ at <code style="font-family:var(--mono);font-size:12px">dns.olladns.com</code></div>
+        <div class="item">Single US region · EU-West next</div>
       </div>
     </div>
 
-    <!-- Product preview "screenshot" rendered as live mini-dashboard -->
+    <!-- Terminal mock — real, working commands you can copy/paste -->
     <div class="product-frame" style="margin-top:24px">
       <div class="pf-bar">
         <span class="dot"></span><span class="dot"></span><span class="dot"></span>
-        <span class="url">console.olladns.com/overview</span>
+        <span class="url">terminal · api.olladns.com</span>
       </div>
-      <div style="display:grid;grid-template-columns:200px 1fr;background:var(--bg-1)">
-        <!-- Faux sidebar -->
-        <div style="border-right:1px solid var(--line);padding:14px 10px;background:var(--bg-1)">
-          <div style="display:flex;align-items:center;gap:8px;padding:6px 8px;margin-bottom:14px">
-            <div class="brand-mark" style="width:22px;height:22px"><span id="i-shieldsm"></span></div>
-            <span style="font-weight:600;font-size:13px">olladns</span>
-          </div>
-          <div style="font-size:10px;color:var(--muted);letter-spacing:.12em;padding:4px 8px">MONITOR</div>
-          <div style="padding:6px 8px;color:var(--accent);background:var(--accent-soft);border-radius:6px;font-size:12px;margin:2px 0;display:flex;justify-content:space-between"><span>Overview</span></div>
-          <div style="padding:6px 8px;color:var(--text-2);font-size:12px;margin:2px 0;display:flex;justify-content:space-between"><span>Query Log</span><span class="pill accent" style="padding:1px 6px;font-size:9px">live</span></div>
-          <div style="padding:6px 8px;color:var(--text-2);font-size:12px">Threats</div>
-          <div style="padding:6px 8px;color:var(--text-2);font-size:12px">AI Detection</div>
-          <div style="font-size:10px;color:var(--muted);letter-spacing:.12em;padding:10px 8px 4px;margin-top:6px">INSPECT</div>
-          <div style="padding:6px 8px;color:var(--text-2);font-size:12px">Devices</div>
-          <div style="padding:6px 8px;color:var(--text-2);font-size:12px">Policies</div>
-          <div style="padding:6px 8px;color:var(--text-2);font-size:12px">Audit Log</div>
-          <div style="font-size:10px;color:var(--muted);letter-spacing:.12em;padding:10px 8px 4px;margin-top:6px">CONFIGURE</div>
-          <div style="padding:6px 8px;color:var(--text-2);font-size:11px;font-family:var(--mono)">api.olladns.com</div>
-          <div style="padding:6px 8px;color:var(--text-2);font-size:11px;font-family:var(--mono)">mcp.olladns.com</div>
-        </div>
-        <!-- Faux content -->
-        <div style="padding:18px;background:var(--bg-0)">
-          <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:14px">
-            <div class="card" style="padding:12px">
-              <div style="color:var(--muted);font-size:10px;text-transform:uppercase;letter-spacing:.08em">Queries 24h</div>
-              <div style="font-family:var(--mono);font-size:18px;margin-top:4px">14.2M</div>
-            </div>
-            <div class="card" style="padding:12px">
-              <div style="color:var(--muted);font-size:10px;text-transform:uppercase;letter-spacing:.08em">Blocked</div>
-              <div style="font-family:var(--mono);font-size:18px;margin-top:4px;color:var(--bad)">412.8K</div>
-            </div>
-            <div class="card" style="padding:12px">
-              <div style="color:var(--muted);font-size:10px;text-transform:uppercase;letter-spacing:.08em">Threats</div>
-              <div style="font-family:var(--mono);font-size:18px;margin-top:4px;color:var(--warn)">1,284</div>
-            </div>
-            <div class="card" style="padding:12px">
-              <div style="color:var(--muted);font-size:10px;text-transform:uppercase;letter-spacing:.08em">Latency</div>
-              <div style="font-family:var(--mono);font-size:18px;margin-top:4px;color:var(--accent)">4.1ms</div>
-            </div>
-          </div>
+      <div style="padding:22px 26px;background:var(--bg-1);font-family:var(--mono);font-size:12.5px;line-height:1.75;color:var(--text)">
+        <div style="color:var(--muted)"># 1. What's actually running in prod right now?</div>
+        <div><span style="color:#22d3ee">$</span> curl https://api.olladns.com/version</div>
+        <div style="color:#22c55e">{"version":"0.2.0","git_sha":"a20b38b…","built_at":"2026-05-28"}</div>
 
-          <!-- Faux chart -->
-          <div class="card" style="padding:14px">
-            <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px">
-              <div style="font-weight:600;font-size:13px">DNS activity · 24h</div>
-              <div class="pill accent" style="margin-left:auto;font-size:10px;padding:2px 7px"><span style="width:5px;height:5px;background:#22d3ee;display:inline-block;border-radius:50%;box-shadow:0 0 6px #22d3ee"></span> live</div>
-            </div>
-            <svg viewBox="0 0 600 120" width="100%" height="110" preserveAspectRatio="none">
-              <defs>
-                <linearGradient id="gA" x1="0" x2="0" y1="0" y2="1"><stop offset="0%" stop-color="#22d3ee" stop-opacity=".22"/><stop offset="100%" stop-color="#22d3ee" stop-opacity="0"/></linearGradient>
-                <linearGradient id="gB" x1="0" x2="0" y1="0" y2="1"><stop offset="0%" stop-color="#ef4444" stop-opacity=".22"/><stop offset="100%" stop-color="#ef4444" stop-opacity="0"/></linearGradient>
-              </defs>
-              <g stroke="#1c2740" stroke-width=".5">
-                <line x1="0" y1="30" x2="600" y2="30"/>
-                <line x1="0" y1="60" x2="600" y2="60"/>
-                <line x1="0" y1="90" x2="600" y2="90"/>
-              </g>
-              <path d="M0,80 C40,72 80,60 120,55 C160,50 200,40 240,30 C280,20 320,28 360,40 C400,52 440,60 480,48 C520,38 560,42 600,30 L600,120 L0,120 Z" fill="url(#gA)"/>
-              <path d="M0,80 C40,72 80,60 120,55 C160,50 200,40 240,30 C280,20 320,28 360,40 C400,52 440,60 480,48 C520,38 560,42 600,30" fill="none" stroke="#22d3ee" stroke-width="1.5"/>
-              <path d="M0,108 C40,104 80,100 120,98 C160,98 200,90 240,92 C280,96 320,94 360,86 C400,80 440,82 480,90 C520,96 560,92 600,82 L600,120 L0,120 Z" fill="url(#gB)"/>
-              <path d="M0,108 C40,104 80,100 120,98 C160,98 200,90 240,92 C280,96 320,94 360,86 C400,80 440,82 480,90 C520,96 560,92 600,82" fill="none" stroke="#ef4444" stroke-width="1.5"/>
-            </svg>
-            <div style="display:flex;justify-content:space-between;color:var(--muted);font-size:9px;font-family:var(--mono);margin-top:4px">
-              <span>10:00</span><span>14:00</span><span>18:00</span><span>22:00</span><span>02:00</span><span>06:00</span><span>now</span>
-            </div>
-          </div>
+        <div style="height:14px"></div>
+        <div style="color:var(--muted)"># 2. Block a domain — every change carries an actor in the audit log</div>
+        <div><span style="color:#22d3ee">$</span> curl -X <span style="color:#a78bfa">PUT</span> api.olladns.com/api/v1/policies/custom-rules \</div>
+        <div>&nbsp;&nbsp;&nbsp;&nbsp;-H <span style="color:#22c55e">"x-api-key: $K"</span> \</div>
+        <div>&nbsp;&nbsp;&nbsp;&nbsp;-d <span style="color:#22c55e">'{"block":["evil.example"],"allow":[]}'</span></div>
 
-          <!-- live ticker -->
-          <div class="card" style="padding:0;margin-top:12px">
-            <div style="padding:10px 14px;border-bottom:1px solid var(--line);display:flex;align-items:center;gap:10px">
-              <div style="font-weight:600;font-size:13px">Recent threats</div>
-              <span class="pill mag" style="font-size:10px;padding:1px 7px">AI</span>
-            </div>
-            <div class="tick"><span class="t">09:42:18</span><span class="pill" style="background:rgba(239,68,68,.10);color:#ef4444;border-color:rgba(239,68,68,.28);font-size:10px;padding:1px 6px">block</span><span class="d">login-microsoft-secure.cf</span><span class="t">Phishing</span></div>
-            <div class="tick"><span class="t">09:41:02</span><span class="pill" style="background:rgba(239,68,68,.10);color:#ef4444;border-color:rgba(239,68,68,.28);font-size:10px;padding:1px 6px">block</span><span class="d">c2-server-relay.icu</span><span class="t">C&amp;C</span></div>
-            <div class="tick"><span class="t">09:39:55</span><span class="pill" style="background:rgba(239,68,68,.10);color:#ef4444;border-color:rgba(239,68,68,.28);font-size:10px;padding:1px 6px">block</span><span class="d">paypal-verify-update.top</span><span class="t">Phishing</span></div>
-            <div class="tick"><span class="t">09:38:12</span><span class="pill" style="background:rgba(239,68,68,.10);color:#ef4444;border-color:rgba(239,68,68,.28);font-size:10px;padding:1px 6px">block</span><span class="d">crypt0-mining-pool.click</span><span class="t">Cryptomining</span></div>
-          </div>
-        </div>
+        <div style="height:14px"></div>
+        <div style="color:var(--muted)"># 3. Register a device — get its unique DoH URL back</div>
+        <div><span style="color:#22d3ee">$</span> curl -X <span style="color:#22c55e">POST</span> api.olladns.com/api/v1/devices \</div>
+        <div>&nbsp;&nbsp;&nbsp;&nbsp;-d <span style="color:#22c55e">'{"slug":"bob-mbp","display_name":"Bob - MBP"}'</span></div>
+        <div style="color:#22c55e">{"id":7,"doh_url":"https://dns.olladns.com/dns-query/&lt;uuid&gt;--bob-mbp"}</div>
+
+        <div style="height:14px"></div>
+        <div style="color:var(--muted)"># 4. Or skip curl — ask your AI editor through MCP</div>
+        <div style="color:var(--muted)">&nbsp;&nbsp;&nbsp;&gt; "show every DGA suspect with score ≥ 0.85 and block them"</div>
+        <div style="color:var(--muted)">&nbsp;&nbsp;&nbsp;&gt; Claude calls top_dga → set_custom_rules → done</div>
       </div>
     </div>
   </div>
 </section>
 
 <!-- ============================================ -->
-<!-- LOGO STRIP — DESIGN PARTNER CALLOUT -->
+<!-- DESIGN PARTNER CALLOUT -->
 <!-- ============================================ -->
 <section class="section-sm" style="border-top:1px solid var(--line)">
   <div class="container" style="text-align:center;max-width:780px">
@@ -133,250 +95,191 @@
       We're a new product. Be early.
     </div>
     <p style="color:var(--text-2);font-size:15.5px;line-height:1.6;margin:0">
-      olladns shipped v0.33 in May 2026 and is looking for 3&ndash;5 design-partner teams &mdash;
+      olladns shipped v0.34 in May 2026 and is looking for 3&ndash;5 design-partner teams &mdash;
       AI-native B2B startups (3&ndash;50 engineers) and Indian mid-market security teams &mdash;
       who'll trade aggressive product feedback for free Pro tier through 2026 and influence
-      over the roadmap. <a href="contact.html" style="color:var(--accent)">Apply to the partner program &rarr;</a>
+      over the roadmap. <a href="contact.html" style="color:var(--accent)">Apply &rarr;</a>
     </p>
   </div>
 </section>
 
 <!-- ============================================ -->
-<!-- API-FIRST DIFFERENTIATOR -->
+<!-- ONE-PARAGRAPH VERSION -->
 <!-- ============================================ -->
 <section class="section" style="padding-bottom:0">
+  <div class="container" style="max-width:880px">
+    <p style="color:var(--text);font-size:18px;line-height:1.7">
+      Every serious DNS filter does ~80% of the same things. The 20% that differs is whether your team configures it through a console, through code, or through an AI agent. <strong>olladns is the third one.</strong> Every policy, every device, every audit event is a REST endpoint and an MCP tool. The dashboard shows you what's happening; it doesn't let you change anything. Configuration goes through versionable, auditable, scriptable APIs — gated by scoped tokens per workload. The classifier that decides whether to block a domain is ~280 lines of feature-based Rust you can read.
+    </p>
+  </div>
+</section>
+
+<!-- ============================================ -->
+<!-- THREE BETS -->
+<!-- ============================================ -->
+<section class="section">
   <div class="container">
     <div class="section-head">
-      <span class="eyebrow">What makes us different</span>
-      <h2>The only DNS security platform built for code, CI, and AI agents.</h2>
-      <p class="lede">Every other DNS filter ships a click-heavy admin console and treats the API as an "advanced feature." We do the opposite. The console is intentionally read-only — every change goes through a versionable, auditable, scriptable API. Your AI editor is a first-class operator.</p>
+      <span class="eyebrow">Three things we bet on differently</span>
+      <h2>The product model an AI-native security team would build for itself.</h2>
     </div>
 
     <div class="row row-3" style="margin-top:36px">
       <div class="card card-feature">
         <div class="feature-ic" id="i-code-1"></div>
-        <h3>REST API</h3>
-        <p>57 endpoints at <code>api.olladns.com</code>. OpenAPI 3.1 spec with <code>x-required-scopes</code> for SDK generators. Every mutation writes an audit-log entry attributed to the actor.</p>
-        <a href="developers.html#api" style="display:inline-block;margin-top:14px;color:var(--accent);font-size:13.5px">API docs <span id="i-api-arrow"></span></a>
+        <h3>API + MCP for config. Dashboard for reporting.</h3>
+        <p>NextDNS, ControlD, Cisco Umbrella all treat the dashboard as the source of truth. We inverted that at v0.19. The console is read-only by design. Config changes are commits, not clicks. Every change carries an actor (user_id or specific api_key_id) in the audit log. Zero drift, every change attributable.</p>
+        <a href="developers.html#api" style="display:inline-block;margin-top:14px;color:var(--accent);font-size:13.5px">REST API docs <span id="i-api-arrow"></span></a>
       </div>
       <div class="card card-feature">
         <div class="feature-ic" id="i-ai-1"></div>
-        <h3>MCP server</h3>
-        <p>49 Model Context Protocol tools at <code>mcp.olladns.com</code>. Connect Claude, Cursor, Continue, Goose, or any MCP client — your AI agent operates olladns gated by the same scoped tokens your humans use.</p>
+        <h3>MCP-native from day one.</h3>
+        <p><code>mcp.olladns.com</code> exposes 49 Model Context Protocol tools auto-generated from our OpenAPI spec. Connect Claude, Cursor, Cline, Continue, Goose — your AI agent operates olladns under the same scoped tokens your humans use. Every tool call lands in the audit log. Nobody else in DNS-filtering ships this today.</p>
         <a href="developers.html#mcp" style="display:inline-block;margin-top:14px;color:var(--accent);font-size:13.5px">MCP docs <span id="i-mcp-arrow"></span></a>
       </div>
       <div class="card card-feature">
         <div class="feature-ic" id="i-plug-1"></div>
-        <h3>HMAC-signed webhooks</h3>
-        <p>Every audit event fans out to your SIEM, your ChatOps, or your custom incident pipeline. Wildcard event subscriptions (<code>policy.*</code>, <code>threat.*</code>), SHA-256 body signing, timestamp + replay protection.</p>
-        <a href="developers.html#webhooks" style="display:inline-block;margin-top:14px;color:var(--accent);font-size:13.5px">Webhook docs <span id="i-wh-arrow"></span></a>
+        <h3>Transparent threat intel, not vendor magic.</h3>
+        <p>Our DGA classifier is ~280 lines of feature-based Rust (entropy + n-gram + vowel ratio). Our typosquat detector is ~230 lines of Damerau-Levenshtein with Cyrillic homoglyph normalization. Both run inline at ingest with zero per-query vendor cost. Stacked on 86 community blocklists across 15 categories.</p>
+        <a href="product.html#threats" style="display:inline-block;margin-top:14px;color:var(--accent);font-size:13.5px">Threat Intel docs <span id="i-wh-arrow"></span></a>
       </div>
     </div>
   </div>
 </section>
 
 <!-- ============================================ -->
-<!-- VALUE PROPS -->
-<!-- ============================================ -->
-<section class="section">
-  <div class="container">
-    <div class="section-head">
-      <span class="eyebrow">Why olladns</span>
-      <h2>DNS-layer security is your first &amp; cheapest line of defense.</h2>
-      <p class="lede">Most threats start with a DNS lookup. Stop them there — before traffic ever reaches the device — and you neutralize phishing, ransomware, and exfiltration in one move.</p>
-    </div>
-
-    <div class="row row-3">
-      <div class="card card-feature">
-        <div class="feature-ic" id="i-shield-check"></div>
-        <h3>AI catches what feeds miss</h3>
-        <p>Five specialized ML models score every lookup for phishing lookalikes, DGAs, and newly-registered domains. We block zero-days an average of <strong>14 hours</strong> before threat feeds add them.</p>
-      </div>
-      <div class="card card-feature">
-        <div class="feature-ic" id="i-globe"></div>
-        <h3>Global anycast resolvers</h3>
-        <p>43 POPs across 6 continents. Average resolve time <strong>4.1ms</strong>. Users feel nothing — except the absence of bad sites.</p>
-      </div>
-      <div class="card card-feature">
-        <div class="feature-ic" id="i-devices"></div>
-        <h3>Anywhere protection</h3>
-        <p>Roaming clients for macOS, Windows, iOS, Android, ChromeOS &amp; Linux. Same policy on the office Wi-Fi, the airport, or your kid&rsquo;s school laptop.</p>
-      </div>
-      <div class="card card-feature">
-        <div class="feature-ic" id="i-activity"></div>
-        <h3>Forensic-grade visibility</h3>
-        <p>Every query logged with device, user, category, and verdict. Stream to your SIEM, search 90 days hot, and export evidence in two clicks.</p>
-      </div>
-      <div class="card card-feature">
-        <div class="feature-ic" id="i-users"></div>
-        <h3>Policy mapped to identity</h3>
-        <p>Sync from Entra ID, Okta, or Google Workspace. Different rules for engineering, finance, guests — applied by user, not by IP.</p>
-      </div>
-      <div class="card card-feature">
-        <div class="feature-ic" id="i-plug"></div>
-        <h3>SIEM &amp; MDM-native</h3>
-        <p>Splunk, Sentinel, Datadog, Jamf, Intune — connected in minutes. olladns slots into the stack you already operate.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ============================================ -->
-<!-- BIG STATS -->
+<!-- WHAT'S IN THE BOX TODAY -->
 <!-- ============================================ -->
 <section class="section" style="padding-top:0">
   <div class="container">
-    <div class="stat-strip">
-      <div class="item"><div class="v">182<span style="font-size:18px;color:var(--muted)">B</span></div><div class="l">Queries resolved per month</div></div>
-      <div class="item"><div class="v">5.6<span style="font-size:18px;color:var(--muted)">M</span></div><div class="l">Malicious domains blocked daily</div></div>
-      <div class="item"><div class="v">4.1<span style="font-size:18px;color:var(--muted)">ms</span></div><div class="l">Average resolve latency</div></div>
-      <div class="item"><div class="v">99.999<span style="font-size:18px;color:var(--muted)">%</span></div><div class="l">Resolver uptime (12mo)</div></div>
+    <div class="section-head">
+      <span class="eyebrow">What's in the box today</span>
+      <h2>Real surface area, v0.34.</h2>
+      <p class="lede">Every number below verifiable in <code>git log</code> or by hitting an endpoint. No claims we can't back.</p>
+    </div>
+
+    <div class="card" style="padding:0;margin-top:32px;overflow:hidden">
+      <table class="surface-tbl">
+        <tbody>
+          <tr><th>Resolvers</th><td>DoH, DoT, DoQ at <code>dns.olladns.com</code> · per-tenant routing via path UUID · per-device routing via <code>&lt;uuid&gt;--&lt;slug&gt;</code></td></tr>
+          <tr><th>REST API</th><td>57 endpoints at <code>api.olladns.com/api/v1</code> · OpenAPI 3.1 spec at <code>/openapi.json</code> · <code>x-required-scopes</code> on every secured op · <code>/version</code> returns git SHA</td></tr>
+          <tr><th>MCP server</th><td>49 tools at <code>mcp.olladns.com</code> · 5 hand-curated workflows · FastMCP-generated from OpenAPI · scope-gated per caller</td></tr>
+          <tr><th>Auth</th><td>JWT for humans (admin / viewer roles) · scoped API keys for agents · 16 scopes (<code>analytics:read</code>, <code>policies:write</code>, …) · per-key expiry · last-used timestamps</td></tr>
+          <tr><th>Policies</th><td>Custom rules (block / allow with wildcards) · DNS rewrites (A/AAAA/CNAME/NXDOMAIN/REFUSED) · safe-search · parental · blocked-services · NRD blocking · TLD blocking · allowlist-only mode · per-tenant protect-list</td></tr>
+          <tr><th>Threat intel</th><td>Inline DGA classifier (~280 LoC, threshold-tunable) · inline typosquat detector (~230 LoC) · 86-list community blocklist catalog across 15 categories · per-tenant subscriptions reconciled every 5 min</td></tr>
+          <tr><th>Analytics</th><td>summary · top-domains · top-clients · top-devices · top-ai-tools · top-dga · top-typosquat · blocked · by-reason · latency · block-rate · CSV/NDJSON export · 1–365 day retention per tenant</td></tr>
+          <tr><th>Audit + events</th><td>Every mutation writes an audit-log row · HMAC-SHA256 signed outbound webhooks · wildcard event subscriptions (<code>policy.*</code>, <code>threat.*</code>, <code>*</code>) · timestamp + replay protection</td></tr>
+          <tr><th>Privacy</th><td>Per-tenant client-IP anonymization at ingest · per-tenant retention 1–365 days · bypass-bypass blocklists (Tor + DoH)</td></tr>
+          <tr><th>Dashboard</th><td>Read-only Alpine.js SPA at <code>login.olladns.com</code> · 7 screens: Overview, Query Log, Threats, AI Detection, Devices, Policies, Audit Log · CSP-locked (no inline scripts)</td></tr>
+          <tr><th>Open source</th><td>Full stack public on GitHub: Rust API, Postgres + ClickHouse migrations, FastMCP Python sidecar, Caddy config, dashboard, docker-compose</td></tr>
+        </tbody>
+      </table>
     </div>
   </div>
 </section>
 
 <!-- ============================================ -->
-<!-- HOW IT WORKS -->
+<!-- HOW IT FITS YOUR STACK -->
 <!-- ============================================ -->
-<section class="section">
+<section class="section" style="padding-top:0">
   <div class="container">
     <div class="section-head">
-      <span class="eyebrow">How it works</span>
-      <h2>Live in 15 minutes. Protecting in seconds.</h2>
+      <span class="eyebrow">How it fits your stack</span>
+      <h2>Three concrete usage patterns.</h2>
     </div>
-    <div class="steps">
-      <div class="step">
-        <h4>Point your DNS</h4>
-        <p class="muted" style="margin-top:8px">Set your network resolvers to olladns anycast IPs, or push our roaming client via MDM. No new agents, no traffic mirroring.</p>
-        <pre class="code" style="margin-top:14px;padding:12px;display:block;background:var(--bg-2);border-radius:6px;font-size:11.5px;line-height:1.5">primary&nbsp;&nbsp;&nbsp;&nbsp;76.76.21.21
-secondary&nbsp;&nbsp;76.76.22.22</pre>
+    <div class="row row-3" style="margin-top:32px">
+      <div class="fit-card">
+        <h3>Policy-as-code from CI</h3>
+        <p>Keep your custom rules in <code>git</code>. On merge, your CI runs <code>curl -X PUT api.olladns.com/api/v1/policies/custom-rules</code>. Diff between staging and prod. Roll back via revert. Same scoped token per environment.</p>
       </div>
-      <div class="step">
-        <h4>Pick a policy</h4>
-        <p class="muted" style="margin-top:8px">Start with our security-first defaults — phishing, malware, C2, cryptomining blocked. Tune categories and lists later, per-site or per-group.</p>
+      <div class="fit-card">
+        <h3>Agentic triage in Claude / Cursor</h3>
+        <p>Connect once in <code>mcp.json</code>. Ask your editor: <em>"Show me every DGA-flagged domain in the last 24h with score ≥ 0.85 and block them."</em> Three tool calls; one approval; landed in the audit log under your agent token.</p>
       </div>
-      <div class="step">
-        <h4>Watch it work</h4>
-        <p class="muted" style="margin-top:8px">Real-time query log shows every lookup, every block, every threat. Stream to your SIEM and let AI Detection handle the noise.</p>
+      <div class="fit-card">
+        <h3>Webhook fan-out to your SIEM</h3>
+        <p>Every audit event posts to your endpoint with HMAC-SHA256 signature, timestamp header, and event-name header. Subscribe to <code>policy.*</code> for change-tracking, <code>threat.*</code> for live detection alerts, <code>*</code> for everything.</p>
       </div>
     </div>
   </div>
 </section>
 
 <!-- ============================================ -->
-<!-- DEEP-DIVE FEATURE BLOCKS -->
+<!-- HONEST CURRENT STATE -->
 <!-- ============================================ -->
-<section class="section">
-  <div class="container">
-    <div class="row row-1-2" style="align-items:center;gap:48px;margin-bottom:96px">
-      <div>
-        <span class="eyebrow">AI Detection</span>
-        <h2 style="margin-top:14px">Catches zero-day threats your feeds don&rsquo;t know exist yet.</h2>
-        <p class="lede" style="margin-top:18px">Five models, scoring every lookup in parallel. Newly-registered domain pretending to be your bank? Caught. Algorithmically-generated C2 host? Caught. Typosquat of your SaaS login? Caught.</p>
-        <ul style="margin:24px 0 0;padding:0;list-style:none;display:flex;flex-direction:column;gap:10px">
-          <li class="flex"><span id="i-ck1" class="accent"></span> 712 confirmed-malicious catches per day, on average</li>
-          <li class="flex"><span id="i-ck2" class="accent"></span> 0.04% false positive rate</li>
-          <li class="flex"><span id="i-ck3" class="accent"></span> Detection-to-block latency under 3 seconds</li>
-        </ul>
-        <a class="btn lg" style="margin-top:28px" href="product.html#ai">Explore AI Detection <span id="i-a2"></span></a>
-      </div>
-      <div class="product-frame">
-        <div class="pf-bar"><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="url">/ai-detection</span></div>
-        <div style="padding:22px;background:var(--bg-1)">
-          <div class="card" style="background:var(--bg-2);margin-bottom:12px">
-            <div style="display:flex;align-items:center;gap:10px;margin-bottom:12px">
-              <span class="pill mag" style="font-size:10px;padding:2px 8px">AI · v4.2</span>
-              <span style="font-family:var(--mono);font-size:12px">login-microsoft-secure.cf</span>
-              <span class="pill" style="background:rgba(239,68,68,.10);color:#ef4444;border-color:rgba(239,68,68,.28);font-size:10px;margin-left:auto">BLOCKED</span>
-            </div>
-            <div style="font-size:12px;color:var(--muted);margin-bottom:6px;display:flex;justify-content:space-between"><span>Confidence</span><span class="mono">96%</span></div>
-            <div style="height:6px;background:var(--bg-3);border-radius:3px;overflow:hidden;margin-bottom:14px">
-              <div style="width:96%;height:100%;background:linear-gradient(90deg,#a78bfa,#22d3ee)"></div>
-            </div>
-            <div style="font-size:10px;letter-spacing:.08em;color:var(--muted);text-transform:uppercase;margin-bottom:8px">Signals</div>
-            <div class="tag-row">
-              <span class="pill accent" style="font-size:10px">newly registered · 4h</span>
-              <span class="pill accent" style="font-size:10px">lookalike brand</span>
-              <span class="pill accent" style="font-size:10px">DGA-like ngram</span>
-              <span class="pill warn" style="font-size:10px">cert chain anomaly</span>
-            </div>
-          </div>
-          <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:10px">
-            <div class="card" style="padding:14px">
-              <div class="muted" style="font-size:10px;letter-spacing:.08em;text-transform:uppercase">Models active</div>
-              <div style="font-family:var(--mono);font-size:22px;margin-top:4px">5 / 5</div>
-            </div>
-            <div class="card" style="padding:14px">
-              <div class="muted" style="font-size:10px;letter-spacing:.08em;text-transform:uppercase">Caught today</div>
-              <div style="font-family:var(--mono);font-size:22px;margin-top:4px;color:var(--mag)">744</div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="row row-2-3" style="align-items:center;gap:48px">
-      <div class="product-frame">
-        <div class="pf-bar"><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="url">/query-log</span></div>
-        <div style="padding:0;background:var(--bg-1)">
-          <div style="padding:14px 18px;border-bottom:1px solid var(--line);display:flex;align-items:center;gap:10px">
-            <span class="pill accent" style="font-size:10px"><span style="width:5px;height:5px;background:#22d3ee;display:inline-block;border-radius:50%;box-shadow:0 0 6px #22d3ee"></span> streaming</span>
-            <span class="muted" style="font-size:12px">2,841 events / sec</span>
-          </div>
-          <div class="tick"><span class="t">09:42:18</span><span class="pill" style="background:rgba(34,197,94,.10);color:#22c55e;border-color:rgba(34,197,94,.28);font-size:10px">allow</span><span class="d">cdn.cloudflare.com</span><span class="t">Productivity</span></div>
-          <div class="tick"><span class="t">09:42:18</span><span class="pill" style="background:rgba(239,68,68,.10);color:#ef4444;border-color:rgba(239,68,68,.28);font-size:10px">block</span><span class="d">tracker.advert-net.io</span><span class="t">Advertising</span></div>
-          <div class="tick"><span class="t">09:42:17</span><span class="pill" style="background:rgba(34,197,94,.10);color:#22c55e;border-color:rgba(34,197,94,.28);font-size:10px">allow</span><span class="d">api.github.com</span><span class="t">Productivity</span></div>
-          <div class="tick"><span class="t">09:42:17</span><span class="pill" style="background:rgba(239,68,68,.10);color:#ef4444;border-color:rgba(239,68,68,.28);font-size:10px">block</span><span class="d">c2-server-relay.icu</span><span class="t">C&amp;C</span></div>
-          <div class="tick"><span class="t">09:42:16</span><span class="pill" style="background:rgba(34,197,94,.10);color:#22c55e;border-color:rgba(34,197,94,.28);font-size:10px">allow</span><span class="d">slack.com</span><span class="t">Productivity</span></div>
-          <div class="tick"><span class="t">09:42:16</span><span class="pill" style="background:rgba(34,197,94,.10);color:#22c55e;border-color:rgba(34,197,94,.28);font-size:10px">allow</span><span class="d">figma.com</span><span class="t">Productivity</span></div>
-          <div class="tick"><span class="t">09:42:15</span><span class="pill" style="background:rgba(239,68,68,.10);color:#ef4444;border-color:rgba(239,68,68,.28);font-size:10px">block</span><span class="d">crypt0-mining-pool.click</span><span class="t">Cryptomining</span></div>
-        </div>
-      </div>
-      <div>
-        <span class="eyebrow">Query Log</span>
-        <h2 style="margin-top:14px">Every lookup. Every device. Live.</h2>
-        <p class="lede" style="margin-top:18px">A streaming, searchable record of every DNS query on your network. Filter by domain, device, user, category, country, verdict — then click any row to see exactly why it was allowed or blocked.</p>
-        <ul style="margin:24px 0 0;padding:0;list-style:none;display:flex;flex-direction:column;gap:10px">
-          <li class="flex"><span id="i-ck4" class="accent"></span> 90 days of hot retention, 13 months cold</li>
-          <li class="flex"><span id="i-ck5" class="accent"></span> Streams to Splunk, Sentinel, Datadog &amp; S3</li>
-          <li class="flex"><span id="i-ck6" class="accent"></span> Audit-ready CSV / JSONL export</li>
-        </ul>
-        <a class="btn lg" style="margin-top:28px" href="product.html#querylog">See the Query Log <span id="i-a3"></span></a>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ============================================ -->
-<!-- WHY THIS, WHY NOW -->
-<!-- ============================================ -->
-<section class="section">
+<section class="section" style="padding-top:0">
   <div class="container">
     <div class="row row-2" style="gap:48px;align-items:flex-start">
       <div>
-        <span class="eyebrow">Why this, why now</span>
-        <h2 style="margin-top:14px;font-size:30px">DNS filtering converged. The differentiator is who can drive it.</h2>
-        <p style="color:var(--text-2);font-size:16px;line-height:1.65;margin-top:14px">
-          Every serious DNS-filter product (NextDNS, ControlD, Cloudflare Gateway, Cisco
-          Umbrella) does ~80% of the same things today. The 20% that differs is whether
-          your team configures it through a console, through code, or through an AI agent.
-          We bet on the third.
+        <span class="eyebrow">Honest current state</span>
+        <h2 style="margin-top:14px;font-size:28px">The thing every other vendor's homepage hides.</h2>
+        <p style="color:var(--text-2);font-size:15.5px;line-height:1.65;margin-top:14px">
+          Read this before you evaluate us. We'd rather lose the deal at the top of the funnel than waste your procurement team's time at the bottom.
         </p>
-        <p style="color:var(--text-2);font-size:16px;line-height:1.65;margin-top:14px">
-          Read-only dashboard, API-first config, MCP server for agentic operation, scoped
-          tokens for every workload, transparent classifiers you can read the source of.
-          The product model that an AI-native security team would build for themselves.
-        </p>
-        <a class="btn" style="margin-top:18px" href="developers.html">Read the developer docs</a>
       </div>
       <div class="card" style="padding:28px">
-        <div style="font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-bottom:14px">Honest current state</div>
-        <div style="display:flex;flex-direction:column;gap:14px">
-          <div><div style="font-weight:600">v0.33 shipped May 2026</div><div class="muted" style="font-size:13px;margin-top:2px">57 REST endpoints, 49 MCP tools, 16 scoped permissions, 11 migrations, 65 unit tests</div></div>
-          <div><div style="font-weight:600">Pre-customer · pre-revenue</div><div class="muted" style="font-size:13px;margin-top:2px">Bootstrapped. Looking for 3&ndash;5 design partners. No fake logos on this site.</div></div>
-          <div><div style="font-weight:600">SOC 2 Type II observation in progress</div><div class="muted" style="font-size:13px;margin-top:2px">Full report Q3 2026. ISO 27001 / HIPAA BAA not yet offered.</div></div>
-          <div><div style="font-weight:600">One US region today</div><div class="muted" style="font-size:13px;margin-top:2px">EU-West region next. Single-LXC deployment; no anycast yet.</div></div>
+        <div style="display:flex;flex-direction:column;gap:16px">
+          <div>
+            <div style="font-weight:600;color:var(--text)">v0.34 shipped May 2026</div>
+            <div class="muted" style="font-size:13px;margin-top:3px;line-height:1.55">Public <a href="changelog.html">changelog</a> covers every version. <code style="font-family:var(--mono);font-size:11.5px">api.olladns.com/version</code> returns the git SHA of what's actually running.</div>
+          </div>
+          <div>
+            <div style="font-weight:600;color:var(--text)">Pre-customer · pre-revenue · bootstrapped</div>
+            <div class="muted" style="font-size:13px;margin-top:3px;line-height:1.55">No real logo strip on this site. Looking for 3&ndash;5 design partners (free Pro tier through 2026 in exchange for aggressive feedback + roadmap influence).</div>
+          </div>
+          <div>
+            <div style="font-weight:600;color:var(--text)">SOC 2 Type II observation in progress</div>
+            <div class="muted" style="font-size:13px;margin-top:3px;line-height:1.55">Full Type II report Q3 2026. ISO 27001 not pursued yet. HIPAA BAA not offered today &mdash; ask if it's a requirement.</div>
+          </div>
+          <div>
+            <div style="font-weight:600;color:var(--text)">Single US region · no anycast</div>
+            <div class="muted" style="font-size:13px;margin-top:3px;line-height:1.55">EU-West region is the next infra workstream. If sub-20ms p99 latency from Singapore is your gate, this is not the product for you today.</div>
+          </div>
+          <div>
+            <div style="font-weight:600;color:var(--text)">No native desktop / mobile / router clients</div>
+            <div class="muted" style="font-size:13px;margin-top:3px;line-height:1.55">Roadmap: fork the MIT-licensed <code style="font-family:var(--mono);font-size:11.5px">ctrld</code> Go agent (3 weeks of work, decision locked). Until then, point any DoH-capable client at your tenant's DoH URL.</div>
+          </div>
+          <div>
+            <div style="font-weight:600;color:var(--text)">Founder's other Rust SaaS</div>
+            <div class="muted" style="font-size:13px;margin-top:3px;line-height:1.55"><a href="https://24observe.com">24observe.com</a> (logs observability) and <a href="https://qcrawl.com">qcrawl.com</a> (scraping). Open to a small pre-seed if you want to be early on the three together.</div>
+          </div>
         </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================ -->
+<!-- WHO THIS IS FOR / NOT FOR -->
+<!-- ============================================ -->
+<section class="section" style="padding-top:0">
+  <div class="container">
+    <div class="section-head">
+      <span class="eyebrow">Self-disqualify gracefully</span>
+      <h2>Who this is for. Who it's not.</h2>
+    </div>
+
+    <div class="qual" style="margin-top:32px">
+      <div class="qual-col yes">
+        <h3>Pick olladns if&hellip;</h3>
+        <ul>
+          <li>Your engineers live in Claude / Cursor / Continue / Cline and would rather ask their editor to change a policy than open another dashboard.</li>
+          <li>You want to mint a token per workload (CI, SOC tooling, AI agent, partner integration) with explicit scope grants.</li>
+          <li>You need to explain to your auditor why a given lookup was blocked &mdash; and "the vendor said so" isn't acceptable.</li>
+          <li>You have a brand worth protecting and want typosquat scored against <em>your</em> protect-list, not a generic feed.</li>
+          <li>You're a small/mid security team that values transparency + control over vendor pedigree.</li>
+          <li>You're operating in India or APAC and DPDP / data-residency conversations are near-term.</li>
+        </ul>
+      </div>
+      <div class="qual-col no">
+        <h3>Don't pick us if&hellip;</h3>
+        <ul>
+          <li>You need a CISO-grade vendor name today. We don't have brand recognition. Wait 12 months or pick NextDNS.</li>
+          <li>You need anycast from 100+ PoPs. Single US region. Pick NextDNS or Cloudflare Gateway.</li>
+          <li>Your procurement gate is SOC 2 Type II report. We're in observation; not landing until Q3 2026.</li>
+          <li>You need a native macOS / Windows / iOS / Android installer today. Manual DoH setup until the ctrld fork ships.</li>
+          <li>Your only operators are non-technical. The dashboard is read-only; config is API/MCP. If your humans don't write code or use AI editors, our product model is wrong for you.</li>
+        </ul>
       </div>
     </div>
   </div>
@@ -388,12 +291,14 @@ secondary&nbsp;&nbsp;76.76.22.22</pre>
 <section class="section">
   <div class="container">
     <div class="cta-block">
-      <h2>Spin up olladns in 15 minutes. <br/>See blocks in your first hour.</h2>
-      <p class="lede">Free 14-day trial. Full feature access. No credit card. Your existing DNS keeps working until you switch.</p>
+      <div style="font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);margin-bottom:12px">Design partner program · 3&ndash;5 spots</div>
+      <h2>Be early. Get a free Pro tier through 2026 and a real seat at the roadmap table.</h2>
+      <p class="lede">No demo theatre. A real evaluation: we set up your tenant, you point a single laptop or router at your DoH URL, and you tell us what's missing. Bring real DNS traffic if you can; the analytics populate within the hour. The first three teams who commit to weekly feedback get unlimited usage through end of 2026 plus quarterly roadmap input.</p>
       <div class="cta">
-        <a class="btn primary lg" href="contact.html">Start free trial <span id="i-a4"></span></a>
-        <a class="btn lg" href="pricing.html">View pricing</a>
+        <a class="btn primary lg" href="contact.html">Apply to the program <span id="i-a4"></span></a>
+        <a class="btn lg" href="https://github.com/vikasswaminh/qdns">Read the source on GitHub</a>
       </div>
+      <p class="muted" style="font-size:13px;margin-top:18px">Or just try the API yourself: <code style="font-family:var(--mono);font-size:12px;background:var(--bg-2);padding:2px 7px;border-radius:4px">curl https://api.olladns.com/version</code></p>
     </div>
   </div>
 </section>
@@ -403,22 +308,8 @@ secondary&nbsp;&nbsp;76.76.22.22</pre>
 <script src="chrome.js"></script>
 <script>
   mountChrome('home');
-  // Inject icons by id
   document.getElementById('i-arrow1').innerHTML = icon('arrow',{size:14});
-  document.getElementById('i-play').innerHTML = icon('play',{size:14});
-  document.getElementById('i-shieldsm').innerHTML = icon('shield-check',{size:14,sw:2.4});
-  for(const [id,name] of [
-    ['i-shield-check','shield-check'],
-    ['i-globe','globe'],
-    ['i-devices','devices'],
-    ['i-activity','activity'],
-    ['i-users','users'],
-    ['i-plug','plug'],
-  ]){
-    document.getElementById(id).innerHTML = icon(name,{size:20});
-  }
-  for(const id of ['i-ck1','i-ck2','i-ck3','i-ck4','i-ck5','i-ck6']) document.getElementById(id).innerHTML = icon('check',{size:16,sw:2.2});
-  for(const id of ['i-a2','i-a3','i-a4','i-api-arrow','i-mcp-arrow','i-wh-arrow']) document.getElementById(id).innerHTML = icon('arrow',{size:14});
+  for(const id of ['i-a4','i-api-arrow','i-mcp-arrow','i-wh-arrow']) document.getElementById(id).innerHTML = icon('arrow',{size:14});
   document.getElementById('i-code-1').innerHTML = icon('code',{size:20});
   document.getElementById('i-ai-1').innerHTML = icon('ai',{size:20});
   document.getElementById('i-plug-1').innerHTML = icon('plug',{size:20});
