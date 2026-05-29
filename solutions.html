@@ -56,7 +56,7 @@
       <a class="solution-card" href="#healthcare">
         <div class="badge-ic" data-ic="heart"></div>
         <h3>Healthcare</h3>
-        <p class="muted">HIPAA-ready logging, medical-device-safe categories, BAA on every plan, and audit trails to spare.</p>
+        <p class="muted">HIPAA-aligned controls (per-tenant retention, IP anonymization, audit log). BAA not yet offered &mdash; ask if it's a requirement.</p>
         <span class="arrow">Explore Healthcare <span data-ic="arrow"></span></span>
       </a>
       <a class="solution-card" href="#smb">
@@ -68,7 +68,7 @@
       <a class="solution-card" href="#federal">
         <div class="badge-ic" data-ic="shield"></div>
         <h3>Public sector</h3>
-        <p class="muted">FedRAMP Moderate (in process), StateRAMP authorized, US-only resolvers, government-grade SLAs.</p>
+        <p class="muted">US-only resolvers and per-tenant audit log today. FedRAMP / StateRAMP not yet pursued &mdash; the agency-buyer conversation is open if you're willing to be an anchor customer.</p>
         <span class="arrow">Explore Public sector <span data-ic="arrow"></span></span>
       </a>
     </div>
@@ -244,27 +244,27 @@
         <div style="font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin-bottom:14px">Compliance posture</div>
         <div style="display:flex;flex-direction:column;gap:10px">
           <div style="display:flex;align-items:center;gap:12px;padding:14px;background:var(--bg-2);border:1px solid var(--line);border-radius:8px">
-            <div style="width:34px;height:34px;border-radius:8px;background:rgba(34,197,94,.10);color:#22c55e;display:grid;place-items:center" data-ic="shield-check"></div>
-            <div><div style="font-weight:600">HIPAA</div><div class="muted tiny">BAA on every plan · 12-month query retention</div></div>
-          </div>
-          <div style="display:flex;align-items:center;gap:12px;padding:14px;background:var(--bg-2);border:1px solid var(--line);border-radius:8px">
-            <div style="width:34px;height:34px;border-radius:8px;background:rgba(34,197,94,.10);color:#22c55e;display:grid;place-items:center" data-ic="shield-check"></div>
-            <div><div style="font-weight:600">SOC 2 Type II</div><div class="muted tiny">Audited annually · report on request</div></div>
-          </div>
-          <div style="display:flex;align-items:center;gap:12px;padding:14px;background:var(--bg-2);border:1px solid var(--line);border-radius:8px">
-            <div style="width:34px;height:34px;border-radius:8px;background:rgba(34,197,94,.10);color:#22c55e;display:grid;place-items:center" data-ic="shield-check"></div>
-            <div><div style="font-weight:600">ISO 27001:2022</div><div class="muted tiny">Certified · scope: all services</div></div>
+            <div style="width:34px;height:34px;border-radius:8px;background:rgba(245,158,11,.10);color:#f59e0b;display:grid;place-items:center" data-ic="shield-alert"></div>
+            <div><div style="font-weight:600">SOC 2 Type II</div><div class="muted tiny">Observation in progress · report expected Q3 2026</div></div>
           </div>
           <div style="display:flex;align-items:center;gap:12px;padding:14px;background:var(--bg-2);border:1px solid var(--line);border-radius:8px">
             <div style="width:34px;height:34px;border-radius:8px;background:rgba(245,158,11,.10);color:#f59e0b;display:grid;place-items:center" data-ic="shield-alert"></div>
-            <div><div style="font-weight:600">HITRUST CSF</div><div class="muted tiny">In progress · expected Q3 2026</div></div>
+            <div><div style="font-weight:600">HIPAA BAA</div><div class="muted tiny">Not yet offered &mdash; ask if it's a requirement</div></div>
+          </div>
+          <div style="display:flex;align-items:center;gap:12px;padding:14px;background:var(--bg-2);border:1px solid var(--line);border-radius:8px">
+            <div style="width:34px;height:34px;border-radius:8px;background:rgba(245,158,11,.10);color:#f59e0b;display:grid;place-items:center" data-ic="shield-alert"></div>
+            <div><div style="font-weight:600">ISO 27001</div><div class="muted tiny">Not yet certified &mdash; roadmap after SOC 2</div></div>
+          </div>
+          <div style="display:flex;align-items:center;gap:12px;padding:14px;background:var(--bg-2);border:1px solid var(--line);border-radius:8px">
+            <div style="width:34px;height:34px;border-radius:8px;background:rgba(34,197,94,.10);color:#22c55e;display:grid;place-items:center" data-ic="shield-check"></div>
+            <div><div style="font-weight:600">Per-tenant retention + anonymization</div><div class="muted tiny">Real today &mdash; 1&ndash;365 days, drop client IP at ingest</div></div>
           </div>
         </div>
       </div>
       <div>
         <span class="eyebrow">Healthcare</span>
         <h2 style="margin-top:14px">Filter the network without disrupting the OR.</h2>
-        <p class="lede" style="margin-top:18px">Medical device categories pre-allowed. PHI never leaves your network. BAA included. Audit logs that hold up to compliance reviews.</p>
+        <p class="lede" style="margin-top:18px">PHI never appears in our logs (we only see DNS query names, not payloads). Per-tenant anonymization can drop the source IP at ingest. Audit logs are real; HIPAA BAA isn't offered yet &mdash; ask if it's a requirement.</p>
         <ul style="margin:24px 0 0;padding:0;list-style:none;display:flex;flex-direction:column;gap:10px">
           <li class="flex"><span data-ic="check" class="accent"></span> Pre-built &ldquo;medical safe&rdquo; policy that won&rsquo;t break devices</li>
           <li class="flex"><span data-ic="check" class="accent"></span> EHR &amp; PACS-aware allow-lists for Epic, Cerner, Meditech</li>
