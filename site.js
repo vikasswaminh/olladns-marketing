@@ -4,7 +4,7 @@
     {name:'Product',   href:'product.html'},
     {name:'Solutions', href:'solutions.html'},
     {name:'Pricing',   href:'pricing.html'},
-    {name:'Customers', href:'customers.html'},
+    
     {name:'Resources', href:'resources.html'},
   ];
 
@@ -81,7 +81,7 @@
           <div>
             <h5>Company</h5>
             <ul>
-              <li><a href="customers.html">Customers</a></li>
+              
               <li><a href="resources.html">Blog</a></li>
               <li><a href="resources.html#docs">Documentation</a></li>
               <li><a href="contact.html">Contact</a></li>
