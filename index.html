@@ -20,17 +20,17 @@
   <div class="grid-bg"></div>
   <div class="container hero-inner">
     <div>
-      <span class="eyebrow">AI Detection · v4.2 now live</span>
-      <h1 class="gradient-text" style="margin-top:18px">Block threats at the resolver,<br/>before they reach your network.</h1>
-      <p class="lede">olladns protects every device — on-network, roaming, or remote — with AI-driven DNS filtering. Catch phishing, malware C2, and zero-day domains in milliseconds.</p>
+      <span class="eyebrow">v0.33 shipped · DGA + Typosquat detection now live</span>
+      <h1 class="gradient-text" style="margin-top:18px">The AI-native, API-first<br/>DNS security platform.</h1>
+      <p class="lede">olladns blocks phishing, malware C2, DGA, and brand typosquats at the resolver — and gives your team a REST API, an MCP server, and HMAC-signed webhooks so the whole thing operates from code, CI, or your AI editor. Dashboard is read-only on purpose.</p>
       <div class="cta">
         <a class="btn primary lg" href="contact.html">Start free 14-day trial <span id="i-arrow1"></span></a>
-        <a class="btn lg" href="../index.html"><span id="i-play"></span> See live demo</a>
+        <a class="btn lg" href="developers.html"><span id="i-play"></span> Developer docs</a>
       </div>
       <div class="meta">
-        <div class="item"><span class="dot"></span> 99.999% resolver uptime</div>
-        <div class="item">SOC 2 Type II · ISO 27001</div>
-        <div class="item">4ms average latency</div>
+        <div class="item"><span class="dot"></span> 57 REST endpoints · 49 MCP tools</div>
+        <div class="item">DoH · DoT · DoQ resolvers</div>
+        <div class="item">OpenAPI 3.1 spec</div>
       </div>
     </div>
 
@@ -52,10 +52,13 @@
           <div style="padding:6px 8px;color:var(--text-2);font-size:12px;margin:2px 0;display:flex;justify-content:space-between"><span>Query Log</span><span class="pill accent" style="padding:1px 6px;font-size:9px">live</span></div>
           <div style="padding:6px 8px;color:var(--text-2);font-size:12px">Threats</div>
           <div style="padding:6px 8px;color:var(--text-2);font-size:12px">AI Detection</div>
-          <div style="font-size:10px;color:var(--muted);letter-spacing:.12em;padding:10px 8px 4px;margin-top:6px">CONFIGURE</div>
+          <div style="font-size:10px;color:var(--muted);letter-spacing:.12em;padding:10px 8px 4px;margin-top:6px">INSPECT</div>
+          <div style="padding:6px 8px;color:var(--text-2);font-size:12px">Devices</div>
           <div style="padding:6px 8px;color:var(--text-2);font-size:12px">Policies</div>
-          <div style="padding:6px 8px;color:var(--text-2);font-size:12px">Categories</div>
-          <div style="padding:6px 8px;color:var(--text-2);font-size:12px">Block / Allow</div>
+          <div style="padding:6px 8px;color:var(--text-2);font-size:12px">Audit Log</div>
+          <div style="font-size:10px;color:var(--muted);letter-spacing:.12em;padding:10px 8px 4px;margin-top:6px">CONFIGURE</div>
+          <div style="padding:6px 8px;color:var(--text-2);font-size:11px;font-family:var(--mono)">api.olladns.com</div>
+          <div style="padding:6px 8px;color:var(--text-2);font-size:11px;font-family:var(--mono)">mcp.olladns.com</div>
         </div>
         <!-- Faux content -->
         <div style="padding:18px;background:var(--bg-0)">
@@ -142,6 +145,40 @@
       <div class="cell">PARALLEL</div>
       <div class="cell">Meridian</div>
       <div class="cell">Iris/IO</div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================ -->
+<!-- API-FIRST DIFFERENTIATOR -->
+<!-- ============================================ -->
+<section class="section" style="padding-bottom:0">
+  <div class="container">
+    <div class="section-head">
+      <span class="eyebrow">What makes us different</span>
+      <h2>The only DNS security platform built for code, CI, and AI agents.</h2>
+      <p class="lede">Every other DNS filter ships a click-heavy admin console and treats the API as an "advanced feature." We do the opposite. The console is intentionally read-only — every change goes through a versionable, auditable, scriptable API. Your AI editor is a first-class operator.</p>
+    </div>
+
+    <div class="row row-3" style="margin-top:36px">
+      <div class="card card-feature">
+        <div class="feature-ic" id="i-code-1"></div>
+        <h3>REST API</h3>
+        <p>57 endpoints at <code>api.olladns.com</code>. OpenAPI 3.1 spec with <code>x-required-scopes</code> for SDK generators. Every mutation writes an audit-log entry attributed to the actor.</p>
+        <a href="developers.html#api" style="display:inline-block;margin-top:14px;color:var(--accent);font-size:13.5px">API docs <span id="i-api-arrow"></span></a>
+      </div>
+      <div class="card card-feature">
+        <div class="feature-ic" id="i-ai-1"></div>
+        <h3>MCP server</h3>
+        <p>49 Model Context Protocol tools at <code>mcp.olladns.com</code>. Connect Claude, Cursor, Continue, Goose, or any MCP client — your AI agent operates olladns gated by the same scoped tokens your humans use.</p>
+        <a href="developers.html#mcp" style="display:inline-block;margin-top:14px;color:var(--accent);font-size:13.5px">MCP docs <span id="i-mcp-arrow"></span></a>
+      </div>
+      <div class="card card-feature">
+        <div class="feature-ic" id="i-plug-1"></div>
+        <h3>HMAC-signed webhooks</h3>
+        <p>Every audit event fans out to your SIEM, your ChatOps, or your custom incident pipeline. Wildcard event subscriptions (<code>policy.*</code>, <code>threat.*</code>), SHA-256 body signing, timestamp + replay protection.</p>
+        <a href="developers.html#webhooks" style="display:inline-block;margin-top:14px;color:var(--accent);font-size:13.5px">Webhook docs <span id="i-wh-arrow"></span></a>
+      </div>
     </div>
   </div>
 </section>
@@ -394,7 +431,10 @@ secondary&nbsp;&nbsp;76.76.22.22</pre>
     document.getElementById(id).innerHTML = icon(name,{size:20});
   }
   for(const id of ['i-ck1','i-ck2','i-ck3','i-ck4','i-ck5','i-ck6']) document.getElementById(id).innerHTML = icon('check',{size:16,sw:2.2});
-  for(const id of ['i-a2','i-a3','i-a4']) document.getElementById(id).innerHTML = icon('arrow',{size:14});
+  for(const id of ['i-a2','i-a3','i-a4','i-api-arrow','i-mcp-arrow','i-wh-arrow']) document.getElementById(id).innerHTML = icon('arrow',{size:14});
+  document.getElementById('i-code-1').innerHTML = icon('code',{size:20});
+  document.getElementById('i-ai-1').innerHTML = icon('ai',{size:20});
+  document.getElementById('i-plug-1').innerHTML = icon('plug',{size:20});
 </script>
 </body>
 </html>

@@ -1,0 +1,329 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <title>Developers · olladns</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <meta name="description" content="REST API + MCP server for olladns. Configure DNS filtering from code, CI/CD, or your AI editor. 57 REST endpoints, 49 MCP tools, OpenAPI 3.1, scoped tokens, HMAC-signed webhooks."/>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="site.css"/>
+  <style>
+    .api-card{padding:22px;border:1px solid var(--line);border-radius:10px;background:var(--panel);display:flex;flex-direction:column;gap:8px}
+    .api-card .num{font-family:var(--mono);color:var(--accent);font-size:13px;letter-spacing:.08em}
+    .api-card h3{font-size:18px;margin:4px 0 6px}
+    .api-card p{color:var(--muted);font-size:14px;line-height:1.55;margin:0}
+    .scope-pill{display:inline-block;padding:3px 9px;border-radius:999px;font-family:var(--mono);font-size:11px;background:var(--bg-2);border:1px solid var(--line);color:var(--text);margin:2px 4px 2px 0}
+    .scope-pill.write{color:var(--bad);border-color:rgba(239,68,68,.30);background:rgba(239,68,68,.08)}
+    .scope-pill.read{color:var(--accent);border-color:var(--accent-line);background:var(--accent-soft)}
+    .endpoint{font-family:var(--mono);font-size:12.5px;padding:6px 10px;border-radius:6px;background:var(--bg-2);border:1px solid var(--line);display:flex;align-items:center;gap:10px;margin:4px 0}
+    .endpoint .verb{display:inline-block;width:54px;font-weight:600;font-size:11px;padding:2px 6px;border-radius:4px;text-align:center;flex:none}
+    .endpoint .verb.get{background:rgba(34,211,238,.10);color:#22d3ee}
+    .endpoint .verb.post{background:rgba(34,197,94,.10);color:#22c55e}
+    .endpoint .verb.put{background:rgba(245,158,11,.10);color:#f59e0b}
+    .endpoint .verb.delete{background:rgba(239,68,68,.10);color:#ef4444}
+    .endpoint .verb.patch{background:rgba(167,139,250,.10);color:#a78bfa}
+    .endpoint .path{flex:1;color:var(--text)}
+    .endpoint .scopes{color:var(--muted);font-size:11px}
+    pre.code{background:var(--bg-1);padding:18px 22px;border-radius:10px;border:1px solid var(--line);font-family:var(--mono);font-size:12.5px;line-height:1.65;overflow-x:auto;color:var(--text)}
+    pre.code .c{color:var(--muted)}
+    pre.code .k{color:#a78bfa}
+    pre.code .s{color:#22c55e}
+    pre.code .n{color:#22d3ee}
+  </style>
+</head>
+<body data-screen-label="Marketing — Developers">
+
+<div id="site-nav"></div>
+
+<section class="page-hero">
+  <div class="grid-bg"></div>
+  <div class="container" style="position:relative">
+    <span class="eyebrow">Developers</span>
+    <h1 class="gradient-text">Configure DNS like you configure infrastructure.</h1>
+    <p class="lede" style="font-size:19px">
+      olladns is API-first. Every setting that exists in the dashboard
+      (and many that don't) is a REST endpoint or an MCP tool — version it,
+      diff it, ship it from CI, or hand the keys to your AI agent.
+    </p>
+    <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:24px">
+      <a class="pill" href="#api">REST API</a>
+      <a class="pill" href="#mcp">MCP server</a>
+      <a class="pill" href="#auth">Auth &amp; scopes</a>
+      <a class="pill" href="#webhooks">Webhooks</a>
+      <a class="pill" href="#openapi">OpenAPI 3.1</a>
+    </div>
+  </div>
+</section>
+
+<!-- WHY API-FIRST -->
+<section class="section" style="padding-top:48px">
+  <div class="container">
+    <div class="section-head">
+      <span class="eyebrow">Product model</span>
+      <h2>API &amp; MCP for configuration. Dashboard for read-only reporting.</h2>
+      <p class="lede">
+        Other DNS security products give you a click-heavy admin console and call the API an "advanced feature." We do the opposite: the console is intentionally read-only — every change goes through versionable, auditable, scriptable APIs. The result: zero drift between staging and prod, every change has an actor, and your AI editor can patch a policy at 2am without a human in the loop.
+      </p>
+    </div>
+
+    <div class="row row-3" style="margin-top:36px">
+      <div class="api-card">
+        <span class="num">01</span>
+        <h3>57 REST endpoints</h3>
+        <p>Every policy, every tenant, every device, every audit event. JSON in, JSON out, conventional verbs. Curl-able from the terminal, fetch-able from the browser, available in any language.</p>
+      </div>
+      <div class="api-card">
+        <span class="num">02</span>
+        <h3>49 MCP tools</h3>
+        <p>The same surface auto-generated as Model Context Protocol tools. Connect Claude, Cursor, or any MCP-compatible client to <code>mcp.olladns.com</code> and let an AI agent reconcile your policies, triage a phishing campaign, or onboard a new tenant.</p>
+      </div>
+      <div class="api-card">
+        <span class="num">03</span>
+        <h3>16 scoped permissions</h3>
+        <p>Tokens carry granular scopes — <code>policies:read</code>, <code>devices:write</code>, <code>audit:read</code>. Mint a read-only key for your SIEM, a write-key for your IaC pipeline, a tool-specific key for each AI agent. Revoke independently.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- REST API -->
+<section class="section" id="api" style="padding-top:0">
+  <div class="container">
+    <div class="section-head">
+      <span class="eyebrow">REST API</span>
+      <h2>Every setting, every record, one HTTP call away.</h2>
+      <p class="lede">Hosted at <code>https://api.olladns.com/api/v1</code>. JSON request bodies, JSON responses. Authentication via <code>x-api-key: &lt;token&gt;</code> header or <code>Authorization: Bearer &lt;jwt&gt;</code>. Every mutation writes an audit-log entry attributed to the actor.</p>
+    </div>
+
+    <div class="row row-2" style="margin-top:36px;gap:36px;align-items:flex-start">
+      <div>
+        <h4 style="margin-bottom:14px">Quickstart</h4>
+        <pre class="code"><span class="c"># Mint a scoped key from the dashboard or via API</span>
+<span class="k">curl</span> -X POST https://api.olladns.com/api/v1/api-keys \
+  -H <span class="s">"x-api-key: $ADMIN_KEY"</span> \
+  -H <span class="s">"content-type: application/json"</span> \
+  -d <span class="s">'{"label":"ci-deploy","scopes":["policies:write"]}'</span>
+
+<span class="c"># Block a domain</span>
+<span class="k">curl</span> -X PUT https://api.olladns.com/api/v1/policies/custom-rules \
+  -H <span class="s">"x-api-key: $CI_KEY"</span> \
+  -H <span class="s">"content-type: application/json"</span> \
+  -d <span class="s">'{"block":["evil.example.com"],"allow":[]}'</span>
+
+<span class="c"># Register a device — get its DoH URL back</span>
+<span class="k">curl</span> -X POST https://api.olladns.com/api/v1/devices \
+  -H <span class="s">"x-api-key: $CI_KEY"</span> \
+  -H <span class="s">"content-type: application/json"</span> \
+  -d <span class="s">'{"slug":"bob-laptop","display_name":"Bob - Macbook Pro"}'</span>
+
+<span class="c"># → {"id":7, ..., "doh_url":"https://dns.olladns.com/dns-query/&lt;uuid&gt;--bob-laptop"}</span></pre>
+      </div>
+      <div>
+        <h4 style="margin-bottom:14px">Endpoint surface (selected)</h4>
+        <div class="endpoint"><span class="verb get">GET</span><span class="path">/analytics/summary</span><span class="scopes">analytics:read</span></div>
+        <div class="endpoint"><span class="verb get">GET</span><span class="path">/analytics/top-typosquat</span><span class="scopes">analytics:read</span></div>
+        <div class="endpoint"><span class="verb get">GET</span><span class="path">/analytics/top-dga</span><span class="scopes">analytics:read</span></div>
+        <div class="endpoint"><span class="verb get">GET</span><span class="path">/audit-logs</span><span class="scopes">audit:read</span></div>
+        <div class="endpoint"><span class="verb put">PUT</span><span class="path">/policies/filtering</span><span class="scopes">policies:write</span></div>
+        <div class="endpoint"><span class="verb put">PUT</span><span class="path">/policies/custom-rules</span><span class="scopes">policies:write</span></div>
+        <div class="endpoint"><span class="verb put">PUT</span><span class="path">/policies/threat-intel</span><span class="scopes">policies:write</span></div>
+        <div class="endpoint"><span class="verb put">PUT</span><span class="path">/policies/default-deny</span><span class="scopes">policies:write</span></div>
+        <div class="endpoint"><span class="verb put">PUT</span><span class="path">/policies/protect-list</span><span class="scopes">policies:write</span></div>
+        <div class="endpoint"><span class="verb put">PUT</span><span class="path">/policies/rewrites</span><span class="scopes">policies:write</span></div>
+        <div class="endpoint"><span class="verb post">POST</span><span class="path">/devices</span><span class="scopes">devices:write</span></div>
+        <div class="endpoint"><span class="verb post">POST</span><span class="path">/webhooks</span><span class="scopes">webhooks:write</span></div>
+        <div class="endpoint"><span class="verb put">PUT</span><span class="path">/blocklists/subscriptions</span><span class="scopes">blocklists:write</span></div>
+        <div style="margin-top:14px;font-size:13px;color:var(--muted)">
+          Plus 43 more. Full machine-readable spec at <a href="https://api.olladns.com/api/v1/openapi.json"><code>api.olladns.com/api/v1/openapi.json</code></a>.
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MCP -->
+<section class="section" id="mcp" style="padding-top:0">
+  <div class="container">
+    <div class="section-head">
+      <span class="eyebrow">Model Context Protocol</span>
+      <h2>Your AI editor as a first-class operator.</h2>
+      <p class="lede">
+        <code>mcp.olladns.com</code> exposes the entire API as Model Context Protocol tools.
+        Connect Claude, Cursor, Cline, Continue, Goose, or any MCP-compatible client and
+        your AI can configure tenants, write policies, triage detections, and reconcile
+        state — all gated by the same scoped tokens your humans use.
+      </p>
+    </div>
+
+    <div class="row row-2" style="margin-top:36px;gap:36px;align-items:flex-start">
+      <div>
+        <h4 style="margin-bottom:14px">Connect from Claude Code</h4>
+        <pre class="code"><span class="c"># ~/.claude/mcp.json</span>
+{
+  <span class="s">"mcpServers"</span>: {
+    <span class="s">"olladns"</span>: {
+      <span class="s">"url"</span>: <span class="s">"https://mcp.olladns.com"</span>,
+      <span class="s">"headers"</span>: {
+        <span class="s">"x-api-key"</span>: <span class="s">"qd_..."</span>
+      }
+    }
+  }
+}
+
+<span class="c"># Then in Claude:</span>
+<span class="c">&gt; List all DGA-flagged domains in the last 24h and</span>
+<span class="c">&gt; block any with a score above 0.85.</span>
+
+<span class="c"># Claude calls top_dga, filters, then set_custom_rules.</span>
+<span class="c"># Every action lands in /audit-logs with actor=api_key #N.</span></pre>
+      </div>
+      <div>
+        <h4 style="margin-bottom:14px">Available MCP tools (selected)</h4>
+        <div class="endpoint"><span class="verb get">tool</span><span class="path">list_tenants</span></div>
+        <div class="endpoint"><span class="verb get">tool</span><span class="path">get_policies</span></div>
+        <div class="endpoint"><span class="verb get">tool</span><span class="path">list_devices</span></div>
+        <div class="endpoint"><span class="verb get">tool</span><span class="path">top_typosquat</span></div>
+        <div class="endpoint"><span class="verb get">tool</span><span class="path">top_dga</span></div>
+        <div class="endpoint"><span class="verb get">tool</span><span class="path">top_ai_tools</span></div>
+        <div class="endpoint"><span class="verb get">tool</span><span class="path">list_audit_logs</span></div>
+        <div class="endpoint"><span class="verb post">tool</span><span class="path">set_custom_rules</span></div>
+        <div class="endpoint"><span class="verb post">tool</span><span class="path">set_threat_intel</span></div>
+        <div class="endpoint"><span class="verb post">tool</span><span class="path">create_device</span></div>
+        <div class="endpoint"><span class="verb post">tool</span><span class="path">set_default_deny</span></div>
+        <div class="endpoint"><span class="verb post">tool</span><span class="path">set_protect_list</span></div>
+        <div style="margin-top:14px;font-size:13px;color:var(--muted)">
+          49 tools total, auto-generated from the OpenAPI spec via FastMCP.
+          Sensitive operations (key rotation, tenant deletion) are deliberately
+          excluded from MCP and remain REST-only.
+        </div>
+      </div>
+    </div>
+
+    <div class="row row-3" style="margin-top:48px">
+      <div class="api-card">
+        <span class="num">USE CASE</span>
+        <h3>Agentic triage</h3>
+        <p>Connect your SOC AI agent to MCP. When a typosquat detection fires, the agent pulls the affected device, opens an incident, and asks the SOC analyst to confirm a block — all in-thread.</p>
+      </div>
+      <div class="api-card">
+        <span class="num">USE CASE</span>
+        <h3>Self-service onboarding</h3>
+        <p>New tenant signs up? Your AI sales assistant provisions the tenant, mints a scoped key, subscribes default blocklists, and emails the customer their DoH URL — without a human touching the dashboard.</p>
+      </div>
+      <div class="api-card">
+        <span class="num">USE CASE</span>
+        <h3>Policy-as-code</h3>
+        <p>Keep your custom rules in git. CI calls <code>PUT /policies/custom-rules</code> on merge. Diff between environments. Roll back via revert.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- AUTH -->
+<section class="section" id="auth" style="padding-top:0">
+  <div class="container">
+    <div class="section-head">
+      <span class="eyebrow">Auth &amp; scopes</span>
+      <h2>One token per workload. Revoke independently.</h2>
+      <p class="lede">Two authentication flows: human sessions (JWT, admin or viewer role) and machine identities (API keys with explicit scope arrays). No shared secrets, no shared blast radius.</p>
+    </div>
+
+    <div style="margin-top:36px">
+      <h4 style="margin-bottom:14px">Available scopes</h4>
+      <div>
+        <span class="scope-pill read">analytics:read</span>
+        <span class="scope-pill read">policies:read</span>
+        <span class="scope-pill write">policies:write</span>
+        <span class="scope-pill read">devices:read</span>
+        <span class="scope-pill write">devices:write</span>
+        <span class="scope-pill read">blocklists:read</span>
+        <span class="scope-pill write">blocklists:write</span>
+        <span class="scope-pill read">audit:read</span>
+        <span class="scope-pill read">webhooks:read</span>
+        <span class="scope-pill write">webhooks:write</span>
+        <span class="scope-pill read">users:read</span>
+        <span class="scope-pill write">users:write</span>
+        <span class="scope-pill read">api_keys:read</span>
+        <span class="scope-pill write">api_keys:write</span>
+        <span class="scope-pill read">tenants:read</span>
+        <span class="scope-pill write">tenants:write</span>
+      </div>
+      <p style="margin-top:18px;color:var(--muted);font-size:14px">
+        Endpoints publish their required scopes via the <code>x-required-scopes</code> OpenAPI extension, so SDK generators and the MCP server pick them up automatically. Tokens carry a creation actor, an optional expiry, and a <code>last_used_at</code> for housekeeping.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- WEBHOOKS -->
+<section class="section" id="webhooks" style="padding-top:0">
+  <div class="container">
+    <div class="section-head">
+      <span class="eyebrow">Webhooks</span>
+      <h2>HMAC-signed outbound events.</h2>
+      <p class="lede">Every audit event can fan out to your SIEM, your ChatOps, or your custom incident pipeline. Events are signed with HMAC-SHA256 over the body using a per-webhook secret; replay-safe with a timestamp header.</p>
+    </div>
+
+    <div class="row row-2" style="margin-top:36px;gap:36px;align-items:flex-start">
+      <div>
+        <h4 style="margin-bottom:14px">Subscribe</h4>
+        <pre class="code"><span class="k">curl</span> -X POST https://api.olladns.com/api/v1/webhooks \
+  -H <span class="s">"x-api-key: $K"</span> \
+  -H <span class="s">"content-type: application/json"</span> \
+  -d <span class="s">'{
+    "url":"https://soc.example.com/hooks/olladns",
+    "events":["policy.*","threat.*","device.create"]
+  }'</span>
+
+<span class="c"># Event names use dotted-prefix wildcards.</span>
+<span class="c"># "*" subscribes to every event.</span></pre>
+      </div>
+      <div>
+        <h4 style="margin-bottom:14px">Verify in your receiver</h4>
+        <pre class="code"><span class="c"># Headers on every POST:</span>
+<span class="c">#   X-Olladns-Signature: sha256=&lt;hex&gt;</span>
+<span class="c">#   X-Olladns-Timestamp: &lt;unix-seconds&gt;</span>
+<span class="c">#   X-Olladns-Event:     policy.custom_rules.update</span>
+
+<span class="k">import</span> hmac, hashlib
+
+<span class="k">def</span> verify(body, sig, secret):
+    expected = hmac.new(
+        secret.encode(),
+        body, hashlib.sha256
+    ).hexdigest()
+    <span class="k">return</span> hmac.compare_digest(
+        <span class="s">f"sha256={expected}"</span>, sig
+    )</pre>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- OPENAPI -->
+<section class="section" id="openapi" style="padding-top:0;padding-bottom:80px">
+  <div class="container">
+    <div class="cta-block">
+      <h2>Generate clients in any language.</h2>
+      <p class="lede">
+        Full OpenAPI 3.1 spec including <code>x-required-scopes</code> and
+        <code>x-mcp-tool</code> extensions. Point <code>openapi-generator</code>
+        at it for typed clients in TypeScript, Go, Python, Rust, Swift, Kotlin —
+        or just <code>curl</code> it.
+      </p>
+      <div class="cta">
+        <a class="btn primary lg" href="https://api.olladns.com/api/v1/openapi.json">View OpenAPI spec</a>
+        <a class="btn lg" href="contact.html">Talk to engineering</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div id="site-footer"></div>
+
+<script src="chrome.js"></script>
+<script>
+  mountChrome('developers');
+</script>
+</body>
+</html>

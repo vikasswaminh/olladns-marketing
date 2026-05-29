@@ -50,6 +50,7 @@
     const links = [
       {key:'product', label:'Product', href:'product.html'},
       {key:'solutions', label:'Solutions', href:'solutions.html'},
+      {key:'developers', label:'Developers', href:'developers.html'},
       {key:'pricing', label:'Pricing', href:'pricing.html'},
       {key:'compare', label:'Compare', href:'comparison.html'},
       {key:'resources', label:'Resources', href:'resources.html'},
@@ -113,12 +114,21 @@
             </ul>
           </div>
           <div>
+            <h5>Developers</h5>
+            <ul>
+              <li><a href="developers.html">Overview</a></li>
+              <li><a href="developers.html#api">REST API</a></li>
+              <li><a href="developers.html#mcp">MCP server</a></li>
+              <li><a href="https://api.olladns.com/api/v1/openapi.json">OpenAPI 3.1 spec</a></li>
+              <li><a href="changelog.html">Changelog</a></li>
+            </ul>
+          </div>
+          <div>
             <h5>Resources</h5>
             <ul>
               <li><a href="resources.html">Library</a></li>
               <li><a href="resources.html#docs">Docs</a></li>
               <li><a href="resources.html#blog">Blog</a></li>
-              <li><a href="changelog.html">Changelog</a></li>
               <li><a href="security.html">Trust &amp; Security</a></li>
               <li><a href="security-policy.html">Report a vulnerability</a></li>
             </ul>

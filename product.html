@@ -54,12 +54,94 @@
     <h1 class="gradient-text">One console. Every device. Every DNS query.</h1>
     <p class="lede" style="font-size:19px">From the resolver to the SOC, olladns is the modern DNS security platform. Six interconnected surfaces — built for teams who care about milliseconds and audit trails.</p>
     <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:24px">
+      <a class="pill" href="#api">API &amp; MCP</a>
+      <a class="pill" href="#devices">Per-device</a>
+      <a class="pill" href="#threats">Threat Intel v2</a>
       <a class="pill" href="#querylog">Query Log</a>
       <a class="pill" href="#ai">AI Detection</a>
       <a class="pill" href="#policies">Policies</a>
-      <a class="pill" href="#roaming">Roaming Clients</a>
-      <a class="pill" href="#threats">Threat Intel</a>
+      <a class="pill" href="#audit">Audit + Webhooks</a>
+      <a class="pill" href="#privacy">Privacy controls</a>
       <a class="pill" href="#integrations">Integrations</a>
+    </div>
+  </div>
+</section>
+
+<!-- API & MCP -->
+<section class="section" id="api">
+  <div class="container">
+    <div class="row row-1-2" style="gap:56px;align-items:center">
+      <div>
+        <span class="eyebrow">API + MCP</span>
+        <h2 style="margin-top:14px">Configure DNS from code, CI, or your AI editor.</h2>
+        <p class="lede" style="margin-top:18px">Every setting is a REST endpoint or an MCP tool. The dashboard is read-only on purpose — config changes have to be versionable, diff-able, and auditable.</p>
+        <div style="margin-top:32px;display:flex;flex-direction:column;gap:18px">
+          <div class="feat"><div class="ck" data-ic="check"></div><div><div class="ti">57 REST endpoints</div><div class="bo"><code>api.olladns.com</code> · OpenAPI 3.1 with <code>x-required-scopes</code> · auth via JWT or scoped API key.</div></div></div>
+          <div class="feat"><div class="ck" data-ic="check"></div><div><div class="ti">49 MCP tools</div><div class="bo"><code>mcp.olladns.com</code> · auto-generated from OpenAPI via FastMCP. Connect Claude, Cursor, Continue, Goose, any MCP client.</div></div></div>
+          <div class="feat"><div class="ck" data-ic="check"></div><div><div class="ti">16 granular scopes</div><div class="bo">Mint a read-only key for your SIEM, a write key for CI, a tool-specific key per AI agent. Revoke independently.</div></div></div>
+          <div class="feat"><div class="ck" data-ic="check"></div><div><div class="ti">HMAC-signed webhooks</div><div class="bo">Every audit event fans out to your SIEM. SHA-256 signed bodies, timestamp + replay protection, wildcard event subscriptions.</div></div></div>
+        </div>
+        <a class="btn" style="margin-top:28px" href="developers.html">Open developer docs</a>
+      </div>
+      <div class="product-frame">
+        <div class="pf-bar"><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="url">api.olladns.com/api/v1</span></div>
+        <div style="padding:22px;background:var(--bg-1);font-family:var(--mono);font-size:12.5px;line-height:1.7;color:var(--text)">
+          <div style="color:var(--muted)"># Block a domain across all of tenant 11</div>
+          <div><span style="color:#a78bfa">PUT</span> /policies/custom-rules</div>
+          <div style="color:var(--muted)">  x-api-key: qd_***</div>
+          <div style="color:#22c55e">  {"block":["evil.example"],"allow":[]}</div>
+          <div style="height:10px"></div>
+          <div style="color:var(--muted)"># Register a device — get its DoH URL</div>
+          <div><span style="color:#22c55e">POST</span> /devices</div>
+          <div style="color:#22c55e">  {"slug":"bob","display_name":"Bob - MBP"}</div>
+          <div style="color:var(--muted)">→ doh_url: dns.olladns.com/dns-query/&lt;uuid&gt;--bob</div>
+          <div style="height:10px"></div>
+          <div style="color:var(--muted)"># Triage every DGA suspect this week</div>
+          <div><span style="color:#22d3ee">GET</span> /analytics/top-dga?hours=168</div>
+          <div style="color:var(--muted)">→ [{query_name, max_score, count, unique_clients}, ...]</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DEVICES -->
+<section class="section" id="devices">
+  <div class="container">
+    <div class="row row-2-3" style="gap:56px;align-items:center">
+      <div class="product-frame">
+        <div class="pf-bar"><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="url">/devices</span></div>
+        <div style="padding:0;background:var(--bg-1)">
+          <div class="client-row" style="border-bottom:1px solid var(--line);font-weight:600;background:var(--bg-2)">
+            <div>Device</div><div>DoH URL</div><div>Queries 24h</div>
+          </div>
+          <div class="client-row">
+            <div><span class="pdot good"></span>bob-laptop</div>
+            <div style="font-family:var(--mono);font-size:11px;color:var(--accent);overflow:hidden;text-overflow:ellipsis;white-space:nowrap">…--bob-laptop</div>
+            <div>14,820</div>
+          </div>
+          <div class="client-row">
+            <div><span class="pdot good"></span>alice-laptop</div>
+            <div style="font-family:var(--mono);font-size:11px;color:var(--accent);overflow:hidden;text-overflow:ellipsis;white-space:nowrap">…--alice-laptop</div>
+            <div>9,233</div>
+          </div>
+          <div class="client-row">
+            <div><span class="pdot warn"></span>conference-room</div>
+            <div style="font-family:var(--mono);font-size:11px;color:var(--accent);overflow:hidden;text-overflow:ellipsis;white-space:nowrap">…--conference-room</div>
+            <div>421</div>
+          </div>
+        </div>
+      </div>
+      <div>
+        <span class="eyebrow">Per-device identification</span>
+        <h2 style="margin-top:14px">Every lookup tagged to the device that made it.</h2>
+        <p class="lede" style="margin-top:18px">Register a device, get its unique DoH URL. AGH writes the device suffix into every query log row, so every analytics endpoint can answer "which device looked up X?"</p>
+        <div style="margin-top:32px;display:flex;flex-direction:column;gap:18px">
+          <div class="feat"><div class="ck" data-ic="check"></div><div><div class="ti">Unique DoH URL per device</div><div class="bo"><code>dns.olladns.com/dns-query/&lt;tenant&gt;--&lt;slug&gt;</code> — point your laptop, your phone, your router each at their own.</div></div></div>
+          <div class="feat"><div class="ck" data-ic="check"></div><div><div class="ti">Device-level analytics</div><div class="bo">"Top devices by queries" tile + every other aggregate slice-able by device slug.</div></div></div>
+          <div class="feat"><div class="ck" data-ic="check"></div><div><div class="ti">Last-seen telemetry</div><div class="bo">First-seen / last-seen timestamps surface roaming gaps and ghost devices.</div></div></div>
+        </div>
+      </div>
     </div>
   </div>
 </section>
@@ -216,34 +298,125 @@
   </div>
 </section>
 
-<!-- THREAT INTEL -->
+<!-- THREAT INTEL v2 -->
 <section class="section" id="threats" style="background:linear-gradient(180deg, transparent, rgba(34,211,238,.04))">
   <div class="container">
     <div class="section-head">
-      <span class="eyebrow">Threat Intelligence</span>
-      <h2>200+ feeds, four research labs, one stream.</h2>
-      <p class="lede">Curated indicator feeds from public, commercial, and our own honeypot network — deduplicated, scored for confidence, and applied to your resolvers within 60 seconds of a new IOC.</p>
+      <span class="eyebrow">Threat Intel v2</span>
+      <h2>Inline classifiers + curated blocklists. No vendor magic.</h2>
+      <p class="lede">Two transparent classifiers run at ingest, with zero per-query vendor cost: a DGA scorer (entropy + ngram + vowel-ratio features) and a typosquat detector (Damerau-Levenshtein ≤ 2 with homoglyph normalization). Stacked on a curated catalog of 30 community blocklists that you opt into per-tenant.</p>
     </div>
-    <div class="row row-4">
-      <div class="card" style="padding:22px"><div class="muted" style="font-size:11px;letter-spacing:.08em;text-transform:uppercase">Active feeds</div><div style="font-family:var(--mono);font-size:32px;margin-top:6px;color:var(--accent);font-weight:600">217</div></div>
-      <div class="card" style="padding:22px"><div class="muted" style="font-size:11px;letter-spacing:.08em;text-transform:uppercase">IOC updates / day</div><div style="font-family:var(--mono);font-size:32px;margin-top:6px;color:var(--accent);font-weight:600">3.8M</div></div>
-      <div class="card" style="padding:22px"><div class="muted" style="font-size:11px;letter-spacing:.08em;text-transform:uppercase">Median feed-to-block</div><div style="font-family:var(--mono);font-size:32px;margin-top:6px;color:var(--accent);font-weight:600">38s</div></div>
-      <div class="card" style="padding:22px"><div class="muted" style="font-size:11px;letter-spacing:.08em;text-transform:uppercase">Internal honeypots</div><div style="font-family:var(--mono);font-size:32px;margin-top:6px;color:var(--accent);font-weight:600">2,140</div></div>
+
+    <div class="row row-3" style="margin-top:32px">
+      <div class="card" style="padding:24px">
+        <div class="muted" style="font-size:11px;letter-spacing:.08em;text-transform:uppercase">DGA classifier</div>
+        <div style="font-family:var(--mono);font-size:24px;margin-top:8px;color:var(--accent);font-weight:600">~280 LoC</div>
+        <p style="color:var(--muted);font-size:13px;margin-top:10px;line-height:1.5">Feature-based scoring (entropy, character n-grams, vowel ratio). Surfaces via <code>/analytics/top-dga</code>; tunable threshold (default 0.7). No auto-block by default — flagged for review.</p>
+      </div>
+      <div class="card" style="padding:24px">
+        <div class="muted" style="font-size:11px;letter-spacing:.08em;text-transform:uppercase">Typosquat detector</div>
+        <div style="font-family:var(--mono);font-size:24px;margin-top:8px;color:var(--accent);font-weight:600">~230 LoC</div>
+        <p style="color:var(--muted);font-size:13px;margin-top:10px;line-height:1.5">Damerau-Levenshtein distance ≤ 2 after homoglyph normalization (Cyrillic 'а'→Latin 'a', etc.). Length-band pruning keeps the per-query cost bounded. Catches <code>g00gle.com</code>, <code>githab.com</code>, <code>paypa1.com</code>.</p>
+      </div>
+      <div class="card" style="padding:24px">
+        <div class="muted" style="font-size:11px;letter-spacing:.08em;text-transform:uppercase">Blocklist catalog</div>
+        <div style="font-family:var(--mono);font-size:24px;margin-top:8px;color:var(--accent);font-weight:600">30 lists</div>
+        <p style="color:var(--muted);font-size:13px;margin-top:10px;line-height:1.5">Curated community blocklists across phishing, malware, ads, NRD, DGA, NSFW, gambling, telemetry, bypass-bypass (Tor + DoH). Per-tenant subscriptions reconciled to AGH automatically every 5 minutes.</p>
+      </div>
     </div>
+
     <div style="margin-top:32px" class="card">
-      <div style="font-weight:600;margin-bottom:14px">A few of our feed sources</div>
+      <div style="font-weight:600;margin-bottom:14px">Catalog includes</div>
       <div class="tag-row">
-        <span class="pill">Spamhaus</span>
-        <span class="pill">Mandiant</span>
-        <span class="pill">Recorded Future</span>
-        <span class="pill">Abuse.ch</span>
-        <span class="pill">PhishTank</span>
-        <span class="pill">CISA AIS</span>
-        <span class="pill">VirusTotal Intel</span>
+        <span class="pill">Hagezi Pro (ads)</span>
+        <span class="pill">OISD Big (general)</span>
+        <span class="pill">URLhaus (malware)</span>
+        <span class="pill">ThreatFox (malware)</span>
+        <span class="pill">Phishing Army Extended</span>
         <span class="pill">OpenPhish</span>
-        <span class="pill">URLhaus</span>
-        <span class="pill">Internal honeypots</span>
-        <span class="pill">+207 more</span>
+        <span class="pill">Disconnect Tracking</span>
+        <span class="pill">EasyPrivacy</span>
+        <span class="pill">Hagezi NRDs (30d)</span>
+        <span class="pill">Suspicious TLDs</span>
+        <span class="pill">Hagezi DoH bypass</span>
+        <span class="pill">Tor exit nodes</span>
+        <span class="pill">+18 more</span>
+      </div>
+    </div>
+
+    <div class="row row-2" style="margin-top:32px;gap:32px;align-items:center">
+      <div>
+        <span class="eyebrow">Allowlist-only mode</span>
+        <h3 style="margin-top:10px">For when "block what's bad" isn't strict enough.</h3>
+        <p style="color:var(--muted);line-height:1.6">Per-tenant <code>default-deny</code> toggle flips resolution from blocklist to allowlist: nothing resolves unless explicitly permitted. The Fortune-500-healthcare / SCIF / kiosk mode. Layered under existing per-tenant allow entries.</p>
+      </div>
+      <div>
+        <span class="eyebrow">Protect-list</span>
+        <h3 style="margin-top:10px">Per-tenant brand defense.</h3>
+        <p style="color:var(--muted);line-height:1.6">Push your owned domains (<code>yourcompany.com</code>, <code>internal-tool.com</code>) to <code>/policies/protect-list</code>. The typosquat detector scores incoming queries against your list — catches phishing campaigns built around your specific brand within minutes of the first DNS lookup.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- AUDIT + WEBHOOKS -->
+<section class="section" id="audit">
+  <div class="container">
+    <div class="row row-1-2" style="gap:56px;align-items:center">
+      <div>
+        <span class="eyebrow">Audit + Webhooks</span>
+        <h2 style="margin-top:14px">Every change attributed. Every event delivered.</h2>
+        <p class="lede" style="margin-top:18px">Every API mutation writes an audit-log row tagged with the actor (human session or specific agent token). Every audit event can fan out to your SIEM via HMAC-signed webhook.</p>
+        <div style="margin-top:32px;display:flex;flex-direction:column;gap:18px">
+          <div class="feat"><div class="ck" data-ic="check"></div><div><div class="ti">Actor-attributed audit</div><div class="bo">Each row carries <code>actor_type</code> + <code>user_id</code> or <code>api_key_id</code>. Filter by humans, by agents, by system actions.</div></div></div>
+          <div class="feat"><div class="ck" data-ic="check"></div><div><div class="ti">Per-tenant retention</div><div class="bo">1–365 days, configurable. Pair with per-tenant <em>logs anonymization</em> for GDPR / DPDP setups that need to drop client IPs at ingest.</div></div></div>
+          <div class="feat"><div class="ck" data-ic="check"></div><div><div class="ti">Wildcard webhook events</div><div class="bo">Subscribe to <code>policy.*</code>, <code>threat.*</code>, <code>device.create</code>, or <code>*</code>. Bodies HMAC-SHA256 signed; timestamp header for replay protection.</div></div></div>
+          <div class="feat"><div class="ck" data-ic="check"></div><div><div class="ti">CSV / NDJSON export</div><div class="bo"><code>/analytics/export</code> for ad-hoc pulls into your data lake.</div></div></div>
+        </div>
+      </div>
+      <div class="product-frame">
+        <div class="pf-bar"><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="url">/audit-logs</span></div>
+        <div style="padding:0;background:var(--bg-1);font-family:var(--mono);font-size:11.5px">
+          <div style="padding:10px 16px;border-bottom:1px solid var(--line);display:grid;grid-template-columns:90px 90px 1fr;gap:10px;color:var(--muted)">
+            <div>WHEN</div><div>ACTOR</div><div>ACTION</div>
+          </div>
+          <div style="padding:10px 16px;border-bottom:1px solid var(--line);display:grid;grid-template-columns:90px 90px 1fr;gap:10px">
+            <div>14:22</div><div><span class="pill allow" style="font-size:9px;padding:1px 6px">agent #15</span></div><div>policy.custom_rules.update</div>
+          </div>
+          <div style="padding:10px 16px;border-bottom:1px solid var(--line);display:grid;grid-template-columns:90px 90px 1fr;gap:10px">
+            <div>14:18</div><div><span class="pill" style="font-size:9px;padding:1px 6px;color:var(--muted)">user #23</span></div><div>device.create</div>
+          </div>
+          <div style="padding:10px 16px;border-bottom:1px solid var(--line);display:grid;grid-template-columns:90px 90px 1fr;gap:10px">
+            <div>14:11</div><div><span class="pill allow" style="font-size:9px;padding:1px 6px">agent #15</span></div><div>policy.threat_intel.update</div>
+          </div>
+          <div style="padding:10px 16px;display:grid;grid-template-columns:90px 90px 1fr;gap:10px">
+            <div>14:02</div><div><span class="pill" style="font-size:9px;padding:1px 6px;color:var(--muted)">system</span></div><div>blocklists.reconcile</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRIVACY CONTROLS -->
+<section class="section" id="privacy" style="padding-top:0">
+  <div class="container">
+    <div class="section-head">
+      <span class="eyebrow">Privacy controls</span>
+      <h2>Per-tenant levers for GDPR, DPDP, HIPAA, FERPA.</h2>
+    </div>
+    <div class="row row-3" style="margin-top:32px">
+      <div class="card" style="padding:24px">
+        <h3 style="font-size:17px;margin-bottom:8px">Client-IP anonymization</h3>
+        <p style="color:var(--muted);font-size:13.5px;line-height:1.55">Flip <code>log_anonymize_clients</code> per tenant; the AGH-to-ClickHouse poller drops source IPs at ingest. Analytics still slice by device slug — privacy without losing device-level visibility.</p>
+      </div>
+      <div class="card" style="padding:24px">
+        <h3 style="font-size:17px;margin-bottom:8px">Configurable retention</h3>
+        <p style="color:var(--muted);font-size:13.5px;line-height:1.55">Per-tenant <code>log_retention_days</code> from 1 to 365. ClickHouse TTL is applied at partition rotation. Default 30; healthcare tenants typically choose 90; a few choose 1.</p>
+      </div>
+      <div class="card" style="padding:24px">
+        <h3 style="font-size:17px;margin-bottom:8px">Bypass-bypass blocklists</h3>
+        <p style="color:var(--muted);font-size:13.5px;line-height:1.55">Subscribe to the Hagezi DoH-bypass and Tor-exit catalog entries to block users from circumventing your DNS filter via third-party encrypted resolvers.</p>
       </div>
     </div>
   </div>
