@@ -4,7 +4,7 @@
   <meta charset="utf-8"/>
   <title>olladns — DNS security you configure from code</title>
   <meta name="viewport" content="width=device-width,initial-scale=1"/>
-  <meta name="description" content="Multi-tenant DNS filtering platform, built API-first and MCP-native. 57 REST endpoints, 49 MCP tools, transparent classifiers, HMAC-signed webhooks. Dashboard is read-only on purpose."/>
+  <meta name="description" content="Multi-tenant DNS filtering platform, built API-first and MCP-native. 57 REST endpoints, 54 MCP tools, transparent classifiers, HMAC-signed webhooks. Dashboard is read-only on purpose."/>
   <link rel="preconnect" href="https://fonts.googleapis.com"/>
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
   <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet"/>
@@ -48,7 +48,7 @@
         <a class="btn lg" href="contact.html">Apply to design partner program</a>
       </div>
       <div class="meta">
-        <div class="item"><span class="dot"></span> 57 REST endpoints · 49 MCP tools</div>
+        <div class="item"><span class="dot"></span> 57 REST endpoints · 54 MCP tools</div>
         <div class="item">DoH · DoT · DoQ at <code style="font-family:var(--mono);font-size:12px">dns.olladns.com</code></div>
         <div class="item">Single US region · EU-West next</div>
       </div>
@@ -134,13 +134,13 @@
       <div class="card card-feature">
         <div class="feature-ic" id="i-ai-1"></div>
         <h3>MCP-native from day one.</h3>
-        <p><code>mcp.olladns.com</code> exposes 49 Model Context Protocol tools auto-generated from our OpenAPI spec. Connect Claude, Cursor, Cline, Continue, Goose — your AI agent operates olladns under the same scoped tokens your humans use. Every tool call lands in the audit log. Nobody else in DNS-filtering ships this today.</p>
+        <p><code>mcp.olladns.com</code> exposes 49 auto-generated MCP tools + 5 hand-curated workflows (54 total) auto-generated from our OpenAPI spec. Connect Claude, Cursor, Cline, Continue, Goose — your AI agent operates olladns under the same scoped tokens your humans use. Every tool call lands in the audit log. Nobody else in DNS-filtering ships this today.</p>
         <a href="developers.html#mcp" style="display:inline-block;margin-top:14px;color:var(--accent);font-size:13.5px">MCP docs <span id="i-mcp-arrow"></span></a>
       </div>
       <div class="card card-feature">
         <div class="feature-ic" id="i-plug-1"></div>
         <h3>Transparent threat intel, not vendor magic.</h3>
-        <p>Our DGA classifier is ~280 lines of feature-based Rust (entropy + n-gram + vowel ratio). Our typosquat detector is ~230 lines of Damerau-Levenshtein with Cyrillic homoglyph normalization. Both run inline at ingest with zero per-query vendor cost. Stacked on 86 community blocklists across 15 categories.</p>
+        <p>Our DGA classifier is ~280 lines of feature-based Rust (entropy + n-gram + vowel ratio). Our typosquat detector is ~230 lines of Damerau-Levenshtein with Cyrillic homoglyph normalization. Both run inline at ingest with zero per-query vendor cost. Stacked on 67 community blocklists across 15 categories.</p>
         <a href="product.html#threats" style="display:inline-block;margin-top:14px;color:var(--accent);font-size:13.5px">Threat Intel docs <span id="i-wh-arrow"></span></a>
       </div>
     </div>
@@ -166,7 +166,7 @@
           <tr><th>MCP server</th><td>49 tools at <code>mcp.olladns.com</code> · 5 hand-curated workflows · FastMCP-generated from OpenAPI · scope-gated per caller</td></tr>
           <tr><th>Auth</th><td>JWT for humans (admin / viewer roles) · scoped API keys for agents · 16 scopes (<code>analytics:read</code>, <code>policies:write</code>, …) · per-key expiry · last-used timestamps</td></tr>
           <tr><th>Policies</th><td>Custom rules (block / allow with wildcards) · DNS rewrites (A/AAAA/CNAME/NXDOMAIN/REFUSED) · safe-search · parental · blocked-services · NRD blocking · TLD blocking · allowlist-only mode · per-tenant protect-list</td></tr>
-          <tr><th>Threat intel</th><td>Inline DGA classifier (~280 LoC, threshold-tunable) · inline typosquat detector (~230 LoC) · 86-list community blocklist catalog across 15 categories · per-tenant subscriptions reconciled every 5 min</td></tr>
+          <tr><th>Threat intel</th><td>Inline DGA classifier (~280 LoC, threshold-tunable) · inline typosquat detector (~230 LoC) · 67-list community blocklist catalog across 14 categories · per-tenant subscriptions reconciled every 5 min</td></tr>
           <tr><th>Analytics</th><td>summary · top-domains · top-clients · top-devices · top-ai-tools · top-dga · top-typosquat · blocked · by-reason · latency · block-rate · CSV/NDJSON export · 1–365 day retention per tenant</td></tr>
           <tr><th>Audit + events</th><td>Every mutation writes an audit-log row · HMAC-SHA256 signed outbound webhooks · wildcard event subscriptions (<code>policy.*</code>, <code>threat.*</code>, <code>*</code>) · timestamp + replay protection</td></tr>
           <tr><th>Privacy</th><td>Per-tenant client-IP anonymization at ingest · per-tenant retention 1–365 days · bypass-bypass blocklists (Tor + DoH)</td></tr>
