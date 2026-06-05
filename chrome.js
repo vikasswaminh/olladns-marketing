@@ -67,7 +67,7 @@
             ${links.map(l=>`<a class="nav-link ${active===l.key?'active':''}" href="${l.href}">${l.label}</a>`).join('')}
           </div>
           <div class="nav-cta">
-            <a class="nav-link" href="../index.html">Sign in</a>
+            <a class="nav-link" href="https://login.olladns.com">Sign in</a>
             <a class="btn primary" href="contact.html">Request demo ${icon('arrow',{size:14})}</a>
           </div>
         </div>
@@ -100,7 +100,7 @@
               <li><a href="product.html#ai">AI Detection</a></li>
               <li><a href="product.html#roaming">Roaming Clients</a></li>
               <li><a href="pricing.html">Pricing</a></li>
-              <li><a href="../index.html">Live Demo</a></li>
+              <li><a href="https://login.olladns.com">Dashboard sign-in</a></li>
             </ul>
           </div>
           <div>
