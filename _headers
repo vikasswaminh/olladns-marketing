@@ -1,4 +1,9 @@
-# CF Pages — security headers
+# CF Pages — security + cache headers
+# Cache strategy: HTML cached at edge for 1h with 24h SWR (instant render
+# from edge, refresh in background). Static assets cached for a year.
+# Without these, CF Pages serves every HTML request as cf-cache-status:
+# DYNAMIC (no edge cache), so every visitor round-trips to the origin.
+
 /*
   X-Frame-Options: SAMEORIGIN
   X-Content-Type-Options: nosniff
@@ -6,3 +11,23 @@
   Permissions-Policy: camera=(), microphone=(), geolocation=()
   Strict-Transport-Security: max-age=31536000; includeSubDomains
   Content-Security-Policy: default-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; script-src 'self' 'unsafe-inline'; img-src 'self' data:; frame-ancestors 'self'
+
+# HTML — short browser cache, long edge cache, long stale-while-revalidate
+/*.html
+  Cache-Control: public, max-age=300, s-maxage=3600, stale-while-revalidate=86400
+
+# Root + clean URLs (CF Pages serves index.html for "/")
+/
+  Cache-Control: public, max-age=300, s-maxage=3600, stale-while-revalidate=86400
+
+# CSS — safe to cache forever (manual cache-bust by renaming file if needed)
+/site.css
+  Cache-Control: public, max-age=31536000, immutable
+/tokens.css
+  Cache-Control: public, max-age=31536000, immutable
+
+# JS — cache for a day, SWR a week.
+/chrome.js
+  Cache-Control: public, max-age=86400, stale-while-revalidate=604800
+/site.js
+  Cache-Control: public, max-age=86400, stale-while-revalidate=604800
