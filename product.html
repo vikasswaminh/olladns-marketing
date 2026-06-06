@@ -4,7 +4,7 @@
   <meta charset="utf-8"/>
   <title>Product · olladns</title>
   <meta name="viewport" content="width=device-width,initial-scale=1"/>
-  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;500;600;700;900&display=swap" rel="stylesheet"/>
   <link rel="stylesheet" href="site.css"/>
   <style>
     .feat{display:flex;gap:14px;align-items:flex-start}
@@ -17,7 +17,7 @@
     .mini-tbl tr.flash td{background:rgba(34,211,238,.05)}
     .ptab{display:inline-flex;align-items:center;gap:4px;padding:4px 9px;border-radius:999px;font-size:10px;font-family:var(--mono);border:1px solid var(--line)}
     .ptab.block{background:rgba(239,68,68,.10);color:#ef4444;border-color:rgba(239,68,68,.28)}
-    .ptab.allow{background:rgba(34,197,94,.10);color:#22c55e;border-color:rgba(34,197,94,.28)}
+    .ptab.allow{background:rgba(34,197,94,.10);color:#10b981;border-color:rgba(34,197,94,.28)}
     .model-row{display:grid;grid-template-columns:1fr auto;align-items:center;gap:10px;padding:7px 0;border-bottom:1px solid var(--line)}
     .model-row:last-child{border-bottom:0}
     .sw{width:28px;height:14px;border-radius:999px;position:relative}
@@ -87,17 +87,17 @@
         <div class="pf-bar"><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="url">api.olladns.com/api/v1</span></div>
         <div style="padding:22px;background:var(--bg-1);font-family:var(--mono);font-size:12.5px;line-height:1.7;color:var(--text)">
           <div style="color:var(--muted)"># Block a domain across all of tenant 11</div>
-          <div><span style="color:#a78bfa">PUT</span> /policies/custom-rules</div>
+          <div><span style="color:#7c3aed">PUT</span> /policies/custom-rules</div>
           <div style="color:var(--muted)">  x-api-key: qd_***</div>
-          <div style="color:#22c55e">  {"block":["evil.example"],"allow":[]}</div>
+          <div style="color:#10b981">  {"block":["evil.example"],"allow":[]}</div>
           <div style="height:10px"></div>
           <div style="color:var(--muted)"># Register a device — get its DoH URL</div>
-          <div><span style="color:#22c55e">POST</span> /devices</div>
-          <div style="color:#22c55e">  {"slug":"bob","display_name":"Bob - MBP"}</div>
+          <div><span style="color:#10b981">POST</span> /devices</div>
+          <div style="color:#10b981">  {"slug":"bob","display_name":"Bob - MBP"}</div>
           <div style="color:var(--muted)">→ doh_url: dns.olladns.com/dns-query/&lt;uuid&gt;--bob</div>
           <div style="height:10px"></div>
           <div style="color:var(--muted)"># Triage every DGA suspect this week</div>
-          <div><span style="color:#22d3ee">GET</span> /analytics/top-dga?hours=168</div>
+          <div><span style="color:var(--info)">GET</span> /analytics/top-dga?hours=168</div>
           <div style="color:var(--muted)">→ [{query_name, max_score, count, unique_clients}, ...]</div>
         </div>
       </div>

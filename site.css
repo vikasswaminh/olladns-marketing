@@ -1,34 +1,10 @@
 /* =========================================================
    olladns — Marketing site
-   Dark SOC-console aesthetic, cyan accents, IBM Plex
+   Light theme, Lato + system stack, Networkers Home red accent.
+   All design tokens live in tokens.css; this file only contains
+   component / layout / typography rules.
    ========================================================= */
-:root{
-  --bg-0:#05080f;
-  --bg-1:#0a0f1c;
-  --bg-2:#0e1525;
-  --bg-3:#121b30;
-  --panel:#0e1525;
-  --line:#1c2740;
-  --line-2:#243352;
-  --text:#e6ecf5;
-  --text-2:#b4bfd2;
-  --muted:#6a7894;
-  --dim:#445072;
-  --accent:#22d3ee;
-  --accent-2:#06b6d4;
-  --accent-soft:rgba(34,211,238,.12);
-  --accent-line:rgba(34,211,238,.28);
-  --good:#22c55e;
-  --warn:#f59e0b;
-  --bad:#ef4444;
-  --mag:#a78bfa;
-
-  --font: "IBM Plex Sans","Söhne","Helvetica Neue",Helvetica,Arial,sans-serif;
-  --mono: "IBM Plex Mono",ui-monospace,SFMono-Regular,Menlo,monospace;
-  --r:6px; --r-md:10px; --r-lg:16px;
-
-  --container: 1200px;
-}
+@import url("tokens.css");
 
 *{box-sizing:border-box}
 html,body{margin:0;padding:0;background:var(--bg-0);color:var(--text);font-family:var(--font);font-size:15px;line-height:1.55;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
@@ -59,14 +35,14 @@ p{margin:0;color:var(--text-2)}
 .mono{font-family:var(--mono)}
 .muted{color:var(--muted)}
 .tiny{font-size:12px}
-.gradient-text{background:linear-gradient(180deg,#e6ecf5 0%,#94a3b8 100%);-webkit-background-clip:text;background-clip:text;color:transparent}
+.gradient-text{background:linear-gradient(180deg,#171717 0%,#525252 100%);-webkit-background-clip:text;background-clip:text;color:transparent}
 .accent{color:var(--accent)}
 
 /* ===== Nav ===== */
-.nav{position:sticky;top:0;z-index:50;background:rgba(5,8,15,.85);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+.nav{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.85);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
 .nav-inner{display:flex;align-items:center;gap:28px;height:64px}
 .brand{display:flex;align-items:center;gap:10px;font-weight:600;letter-spacing:-.01em}
-.brand-mark{width:28px;height:28px;border-radius:7px;background:linear-gradient(135deg,#22d3ee,#7dd3fc);display:grid;place-items:center;color:#031320;box-shadow:0 0 0 1px rgba(34,211,238,.4),0 0 24px rgba(34,211,238,.3)}
+.brand-mark{width:28px;height:28px;border-radius:7px;background:linear-gradient(135deg,var(--accent),#fca5a5);display:grid;place-items:center;color:#fff;box-shadow:0 0 0 1px rgba(218,41,28,.30),0 0 24px rgba(34,211,238,.3)}
 .brand-mark svg{width:16px;height:16px}
 .nav-links{display:flex;align-items:center;gap:4px}
 .nav-link{padding:8px 12px;font-size:14px;color:var(--text-2);border-radius:6px;display:inline-flex;align-items:center;gap:5px}
@@ -77,8 +53,8 @@ p{margin:0;color:var(--text-2)}
 /* ===== Buttons ===== */
 .btn{display:inline-flex;align-items:center;gap:8px;padding:10px 16px;border-radius:var(--r);font-weight:500;font-size:14px;border:1px solid var(--line);background:var(--bg-2);color:var(--text);transition:.15s}
 .btn:hover{border-color:var(--line-2);background:var(--bg-3)}
-.btn.primary{background:var(--accent);border-color:var(--accent);color:#02151e;font-weight:600;box-shadow:0 0 0 1px rgba(34,211,238,.4),0 8px 28px rgba(34,211,238,.18)}
-.btn.primary:hover{background:#67e8f9;border-color:#67e8f9}
+.btn.primary{background:var(--accent);border-color:var(--accent);color:#fff;font-weight:600;box-shadow:0 0 0 1px rgba(218,41,28,.30),0 8px 28px rgba(218,41,28,.14)}
+.btn.primary:hover{background:var(--accent-2);border-color:var(--accent-2)}
 .btn.ghost{background:transparent;border-color:transparent}
 .btn.ghost:hover{background:var(--bg-2);border-color:var(--line)}
 .btn.lg{padding:13px 22px;font-size:15px;border-radius:8px}
@@ -103,8 +79,8 @@ p{margin:0;color:var(--text-2)}
 .hero::before{
   content:"";position:absolute;inset:-20% 0 0;z-index:0;pointer-events:none;
   background:
-    radial-gradient(60% 50% at 50% 0%, rgba(34,211,238,.16), transparent 60%),
-    radial-gradient(40% 30% at 80% 0%, rgba(167,139,250,.12), transparent 60%);
+    radial-gradient(60% 50% at 50% 0%, rgba(218,41,28,.06), transparent 60%),
+    radial-gradient(40% 30% at 80% 0%, rgba(31,79,216,.05), transparent 60%);
 }
 .hero-inner{position:relative;z-index:1;display:grid;grid-template-columns:1fr;gap:36px}
 .hero h1{max-width:18ch}
@@ -152,7 +128,7 @@ p{margin:0;color:var(--text-2)}
 /* ===== Product preview frame ===== */
 .product-frame{
   position:relative;border:1px solid var(--line);border-radius:14px;overflow:hidden;background:var(--bg-1);
-  box-shadow:0 30px 80px rgba(0,0,0,.5), 0 0 0 1px rgba(34,211,238,.08), 0 0 60px rgba(34,211,238,.08);
+  box-shadow:var(--shadow-lg);
 }
 .product-frame .pf-bar{display:flex;align-items:center;gap:8px;padding:10px 14px;border-bottom:1px solid var(--line);background:var(--bg-1)}
 .product-frame .pf-bar .dot{width:10px;height:10px;border-radius:50%;background:var(--bg-3);border:1px solid var(--line)}
@@ -191,11 +167,11 @@ p{margin:0;color:var(--text-2)}
 .quote{font-size:22px;color:var(--text);line-height:1.45;letter-spacing:-.01em;font-weight:400}
 .quote::before{content:"\201C";color:var(--accent);font-size:48px;font-weight:600;line-height:0;vertical-align:-12px;margin-right:4px}
 .quote-foot{display:flex;align-items:center;gap:12px;margin-top:24px;color:var(--muted)}
-.quote-foot .avatar{width:40px;height:40px;border-radius:50%;background:linear-gradient(135deg,#22d3ee,#a78bfa)}
+.quote-foot .avatar{width:40px;height:40px;border-radius:50%;background:linear-gradient(135deg,var(--accent),var(--info))}
 
 /* ===== CTA block ===== */
 .cta-block{position:relative;border-radius:18px;border:1px solid var(--accent-line);padding:64px 48px;text-align:center;overflow:hidden;background:linear-gradient(180deg, rgba(34,211,238,.08), rgba(34,211,238,.02))}
-.cta-block::before{content:"";position:absolute;inset:0;background:radial-gradient(60% 60% at 50% 0%, rgba(34,211,238,.18), transparent 70%);pointer-events:none}
+.cta-block::before{content:"";position:absolute;inset:0;background:radial-gradient(60% 60% at 50% 0%, rgba(218,41,28,.14), transparent 70%);pointer-events:none}
 .cta-block h2{position:relative;max-width:22ch;margin:0 auto}
 .cta-block .lede{position:relative;margin:14px auto 28px}
 .cta-block .cta{position:relative;display:flex;justify-content:center;gap:12px;flex-wrap:wrap}

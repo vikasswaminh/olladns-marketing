@@ -4,7 +4,7 @@
   <meta charset="utf-8"/>
   <title>Resources · olladns</title>
   <meta name="viewport" content="width=device-width,initial-scale=1"/>
-  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;500;600;700;900&display=swap" rel="stylesheet"/>
   <link rel="stylesheet" href="site.css"/>
   <style>
     .res-tabs{display:flex;gap:6px;border-bottom:1px solid var(--line);margin-bottom:40px;flex-wrap:wrap}
@@ -175,16 +175,16 @@
         </div>
         <pre style="margin:0;padding:22px;font-family:var(--mono);font-size:13px;line-height:1.6;color:var(--text-2);background:var(--bg-1);overflow:auto"><span style="color:var(--muted)"># Block a domain on your default policy</span>
 <span style="color:var(--accent)">curl</span> -X POST https://api.olladns.com/v2/policies/default/blocklist \
-  -H <span style="color:#a78bfa">"Authorization: Bearer $SENTINEL_TOKEN"</span> \
-  -H <span style="color:#a78bfa">"Content-Type: application/json"</span> \
-  -d <span style="color:#22d3ee">'{
+  -H <span style="color:#7c3aed">"Authorization: Bearer $SENTINEL_TOKEN"</span> \
+  -H <span style="color:#7c3aed">"Content-Type: application/json"</span> \
+  -d <span style="color:var(--info)">'{
     "pattern": "*.suspicious-domain.com",
     "note": "Added by Riley — flagged in incident #4821",
     "expires_at": "2026-07-01T00:00:00Z"
   }'</span>
 
 <span style="color:var(--good)">→ 201 Created</span>
-{ <span style="color:#a78bfa">"id"</span>: <span style="color:#22d3ee">"bl_8h2kj3"</span>, <span style="color:#a78bfa">"applied_to"</span>: <span style="color:#22d3ee">"480 devices"</span>, <span style="color:#a78bfa">"propagated_in"</span>: <span style="color:#22d3ee">"1.4s"</span> }</pre>
+{ <span style="color:#7c3aed">"id"</span>: <span style="color:var(--info)">"bl_8h2kj3"</span>, <span style="color:#7c3aed">"applied_to"</span>: <span style="color:var(--info)">"480 devices"</span>, <span style="color:#7c3aed">"propagated_in"</span>: <span style="color:var(--info)">"1.4s"</span> }</pre>
       </div>
     </div>
 
