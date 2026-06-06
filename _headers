@@ -20,11 +20,12 @@
 /
   Cache-Control: public, max-age=300, s-maxage=3600, stale-while-revalidate=86400
 
-# CSS — safe to cache forever (manual cache-bust by renaming file if needed)
+# CSS — short browser cache + long edge cache + SWR. NOT immutable until
+# we add content hashing to filenames; theme iterations need to propagate.
 /site.css
-  Cache-Control: public, max-age=31536000, immutable
+  Cache-Control: public, max-age=300, s-maxage=3600, stale-while-revalidate=86400
 /tokens.css
-  Cache-Control: public, max-age=31536000, immutable
+  Cache-Control: public, max-age=300, s-maxage=3600, stale-while-revalidate=86400
 
 # JS — cache for a day, SWR a week.
 /chrome.js
