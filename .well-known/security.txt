@@ -1,0 +1,14 @@
+# olladns security disclosure (RFC 9116)
+# Report security vulnerabilities responsibly. We acknowledge within 48h.
+
+Contact: mailto:security@olladns.com
+Preferred-Languages: en, hi
+Canonical: https://olladns.com/.well-known/security.txt
+Policy: https://olladns.com/security-policy.html
+Hiring: https://olladns.com/careers
+
+# Public PGP key (not yet published). Encrypted reports may be sent over
+# TLS via the contact address until a key fingerprint is listed here.
+
+# Expires must be ISO 8601. Refresh every 12 months.
+Expires: 2027-06-07T00:00:00Z

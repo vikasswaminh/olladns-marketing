@@ -1,0 +1,22 @@
+# olladns Data Protection Officer disclosure
+# Per India's Digital Personal Data Protection Act, 2023 (DPDP §10),
+# data fiduciaries processing personal data of Indian principals must
+# publish a DPO point of contact. This file is the machine-readable
+# disclosure; a human-readable version is at /privacy.html.
+
+DPO-Contact: mailto:dpo@olladns.com
+DPO-Address-Pending: yes
+# A physical address in India is required by DPDP §10 for fiduciaries
+# operating at scale. olladns is currently in pre-production testing;
+# the Indian office address will be published before general availability.
+
+Subject-Rights-API: https://api.olladns.com/api/v1/me/data-export
+Subject-Rights-API: https://api.olladns.com/api/v1/me/data-erasure-request
+Subject-Rights-API: https://api.olladns.com/api/v1/me/privacy
+
+# Data residency disclosure
+Data-Residency-Status: pre-production-testing
+Data-Residency-Target: India (production launch)
+
+Canonical: https://olladns.com/.well-known/dpo.txt
+Expires: 2027-06-07T00:00:00Z
