@@ -33,7 +33,7 @@ function svgHero(label) {
 
 function imageUrl(post, { width = 640, height = 400, hero = false } = {}) {
   if (post.image) {
-    return post.image.startsWith('http') || post.image.startsWith('/') ? post.image : `../${post.image}`;
+    return post.image.startsWith('http') || post.image.startsWith('/') ? post.image : `/${post.image}`;
   }
   return hero ? svgHero(post.imageLabel || post.category) : svgThumb(post.imageLabel || post.category);
 }
@@ -80,7 +80,7 @@ const blogListing = `<!doctype html>
   <link rel="preconnect" href="https://fonts.googleapis.com"/>
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
   <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;500;600;700;900&display=swap" rel="stylesheet"/>
-  <link rel="stylesheet" href="site.css?v=20260820"/>
+  <link rel="stylesheet" href="/site.css?v=20260820"/>
   <style>
     .blog-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
     .blog-card{padding:0;border:1px solid var(--line);border-radius:var(--r-md);background:var(--panel);display:flex;flex-direction:column;transition:.15s;overflow:hidden}
@@ -134,7 +134,7 @@ ${cardsHtml}
 
 <div id="site-footer"></div>
 
-<script src="chrome.js?v=20260820"></script>
+<script src="/chrome.js?v=20260820"></script>
 <script>
   mountChrome('blog');
   document.querySelectorAll('[data-ic]').forEach(el=>{
@@ -151,8 +151,6 @@ fs.writeFileSync(BLOG_HTML, blogListing, 'utf-8');
 fs.writeFileSync(
   path.join(BLOG_DIR, 'index.html'),
   blogListing
-    .replace(/href="site\.css/g, 'href="../site.css?v=20260820')
-    .replace(/src="chrome\.js/g, 'src="../chrome.js?v=20260820')
 );
 
 const postPageTemplate = (post, index) => {
@@ -173,7 +171,7 @@ const postPageTemplate = (post, index) => {
   <meta property="og:description" content="${escapeHtml(post.excerpt)}"/>
   <meta property="og:type" content="article"/>
   <meta property="og:url" content="https://olladns.com/blog/${post.slug}/"/>
-  <meta property="og:image" content="${ogImage.startsWith('http') ? ogImage : 'https://olladns.com' + (ogImage.startsWith('/') ? '' : '/') + ogImage.replace(/^\.\.\//, '')}"/>
+  <meta property="og:image" content="${ogImage.startsWith('http') ? ogImage : 'https://olladns.com' + ogImage}"/>
   <meta property="article:published_time" content="${post.date}"/>
   <meta property="article:author" content="${escapeHtml(post.author)}"/>
   <meta property="article:section" content="${escapeHtml(post.category)}"/>
@@ -181,7 +179,7 @@ const postPageTemplate = (post, index) => {
   <link rel="preconnect" href="https://fonts.googleapis.com"/>
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
   <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;500;600;700;900&display=swap" rel="stylesheet"/>
-  <link rel="stylesheet" href="../site.css?v=20260820"/>
+  <link rel="stylesheet" href="/site.css?v=20260820"/>
   <style>
     .post-meta{display:flex;align-items:center;gap:18px;flex-wrap:wrap;margin-top:18px;color:var(--muted);font-size:14px}
     .post-meta .tag{font-family:var(--mono);font-size:11px;color:var(--accent);text-transform:uppercase;letter-spacing:.08em}
@@ -247,7 +245,7 @@ const postPageTemplate = (post, index) => {
 
 <div id="site-footer"></div>
 
-<script src="../chrome.js?v=20260820"></script>
+<script src="/chrome.js?v=20260820"></script>
 <script>
   mountChrome('blog');
 </script>
@@ -264,8 +262,6 @@ posts.forEach((post, index) => {
   fs.writeFileSync(
     path.join(postDir, 'index.html'),
     postPageTemplate(post, index)
-      .replace(/href="\.\.\/site\.css/g, 'href="../../site.css')
-      .replace(/src="\.\.\/chrome\.js/g, 'src="../../chrome.js?v=20260820')
   );
 });
 

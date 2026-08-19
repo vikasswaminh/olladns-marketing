@@ -1,0 +1,24 @@
+{
+  "name": "olladns-marketing",
+  "version": "1.0.0",
+  "description": "Marketing site for **olladns.com** (apex domain). Pure static HTML/CSS/JS. Hosted on Cloudflare Pages.",
+  "main": "build-blog.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/vikasswaminh/olladns-marketing.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/vikasswaminh/olladns-marketing/issues"
+  },
+  "homepage": "https://github.com/vikasswaminh/olladns-marketing#readme",
+  "devDependencies": {
+    "playwright": "^1.62.1"
+  }
+}
