@@ -6,6 +6,7 @@
     { name: 'Pricing', href: '/pricing.html' },
 
     { name: 'Resources', href: '/resources.html' },
+    { name: 'Blog', href: '/blog/' },
   ];
 
   function svg(d, w = 14, sw = 1.8) {
