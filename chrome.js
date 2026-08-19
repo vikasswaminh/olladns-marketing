@@ -1,4 +1,4 @@
-/* Marketing: small icon + shared component helpers */
+/* Marketing: small icon + shared component helpers — v20260821 */
 (function () {
   const NS = "http://www.w3.org/2000/svg";
   function svg(d, opts = {}) {
