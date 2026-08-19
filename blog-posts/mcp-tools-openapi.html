@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <title>54 MCP tools, generated from OpenAPI · olladns Blog</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <meta name="description" content="How we keep the MCP server in sync with every REST endpoint without writing wrappers by hand."/>
+  <meta property="og:title" content="54 MCP tools, generated from OpenAPI · olladns Blog"/>
+  <meta property="og:description" content="How we keep the MCP server in sync with every REST endpoint without writing wrappers by hand."/>
+  <meta property="og:type" content="article"/>
+  <meta property="og:url" content="https://olladns.com/blog-posts/mcp-tools-openapi.html"/>
+  <meta property="og:image" content="https://olladns.com/data:image/svg+xml,%3Csvg%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%20width%3D'1280'%20height%3D'720'%3E%3Crect%20fill%3D'%2523f4f4f5'%20width%3D'1280'%20height%3D'720'%2F%3E%3Ctext%20fill%3D'%2523DA291C'%20font-family%3D'sans-serif'%20font-size%3D'28'%20font-weight%3D'600'%20x%3D'640'%20y%3D'370'%20text-anchor%3D'middle'%3EMCP%20tools%3C%2Ftext%3E%3C%2Fsvg%3E"/>
+  <meta property="article:published_time" content="2026-05-28"/>
+  <meta property="article:author" content="olladns Product Team"/>
+  <meta property="article:section" content="Product"/>
+  <link rel="canonical" href="https://olladns.com/blog-posts/mcp-tools-openapi.html"/>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;500;600;700;900&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="../site.css?v=light-2026-06-05"/>
+  <style>
+    .post-meta{display:flex;align-items:center;gap:18px;flex-wrap:wrap;margin-top:18px;color:var(--muted);font-size:14px}
+    .post-meta .tag{font-family:var(--mono);font-size:11px;color:var(--accent);text-transform:uppercase;letter-spacing:.08em}
+    .post-thumb{aspect-ratio:16/9;background:var(--bg-2);border-radius:var(--r-md);overflow:hidden;border:1px solid var(--line);margin-bottom:36px}
+    .post-thumb img{width:100%;height:100%;object-fit:cover;display:block}
+    .post-body{max-width:720px;margin:0 auto}
+    .post-body h2{font-size:24px;margin:42px 0 16px;color:var(--text)}
+    .post-body h3{font-size:18px;margin:32px 0 12px;color:var(--text)}
+    .post-body p{font-size:15.5px;line-height:1.7;color:var(--text-2);margin:0 0 18px}
+    .post-body .lede{font-size:18px;color:var(--text);line-height:1.7;margin-bottom:28px}
+    .post-body ul,.post-body ol{margin:0 0 20px;padding-left:24px;color:var(--text-2);font-size:15.5px;line-height:1.7}
+    .post-body li{margin-bottom:8px}
+    .post-body code{font-family:var(--mono);font-size:13px;background:var(--bg-2);padding:2px 6px;border-radius:4px;color:var(--text)}
+    .post-body pre{background:var(--bg-1);border:1px solid var(--line);border-radius:var(--r-md);padding:18px;overflow:auto;margin:22px 0}
+    .post-body pre code{background:transparent;padding:0}
+    .post-body blockquote{border-left:3px solid var(--accent);margin:24px 0;padding-left:20px;color:var(--muted);font-style:italic}
+    .post-author{display:flex;align-items:center;gap:12px;margin-top:32px;color:var(--muted);font-size:14px}
+    .post-author .dot{width:32px;height:32px;border-radius:50%;background:var(--accent-soft);color:var(--accent);display:grid;place-items:center;font-weight:700;font-size:13px}
+    .post-nav{display:flex;justify-content:space-between;gap:16px;margin-top:56px;padding-top:24px;border-top:1px solid var(--line)}
+    .post-nav a{color:var(--accent);font-size:14px;font-weight:500}
+    .post-nav a:hover{text-decoration:underline}
+  </style>
+</head>
+<body data-screen-label="Marketing — Blog Post">
+
+<div id="site-nav"></div>
+
+<section class="page-hero" style="padding-bottom:40px">
+  <div class="grid-bg"></div>
+  <div class="container" style="position:relative">
+    <span class="eyebrow"><a href="../blog.html" style="color:inherit">Blog</a></span>
+    <h1 class="gradient-text">54 MCP tools, generated from OpenAPI</h1>
+    <div class="post-meta">
+      <span class="tag">Product</span>
+      <span>May 28, 2026</span>
+      <span>5 min read</span>
+      <span>by olladns Product Team</span>
+    </div>
+  </div>
+</section>
+
+<section class="section" style="padding-top:0">
+  <div class="container">
+    <article class="post-body">
+      <div class="post-thumb">
+        <img src="data:image/svg+xml,%3Csvg%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%20width%3D'1280'%20height%3D'720'%3E%3Crect%20fill%3D'%2523f4f4f5'%20width%3D'1280'%20height%3D'720'%2F%3E%3Ctext%20fill%3D'%2523DA291C'%20font-family%3D'sans-serif'%20font-size%3D'28'%20font-weight%3D'600'%20x%3D'640'%20y%3D'370'%20text-anchor%3D'middle'%3EMCP%20tools%3C%2Ftext%3E%3C%2Fsvg%3E" alt="54 MCP tools, generated from OpenAPI"/>
+      </div>
+
+      <p class='lede' style='font-size:18px;color:var(--text);line-height:1.7;margin-bottom:28px'>Every REST endpoint we ship becomes an MCP tool automatically. Here is how we generate 54 tools from our OpenAPI spec and keep them in lockstep with the API.</p><h2>The wrapper problem</h2><p>Hand-writing MCP wrappers for every endpoint is a recipe for drift. Rename a field in the API and five editor integrations break. We wanted one source of truth: the OpenAPI spec served at <code>/api/v1/openapi.json</code>.</p><h2>Generation pipeline</h2><ul><li>FastMCP reads the OpenAPI spec at build time.</li><li>Each operation becomes a tool with typed arguments from the spec's schemas.</li><li>We annotate scope requirements from the <code>x-required-scopes</code> extension.</li><li>Five hand-curated workflows combine multiple tools for common tasks.</li></ul><h2>Result</h2><p>When we add a new REST endpoint, the MCP tool appears in the next deploy without anyone writing a wrapper. The same validation, the same auth, the same audit logging applies whether the caller is curl, a dashboard, or Claude.</p>
+
+      <div class="post-author">
+        <span class="dot">OP</span>
+        <span>Written by <strong style="color:var(--text)">olladns Product Team</strong> · Product</span>
+      </div>
+
+      <div class="post-nav">
+        <a href="scoped-api-keys.html">← Designing scoped API keys for agents</a>
+        <a href="inside-dga-classifier.html">Inside the 280-line DGA classifier →</a>
+      </div>
+    </article>
+  </div>
+</section>
+
+<div id="site-footer"></div>
+
+<script src="../chrome.js"></script>
+<script>
+  mountChrome('blog');
+</script>
+</body>
+</html>
