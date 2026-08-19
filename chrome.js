@@ -54,7 +54,7 @@
       { key: 'pricing', label: 'Pricing', href: 'pricing.html' },
       { key: 'compare', label: 'Compare', href: 'comparison.html' },
       { key: 'resources', label: 'Resources', href: 'resources.html' },
-      { key: 'blog', label: 'Blog', href: 'blog.html' },
+      { key: 'blog', label: 'Blog', href: '/blog/' },
       { key: 'company', label: 'Company', href: 'company.html' },
     ];
     return `
@@ -129,7 +129,7 @@
             <ul>
               <li><a href="resources.html">Library</a></li>
               <li><a href="resources.html#docs">Docs</a></li>
-              <li><a href="blog.html">Blog</a></li>
+              <li><a href="/blog/">Blog</a></li>
               <li><a href="security.html">Trust &amp; Security</a></li>
               <li><a href="security-policy.html">Report a vulnerability</a></li>
             </ul>

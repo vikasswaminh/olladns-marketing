@@ -2,22 +2,22 @@
 <html lang="en">
 <head>
   <meta charset="utf-8"/>
-  <title>Catching Cyrillic homoglyphs in 230 lines · olladns Blog</title>
+  <title>Why DNS filtering is the cheapest zero-trust control · olladns Blog</title>
   <meta name="viewport" content="width=device-width,initial-scale=1"/>
-  <meta name="description" content="A Damerau-Levenshtein approach to brand impersonation that runs inline at DNS query time."/>
-  <meta property="og:title" content="Catching Cyrillic homoglyphs in 230 lines · olladns Blog"/>
-  <meta property="og:description" content="A Damerau-Levenshtein approach to brand impersonation that runs inline at DNS query time."/>
+  <meta name="description" content="Every device on your network asks DNS before it connects anywhere. That makes the resolver the most universal enforcement point you already own."/>
+  <meta property="og:title" content="Why DNS filtering is the cheapest zero-trust control · olladns Blog"/>
+  <meta property="og:description" content="Every device on your network asks DNS before it connects anywhere. That makes the resolver the most universal enforcement point you already own."/>
   <meta property="og:type" content="article"/>
-  <meta property="og:url" content="https://olladns.com/blog/cyrillic-homoglyphs/"/>
-  <meta property="og:image" content="https://olladns.com/data:image/svg+xml,%3Csvg%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%20width%3D'1280'%20height%3D'720'%3E%3Crect%20fill%3D'%2523f4f4f5'%20width%3D'1280'%20height%3D'720'%2F%3E%3Ctext%20fill%3D'%2523DA291C'%20font-family%3D'sans-serif'%20font-size%3D'28'%20font-weight%3D'600'%20x%3D'640'%20y%3D'370'%20text-anchor%3D'middle'%3ETyposquat%3C%2Ftext%3E%3C%2Fsvg%3E"/>
-  <meta property="article:published_time" content="2026-05-02"/>
+  <meta property="og:url" content="https://olladns.com/blog/dns-cheapest-zero-trust-control/"/>
+  <meta property="og:image" content="https://olladns.com/data:image/svg+xml,%3Csvg%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%20width%3D'1280'%20height%3D'720'%3E%3Crect%20fill%3D'%2523f4f4f5'%20width%3D'1280'%20height%3D'720'%2F%3E%3Ctext%20fill%3D'%2523DA291C'%20font-family%3D'sans-serif'%20font-size%3D'28'%20font-weight%3D'600'%20x%3D'640'%20y%3D'370'%20text-anchor%3D'middle'%3EZero%20trust%20DNS%3C%2Ftext%3E%3C%2Fsvg%3E"/>
+  <meta property="article:published_time" content="2026-08-18"/>
   <meta property="article:author" content="olladns Security Team"/>
   <meta property="article:section" content="Threat Research"/>
-  <link rel="canonical" href="https://olladns.com/blog/cyrillic-homoglyphs/"/>
+  <link rel="canonical" href="https://olladns.com/blog/dns-cheapest-zero-trust-control/"/>
   <link rel="preconnect" href="https://fonts.googleapis.com"/>
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
   <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;500;600;700;900&display=swap" rel="stylesheet"/>
-  <link rel="stylesheet" href="../site.css?v=light-2026-06-05"/>
+  <link rel="stylesheet" href="../../site.css?v=light-2026-06-05"/>
   <style>
     .post-meta{display:flex;align-items:center;gap:18px;flex-wrap:wrap;margin-top:18px;color:var(--muted);font-size:14px}
     .post-meta .tag{font-family:var(--mono);font-size:11px;color:var(--accent);text-transform:uppercase;letter-spacing:.08em}
@@ -49,11 +49,11 @@
   <div class="grid-bg"></div>
   <div class="container" style="position:relative">
     <span class="eyebrow"><a href="/blog/" style="color:inherit">Blog</a></span>
-    <h1 class="gradient-text">Catching Cyrillic homoglyphs in 230 lines</h1>
+    <h1 class="gradient-text">Why DNS filtering is the cheapest zero-trust control</h1>
     <div class="post-meta">
       <span class="tag">Threat Research</span>
-      <span>May 2, 2026</span>
-      <span>5 min read</span>
+      <span>Aug 18, 2026</span>
+      <span>7 min read</span>
       <span>by olladns Security Team</span>
     </div>
   </div>
@@ -63,10 +63,10 @@
   <div class="container">
     <article class="post-body">
       <div class="post-thumb">
-        <img src="data:image/svg+xml,%3Csvg%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%20width%3D'1280'%20height%3D'720'%3E%3Crect%20fill%3D'%2523f4f4f5'%20width%3D'1280'%20height%3D'720'%2F%3E%3Ctext%20fill%3D'%2523DA291C'%20font-family%3D'sans-serif'%20font-size%3D'28'%20font-weight%3D'600'%20x%3D'640'%20y%3D'370'%20text-anchor%3D'middle'%3ETyposquat%3C%2Ftext%3E%3C%2Fsvg%3E" alt="Catching Cyrillic homoglyphs in 230 lines"/>
+        <img src="data:image/svg+xml,%3Csvg%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%20width%3D'1280'%20height%3D'720'%3E%3Crect%20fill%3D'%2523f4f4f5'%20width%3D'1280'%20height%3D'720'%2F%3E%3Ctext%20fill%3D'%2523DA291C'%20font-family%3D'sans-serif'%20font-size%3D'28'%20font-weight%3D'600'%20x%3D'640'%20y%3D'370'%20text-anchor%3D'middle'%3EZero%20trust%20DNS%3C%2Ftext%3E%3C%2Fsvg%3E" alt="Why DNS filtering is the cheapest zero-trust control"/>
       </div>
 
-      <p class='lede' style='font-size:18px;color:var(--text);line-height:1.7;margin-bottom:28px'>Typosquatting is not just about misspellings anymore. Attackers now use Cyrillic homoglyphs to make evil domains look identical to trusted brands. Our 230-line detector runs at query time.</p><h2>From ASCII to confusables</h2><p>A domain like <code>paypa-l.com</code> is easy to catch with edit distance. But <code>раурӑl.com</code>, where the Latin <code>a</code> is replaced by Cyrillic <code>а</code>, defeats naive string comparison while looking identical to most users.</p><h2>Normalization first</h2><p>We normalize Unicode confusables to a canonical ASCII form before scoring. Internationalized domain names are decoded from Punycode, then each character is mapped to its closest ASCII homoglyph if one exists.</p><h2>Edit distance against the protect-list</h2><p>After normalization, we compute Damerau-Levenshtein distance against the tenant's protect-list. Domains within a tunable threshold are flagged as typosquats. The whole operation runs inline at ingest time.</p>
+      <p class='lede' style='font-size:18px;color:var(--text);line-height:1.7;margin-bottom:28px'>Zero-trust architectures usually start with identity and endpoints. That's backwards. Every device on your network already reports every destination to DNS — making the resolver the cheapest, most universal enforcement point you own.</p><h2>The resolver sees everything</h2><p>Before a laptop, server, printer, or IoT sensor connects to anything, it resolves a name. Malware beacons, phishing pages, and command-and-control servers all appear first as DNS queries. Blocking at the resolver stops the connection before any TCP handshake happens.</p><h2>Why it's cheaper than EDR or SWG</h2><ul><li><strong>No agent:</strong> point the device at a DoH/DoT resolver and policy applies instantly.</li><li><strong>No traffic steering:</strong> you don't need to proxy every byte through a cloud SWG.</li><li><strong>Universal coverage:</strong> works for unmanaged devices, guest networks, and IoT that can't run endpoint software.</li></ul><h2>What good DNS filtering actually blocks</h2><p>The best DNS security layers stop phishing infrastructure within minutes of registration, identify algorithmic domains before they're on any threat feed, and catch lookalike domains targeting your brand specifically. That's the layer we are building at olladns.</p>
 
       <div class="post-author">
         <span class="dot">OS</span>
@@ -74,8 +74,8 @@
       </div>
 
       <div class="post-nav">
-        <a href="/blog/">← All posts</a>
-        <a href="/blog/scoped-api-keys/">Designing scoped API keys for agents →</a>
+        <a href="/blog/inside-dga-classifier/">← Inside the 280-line DGA classifier</a>
+        
       </div>
     </article>
   </div>
@@ -83,7 +83,7 @@
 
 <div id="site-footer"></div>
 
-<script src="../chrome.js"></script>
+<script src="../../chrome.js"></script>
 <script>
   mountChrome('blog');
 </script>
