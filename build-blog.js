@@ -126,7 +126,7 @@ ${cardsHtml}
       <h2>Want new posts in your inbox?</h2>
       <p class="lede">A short email when we ship something worth reading. No roundups, no recycled press releases.</p>
       <div class="cta">
-        <a class="btn primary lg" href="contact.html">Subscribe <span data-ic="arrow"></span></a>
+        <a class="btn primary lg" href="/contact.html">Subscribe <span data-ic="arrow"></span></a>
       </div>
     </div>
   </div>
@@ -153,7 +153,6 @@ fs.writeFileSync(
   blogListing
     .replace(/href="site\.css/g, 'href="../site.css?v=20260820')
     .replace(/src="chrome\.js/g, 'src="../chrome.js?v=20260820')
-    .replace(/href="contact\.html/g, 'href="../contact.html')
 );
 
 const postPageTemplate = (post, index) => {

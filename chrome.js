@@ -48,19 +48,19 @@
   // Smart nav with active state
   window.renderNav = (active) => {
     const links = [
-      { key: 'product', label: 'Product', href: 'product.html' },
-      { key: 'solutions', label: 'Solutions', href: 'solutions.html' },
-      { key: 'developers', label: 'Developers', href: 'developers.html' },
-      { key: 'pricing', label: 'Pricing', href: 'pricing.html' },
-      { key: 'compare', label: 'Compare', href: 'comparison.html' },
-      { key: 'resources', label: 'Resources', href: 'resources.html' },
+      { key: 'product', label: 'Product', href: '/product.html' },
+      { key: 'solutions', label: 'Solutions', href: '/solutions.html' },
+      { key: 'developers', label: 'Developers', href: '/developers.html' },
+      { key: 'pricing', label: 'Pricing', href: '/pricing.html' },
+      { key: 'compare', label: 'Compare', href: '/comparison.html' },
+      { key: 'resources', label: 'Resources', href: '/resources.html' },
       { key: 'blog', label: 'Blog', href: '/blog/' },
-      { key: 'company', label: 'Company', href: 'company.html' },
+      { key: 'company', label: 'Company', href: '/company.html' },
     ];
     return `
       <nav class="nav">
         <div class="container nav-inner">
-          <a href="index.html" class="brand">
+          <a href="/" class="brand">
             <div class="brand-mark">${icon('shield-check', { size: 18, sw: 2.4 })}</div>
             <span>olladns</span>
           </a>
@@ -69,7 +69,7 @@
           </div>
           <div class="nav-cta">
             <a class="nav-link" href="https://login.olladns.com">Sign in</a>
-            <a class="btn primary" href="contact.html">Request demo ${icon('arrow', { size: 14 })}</a>
+            <a class="btn primary" href="/contact.html">Request demo ${icon('arrow', { size: 14 })}</a>
           </div>
         </div>
       </nav>`;
@@ -80,7 +80,7 @@
       <div class="container">
         <div class="footer-inner">
           <div>
-            <a href="index.html" class="brand">
+            <a href="/" class="brand">
               <div class="brand-mark">${icon('shield-check', { size: 18, sw: 2.4 })}</div>
               <span>olladns</span>
             </a>
@@ -96,52 +96,52 @@
           <div>
             <h5>Product</h5>
             <ul>
-              <li><a href="product.html">Features</a></li>
-              <li><a href="product.html#querylog">Query Log</a></li>
-              <li><a href="product.html#ai">AI Detection</a></li>
-              <li><a href="product.html#roaming">Roaming Clients</a></li>
-              <li><a href="pricing.html">Pricing</a></li>
+                            <li><a href="/product.html">Features</a></li>
+              <li><a href="/product.html#querylog">Query Log</a></li>
+              <li><a href="/product.html#ai">AI Detection</a></li>
+              <li><a href="/product.html#roaming">Roaming Clients</a></li>
+              <li><a href="/pricing.html">Pricing</a></li>
               <li><a href="https://login.olladns.com">Dashboard sign-in</a></li>
             </ul>
           </div>
           <div>
             <h5>Solutions</h5>
             <ul>
-              <li><a href="solutions.html#msp">MSPs</a></li>
-              <li><a href="solutions.html#enterprise">Enterprise</a></li>
-              <li><a href="solutions.html#k12">K-12 / Education</a></li>
-              <li><a href="solutions.html#healthcare">Healthcare</a></li>
-              <li><a href="solutions.html#smb">Small Business</a></li>
+              <li><a href="/solutions.html#msp">MSPs</a></li>
+              <li><a href="/solutions.html#enterprise">Enterprise</a></li>
+              <li><a href="/solutions.html#k12">K-12 / Education</a></li>
+              <li><a href="/solutions.html#healthcare">Healthcare</a></li>
+              <li><a href="/solutions.html#smb">Small Business</a></li>
             </ul>
           </div>
           <div>
             <h5>Developers</h5>
             <ul>
-              <li><a href="developers.html">Overview</a></li>
-              <li><a href="developers.html#api">REST API</a></li>
-              <li><a href="developers.html#mcp">MCP server</a></li>
+              <li><a href="/developers.html">Overview</a></li>
+              <li><a href="/developers.html#api">REST API</a></li>
+              <li><a href="/developers.html#mcp">MCP server</a></li>
               <li><a href="https://api.olladns.com/api/v1/openapi.json">OpenAPI 3.1 spec</a></li>
-              <li><a href="changelog.html">Changelog</a></li>
+
+              <li><a href="/changelog.html">Changelog</a></li>
             </ul>
           </div>
           <div>
             <h5>Resources</h5>
             <ul>
-              <li><a href="resources.html">Library</a></li>
-              <li><a href="resources.html#docs">Docs</a></li>
+                            <li><a href="/resources.html">Library</a></li>
+              <li><a href="/resources.html#docs">Docs</a></li>
               <li><a href="/blog/">Blog</a></li>
-              <li><a href="security.html">Trust &amp; Security</a></li>
-              <li><a href="security-policy.html">Report a vulnerability</a></li>
+              <li><a href="/security-policy.html">Report a vulnerability</a></li>
             </ul>
           </div>
           <div>
             <h5>Company</h5>
             <ul>
-              <li><a href="company.html">About</a></li>
-              <li><a href="company.html#careers">Careers</a></li>
-              <li><a href="company.html#press">Press</a></li>
-              <li><a href="contact.html">Contact</a></li>
-              <li><a href="contact.html">Partners</a></li>
+              <li><a href="/company.html">About</a></li>
+                            <li><a href="/company.html#careers">Careers</a></li>
+              <li><a href="/company.html#press">Press</a></li>
+              <li><a href="/contact.html">Contact</a></li>
+              <li><a href="/contact.html">Partners</a></li>
             </ul>
           </div>
         </div>
