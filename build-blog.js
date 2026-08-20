@@ -60,9 +60,6 @@ if (!fs.existsSync(BLOG_DIR)) {
 
 const cardsHtml = posts.map(p => `
       <a class="blog-card" href="/blog/${p.slug}/">
-        <div class="thumb">
-          <img src="${imageUrl(p)}" alt="${escapeHtml(p.title)}" loading="lazy"/>
-        </div>
         <div class="body">
           <div class="tag">${escapeHtml(p.category)}</div>
           <h4>${escapeHtml(p.title)}</h4>
@@ -87,11 +84,9 @@ const blogListing = `<!doctype html>
   <link rel="stylesheet" href="/site.css?v=20260821"/>
   <style>
     .blog-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
-    .blog-card{padding:0;border:1px solid var(--line);border-radius:var(--r-md);background:var(--panel);display:flex;flex-direction:column;transition:.15s;overflow:hidden}
+    .blog-card{padding:22px;border:1px solid var(--line);border-radius:var(--r-md);background:var(--panel);display:flex;flex-direction:column;transition:.15s;overflow:hidden}
     .blog-card:hover{border-color:var(--line-2)}
-    .blog-card .thumb{aspect-ratio:16/10;background:var(--bg-2);position:relative;overflow:hidden;border-bottom:1px solid var(--line)}
-    .blog-card .thumb img{width:100%;height:100%;object-fit:cover;display:block}
-    .blog-card .body{padding:22px;display:flex;flex-direction:column;gap:12px;flex:1}
+    .blog-card .body{display:flex;flex-direction:column;gap:12px;flex:1}
     .blog-card .tag{font-family:var(--mono);font-size:11px;color:var(--accent);text-transform:uppercase;letter-spacing:.08em}
     .blog-card h4{font-size:18px;line-height:1.35;margin:0;color:var(--text)}
     .blog-card p{font-size:13.5px;color:var(--muted);line-height:1.6;margin:0}
