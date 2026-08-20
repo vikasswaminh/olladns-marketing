@@ -1,0 +1,34 @@
+---
+title: "54 MCP tools, generated from OpenAPI"
+slug: mcp-tools-openapi
+category: "Product"
+date: 2026-05-28
+author: "olladns Product Team"
+description: "How we keep the MCP server in sync with every REST endpoint without writing wrappers by hand."
+---
+
+Every REST endpoint we ship becomes an MCP tool automatically. Here is how we generate 54 tools from our OpenAPI spec and keep them in lockstep with the API.
+
+## The wrapper problem
+
+Hand-writing MCP wrappers for every endpoint is a recipe for drift. Rename a field in the API and five editor integrations break. We wanted one source of truth: the OpenAPI spec served at `/api/v1/openapi.json`.
+
+## Generation pipeline
+- FastMCP reads the OpenAPI spec at build time.
+- Each operation becomes a tool with typed arguments from the spec's schemas.
+- We annotate scope requirements from the `x-required-scopes` extension.
+- Five hand-curated workflows combine multiple tools for common tasks.
+
+## Result
+
+When we add a new REST endpoint, the MCP tool appears in the next deploy without anyone writing a wrapper. The same validation, the same auth, the same audit logging applies whether the caller is curl, a dashboard, or Claude.
+
+
+      
+        OP
+        Written by olladns Product Team · Product
+      
+
+      
+        [← Designing scoped API keys for agents](/blog/scoped-api-keys/)
+        [Inside the 280-line DGA classifier →](/blog/inside-dga-classifier/)

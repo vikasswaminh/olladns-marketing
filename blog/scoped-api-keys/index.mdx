@@ -1,0 +1,32 @@
+---
+title: "Designing scoped API keys for agents"
+slug: scoped-api-keys
+category: "Engineering"
+date: 2026-05-15
+author: "olladns Engineering"
+description: "Tokens for CI, SIEM, and AI editors share the same auth surface but carry different audit fingerprints."
+---
+
+CI pipelines, SIEM connectors, and AI agents all need API access, but they should not share the same key. Here is how we built scoped tokens that keep each workload inside its lane.
+
+## One auth surface, many actors
+
+We use the same auth middleware for humans and machines, but the token metadata differs. A CI key carries scopes like `policies:write` and `devices:read`. A SIEM key gets `analytics:read` and `audit:read`. An AI editor key might only get `threats:read` and `policies:write`.
+
+## Fingerprinting every call
+
+Every audit log row records the `api_key_id` that made the call, not just the user who created it. That means when Claude blocks a domain through MCP, the log shows it was the agent key — traceable, revocable, and scoped.
+
+## Rotation and expiry
+
+Scoped keys support expiry dates and last-used timestamps. We surface stale keys in the dashboard so security teams can revoke what they forgot.
+
+
+      
+        OE
+        Written by olladns Engineering · Engineering
+      
+
+      
+        [← Catching Cyrillic homoglyphs in 230 lines](/blog/cyrillic-homoglyphs/)
+        [54 MCP tools, generated from OpenAPI →](/blog/mcp-tools-openapi/)
