@@ -38,9 +38,15 @@ function render() {
 <div class="post-tldr">
   <div class="tldr-head">
     <span class="tldr-label">TL;DR</span>
-    <h3>The DNS layer is security's earliest intervention point</h3>
+    <h3>DNS is security's earliest intervention point</h3>
   </div>
-  <p>${p(parts, 0)}</p>
+  <p>Every phishing link, malware payload, and data exfiltration attempt starts with a domain lookup. Securing DNS means blocking threats before any connection is established — while keeping your network fast and your operations simple.</p>
+  <ul class="tldr-list">
+    <li><span class="ck">✓</span><span><strong>Earliest stop:</strong> DNS lookups happen before malicious payloads download or phishing pages load.</span></li>
+    <li><span class="ck">✓</span><span><strong>Universal coverage:</strong> every device — managed, IoT, or guest — must resolve domains to communicate.</span></li>
+    <li><span class="ck">✓</span><span><strong>Proven attacks:</strong> spoofing, tunneling, DGA-based C2, and lookalike phishing all abuse DNS.</span></li>
+    <li><span class="ck">✓</span><span><strong>Modern stack:</strong> protective DNS + DNSSEC + DoH/DoT/DoQ + RPZ + behavioral intelligence.</span></li>
+  </ul>
 </div>
 
 <section class="post-section" id="the-layer-nobody-watches">
@@ -64,6 +70,15 @@ function render() {
     <div class="flow-step"><span class="flow-dot"></span><div class="flow-card"><h4>4. Authoritative answer</h4><p>The domain's authoritative nameserver returns the IP address. The connection can begin.</p></div></div>
   </div>
 </section>
+
+<div class="what-found">
+  <div class="what-found-head">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12s5-9 10-9 10 9 10 9-5 9-10 9-10-9-10-9Z"></path><circle cx="12" cy="12" r="3"></circle></svg>
+    <h4>What We Found</h4>
+  </div>
+  <p>Most organizations inspect email, endpoints, and web traffic closely — but treat DNS as invisible plumbing. That gap is exactly what attackers exploit. The teams that close it gain an early, high-coverage layer of defense that firewalls and antivirus can't replicate.</p>
+  <p>DNS security isn't another siloed tool; it's a control point that sits in front of nearly every outbound connection in your environment.</p>
+</div>
 
 <section class="post-section" id="what-is-dns-security">
   <span class="section-num">03</span>
@@ -217,8 +232,20 @@ reply-from-authoritative.evil.com</code></pre>
   <h2>${p(parts, 113)}</h2>
   <div class="conclusion-box">
     ${paras(parts, 114, 118)}
-    <div style="margin-top:32px;">
-      <a href="/" class="btn primary lg" style="display:inline-flex;align-items:center;">&larr; Back to Home</a>
+    <div class="conclusion-cta">
+      <a href="/get-started" class="btn primary lg">Secure your DNS with OllaDNS</a>
+      <a href="/blog/" class="btn ghost lg">Explore more guides</a>
+    </div>
+  </div>
+</section>
+
+<section class="post-section final-cta" id="secure-dns">
+  <div class="cta-block">
+    <h2>Secure your DNS with OllaDNS</h2>
+    <p class="lede">Block phishing, malware, and ransomware at the domain layer — before a connection is ever made. Deploy in minutes, protect every device, and get visibility into the traffic other tools miss.</p>
+    <div class="cta" style="margin-top:28px;justify-content:center">
+      <a href="/get-started" class="btn primary lg">Start protecting your network</a>
+      <a href="/" class="btn ghost lg">Learn more about OllaDNS</a>
     </div>
   </div>
 </section>
