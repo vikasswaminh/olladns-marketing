@@ -21,7 +21,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;500;600;700;900&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="/site.css?v=20260821" />
+  <link rel="stylesheet" href="/site.css?v=20260822" />
   <style>
     /* =====================================================
        Blog Post — Premium Article Layout
@@ -512,12 +512,68 @@
           browser tab, DNS runs a lightning-fast relay through resolvers, root servers, TLD servers, and authoritative
           servers, usually finishing in under 100 milliseconds. Because almost nothing on the internet happens without a
           DNS lookup first, DNS is also one of the earliest, cheapest places to stop phishing, malware, and
-          command-and-control traffic before it reaches a device.</p>
+          command-and-control traffic before it reaches a device.
+        </p>
+
+
+        <div class="kt-wrap" aria-labelledby="key-takeaways-title">
+          <div class="kt-head">
+            <span class="kt-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                stroke-linejoin="round">
+                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+                <path d="m9 12 2 2 4-4"></path>
+              </svg>
+            </span>
+            <h2 class="kt-title" id="key-takeaways-title">Key Takeaways</h2>
+          </div>
+          <div class="kt-grid">
+            <div class="kt-item"><span class="kt-num">1</span>
+              <div class="kt-body">
+                <h4>What Is DNS? The Domain Name System Explained</h4>
+                <p>DNS translates human-readable domain names such as olladns.com into IP addresses that computers use
+                  to locate and connect to servers.</p>
+              </div>
+            </div>
+            <div class="kt-item"><span class="kt-num">2</span>
+              <div class="kt-body">
+                <h4>How DNS Works: The DNS Lookup Process</h4>
+                <p>A DNS lookup typically moves through the DNS resolver, root server, TLD server, and authoritative
+                  name server to find the correct IP address. Understanding this process explains how websites are
+                  reached in milliseconds.</p>
+              </div>
+            </div>
+            <div class="kt-item"><span class="kt-num">3</span>
+              <div class="kt-body">
+                <h4>DNS Records & DNS Resolver: The Core of DNS Infrastructure</h4>
+                <p>DNS records such as A, AAAA, CNAME, MX, TXT, NS, and SOA provide different types of information,
+                  while recursive DNS resolvers retrieve and cache these records for faster future lookups.</p>
+              </div>
+            </div>
+            <div class="kt-item"><span class="kt-num">4</span>
+              <div class="kt-body">
+                <h4>DNS Caching, TTL & DNS Propagation Improve Internet Performance</h4>
+                <p>DNS caching stores lookup results according to their TTL (Time to Live), reducing repeated queries
+                  and speeding up connections. When DNS records change, TTL also determines how quickly those changes
+                  are reflected across resolvers.</p>
+              </div>
+            </div>
+            <div class="kt-item"><span class="kt-num">5</span>
+              <div class="kt-body">
+                <h4>DNS Security Protects Against Phishing, Malware & DNS Attacks</h4>
+                <p>DNS is more than an addressing system—it can be an important security layer. DNS filtering,
+                  protective DNS, DNSSEC, encrypted DNS (DoH/DoT/DoQ), and DNS monitoring can help detect or block
+                  phishing, malware, DNS cache poisoning, hijacking, and suspicious domains.</p>
+              </div>
+            </div>
+          </div>
+        </div>
 
         <h2 id="sec-problem">The problem DNS was invented to solve</h2>
         <p>Computers do not talk to each other using names. They use IP addresses — strings like
           <code>172.217.14.206</code> — that tell routers exactly where to send data. That addressing system is precise,
-          but humans are not built to memorize dotted strings of numbers.</p>
+          but humans are not built to memorize dotted strings of numbers.
+        </p>
         <p>In the early days of ARPANET, engineers maintained a single text file called <code>HOSTS.TXT</code> that
           mapped every machine's name to its number. Every computer periodically downloaded a fresh copy from a single
           machine at Stanford Research Institute. That approach worked for a few hundred hosts but collapsed at internet
@@ -544,12 +600,14 @@
           <li><strong><code>.com</code></strong> is the top-level domain, or TLD. TLDs include <code>.com</code>,
             <code>.org</code>, <code>.net</code>, <code>.gov</code>, country codes like <code>.in</code> and
             <code>.uk</code>, and newer options like <code>.dev</code> and <code>.security</code>. Registries manage
-            TLDs, and ICANN coordinates the global namespace.</li>
+            TLDs, and ICANN coordinates the global namespace.
+          </li>
           <li><strong><code>olladns</code></strong> is the second-level domain. This is the part a business or
             individual registers through a domain registrar and carries the brand identity.</li>
           <li><strong><code>blog</code></strong> is a subdomain. The domain owner controls subdomains without additional
             registration. Companies use them constantly to separate services: <code>mail.company.com</code>,
-            <code>api.company.com</code>, <code>vpn.company.com</code>.</li>
+            <code>api.company.com</code>, <code>vpn.company.com</code>.
+          </li>
         </ul>
         <p>This layered delegation is what makes DNS scale. Responsibility flows downward — ICANN and registries handle
           TLDs, registrars and owners handle second-level domains, and owners handle their own subdomains.</p>
@@ -567,14 +625,16 @@
           answer and bring it back. This might be your ISP's resolver, a public resolver like Cloudflare's
           <code>1.1.1.1</code> or Google's <code>8.8.8.8</code>, or a protective DNS resolver. Think of the recursive
           resolver as a determined assistant: you give it one question, and it does the legwork until it returns a final
-          answer.</p>
+          answer.
+        </p>
 
         <h3>Step three: root server</h3>
         <p>If the recursive resolver does not have the answer cached, it starts at the top of the hierarchy by querying
           a root server. There are only 13 root server addresses globally, though anycast routing means those addresses
           are served by hundreds of physical machines worldwide. The root server does not know where
           <code>olladns.com</code> lives. It only knows which server is responsible for the <code>.com</code> TLD, and
-          it points the resolver there.</p>
+          it points the resolver there.
+        </p>
 
         <h3>Step four: TLD server</h3>
         <p>The resolver now asks the <code>.com</code> TLD server. The TLD server also does not know the final answer,
@@ -596,7 +656,8 @@
           expects a complete final answer. The resolver's queries to the root, TLD, and authoritative servers are
           <strong>iterative</strong> — each server may respond with "I don't know, but here's who to ask next." That
           division is deliberate. It keeps the root and TLD servers, which handle staggering global traffic, from doing
-          the heavy lifting of full recursive lookups themselves.</p>
+          the heavy lifting of full recursive lookups themselves.
+        </p>
 
         <h2 id="sec-caching">Why caching makes the internet faster</h2>
         <p>If every DNS lookup ran that full relay from scratch, the internet would feel slower and the root and TLD
@@ -621,7 +682,8 @@
             migrating toward as IPv4's roughly 4.3 billion addresses run short.</li>
           <li><strong>CNAME record</strong>: Points a domain to another domain name instead of an IP. This lets
             <code>shop.company.com</code> quietly point to a third-party e-commerce platform without anyone needing to
-            update that platform's real IP address.</li>
+            update that platform's real IP address.
+          </li>
           <li><strong>MX record</strong>: Mail Exchange record. Tells the internet which mail server accepts email for a
             domain, with priority values so a primary and backups can be listed.</li>
           <li><strong>TXT record</strong>: Originally a general-purpose text field, now heavily used for security. SPF
@@ -650,7 +712,8 @@
         <p>Public resolvers changed that for many people. Cloudflare's <code>1.1.1.1</code>, Google's
           <code>8.8.8.8</code>, and Quad9's <code>9.9.9.9</code> are free, fast thanks to anycast infrastructure, and
           often advertise stronger privacy commitments than ISP resolvers. Some, like Quad9, also apply built-in
-          threat-intelligence filtering.</p>
+          threat-intelligence filtering.
+        </p>
         <p>Then there is the category that matters most in business: protective DNS resolvers, the category olladns
           operates in. These sit deliberately in the resolution path and treat every DNS query as a checkpoint. Because
           virtually nothing on a network happens without a DNS lookup — not a phishing page loading, not malware phoning
@@ -763,7 +826,8 @@
 
         <h3>What is DNS in simple terms?</h3>
         <p>DNS (Domain Name System) is the internet's address book. It translates human-friendly domain names like
-          <code>olladns.com</code> into the numeric IP addresses computers use to find and connect to each other.</p>
+          <code>olladns.com</code> into the numeric IP addresses computers use to find and connect to each other.
+        </p>
 
         <h3>What is a DNS server?</h3>
         <p>A DNS server stores or looks up DNS records. Recursive resolvers, root servers, TLD servers, and
@@ -853,6 +917,7 @@
         <nav class="bp-toc" id="post-toc">
           <span class="bp-toc-label">On This Page</span>
           <ul class="bp-toc-list">
+            <li><a href="#key-takeaways-title">Key Takeaways</a></li>
             <li><a href="#sec-problem">The problem DNS solved</a></li>
             <li><a href="#sec-what-is-dns">What is DNS?</a></li>
             <li><a href="#sec-breakdown">Breaking down a domain</a></li>

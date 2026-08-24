@@ -22,7 +22,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;500;600;700;900&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="/site.css?v=20260821" />
+  <link rel="stylesheet" href="/site.css?v=20260822" />
   <style>
     .post-hero-desc {
       max-width: 68ch;
@@ -910,6 +910,7 @@
           <div class="post-toc-card">
             <h4>On this page</h4>
             <ul>
+              <li><a href="#key-takeaways-title">Key Takeaways</a></li>
               <li><a href="#front-door">The Front Door Nobody Locks</a></li>
               <li><a href="#what-dns-does">What DNS Actually Does</a></li>
               <li><a href="#what-is-dns-firewall">What Is a DNS Firewall?</a></li>
@@ -947,6 +948,62 @@
               intelligence feeds, <code>DGA</code> and behavioral detection, sinkholing), how they differ from
               traditional firewalls and secure web gateways, what a real deployment looks like, and how to tell a
               genuinely capable DNS firewall from a glorified blocklist wearing a marketing deck.</p>
+          </div>
+
+
+          <div class="kt-wrap" aria-labelledby="key-takeaways-title">
+            <div class="kt-head">
+              <span class="kt-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                  stroke-linejoin="round">
+                  <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+                  <path d="m9 12 2 2 4-4"></path>
+                </svg>
+              </span>
+              <h2 class="kt-title" id="key-takeaways-title">Key Takeaways</h2>
+            </div>
+            <div class="kt-grid">
+              <div class="kt-item"><span class="kt-num">1</span>
+                <div class="kt-body">
+                  <h4>What Is a DNS Firewall and How Does It Work?</h4>
+                  <p>A DNS firewall inspects domain-name requests and blocks malicious domains before a connection is
+                    established, helping stop malware, phishing, ransomware, and command-and-control (C2) traffic at the
+                    DNS layer.</p>
+                </div>
+              </div>
+              <div class="kt-item"><span class="kt-num">2</span>
+                <div class="kt-body">
+                  <h4>DNS Firewall vs. Traditional Firewall</h4>
+                  <p>A traditional firewall primarily filters IP addresses, ports, and network traffic, while a DNS
+                    firewall evaluates domain names and DNS requests. Using both provides layered protection against
+                    threats that can evade IP-based blocking.</p>
+                </div>
+              </div>
+              <div class="kt-item"><span class="kt-num">3</span>
+                <div class="kt-body">
+                  <h4>DNS Firewalls Protect Against Modern Cyber Threats</h4>
+                  <p>Advanced DNS security can detect and block malware C2 domains, phishing websites, DGA-generated
+                    domains, DNS tunneling, botnets, and lookalike domains—including threats that may not yet appear on
+                    traditional blocklists.</p>
+                </div>
+              </div>
+              <div class="kt-item"><span class="kt-num">4</span>
+                <div class="kt-body">
+                  <h4>DNS Filtering and Protective DNS Stop Threats Early</h4>
+                  <p>Because DNS resolution happens before most network connections, DNS filtering can prevent users and
+                    infected devices from reaching malicious infrastructure. This provides broad protection across
+                    managed devices, IoT devices, BYOD, and roaming endpoints.</p>
+                </div>
+              </div>
+              <div class="kt-item"><span class="kt-num">5</span>
+                <div class="kt-body">
+                  <h4>Key DNS Firewall Features to Look For</h4>
+                  <p>A strong DNS firewall should offer real-time threat intelligence, DGA and behavioral detection, DNS
+                    tunneling detection, RPZ support, DNS sinkholing, roaming-device protection, SIEM integration,
+                    identity-based policies, and low-latency DNS resolution.</p>
+                </div>
+              </div>
+            </div>
           </div>
 
           <section class="post-section" id="front-door">

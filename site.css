@@ -1282,3 +1282,140 @@ code,
     padding: 8px 10px
   }
 }
+
+/* ===== Key Takeaways component ===== */
+.kt-wrap {
+  background: var(--bg-1);
+  border: 1px solid var(--line);
+  border-radius: var(--r-lg);
+  padding: 32px;
+  margin: 0 0 40px;
+  box-shadow: var(--shadow);
+}
+
+.kt-head {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 24px;
+}
+
+.kt-icon {
+  width: 34px;
+  height: 34px;
+  border-radius: 9px;
+  background: var(--accent-soft);
+  color: var(--accent);
+  border: 1px solid var(--accent-line);
+  display: grid;
+  place-items: center;
+  flex: none;
+}
+
+.kt-icon svg {
+  width: 18px;
+  height: 18px;
+}
+
+.kt-wrap .kt-title {
+  font-size: 22px;
+  line-height: 1.25;
+  color: var(--text-strong);
+  margin: 0;
+  font-weight: 800;
+}
+
+.kt-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+.kt-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: var(--r-md);
+  padding: 18px;
+  transition: border-color .15s, box-shadow .15s;
+}
+
+.kt-item:hover {
+  border-color: var(--line-2);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, .04), 0 6px 16px rgba(0, 0, 0, .06);
+}
+
+.kt-num {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background: var(--accent);
+  color: #fff;
+  display: grid;
+  place-items: center;
+  font-family: var(--mono);
+  font-size: 12px;
+  font-weight: 700;
+  flex: none;
+}
+
+.kt-body {
+  min-width: 0;
+}
+
+.kt-wrap .kt-body h4 {
+  font-size: 15px;
+  line-height: 1.35;
+  color: var(--text-strong);
+  margin: 0 0 6px;
+  font-weight: 700;
+}
+
+.kt-wrap .kt-body p {
+  font-size: 14px;
+  line-height: 1.6;
+  color: var(--text-2);
+  margin: 0;
+}
+
+@media (max-width: 880px) {
+  .kt-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .kt-wrap {
+    padding: 24px;
+  }
+
+  .kt-wrap .kt-title {
+    font-size: 20px;
+  }
+}
+
+@media (max-width: 640px) {
+  .kt-wrap {
+    padding: 20px;
+    margin-bottom: 32px;
+  }
+
+  .kt-item {
+    padding: 16px;
+    gap: 12px;
+  }
+
+  .kt-num {
+    width: 26px;
+    height: 26px;
+    font-size: 11px;
+  }
+
+  .kt-wrap .kt-body h4 {
+    font-size: 14.5px;
+  }
+
+  .kt-wrap .kt-body p {
+    font-size: 13.5px;
+  }
+}

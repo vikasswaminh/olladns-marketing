@@ -17,7 +17,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com"/>
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
   <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;500;600;700;900&display=swap" rel="stylesheet"/>
-  <link rel="stylesheet" href="/site.css?v=20260821"/>
+  <link rel="stylesheet" href="/site.css?v=20260822"/>
   <style>
 /* Premium editorial layout for OllaDNS blog posts */
 .post-hero{padding:80px 0 56px;border-bottom:1px solid var(--line);position:relative;overflow:hidden;background:radial-gradient(60% 40% at 50% 0%,rgba(218,41,28,.04),transparent 60%)}
@@ -218,7 +218,8 @@
 <section class="section" style="padding-top:0">
   <div class="container">
     <div class="post-layout">
-<aside class="post-toc" aria-label="Table of contents"><h4>On this page</h4><ul><li><a href="#the-layer-nobody-watches">The Layer Nobody Watches</a></li>
+<aside class="post-toc" aria-label="Table of contents"><h4>On this page</h4><ul><li><a href="#key-takeaways-title">Key Takeaways</a></li>
+<li><a href="#the-layer-nobody-watches">The Layer Nobody Watches</a></li>
 <li><a href="#what-dns-does">What DNS Actually Does</a></li>
 <li><a href="#what-is-dns-security">What Is DNS Security?</a></li>
 <li><a href="#why-dns-attack-surface">Why DNS Is an Attack Surface</a></li>
@@ -259,6 +260,23 @@
     <li><span class="ck">✓</span><span><strong>Modern stack:</strong> protective DNS + DNSSEC + DoH/DoT/DoQ + RPZ + behavioral intelligence.</span></li>
   </ul>
 </div>
+
+<div class="kt-wrap" aria-labelledby="key-takeaways-title">
+  <div class="kt-head">
+    <span class="kt-icon" aria-hidden="true">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path><path d="m9 12 2 2 4-4"></path></svg>
+    </span>
+    <h2 class="kt-title" id="key-takeaways-title">Key Takeaways</h2>
+  </div>
+  <div class="kt-grid">
+    <div class="kt-item"><span class="kt-num">1</span><div class="kt-body"><h4>DNS Security Protects Against Phishing, Malware & Ransomware</h4><p>DNS security can block malicious domains before a device establishes a connection, making it an important early defense against phishing, malware, ransomware, and malicious C2 infrastructure.</p></div></div>
+    <div class="kt-item"><span class="kt-num">2</span><div class="kt-body"><h4>Protective DNS & DNS Filtering Stop Threats at the DNS Layer</h4><p>Protective DNS analyzes DNS requests against threat intelligence and blocks malicious, phishing, newly registered, or suspicious domains before they can be accessed.</p></div></div>
+    <div class="kt-item"><span class="kt-num">3</span><div class="kt-body"><h4>DNSSEC Prevents DNS Spoofing & Cache Poisoning</h4><p>DNSSEC uses cryptographic signatures to verify DNS responses and helps prevent attackers from manipulating DNS records or redirecting users to fraudulent destinations.</p></div></div>
+    <div class="kt-item"><span class="kt-num">4</span><div class="kt-body"><h4>DNS Tunneling & DGA Detection Help Detect Hidden Attacks</h4><p>Attackers can abuse DNS for command-and-control communication and data exfiltration. Behavioral analysis can identify DNS tunneling, DGA-generated domains, unusual query patterns, and suspicious domain activity.</p></div></div>
+    <div class="kt-item"><span class="kt-num">5</span><div class="kt-body"><h4>Secure DNS Should Include Encryption, Threat Intelligence & Continuous Monitoring</h4><p>A strong DNS security strategy combines DoH, DoT, or DoQ encryption, DNS filtering, RPZ, threat intelligence, behavioral detection, DNS logging, and SIEM integration to provide layered protection.</p></div></div>
+  </div>
+</div>
+
 <section class="post-section" id="the-layer-nobody-watches">
   <span class="section-num">01</span>
   <h2>The Layer Nobody Watches</h2>
