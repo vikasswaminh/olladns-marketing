@@ -27,6 +27,101 @@
     .qual-col li{font-size:14.5px;color:var(--text-2);line-height:1.55;padding-left:24px;position:relative}
     .qual-col.yes li::before{content:"✓";position:absolute;left:0;color:#10b981;font-weight:700}
     .qual-col.no li::before{content:"–";position:absolute;left:0;color:var(--muted);font-weight:700}
+
+    /* Hero visual - dashboard preview cards (page-scoped) */
+    .hero-visual {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      padding: 20px;
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      background: var(--panel)
+    }
+
+    .hv-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px
+    }
+
+    .hv-card {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      padding: 18px 20px;
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      background: var(--bg-1)
+    }
+
+    .hv-card h4 {
+      font-family: var(--mono);
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      color: var(--muted)
+    }
+
+    .hv-card .value {
+      font-family: var(--mono);
+      font-size: 28px;
+      font-weight: 700;
+      letter-spacing: -.02em;
+      color: var(--text)
+    }
+
+    .hv-card .sub {
+      font-size: 12.5px;
+      color: var(--muted)
+    }
+
+    .hv-status {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+      padding: 12px 16px;
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      background: var(--bg-1)
+    }
+
+    .hv-status .left {
+      display: flex;
+      align-items: center;
+      gap: 12px
+    }
+
+    .hv-status .status-ic {
+      width: 34px;
+      height: 34px;
+      border-radius: 8px;
+      background: var(--accent-soft);
+      color: var(--accent);
+      display: grid;
+      place-items: center;
+      flex: none
+    }
+
+    .hv-status .status-title {
+      font-size: 13.5px;
+      font-weight: 600;
+      color: var(--text)
+    }
+
+    .hv-status .status-desc {
+      font-family: var(--mono);
+      font-size: 12px;
+      color: var(--muted)
+    }
+
+    @media (max-width:880px) {
+      .hv-row {
+        grid-template-columns: 1fr
+      }
+    }
   </style>
 </head>
 <body data-screen-label="Marketing — Home">
@@ -54,37 +149,45 @@
       </div>
     </div>
 
-    <!-- Terminal mock — real, working commands you can copy/paste -->
-    <div class="product-frame" style="margin-top:24px">
-      <div class="pf-bar">
-        <span class="dot"></span><span class="dot"></span><span class="dot"></span>
-        <span class="url">terminal · api.olladns.com</span>
-      </div>
-      <div style="padding:22px 26px;background:var(--bg-1);font-family:var(--mono);font-size:12.5px;line-height:1.75;color:var(--text)">
-        <div style="color:var(--muted)"># 1. What's actually running in prod right now?</div>
-        <div><span style="color:var(--info)">$</span> curl https://api.olladns.com/version</div>
-        <div style="color:#10b981">{"version":"0.2.0","git_sha":"a20b38b…","built_at":"2026-05-28"}</div>
-
-        <div style="height:14px"></div>
-        <div style="color:var(--muted)"># 2. Block a domain — every change carries an actor in the audit log</div>
-        <div><span style="color:var(--info)">$</span> curl -X <span style="color:#7c3aed">PUT</span> api.olladns.com/api/v1/policies/custom-rules \</div>
-        <div>&nbsp;&nbsp;&nbsp;&nbsp;-H <span style="color:#10b981">"x-api-key: $K"</span> \</div>
-        <div>&nbsp;&nbsp;&nbsp;&nbsp;-d <span style="color:#10b981">'{"block":["evil.example"],"allow":[]}'</span></div>
-
-        <div style="height:14px"></div>
-        <div style="color:var(--muted)"># 3. Register a device — get its unique DoH URL back</div>
-        <div><span style="color:var(--info)">$</span> curl -X <span style="color:#10b981">POST</span> api.olladns.com/api/v1/devices \</div>
-        <div>&nbsp;&nbsp;&nbsp;&nbsp;-d <span style="color:#10b981">'{"slug":"bob-mbp","display_name":"Bob - MBP"}'</span></div>
-        <div style="color:#10b981">{"id":7,"doh_url":"https://dns.olladns.com/dns-query/&lt;uuid&gt;--bob-mbp"}</div>
-
-        <div style="height:14px"></div>
-        <div style="color:var(--muted)"># 4. Or skip curl — ask your AI editor through MCP</div>
-        <div style="color:var(--muted)">&nbsp;&nbsp;&nbsp;&gt; "show every DGA suspect with score ≥ 0.85 and block them"</div>
-        <div style="color:var(--muted)">&nbsp;&nbsp;&nbsp;&gt; Claude calls top_dga → set_custom_rules → done</div>
+          <!-- Hero visual: live security dashboard preview -->
+      <div class="hero-visual" aria-label="DNS security infrastructure preview">
+        <div class="hv-row">
+          <div class="hv-card">
+            <h4>Threat queries blocked</h4>
+            <div class="value">4.2M+</div>
+            <div class="sub">DGA, phishing, typosquat</div>
+          </div>
+          <div class="hv-card">
+            <h4>API endpoints</h4>
+            <div class="value">57</div>
+            <div class="sub">REST + OpenAPI 3.1</div>
+          </div>
+        </div>
+        <div class="hv-row">
+          <div class="hv-card">
+            <h4>MCP tools</h4>
+            <div class="value">54</div>
+            <div class="sub">Claude · Cursor · Cline · Goose</div>
+          </div>
+          <div class="hv-card">
+            <h4>Average latency</h4>
+            <div class="value">&lt;12ms</div>
+            <div class="sub">DoH / DoT / DoQ</div>
+          </div>
+        </div>
+        <div class="hv-status">
+          <div class="left">
+            <div class="status-ic" id="i-shield-status"></div>
+            <div>
+              <div class="status-title">Resolver status</div>
+              <div class="status-desc">dns.olladns.com · US region</div>
+            </div>
+          </div>
+          <span class="pill good">Operational</span>
+        </div>
       </div>
     </div>
-  </div>
-</section>
+  </section>
 
 <!-- ============================================ -->
 <!-- DESIGN PARTNER CALLOUT -->
@@ -313,6 +416,7 @@
   document.getElementById('i-code-1').innerHTML = icon('code',{size:20});
   document.getElementById('i-ai-1').innerHTML = icon('ai',{size:20});
   document.getElementById('i-plug-1').innerHTML = icon('plug',{size:20});
+  document.getElementById('i-shield-status').innerHTML = icon('shield',{size:18});
 </script>
 </body>
 </html>
