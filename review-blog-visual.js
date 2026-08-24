@@ -51,9 +51,15 @@ function reviewDns() {
 
 function reviewGeneric() {
   const posts = JSON.parse(fs.readFileSync('blog.json', 'utf8'));
-  const generic = posts.find(p => p.slug !== 'what-is-dns-security-a-complete-guide-to-protecting-your-network-in-2026');
+  // Generic-template posts render a hero thumb (.post-thumb); premium long-forms
+  // (DNS guides, firewall post) do not. Review the first actual generic post.
+  const generic = posts.find(p => {
+    if (p.slug === 'what-is-dns-security-a-complete-guide-to-protecting-your-network-in-2026') return false;
+    if (!fs.existsSync(`blog/${p.slug}/index.html`)) return false;
+    return /class=['"][^'"]*post-thumb/.test(fs.readFileSync(`blog/${p.slug}/index.html`, 'utf8'));
+  });
   if (!generic) {
-    return ['INFO: no generic posts in blog.json; skipping generic review.'];
+    return { slug: null, findings: ['INFO: no generic posts in blog.json; skipping generic review.'] };
   }
   const html = fs.readFileSync(`blog/${generic.slug}/index.html`, 'utf8');
   const findings = [];
@@ -70,10 +76,11 @@ function reviewGeneric() {
   const hasToc = /class=['"][^'"]*post-toc/.test(html);
   findings.push((!hasToc ? 'OK: no DNS-style TOC on generic post.' : 'WARN: generic post has TOC.'));
   findings.push(`INFO: h2=${(html.match(/<h2[\s>]/g) || []).length}, h3=${(html.match(/<h3[\s>]/g) || []).length}`);
-  return findings;
+  return { slug: generic.slug, findings };
 }
 
 console.log('=== DNS Security Post Review ===');
 console.log(reviewDns().join('\n'));
-console.log('\n=== Generic Post Review (dns-cheapest-zero-trust-control) ===');
-console.log(reviewGeneric().join('\n'));
+const genericReview = reviewGeneric();
+console.log(`\n=== Generic Post Review (${genericReview.slug || 'none found'}) ===`);
+console.log(genericReview.findings.join('\n'));
