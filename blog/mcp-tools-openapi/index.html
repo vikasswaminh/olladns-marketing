@@ -17,7 +17,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com"/>
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
   <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;500;600;700;900&display=swap" rel="stylesheet"/>
-  <link rel="stylesheet" href="/site.css?v=20260822"/>
+  <link rel="stylesheet" href="/site.css?v=20260821"/>
   <style>
     .post-meta{display:flex;align-items:center;gap:18px;flex-wrap:wrap;margin-top:18px;color:var(--muted);font-size:14px}
     .post-meta .tag{font-family:var(--mono);font-size:11px;color:var(--accent);text-transform:uppercase;letter-spacing:.08em}
@@ -67,29 +67,7 @@
         <img src="data:image/svg+xml,%3Csvg%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%20width%3D'1280'%20height%3D'720'%3E%3Crect%20fill%3D'%2523f4f4f5'%20width%3D'1280'%20height%3D'720'%2F%3E%3Ctext%20fill%3D'%2523DA291C'%20font-family%3D'sans-serif'%20font-size%3D'28'%20font-weight%3D'600'%20x%3D'640'%20y%3D'370'%20text-anchor%3D'middle'%3EMCP%20tools%3C%2Ftext%3E%3C%2Fsvg%3E" alt="54 MCP tools, generated from OpenAPI"/>
       </div>
 
-      <p class='lede' style='font-size:18px;color:var(--text);line-height:1.7;margin-bottom:28px'>Every REST endpoint we ship becomes an MCP tool automatically. Here is how we generate 54 tools from our OpenAPI spec and keep them in lockstep with the API.</p>
-<div class="kt-wrap" aria-labelledby="key-takeaways-title">
-  <div class="kt-head">
-    <span class="kt-icon" aria-hidden="true">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path><path d="m9 12 2 2 4-4"></path></svg>
-    </span>
-    <h2 class="kt-title" id="key-takeaways-title">Key Takeaways</h2>
-  </div>
-  <div class="kt-grid">
-
-    <div class="kt-item"><span class="kt-num">1</span><div class="kt-body"><h4>OpenAPI Specs Can Generate MCP Tools</h4><p>A well-structured OpenAPI spec can be converted into MCP tools automatically, giving agents structured access to APIs without hand-written wrappers.</p></div></div>
-
-    <div class="kt-item"><span class="kt-num">2</span><div class="kt-body"><h4>The Wrapper Problem Slows Agent Integration</h4><p>Manually wrapping every API endpoint for agents is repetitive and error-prone. Generating tools from specs removes most of that boilerplate.</p></div></div>
-
-    <div class="kt-item"><span class="kt-num">3</span><div class="kt-body"><h4>Generated Tools Still Need Design Decisions</h4><p>Not every endpoint should be exposed to agents. Scoping, auth, rate limits, and error handling must be reviewed even when generation is automated.</p></div></div>
-
-    <div class="kt-item"><span class="kt-num">4</span><div class="kt-body"><h4>Type Safety and Validation Come from the Spec</h4><p>Using OpenAPI parameters, request bodies, and response schemas lets the generated MCP layer enforce types and reduce malformed agent calls.</p></div></div>
-
-    <div class="kt-item"><span class="kt-num">5</span><div class="kt-body"><h4>Security Policy Lives Outside the Generator</h4><p>Generation handles shape, but authorization, audit logging, and least-privilege access still need to be enforced by the API or a gateway.</p></div></div>
-  </div>
-</div>
-
-<h2>The wrapper problem</h2><p>Hand-writing MCP wrappers for every endpoint is a recipe for drift. Rename a field in the API and five editor integrations break. We wanted one source of truth: the OpenAPI spec served at <code>/api/v1/openapi.json</code>.</p><h2>Generation pipeline</h2><ul><li>FastMCP reads the OpenAPI spec at build time.</li><li>Each operation becomes a tool with typed arguments from the spec's schemas.</li><li>We annotate scope requirements from the <code>x-required-scopes</code> extension.</li><li>Five hand-curated workflows combine multiple tools for common tasks.</li></ul><h2>Result</h2><p>When we add a new REST endpoint, the MCP tool appears in the next deploy without anyone writing a wrapper. The same validation, the same auth, the same audit logging applies whether the caller is curl, a dashboard, or Claude.</p>
+      <p class='lede' style='font-size:18px;color:var(--text);line-height:1.7;margin-bottom:28px'>Every REST endpoint we ship becomes an MCP tool automatically. Here is how we generate 54 tools from our OpenAPI spec and keep them in lockstep with the API.</p><h2>The wrapper problem</h2><p>Hand-writing MCP wrappers for every endpoint is a recipe for drift. Rename a field in the API and five editor integrations break. We wanted one source of truth: the OpenAPI spec served at <code>/api/v1/openapi.json</code>.</p><h2>Generation pipeline</h2><ul><li>FastMCP reads the OpenAPI spec at build time.</li><li>Each operation becomes a tool with typed arguments from the spec's schemas.</li><li>We annotate scope requirements from the <code>x-required-scopes</code> extension.</li><li>Five hand-curated workflows combine multiple tools for common tasks.</li></ul><h2>Result</h2><p>When we add a new REST endpoint, the MCP tool appears in the next deploy without anyone writing a wrapper. The same validation, the same auth, the same audit logging applies whether the caller is curl, a dashboard, or Claude.</p>
 
       
       <div class="post-author">
