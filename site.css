@@ -831,7 +831,7 @@ p {
 .footer {
   border-top: 1px solid var(--line);
   padding: 64px 0 48px;
-  background: #04060c
+  background: var(--bg-1)
 }
 
 .footer-inner {
