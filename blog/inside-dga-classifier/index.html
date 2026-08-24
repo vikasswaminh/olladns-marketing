@@ -17,7 +17,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com"/>
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
   <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;500;600;700;900&display=swap" rel="stylesheet"/>
-  <link rel="stylesheet" href="/site.css?v=20260821"/>
+  <link rel="stylesheet" href="/site.css?v=20260822"/>
   <style>
     .post-meta{display:flex;align-items:center;gap:18px;flex-wrap:wrap;margin-top:18px;color:var(--muted);font-size:14px}
     .post-meta .tag{font-family:var(--mono);font-size:11px;color:var(--accent);text-transform:uppercase;letter-spacing:.08em}
@@ -67,7 +67,29 @@
         <img src="data:image/svg+xml,%3Csvg%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%20width%3D'1280'%20height%3D'720'%3E%3Crect%20fill%3D'%2523f4f4f5'%20width%3D'1280'%20height%3D'720'%2F%3E%3Ctext%20fill%3D'%2523DA291C'%20font-family%3D'sans-serif'%20font-size%3D'28'%20font-weight%3D'600'%20x%3D'640'%20y%3D'370'%20text-anchor%3D'middle'%3EDGA%20classifier%3C%2Ftext%3E%3C%2Fsvg%3E" alt="Inside the 280-line DGA classifier"/>
       </div>
 
-      <p class='lede' style='font-size:18px;color:var(--text);line-height:1.7;margin-bottom:28px'>Most DNS security vendors either buy a black-box DGA feed or ship a multi-megabyte neural network. We chose a third path: a 280-line feature-based classifier that runs inline, explains every score, and costs essentially zero per query.</p><h2>Why not a neural network?</h2><p>Deep learning is seductive for DGA detection. LSTMs and Transformers can reach high accuracy on labeled corpora. But at resolver-side scale they bring three problems we couldn't accept:</p><ul><li><strong>Opacity:</strong> when a SOC analyst asks why a domain was blocked, "the model said so" is not an acceptable answer.</li><li><strong>Cost:</strong> running inference per query adds latency and compute budget that grows with traffic.</li><li><strong>Drift:</strong> DGAs evolve quickly; retraining and redeploying a model is slower than tuning a few thresholds.</li></ul><h2>The feature set</h2><p>Our classifier extracts interpretable signals from the second-level domain string:</p><ul><li><strong>Shannon entropy:</strong> random-looking algorithmic domains score higher.</li><li><strong>N-gram frequency:</strong> we compare character pairs against a corpus of legitimate domains.</li><li><strong>Vowel ratio:</strong> human-readable names have more vowels than DGA output.</li><li><strong>Length and digit count:</strong> most DGAs use fixed-length alphanumeric strings.</li><li><strong>Consonant runs:</strong> long sequences of consonants are rare in real brand names.</li></ul><pre><code>// Simplified score combination
+      <p class='lede' style='font-size:18px;color:var(--text);line-height:1.7;margin-bottom:28px'>Most DNS security vendors either buy a black-box DGA feed or ship a multi-megabyte neural network. We chose a third path: a 280-line feature-based classifier that runs inline, explains every score, and costs essentially zero per query.</p>
+<div class="kt-wrap" aria-labelledby="key-takeaways-title">
+  <div class="kt-head">
+    <span class="kt-icon" aria-hidden="true">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path><path d="m9 12 2 2 4-4"></path></svg>
+    </span>
+    <h2 class="kt-title" id="key-takeaways-title">Key Takeaways</h2>
+  </div>
+  <div class="kt-grid">
+
+    <div class="kt-item"><span class="kt-num">1</span><div class="kt-body"><h4>DGA Domains Evolve Faster Than Blocklists</h4><p>Domain Generation Algorithms produce thousands of new domains on a schedule. Static blocklists cannot keep up with the volume and rotation.</p></div></div>
+
+    <div class="kt-item"><span class="kt-num">2</span><div class="kt-body"><h4>Statistical Features Reveal Algorithmic Strings</h4><p>Entropy, n-gram frequency, vowel-consonant ratios, and length distributions can distinguish random-looking DGA output from legitimate domains without hardcoded signatures.</p></div></div>
+
+    <div class="kt-item"><span class="kt-num">3</span><div class="kt-body"><h4>Lightweight Classifiers Work at DNS Scale</h4><p>A 280-line classifier using simple statistical features can run at query time with minimal latency, making it practical for real-time DNS security.</p></div></div>
+
+    <div class="kt-item"><span class="kt-num">4</span><div class="kt-body"><h4>Combine Classification with Behavioral Signals</h4><p>Statistical DGA detection becomes stronger when combined with query volume, NXDOMAIN rates, and timing patterns across a fleet or network.</p></div></div>
+
+    <div class="kt-item"><span class="kt-num">5</span><div class="kt-body"><h4>No Neural Network Required</h4><p>Simple, interpretable models can detect DGA activity effectively. The engineering focus should be on feature quality and deployment at the DNS layer, not model complexity.</p></div></div>
+  </div>
+</div>
+
+<h2>Why not a neural network?</h2><p>Deep learning is seductive for DGA detection. LSTMs and Transformers can reach high accuracy on labeled corpora. But at resolver-side scale they bring three problems we couldn't accept:</p><ul><li><strong>Opacity:</strong> when a SOC analyst asks why a domain was blocked, "the model said so" is not an acceptable answer.</li><li><strong>Cost:</strong> running inference per query adds latency and compute budget that grows with traffic.</li><li><strong>Drift:</strong> DGAs evolve quickly; retraining and redeploying a model is slower than tuning a few thresholds.</li></ul><h2>The feature set</h2><p>Our classifier extracts interpretable signals from the second-level domain string:</p><ul><li><strong>Shannon entropy:</strong> random-looking algorithmic domains score higher.</li><li><strong>N-gram frequency:</strong> we compare character pairs against a corpus of legitimate domains.</li><li><strong>Vowel ratio:</strong> human-readable names have more vowels than DGA output.</li><li><strong>Length and digit count:</strong> most DGAs use fixed-length alphanumeric strings.</li><li><strong>Consonant runs:</strong> long sequences of consonants are rare in real brand names.</li></ul><pre><code>// Simplified score combination
 let score = entropy * 0.35
           + ngram_unlikelihood * 0.30
           + length_bias * 0.15

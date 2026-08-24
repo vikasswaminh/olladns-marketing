@@ -17,7 +17,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com"/>
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
   <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;500;600;700;900&display=swap" rel="stylesheet"/>
-  <link rel="stylesheet" href="/site.css?v=20260821"/>
+  <link rel="stylesheet" href="/site.css?v=20260822"/>
   <style>
     .post-meta{display:flex;align-items:center;gap:18px;flex-wrap:wrap;margin-top:18px;color:var(--muted);font-size:14px}
     .post-meta .tag{font-family:var(--mono);font-size:11px;color:var(--accent);text-transform:uppercase;letter-spacing:.08em}
@@ -67,7 +67,29 @@
         <img src="data:image/svg+xml,%3Csvg%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%20width%3D'1280'%20height%3D'720'%3E%3Crect%20fill%3D'%2523f4f4f5'%20width%3D'1280'%20height%3D'720'%2F%3E%3Ctext%20fill%3D'%2523DA291C'%20font-family%3D'sans-serif'%20font-size%3D'28'%20font-weight%3D'600'%20x%3D'640'%20y%3D'370'%20text-anchor%3D'middle'%3EZero%20trust%20DNS%3C%2Ftext%3E%3C%2Fsvg%3E" alt="Why DNS filtering is the cheapest zero-trust control"/>
       </div>
 
-      <p class='lede' style='font-size:18px;color:var(--text);line-height:1.7;margin-bottom:28px'>Zero-trust architectures usually start with identity and endpoints. That's backwards. Every device on your network already reports every destination to DNS — making the resolver the cheapest, most universal enforcement point you own.</p><h2>The resolver sees everything</h2><p>Before a laptop, server, printer, or IoT sensor connects to anything, it resolves a name. Malware beacons, phishing pages, and command-and-control servers all appear first as DNS queries. Blocking at the resolver stops the connection before any TCP handshake happens.</p><h2>Why it's cheaper than EDR or SWG</h2><ul><li><strong>No agent:</strong> point the device at a DoH/DoT resolver and policy applies instantly.</li><li><strong>No traffic steering:</strong> you don't need to proxy every byte through a cloud SWG.</li><li><strong>Universal coverage:</strong> works for unmanaged devices, guest networks, and IoT that can't run endpoint software.</li></ul><h2>What good DNS filtering actually blocks</h2><p>The best DNS security layers stop phishing infrastructure within minutes of registration, identify algorithmic domains before they're on any threat feed, and catch lookalike domains targeting your brand specifically. That's the layer we are building at olladns.</p>
+      <p class='lede' style='font-size:18px;color:var(--text);line-height:1.7;margin-bottom:28px'>Zero-trust architectures usually start with identity and endpoints. That's backwards. Every device on your network already reports every destination to DNS — making the resolver the cheapest, most universal enforcement point you own.</p>
+<div class="kt-wrap" aria-labelledby="key-takeaways-title">
+  <div class="kt-head">
+    <span class="kt-icon" aria-hidden="true">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path><path d="m9 12 2 2 4-4"></path></svg>
+    </span>
+    <h2 class="kt-title" id="key-takeaways-title">Key Takeaways</h2>
+  </div>
+  <div class="kt-grid">
+
+    <div class="kt-item"><span class="kt-num">1</span><div class="kt-body"><h4>DNS Is Everywhere and Early in the Kill Chain</h4><p>Every device on a network must use DNS to communicate. That makes DNS one of the highest-leverage places to enforce zero-trust policies before connections form.</p></div></div>
+
+    <div class="kt-item"><span class="kt-num">2</span><div class="kt-body"><h4>DNS Filtering Covers What Firewalls Miss</h4><p>Firewalls see IPs and ports, but DNS filtering sees domain names. It blocks malicious infrastructure even when IP addresses rotate or are unknown.</p></div></div>
+
+    <div class="kt-item"><span class="kt-num">3</span><div class="kt-body"><h4>It Protects Managed and Unmanaged Devices Alike</h4><p>Because DNS resolution is universal, pointing a network to a protective resolver covers IoT, BYOD, guest devices, and roaming endpoints without installing agents.</p></div></div>
+
+    <div class="kt-item"><span class="kt-num">4</span><div class="kt-body"><h4>Low Cost, High Coverage</h4><p>DNS filtering requires no endpoint agents, no network rearchitecture, and minimal operational overhead — making it one of the cheapest zero-trust controls available.</p></div></div>
+
+    <div class="kt-item"><span class="kt-num">5</span><div class="kt-body"><h4>Threat Intelligence Meets Real-Time Enforcement</h4><p>Protective DNS resolvers apply real-time threat intelligence, behavioral signals, and policy rules to block phishing, malware, and C2 domains at the lookup stage.</p></div></div>
+  </div>
+</div>
+
+<h2>The resolver sees everything</h2><p>Before a laptop, server, printer, or IoT sensor connects to anything, it resolves a name. Malware beacons, phishing pages, and command-and-control servers all appear first as DNS queries. Blocking at the resolver stops the connection before any TCP handshake happens.</p><h2>Why it's cheaper than EDR or SWG</h2><ul><li><strong>No agent:</strong> point the device at a DoH/DoT resolver and policy applies instantly.</li><li><strong>No traffic steering:</strong> you don't need to proxy every byte through a cloud SWG.</li><li><strong>Universal coverage:</strong> works for unmanaged devices, guest networks, and IoT that can't run endpoint software.</li></ul><h2>What good DNS filtering actually blocks</h2><p>The best DNS security layers stop phishing infrastructure within minutes of registration, identify algorithmic domains before they're on any threat feed, and catch lookalike domains targeting your brand specifically. That's the layer we are building at olladns.</p>
 
       
       <div class="post-author">

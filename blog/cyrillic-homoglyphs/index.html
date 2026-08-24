@@ -17,7 +17,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com"/>
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
   <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;500;600;700;900&display=swap" rel="stylesheet"/>
-  <link rel="stylesheet" href="/site.css?v=20260821"/>
+  <link rel="stylesheet" href="/site.css?v=20260822"/>
   <style>
     .post-meta{display:flex;align-items:center;gap:18px;flex-wrap:wrap;margin-top:18px;color:var(--muted);font-size:14px}
     .post-meta .tag{font-family:var(--mono);font-size:11px;color:var(--accent);text-transform:uppercase;letter-spacing:.08em}
@@ -67,7 +67,29 @@
         <img src="data:image/svg+xml,%3Csvg%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%20width%3D'1280'%20height%3D'720'%3E%3Crect%20fill%3D'%2523f4f4f5'%20width%3D'1280'%20height%3D'720'%2F%3E%3Ctext%20fill%3D'%2523DA291C'%20font-family%3D'sans-serif'%20font-size%3D'28'%20font-weight%3D'600'%20x%3D'640'%20y%3D'370'%20text-anchor%3D'middle'%3ETyposquat%3C%2Ftext%3E%3C%2Fsvg%3E" alt="Catching Cyrillic homoglyphs in 230 lines"/>
       </div>
 
-      <p class='lede' style='font-size:18px;color:var(--text);line-height:1.7;margin-bottom:28px'>Typosquatting is not just about misspellings anymore. Attackers now use Cyrillic homoglyphs to make evil domains look identical to trusted brands. Our 230-line detector runs at query time.</p><h2>From ASCII to confusables</h2><p>A domain like <code>paypa-l.com</code> is easy to catch with edit distance. But <code>ÐÇð░ÐâÐÇËæl.com</code>, where the Latin <code>a</code> is replaced by Cyrillic <code>ð░</code>, defeats naive string comparison while looking identical to most users.</p><h2>Normalization first</h2><p>We normalize Unicode confusables to a canonical ASCII form before scoring. Internationalized domain names are decoded from Punycode, then each character is mapped to its closest ASCII homoglyph if one exists.</p><h2>Edit distance against the protect-list</h2><p>After normalization, we compute Damerau-Levenshtein distance against the tenant's protect-list. Domains within a tunable threshold are flagged as typosquats. The whole operation runs inline at ingest time.</p>
+      <p class='lede' style='font-size:18px;color:var(--text);line-height:1.7;margin-bottom:28px'>Typosquatting is not just about misspellings anymore. Attackers now use Cyrillic homoglyphs to make evil domains look identical to trusted brands. Our 230-line detector runs at query time.</p>
+<div class="kt-wrap" aria-labelledby="key-takeaways-title">
+  <div class="kt-head">
+    <span class="kt-icon" aria-hidden="true">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path><path d="m9 12 2 2 4-4"></path></svg>
+    </span>
+    <h2 class="kt-title" id="key-takeaways-title">Key Takeaways</h2>
+  </div>
+  <div class="kt-grid">
+
+    <div class="kt-item"><span class="kt-num">1</span><div class="kt-body"><h4>Homoglyph Attacks Exploit Visual Similarity</h4><p>Cyrillic and other Unicode characters can look identical to Latin letters, letting attackers register domains that are visually indistinguishable from trusted brands.</p></div></div>
+
+    <div class="kt-item"><span class="kt-num">2</span><div class="kt-body"><h4>Typosquatting Defense Must Go Beyond Edit Distance</h4><p>Traditional typosquatting detection relies on misspellings. Homoglyph attacks bypass those checks because the malicious domain can be a near-perfect visual clone.</p></div></div>
+
+    <div class="kt-item"><span class="kt-num">3</span><div class="kt-body"><h4>Confusable Detection Runs at DNS Query Time</h4><p>A 230-line detector can flag homoglyph lookalikes in real time during DNS resolution, stopping phishing before a connection is established.</p></div></div>
+
+    <div class="kt-item"><span class="kt-num">4</span><div class="kt-body"><h4>Character Normalization Is the Core Defense</h4><p>Converting Unicode domains to a canonical form and comparing them against trusted brands reveals confusable attacks that simple string matching misses.</p></div></div>
+
+    <div class="kt-item"><span class="kt-num">5</span><div class="kt-body"><h4>DNS Security Can Block Visual Phishing Infrastructure</h4><p>Because homoglyph phishing domains still need DNS resolution, protective DNS can intercept them at the earliest point in the attack chain.</p></div></div>
+  </div>
+</div>
+
+<h2>From ASCII to confusables</h2><p>A domain like <code>paypa-l.com</code> is easy to catch with edit distance. But <code>ÐÇð░ÐâÐÇËæl.com</code>, where the Latin <code>a</code> is replaced by Cyrillic <code>ð░</code>, defeats naive string comparison while looking identical to most users.</p><h2>Normalization first</h2><p>We normalize Unicode confusables to a canonical ASCII form before scoring. Internationalized domain names are decoded from Punycode, then each character is mapped to its closest ASCII homoglyph if one exists.</p><h2>Edit distance against the protect-list</h2><p>After normalization, we compute Damerau-Levenshtein distance against the tenant's protect-list. Domains within a tunable threshold are flagged as typosquats. The whole operation runs inline at ingest time.</p>
 
       
       <div class="post-author">
