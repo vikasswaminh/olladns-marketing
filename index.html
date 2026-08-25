@@ -1,422 +1,928 @@
 <!doctype html>
 <html lang="en">
+
 <head>
-  <meta charset="utf-8"/>
+  <meta charset="utf-8" />
   <title>olladns — DNS security you configure from code</title>
-  <meta name="viewport" content="width=device-width,initial-scale=1"/>
-  <meta name="description" content="Multi-tenant DNS filtering platform, built API-first and MCP-native. 57 REST endpoints, 54 MCP tools, transparent classifiers, HMAC-signed webhooks. Dashboard is read-only on purpose."/>
-  <link rel="preconnect" href="https://fonts.googleapis.com"/>
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
-  <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;500;600;700;900&display=swap" rel="stylesheet"/>
-  <link rel="stylesheet" href="/site.css?v=20260821"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="description"
+    content="Multi-tenant DNS filtering platform, built API-first and MCP-native. 57 REST endpoints, 54 MCP tools, transparent classifiers, HMAC-signed webhooks. Dashboard is read-only on purpose." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;500;600;700;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/site.css?v=20260821" />
   <style>
-    .surface-tbl{width:100%;border-collapse:collapse;font-size:14px}
-    .surface-tbl th, .surface-tbl td{padding:14px 18px;border-bottom:1px solid var(--line);vertical-align:top;text-align:left}
-    .surface-tbl th{background:var(--bg-2);color:var(--muted);font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;font-weight:500;width:160px}
-    .surface-tbl td{color:var(--text-2);line-height:1.6}
-    .surface-tbl td code{font-family:var(--mono);font-size:12.5px;background:var(--bg-2);padding:1px 6px;border-radius:4px;color:var(--text)}
-    .surface-tbl tr:last-child th, .surface-tbl tr:last-child td{border-bottom:0}
-    .fit-card{padding:24px;border:1px solid var(--line);border-radius:10px;background:var(--panel);display:flex;flex-direction:column;gap:10px}
-    .fit-card h3{font-size:17px;margin:0;color:var(--text)}
-    .fit-card p{color:var(--muted);font-size:13.5px;line-height:1.6;margin:0}
-    .fit-card code{font-family:var(--mono);font-size:12px;background:var(--bg-2);padding:1px 5px;border-radius:4px;color:var(--text)}
-    .qual{display:grid;grid-template-columns:1fr 1fr;gap:32px}
-    @media (max-width:880px){.qual{grid-template-columns:1fr}}
-    .qual-col h3{font-size:17px;margin:0 0 14px;color:var(--text)}
-    .qual-col ul{margin:0;padding-left:0;list-style:none;display:flex;flex-direction:column;gap:10px}
-    .qual-col li{font-size:14.5px;color:var(--text-2);line-height:1.55;padding-left:24px;position:relative}
-    .qual-col.yes li::before{content:"✓";position:absolute;left:0;color:#10b981;font-weight:700}
-    .qual-col.no li::before{content:"–";position:absolute;left:0;color:var(--muted);font-weight:700}
-
-    /* Hero visual - dashboard preview cards (page-scoped) */
-    .hero-visual {
-      display: flex;
-      flex-direction: column;
-      gap: 14px;
-      padding: 20px;
-      border: 1px solid var(--line);
-      border-radius: 14px;
-      background: var(--panel)
+    .surface-tbl {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 14px
     }
 
-    .hv-row {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 14px
+    .surface-tbl th,
+    .surface-tbl td {
+      padding: 14px 18px;
+      border-bottom: 1px solid var(--line);
+      vertical-align: top;
+      text-align: left
     }
 
-    .hv-card {
-      display: flex;
-      flex-direction: column;
-      gap: 6px;
-      padding: 18px 20px;
-      border: 1px solid var(--line);
-      border-radius: 10px;
-      background: var(--bg-1)
-    }
-
-    .hv-card h4 {
+    .surface-tbl th {
+      background: var(--bg-2);
+      color: var(--muted);
       font-family: var(--mono);
       font-size: 11px;
-      font-weight: 500;
       letter-spacing: .08em;
       text-transform: uppercase;
-      color: var(--muted)
+      font-weight: 500;
+      width: 160px
     }
 
-    .hv-card .value {
+    .surface-tbl td {
+      color: var(--text-2);
+      line-height: 1.6
+    }
+
+    .surface-tbl td code {
       font-family: var(--mono);
-      font-size: 28px;
-      font-weight: 700;
-      letter-spacing: -.02em;
+      font-size: 12.5px;
+      background: var(--bg-2);
+      padding: 1px 6px;
+      border-radius: 4px;
       color: var(--text)
     }
 
-    .hv-card .sub {
-      font-size: 12.5px;
-      color: var(--muted)
+    .surface-tbl tr:last-child th,
+    .surface-tbl tr:last-child td {
+      border-bottom: 0
     }
 
-    .hv-status {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 14px;
-      padding: 12px 16px;
+    .fit-card {
+      padding: 24px;
       border: 1px solid var(--line);
       border-radius: 10px;
-      background: var(--bg-1)
-    }
-
-    .hv-status .left {
+      background: var(--panel);
       display: flex;
-      align-items: center;
-      gap: 12px
+      flex-direction: column;
+      gap: 10px
     }
 
-    .hv-status .status-ic {
-      width: 34px;
-      height: 34px;
-      border-radius: 8px;
-      background: var(--accent-soft);
-      color: var(--accent);
-      display: grid;
-      place-items: center;
-      flex: none
-    }
-
-    .hv-status .status-title {
-      font-size: 13.5px;
-      font-weight: 600;
+    .fit-card h3 {
+      font-size: 17px;
+      margin: 0;
       color: var(--text)
     }
 
-    .hv-status .status-desc {
+    .fit-card p {
+      color: var(--muted);
+      font-size: 13.5px;
+      line-height: 1.6;
+      margin: 0
+    }
+
+    .fit-card code {
       font-family: var(--mono);
       font-size: 12px;
-      color: var(--muted)
+      background: var(--bg-2);
+      padding: 1px 5px;
+      border-radius: 4px;
+      color: var(--text)
+    }
+
+    .qual {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 32px
     }
 
     @media (max-width:880px) {
-      .hv-row {
+      .qual {
+        grid-template-columns: 1fr
+      }
+    }
+
+    .qual-col h3 {
+      font-size: 17px;
+      margin: 0 0 14px;
+      color: var(--text)
+    }
+
+    .qual-col ul {
+      margin: 0;
+      padding-left: 0;
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 10px
+    }
+
+    .qual-col li {
+      font-size: 14.5px;
+      color: var(--text-2);
+      line-height: 1.55;
+      padding-left: 24px;
+      position: relative
+    }
+
+    .qual-col.yes li::before {
+      content: "✓";
+      position: absolute;
+      left: 0;
+      color: #10b981;
+      font-weight: 700
+    }
+
+    .qual-col.no li::before {
+      content: "–";
+      position: absolute;
+      left: 0;
+      color: var(--muted);
+      font-weight: 700
+    }
+
+    /* Hero layout: content + diagram side by side on desktop */
+    .hero-inner {
+      grid-template-columns: 1.05fr 1fr;
+      gap: 48px;
+      align-items: center
+    }
+
+    @media (max-width:900px) {
+      .hero-inner {
+        grid-template-columns: 1fr
+      }
+
+      .hero-visual {
+        order: -1
+      }
+    }
+
+    /* Hero visual - compact DNS workflow diagram */
+    .hero-visual {
+      padding: 0;
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      background: var(--panel);
+      overflow: hidden
+    }
+
+    .hero-diagram {
+      padding: 28px;
+      display: flex;
+      flex-direction: column;
+      gap: 20px
+    }
+
+    .hd-flow {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px
+    }
+
+    .hd-step {
+      flex: 1 1 0;
+      min-width: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      gap: 8px
+    }
+
+    .hd-ic {
+      width: 42px;
+      height: 42px;
+      border-radius: 10px;
+      background: var(--bg-0);
+      border: 1px solid var(--line);
+      display: grid;
+      place-items: center;
+      color: var(--text-2)
+    }
+
+    .hd-step.olla .hd-ic {
+      width: 56px;
+      height: 56px;
+      border-radius: 14px;
+      background: var(--accent-soft);
+      border-color: var(--accent-line);
+      color: var(--accent)
+    }
+
+    .hd-label {
+      font-family: var(--mono);
+      font-size: 11.5px;
+      font-weight: 700;
+      letter-spacing: .04em;
+      text-transform: uppercase;
+      color: var(--text)
+    }
+
+    .hd-desc {
+      font-size: 12.5px;
+      color: var(--muted);
+      line-height: 1.4
+    }
+
+    .hd-arrow {
+      flex: none;
+      color: var(--line-2);
+      font-size: 18px;
+      display: grid;
+      place-items: center
+    }
+
+    .hd-caps {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px
+    }
+
+    .hd-cap {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 12px;
+      color: var(--text-2);
+      padding: 7px 10px;
+      border-radius: 6px;
+      background: var(--bg-0);
+      border: 1px solid var(--line)
+    }
+
+    .hd-cap svg {
+      flex: none;
+      color: var(--accent)
+    }
+
+    @media (max-width:640px) {
+      .hd-flow {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 14px
+      }
+
+      .hd-step {
+        flex-direction: row;
+        align-items: center;
+        text-align: left
+      }
+
+      .hd-ic {
+        flex: none
+      }
+
+      .hd-arrow {
+        transform: rotate(90deg);
+        margin: 0 auto
+      }
+
+      .hd-caps {
+        grid-template-columns: 1fr
+      }
+    }
+
+
+    /* ===== How OllaDNS works (page-scoped) ===== */
+    .home-hiw-section {
+      padding: 80px 0
+    }
+
+    .home-hiw-row {
+      display: grid;
+      grid-template-columns: 1fr 1.25fr;
+      gap: 48px;
+      align-items: center
+    }
+
+    .home-hiw-head {
+      max-width: 520px;
+      margin: 0
+    }
+
+    .home-hiw-head .lede {
+      margin-top: 16px;
+      color: var(--text-2);
+      font-size: 17px;
+      line-height: 1.6
+    }
+
+    .home-hiw-diagram {
+      border: 1px solid var(--line);
+      border-radius: var(--r-lg);
+      background: var(--bg-1);
+      padding: 28px
+    }
+
+    .home-hiw-flow {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px
+    }
+
+    .home-hiw-step {
+      flex: 1 1 0;
+      min-width: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      gap: 8px
+    }
+
+    .home-hiw-ic {
+      width: 42px;
+      height: 42px;
+      border-radius: 10px;
+      background: var(--bg-0);
+      border: 1px solid var(--line);
+      display: grid;
+      place-items: center;
+      color: var(--text-2)
+    }
+
+    .home-hiw-step.olla .home-hiw-ic {
+      width: 56px;
+      height: 56px;
+      border-radius: 14px;
+      background: var(--accent-soft);
+      border-color: var(--accent-line);
+      color: var(--accent)
+    }
+
+    .home-hiw-label {
+      font-family: var(--mono);
+      font-size: 11.5px;
+      font-weight: 700;
+      letter-spacing: .04em;
+      text-transform: uppercase;
+      color: var(--text)
+    }
+
+    .home-hiw-desc {
+      font-size: 12.5px;
+      color: var(--muted);
+      line-height: 1.4
+    }
+
+    .home-hiw-arrow {
+      flex: none;
+      color: var(--line-2);
+      font-size: 18px;
+      display: grid;
+      place-items: center
+    }
+
+    .home-hiw-caps {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+      margin-top: 18px
+    }
+
+    .home-hiw-cap {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 12px;
+      color: var(--text-2);
+      padding: 7px 10px;
+      border-radius: 6px;
+      background: var(--bg-0);
+      border: 1px solid var(--line)
+    }
+
+    .home-hiw-cap svg {
+      flex: none;
+      color: var(--accent)
+    }
+
+    @media (max-width:900px) {
+      .home-hiw-row {
+        grid-template-columns: 1fr;
+        gap: 32px
+      }
+
+      .home-hiw-head {
+        max-width: none;
+        text-align: center
+      }
+    }
+
+    @media (max-width:640px) {
+      .home-hiw-flow {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 14px
+      }
+
+      .home-hiw-step {
+        flex-direction: row;
+        align-items: center;
+        text-align: left
+      }
+
+      .home-hiw-ic {
+        flex: none
+      }
+
+      .home-hiw-arrow {
+        transform: rotate(90deg);
+        margin: 0 auto
+      }
+
+      .home-hiw-caps {
         grid-template-columns: 1fr
       }
     }
   </style>
 </head>
+
 <body data-screen-label="Marketing — Home">
 
-<div id="site-nav"></div>
+  <div id="site-nav"></div>
 
-<!-- ============================================ -->
-<!-- HERO -->
-<!-- ============================================ -->
-<section class="hero">
-  <div class="grid-bg"></div>
-  <div class="container hero-inner">
-    <div>
-      <span class="eyebrow">v0.34 · Pre-customer, building in public</span>
-      <h1 class="gradient-text" style="margin-top:18px">DNS security<br/>you configure from code.</h1>
-      <p class="lede">olladns is a multi-tenant DNS filtering platform built API-first and MCP-native. Block phishing, malware C2, DGA, and brand typosquats at the resolver. Configure every policy from your terminal, your CI pipeline, or Claude. The dashboard is read-only on purpose.</p>
-      <div class="cta">
-        <a class="btn primary lg" href="/developers.html">Read the developer docs <span id="i-arrow1"></span></a>
-        <a class="btn lg" href="/contact.html">Apply to design partner program</a>
+  <!-- ============================================ -->
+  <!-- HERO -->
+  <!-- ============================================ -->
+  <section class="hero">
+    <div class="grid-bg"></div>
+    <div class="container hero-inner">
+      <div>
+        <span class="eyebrow">v0.34 · Pre-customer, building in public</span>
+        <h1 class="gradient-text" style="margin-top:18px">DNS security<br />you configure from code.</h1>
+        <p class="lede">olladns is a multi-tenant DNS filtering platform built API-first and MCP-native. Block phishing,
+          malware C2, DGA, and brand typosquats at the resolver. Configure every policy from your terminal, your CI
+          pipeline, or Claude. The dashboard is read-only on purpose.</p>
+        <div class="cta">
+          <a class="btn primary lg" href="/developers.html">Read the developer docs <span id="i-arrow1"></span></a>
+          <a class="btn lg" href="/contact.html">Apply to design partner program</a>
+        </div>
+        <div class="meta">
+          <div class="item"><span class="dot"></span> 57 REST endpoints · 54 MCP tools</div>
+          <div class="item">DoH · DoT · DoQ at <code
+              style="font-family:var(--mono);font-size:12px">dns.olladns.com</code></div>
+          <div class="item">Single US region · EU-West next</div>
+        </div>
       </div>
-      <div class="meta">
-        <div class="item"><span class="dot"></span> 57 REST endpoints · 54 MCP tools</div>
-        <div class="item">DoH · DoT · DoQ at <code style="font-family:var(--mono);font-size:12px">dns.olladns.com</code></div>
-        <div class="item">Single US region · EU-West next</div>
+
+      <!-- Hero visual: compact DNS workflow diagram -->
+      <div class="hero-visual" aria-label="DNS workflow diagram">
+        <div class="hero-diagram">
+          <div class="hd-flow">
+            <div class="hd-step">
+              <div class="hd-ic" id="hd-ic-device"></div>
+              <div>
+                <div class="hd-label">User / Device</div>
+                <div class="hd-desc">Sends a DNS query</div>
+              </div>
+            </div>
+            <div class="hd-arrow">→</div>
+            <div class="hd-step olla">
+              <div class="hd-ic" id="hd-ic-shield"></div>
+              <div>
+                <div class="hd-label">OllaDNS</div>
+                <div class="hd-desc">Receives &amp; processes</div>
+              </div>
+            </div>
+            <div class="hd-arrow">→</div>
+            <div class="hd-step">
+              <div class="hd-ic" id="hd-ic-lock"></div>
+              <div>
+                <div class="hd-label">Security &amp; Filtering</div>
+                <div class="hd-desc">Threat + policy check</div>
+              </div>
+            </div>
+            <div class="hd-arrow">→</div>
+            <div class="hd-step">
+              <div class="hd-ic" id="hd-ic-globe"></div>
+              <div>
+                <div class="hd-label">Website</div>
+                <div class="hd-desc">Safe response</div>
+              </div>
+            </div>
+          </div>
+          <div class="hd-caps">
+            <div class="hd-cap" id="hd-cap-resolve"></div>
+            <div class="hd-cap" id="hd-cap-block"></div>
+            <div class="hd-cap" id="hd-cap-filter"></div>
+            <div class="hd-cap" id="hd-cap-fast"></div>
+          </div>
+        </div>
       </div>
     </div>
 
-          <!-- Hero visual: live security dashboard preview -->
-      <div class="hero-visual" aria-label="DNS security infrastructure preview">
-        <div class="hv-row">
-          <div class="hv-card">
-            <h4>Threat queries blocked</h4>
-            <div class="value">4.2M+</div>
-            <div class="sub">DGA, phishing, typosquat</div>
+  </section>
+
+  <!-- ============================================ -->
+  <!-- DESIGN PARTNER CALLOUT -->
+  <!-- ============================================ -->
+  <section class="section-sm" style="border-top:1px solid var(--line)">
+    <div class="container" style="text-align:center;max-width:780px">
+      <div class="muted"
+        style="font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;margin-bottom:14px">
+        We're a new product. Be early.
+      </div>
+      <p style="color:var(--text-2);font-size:15.5px;line-height:1.6;margin:0">
+        olladns shipped v0.34 in May 2026 and is looking for 3&ndash;5 design-partner teams &mdash;
+        AI-native B2B startups (3&ndash;50 engineers) and Indian mid-market security teams &mdash;
+        who'll trade aggressive product feedback for free Pro tier through 2026 and influence
+        over the roadmap. <a href="/contact.html" style="color:var(--accent)">Apply &rarr;</a>
+      </p>
+    </div>
+  </section>
+
+  <!-- ============================================ -->
+  <!-- PREMIUM TERMINAL SECTION -->
+  <!-- ============================================ -->
+  <section class="section premium-terminal-section" style="padding-top:40px; padding-bottom:60px;">
+    <div class="container premium-terminal-wrapper">
+      <div class="premium-terminal">
+        <div class="terminal-header">
+          <div class="terminal-dots">
+            <div class="terminal-dot r"></div>
+            <div class="terminal-dot y"></div>
+            <div class="terminal-dot g"></div>
           </div>
-          <div class="hv-card">
-            <h4>API endpoints</h4>
-            <div class="value">57</div>
-            <div class="sub">REST + OpenAPI 3.1</div>
-          </div>
+          <div class="terminal-title">curl &mdash; api.olladns.com</div>
         </div>
-        <div class="hv-row">
-          <div class="hv-card">
-            <h4>MCP tools</h4>
-            <div class="value">54</div>
-            <div class="sub">Claude · Cursor · Cline · Goose</div>
+        <div class="terminal-body">
+          <div class="terminal-pane request">
+            <pre><span class="t-prompt">$</span><span class="t-cmd">curl</span> <span class="t-arg">-X</span> POST https://api.olladns.com/api/v1/policies \
+  <span class="t-arg">-H</span> <span class="t-str">"Authorization: Bearer $OLLADNS_TOKEN"</span> \
+  <span class="t-arg">-H</span> <span class="t-str">"Content-Type: application/json"</span> \
+  <span class="t-arg">-d</span> <span class="t-str">'{
+    "name": "Block Ads & Trackers",
+    "priority": 10,
+    "rules": [
+      {
+        "type": "block",
+        "domain": "*.doubleclick.net"
+      },
+      {
+        "type": "block",
+        "domain": "google-analytics.com"
+      }
+    ]
+  }'</span></pre>
           </div>
-          <div class="hv-card">
-            <h4>Average latency</h4>
-            <div class="value">&lt;12ms</div>
-            <div class="sub">DoH / DoT / DoQ</div>
+          <div class="terminal-pane response">
+            <pre><span class="t-comment">// 201 Created</span>
+{
+  <span class="t-key">"id"</span>: <span class="t-str">"pol_9k2x5mf7"</span>,
+  <span class="t-key">"name"</span>: <span class="t-str">"Block Ads & Trackers"</span>,
+  <span class="t-key">"status"</span>: <span class="t-str">"active"</span>,
+  <span class="t-key">"created_at"</span>: <span class="t-str">"2026-08-25T12:00:00Z"</span>,
+  <span class="t-key">"rules_count"</span>: <span class="t-num">2</span>,
+  <span class="t-key">"_links"</span>: {
+    <span class="t-key">"self"</span>: <span class="t-str">"/api/v1/policies/pol_9k2x5mf7"</span>
+  }
+}</pre>
           </div>
-        </div>
-        <div class="hv-status">
-          <div class="left">
-            <div class="status-ic" id="i-shield-status"></div>
-            <div>
-              <div class="status-title">Resolver status</div>
-              <div class="status-desc">dns.olladns.com · US region</div>
-            </div>
-          </div>
-          <span class="pill good">Operational</span>
         </div>
       </div>
     </div>
   </section>
 
-<!-- ============================================ -->
-<!-- DESIGN PARTNER CALLOUT -->
-<!-- ============================================ -->
-<section class="section-sm" style="border-top:1px solid var(--line)">
-  <div class="container" style="text-align:center;max-width:780px">
-    <div class="muted" style="font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;margin-bottom:14px">
-      We're a new product. Be early.
+  <!-- ============================================ -->
+  <!-- ONE-PARAGRAPH VERSION -->
+  <!-- ============================================ -->
+  <section class="section" style="padding-bottom:0">
+    <div class="container" style="max-width:880px">
+      <p style="color:var(--text);font-size:18px;line-height:1.7">
+        Every serious DNS filter does ~80% of the same things. The 20% that differs is whether your team configures it
+        through a console, through code, or through an AI agent. <strong>olladns is the third one.</strong> Every
+        policy, every device, every audit event is a REST endpoint and an MCP tool. The dashboard shows you what's
+        happening; it doesn't let you change anything. Configuration goes through versionable, auditable, scriptable
+        APIs — gated by scoped tokens per workload. The classifier that decides whether to block a domain is ~280 lines
+        of feature-based Rust you can read.
+      </p>
     </div>
-    <p style="color:var(--text-2);font-size:15.5px;line-height:1.6;margin:0">
-      olladns shipped v0.34 in May 2026 and is looking for 3&ndash;5 design-partner teams &mdash;
-      AI-native B2B startups (3&ndash;50 engineers) and Indian mid-market security teams &mdash;
-      who'll trade aggressive product feedback for free Pro tier through 2026 and influence
-      over the roadmap. <a href="/contact.html" style="color:var(--accent)">Apply &rarr;</a>
-    </p>
-  </div>
-</section>
+  </section>
 
-<!-- ============================================ -->
-<!-- ONE-PARAGRAPH VERSION -->
-<!-- ============================================ -->
-<section class="section" style="padding-bottom:0">
-  <div class="container" style="max-width:880px">
-    <p style="color:var(--text);font-size:18px;line-height:1.7">
-      Every serious DNS filter does ~80% of the same things. The 20% that differs is whether your team configures it through a console, through code, or through an AI agent. <strong>olladns is the third one.</strong> Every policy, every device, every audit event is a REST endpoint and an MCP tool. The dashboard shows you what's happening; it doesn't let you change anything. Configuration goes through versionable, auditable, scriptable APIs — gated by scoped tokens per workload. The classifier that decides whether to block a domain is ~280 lines of feature-based Rust you can read.
-    </p>
-  </div>
-</section>
 
-<!-- ============================================ -->
-<!-- THREE BETS -->
-<!-- ============================================ -->
-<section class="section">
-  <div class="container">
-    <div class="section-head">
-      <span class="eyebrow">Three things we bet on differently</span>
-      <h2>The product model an AI-native security team would build for itself.</h2>
-    </div>
 
-    <div class="row row-3" style="margin-top:36px">
-      <div class="card card-feature">
-        <div class="feature-ic" id="i-code-1"></div>
-        <h3>API + MCP for config. Dashboard for reporting.</h3>
-        <p>NextDNS, ControlD, Cisco Umbrella all treat the dashboard as the source of truth. We inverted that at v0.19. The console is read-only by design. Config changes are commits, not clicks. Every change carries an actor (user_id or specific api_key_id) in the audit log. Zero drift, every change attributable.</p>
-        <a href="/developers.html#api" style="display:inline-block;margin-top:14px;color:var(--accent);font-size:13.5px">REST API docs <span id="i-api-arrow"></span></a>
+  <!-- ============================================ -->
+  <!-- THREE BETS -->
+  <!-- ============================================ -->
+  <section class="section">
+    <div class="container">
+      <div class="section-head">
+        <span class="eyebrow">Three things we bet on differently</span>
+        <h2>The product model an AI-native security team would build for itself.</h2>
       </div>
-      <div class="card card-feature">
-        <div class="feature-ic" id="i-ai-1"></div>
-        <h3>MCP-native from day one.</h3>
-        <p><code>mcp.olladns.com</code> exposes 49 auto-generated MCP tools + 5 hand-curated workflows (54 total) auto-generated from our OpenAPI spec. Connect Claude, Cursor, Cline, Continue, Goose — your AI agent operates olladns under the same scoped tokens your humans use. Every tool call lands in the audit log. Nobody else in DNS-filtering ships this today.</p>
-        <a href="/developers.html#mcp" style="display:inline-block;margin-top:14px;color:var(--accent);font-size:13.5px">MCP docs <span id="i-mcp-arrow"></span></a>
-      </div>
-      <div class="card card-feature">
-        <div class="feature-ic" id="i-plug-1"></div>
-        <h3>Transparent threat intel, not vendor magic.</h3>
-        <p>Our DGA classifier is ~280 lines of feature-based Rust (entropy + n-gram + vowel ratio). Our typosquat detector is ~230 lines of Damerau-Levenshtein with Cyrillic homoglyph normalization. Both run inline at ingest with zero per-query vendor cost. Stacked on 67 community blocklists across 15 categories.</p>
-        <a href="/product.html#threats" style="display:inline-block;margin-top:14px;color:var(--accent);font-size:13.5px">Threat Intel docs <span id="i-wh-arrow"></span></a>
-      </div>
-    </div>
-  </div>
-</section>
 
-<!-- ============================================ -->
-<!-- WHAT'S IN THE BOX TODAY -->
-<!-- ============================================ -->
-<section class="section" style="padding-top:0">
-  <div class="container">
-    <div class="section-head">
-      <span class="eyebrow">What's in the box today</span>
-      <h2>Real surface area, v0.34.</h2>
-      <p class="lede">Every number below verifiable in <code>git log</code> or by hitting an endpoint. No claims we can't back.</p>
-    </div>
-
-    <div class="card" style="padding:0;margin-top:32px;overflow:hidden">
-      <table class="surface-tbl">
-        <tbody>
-          <tr><th>Resolvers</th><td>DoH, DoT, DoQ at <code>dns.olladns.com</code> · per-tenant routing via path UUID · per-device routing via <code>&lt;uuid&gt;--&lt;slug&gt;</code></td></tr>
-          <tr><th>REST API</th><td>57 endpoints at <code>api.olladns.com/api/v1</code> · OpenAPI 3.1 spec at <code>/openapi.json</code> · <code>x-required-scopes</code> on every secured op · <code>/version</code> returns git SHA</td></tr>
-          <tr><th>MCP server</th><td>49 tools at <code>mcp.olladns.com</code> · 5 hand-curated workflows · FastMCP-generated from OpenAPI · scope-gated per caller</td></tr>
-          <tr><th>Auth</th><td>JWT for humans (admin / viewer roles) · scoped API keys for agents · 16 scopes (<code>analytics:read</code>, <code>policies:write</code>, …) · per-key expiry · last-used timestamps</td></tr>
-          <tr><th>Policies</th><td>Custom rules (block / allow with wildcards) · DNS rewrites (A/AAAA/CNAME/NXDOMAIN/REFUSED) · safe-search · parental · blocked-services · NRD blocking · TLD blocking · allowlist-only mode · per-tenant protect-list</td></tr>
-          <tr><th>Threat intel</th><td>Inline DGA classifier (~280 LoC, threshold-tunable) · inline typosquat detector (~230 LoC) · 67-list community blocklist catalog across 14 categories · per-tenant subscriptions reconciled every 5 min</td></tr>
-          <tr><th>Analytics</th><td>summary · top-domains · top-clients · top-devices · top-ai-tools · top-dga · top-typosquat · blocked · by-reason · latency · block-rate · CSV/NDJSON export · 1–365 day retention per tenant</td></tr>
-          <tr><th>Audit + events</th><td>Every mutation writes an audit-log row · HMAC-SHA256 signed outbound webhooks · wildcard event subscriptions (<code>policy.*</code>, <code>threat.*</code>, <code>*</code>) · timestamp + replay protection</td></tr>
-          <tr><th>Privacy</th><td>Per-tenant client-IP anonymization at ingest · per-tenant retention 1–365 days · bypass-bypass blocklists (Tor + DoH)</td></tr>
-          <tr><th>Dashboard</th><td>Read-only Alpine.js SPA at <a href="https://login.olladns.com"><code>login.olladns.com</code></a> · 7 screens: Overview, Query Log, Threats, AI Detection, Devices, Policies, Audit Log · CSP-locked (no inline scripts)</td></tr>
-          <tr><th>Open source</th><td>Full stack public on GitHub: Rust API, Postgres + ClickHouse migrations, FastMCP Python sidecar, Caddy config, dashboard, docker-compose</td></tr>
-        </tbody>
-      </table>
-    </div>
-  </div>
-</section>
-
-<!-- ============================================ -->
-<!-- HOW IT FITS YOUR STACK -->
-<!-- ============================================ -->
-<section class="section" style="padding-top:0">
-  <div class="container">
-    <div class="section-head">
-      <span class="eyebrow">How it fits your stack</span>
-      <h2>Three concrete usage patterns.</h2>
-    </div>
-    <div class="row row-3" style="margin-top:32px">
-      <div class="fit-card">
-        <h3>Policy-as-code from CI</h3>
-        <p>Keep your custom rules in <code>git</code>. On merge, your CI runs <code>curl -X PUT api.olladns.com/api/v1/policies/custom-rules</code>. Diff between staging and prod. Roll back via revert. Same scoped token per environment.</p>
-      </div>
-      <div class="fit-card">
-        <h3>Agentic triage in Claude / Cursor</h3>
-        <p>Connect once in <code>mcp.json</code>. Ask your editor: <em>"Show me every DGA-flagged domain in the last 24h with score ≥ 0.85 and block them."</em> Three tool calls; one approval; landed in the audit log under your agent token.</p>
-      </div>
-      <div class="fit-card">
-        <h3>Webhook fan-out to your SIEM</h3>
-        <p>Every audit event posts to your endpoint with HMAC-SHA256 signature, timestamp header, and event-name header. Subscribe to <code>policy.*</code> for change-tracking, <code>threat.*</code> for live detection alerts, <code>*</code> for everything.</p>
+      <div class="row row-3" style="margin-top:36px">
+        <div class="card card-feature">
+          <div class="feature-ic" id="i-code-1"></div>
+          <h3>API + MCP for config. Dashboard for reporting.</h3>
+          <p>NextDNS, ControlD, Cisco Umbrella all treat the dashboard as the source of truth. We inverted that at
+            v0.19. The console is read-only by design. Config changes are commits, not clicks. Every change carries an
+            actor (user_id or specific api_key_id) in the audit log. Zero drift, every change attributable.</p>
+          <a href="/developers.html#api"
+            style="display:inline-block;margin-top:14px;color:var(--accent);font-size:13.5px">REST API docs <span
+              id="i-api-arrow"></span></a>
+        </div>
+        <div class="card card-feature">
+          <div class="feature-ic" id="i-ai-1"></div>
+          <h3>MCP-native from day one.</h3>
+          <p><code>mcp.olladns.com</code> exposes 49 auto-generated MCP tools + 5 hand-curated workflows (54 total)
+            auto-generated from our OpenAPI spec. Connect Claude, Cursor, Cline, Continue, Goose — your AI agent
+            operates olladns under the same scoped tokens your humans use. Every tool call lands in the audit log.
+            Nobody else in DNS-filtering ships this today.</p>
+          <a href="/developers.html#mcp"
+            style="display:inline-block;margin-top:14px;color:var(--accent);font-size:13.5px">MCP docs <span
+              id="i-mcp-arrow"></span></a>
+        </div>
+        <div class="card card-feature">
+          <div class="feature-ic" id="i-plug-1"></div>
+          <h3>Transparent threat intel, not vendor magic.</h3>
+          <p>Our DGA classifier is ~280 lines of feature-based Rust (entropy + n-gram + vowel ratio). Our typosquat
+            detector is ~230 lines of Damerau-Levenshtein with Cyrillic homoglyph normalization. Both run inline at
+            ingest with zero per-query vendor cost. Stacked on 67 community blocklists across 15 categories.</p>
+          <a href="/product.html#threats"
+            style="display:inline-block;margin-top:14px;color:var(--accent);font-size:13.5px">Threat Intel docs <span
+              id="i-wh-arrow"></span></a>
+        </div>
       </div>
     </div>
-  </div>
-</section>
+  </section>
 
-<!-- ============================================ -->
-<!-- HONEST CURRENT STATE -->
-<!-- ============================================ -->
-<section class="section" style="padding-top:0">
-  <div class="container">
-    <div class="row row-2" style="gap:48px;align-items:flex-start">
-      <div>
-        <span class="eyebrow">Honest current state</span>
-        <h2 style="margin-top:14px;font-size:28px">The thing every other vendor's homepage hides.</h2>
-        <p style="color:var(--text-2);font-size:15.5px;line-height:1.65;margin-top:14px">
-          Read this before you evaluate us. We'd rather lose the deal at the top of the funnel than waste your procurement team's time at the bottom.
-        </p>
+  <!-- ============================================ -->
+  <!-- WHAT'S IN THE BOX TODAY -->
+  <!-- ============================================ -->
+  <section class="section" style="padding-top:0">
+    <div class="container">
+      <div class="section-head">
+        <span class="eyebrow">What's in the box today</span>
+        <h2>Real surface area, v0.34.</h2>
+        <p class="lede">Every number below verifiable in <code>git log</code> or by hitting an endpoint. No claims we
+          can't back.</p>
       </div>
-      <div class="card" style="padding:28px">
-        <div style="display:flex;flex-direction:column;gap:16px">
-          <div>
-            <div style="font-weight:600;color:var(--text)">v0.34 shipped May 2026</div>
-            <div class="muted" style="font-size:13px;margin-top:3px;line-height:1.55">Public <a href="/changelog.html">changelog</a> covers every version. <code style="font-family:var(--mono);font-size:11.5px">api.olladns.com/version</code> returns the git SHA of what's actually running.</div>
-          </div>
-          <div>
-            <div style="font-weight:600;color:var(--text)">Pre-customer · pre-revenue · bootstrapped</div>
-            <div class="muted" style="font-size:13px;margin-top:3px;line-height:1.55">No real logo strip on this site. Looking for 3&ndash;5 design partners (free Pro tier through 2026 in exchange for aggressive feedback + roadmap influence).</div>
-          </div>
-          <div>
-            <div style="font-weight:600;color:var(--text)">SOC 2 Type II observation in progress</div>
-            <div class="muted" style="font-size:13px;margin-top:3px;line-height:1.55">Full Type II report Q3 2026. ISO 27001 not pursued yet. HIPAA BAA not offered today &mdash; ask if it's a requirement.</div>
-          </div>
-          <div>
-            <div style="font-weight:600;color:var(--text)">Single US region · no anycast</div>
-            <div class="muted" style="font-size:13px;margin-top:3px;line-height:1.55">EU-West region is the next infra workstream. If sub-20ms p99 latency from Singapore is your gate, this is not the product for you today.</div>
-          </div>
-          <div>
-            <div style="font-weight:600;color:var(--text)">No native desktop / mobile / router clients</div>
-            <div class="muted" style="font-size:13px;margin-top:3px;line-height:1.55">Roadmap: fork the MIT-licensed <code style="font-family:var(--mono);font-size:11.5px">ctrld</code> Go agent (3 weeks of work, decision locked). Until then, point any DoH-capable client at your tenant's DoH URL.</div>
-          </div>
-          <div>
-            <div style="font-weight:600;color:var(--text)">Founder's other Rust SaaS</div>
-            <div class="muted" style="font-size:13px;margin-top:3px;line-height:1.55"><a href="https://24observe.com">24observe.com</a> (logs observability) and <a href="https://qcrawl.com">qcrawl.com</a> (scraping). Open to a small pre-seed if you want to be early on the three together.</div>
+
+      <div class="card" style="padding:0;margin-top:32px;overflow:hidden">
+        <table class="surface-tbl">
+          <tbody>
+            <tr>
+              <th>Resolvers</th>
+              <td>DoH, DoT, DoQ at <code>dns.olladns.com</code> · per-tenant routing via path UUID · per-device routing
+                via <code>&lt;uuid&gt;--&lt;slug&gt;</code></td>
+            </tr>
+            <tr>
+              <th>REST API</th>
+              <td>57 endpoints at <code>api.olladns.com/api/v1</code> · OpenAPI 3.1 spec at <code>/openapi.json</code> ·
+                <code>x-required-scopes</code> on every secured op · <code>/version</code> returns git SHA
+              </td>
+            </tr>
+            <tr>
+              <th>MCP server</th>
+              <td>49 tools at <code>mcp.olladns.com</code> · 5 hand-curated workflows · FastMCP-generated from OpenAPI ·
+                scope-gated per caller</td>
+            </tr>
+            <tr>
+              <th>Auth</th>
+              <td>JWT for humans (admin / viewer roles) · scoped API keys for agents · 16 scopes
+                (<code>analytics:read</code>, <code>policies:write</code>, …) · per-key expiry · last-used timestamps
+              </td>
+            </tr>
+            <tr>
+              <th>Policies</th>
+              <td>Custom rules (block / allow with wildcards) · DNS rewrites (A/AAAA/CNAME/NXDOMAIN/REFUSED) ·
+                safe-search · parental · blocked-services · NRD blocking · TLD blocking · allowlist-only mode ·
+                per-tenant protect-list</td>
+            </tr>
+            <tr>
+              <th>Threat intel</th>
+              <td>Inline DGA classifier (~280 LoC, threshold-tunable) · inline typosquat detector (~230 LoC) · 67-list
+                community blocklist catalog across 14 categories · per-tenant subscriptions reconciled every 5 min</td>
+            </tr>
+            <tr>
+              <th>Analytics</th>
+              <td>summary · top-domains · top-clients · top-devices · top-ai-tools · top-dga · top-typosquat · blocked ·
+                by-reason · latency · block-rate · CSV/NDJSON export · 1–365 day retention per tenant</td>
+            </tr>
+            <tr>
+              <th>Audit + events</th>
+              <td>Every mutation writes an audit-log row · HMAC-SHA256 signed outbound webhooks · wildcard event
+                subscriptions (<code>policy.*</code>, <code>threat.*</code>, <code>*</code>) · timestamp + replay
+                protection</td>
+            </tr>
+            <tr>
+              <th>Privacy</th>
+              <td>Per-tenant client-IP anonymization at ingest · per-tenant retention 1–365 days · bypass-bypass
+                blocklists (Tor + DoH)</td>
+            </tr>
+            <tr>
+              <th>Dashboard</th>
+              <td>Read-only Alpine.js SPA at <a href="https://login.olladns.com"><code>login.olladns.com</code></a> · 7
+                screens: Overview, Query Log, Threats, AI Detection, Devices, Policies, Audit Log · CSP-locked (no
+                inline scripts)</td>
+            </tr>
+            <tr>
+              <th>Open source</th>
+              <td>Full stack public on GitHub: Rust API, Postgres + ClickHouse migrations, FastMCP Python sidecar, Caddy
+                config, dashboard, docker-compose</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================ -->
+  <!-- HOW IT FITS YOUR STACK -->
+  <!-- ============================================ -->
+  <section class="section" style="padding-top:0">
+    <div class="container">
+      <div class="section-head">
+        <span class="eyebrow">How it fits your stack</span>
+        <h2>Three concrete usage patterns.</h2>
+      </div>
+      <div class="row row-3" style="margin-top:32px">
+        <div class="fit-card">
+          <h3>Policy-as-code from CI</h3>
+          <p>Keep your custom rules in <code>git</code>. On merge, your CI runs
+            <code>curl -X PUT api.olladns.com/api/v1/policies/custom-rules</code>. Diff between staging and prod. Roll
+            back via revert. Same scoped token per environment.
+          </p>
+        </div>
+        <div class="fit-card">
+          <h3>Agentic triage in Claude / Cursor</h3>
+          <p>Connect once in <code>mcp.json</code>. Ask your editor: <em>"Show me every DGA-flagged domain in the last
+              24h with score ≥ 0.85 and block them."</em> Three tool calls; one approval; landed in the audit log under
+            your agent token.</p>
+        </div>
+        <div class="fit-card">
+          <h3>Webhook fan-out to your SIEM</h3>
+          <p>Every audit event posts to your endpoint with HMAC-SHA256 signature, timestamp header, and event-name
+            header. Subscribe to <code>policy.*</code> for change-tracking, <code>threat.*</code> for live detection
+            alerts, <code>*</code> for everything.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================ -->
+  <!-- HONEST CURRENT STATE -->
+  <!-- ============================================ -->
+  <section class="section" style="padding-top:0">
+    <div class="container">
+      <div class="row row-2" style="gap:48px;align-items:flex-start">
+        <div>
+          <span class="eyebrow">Honest current state</span>
+          <h2 style="margin-top:14px;font-size:28px">The thing every other vendor's homepage hides.</h2>
+          <p style="color:var(--text-2);font-size:15.5px;line-height:1.65;margin-top:14px">
+            Read this before you evaluate us. We'd rather lose the deal at the top of the funnel than waste your
+            procurement team's time at the bottom.
+          </p>
+        </div>
+        <div class="card" style="padding:28px">
+          <div style="display:flex;flex-direction:column;gap:16px">
+            <div>
+              <div style="font-weight:600;color:var(--text)">v0.34 shipped May 2026</div>
+              <div class="muted" style="font-size:13px;margin-top:3px;line-height:1.55">Public <a
+                  href="/changelog.html">changelog</a> covers every version. <code
+                  style="font-family:var(--mono);font-size:11.5px">api.olladns.com/version</code> returns the git SHA of
+                what's actually running.</div>
+            </div>
+            <div>
+              <div style="font-weight:600;color:var(--text)">Pre-customer · pre-revenue · bootstrapped</div>
+              <div class="muted" style="font-size:13px;margin-top:3px;line-height:1.55">No real logo strip on this site.
+                Looking for 3&ndash;5 design partners (free Pro tier through 2026 in exchange for aggressive feedback +
+                roadmap influence).</div>
+            </div>
+            <div>
+              <div style="font-weight:600;color:var(--text)">SOC 2 Type II observation in progress</div>
+              <div class="muted" style="font-size:13px;margin-top:3px;line-height:1.55">Full Type II report Q3 2026. ISO
+                27001 not pursued yet. HIPAA BAA not offered today &mdash; ask if it's a requirement.</div>
+            </div>
+            <div>
+              <div style="font-weight:600;color:var(--text)">Single US region · no anycast</div>
+              <div class="muted" style="font-size:13px;margin-top:3px;line-height:1.55">EU-West region is the next infra
+                workstream. If sub-20ms p99 latency from Singapore is your gate, this is not the product for you today.
+              </div>
+            </div>
+            <div>
+              <div style="font-weight:600;color:var(--text)">No native desktop / mobile / router clients</div>
+              <div class="muted" style="font-size:13px;margin-top:3px;line-height:1.55">Roadmap: fork the MIT-licensed
+                <code style="font-family:var(--mono);font-size:11.5px">ctrld</code> Go agent (3 weeks of work, decision
+                locked). Until then, point any DoH-capable client at your tenant's DoH URL.
+              </div>
+            </div>
+            <div>
+              <div style="font-weight:600;color:var(--text)">Founder's other Rust SaaS</div>
+              <div class="muted" style="font-size:13px;margin-top:3px;line-height:1.55"><a
+                  href="https://24observe.com">24observe.com</a> (logs observability) and <a
+                  href="https://qcrawl.com">qcrawl.com</a> (scraping). Open to a small pre-seed if you want to be early
+                on the three together.</div>
+            </div>
           </div>
         </div>
       </div>
     </div>
-  </div>
-</section>
+  </section>
 
-<!-- ============================================ -->
-<!-- WHO THIS IS FOR / NOT FOR -->
-<!-- ============================================ -->
-<section class="section" style="padding-top:0">
-  <div class="container">
-    <div class="section-head">
-      <span class="eyebrow">Self-disqualify gracefully</span>
-      <h2>Who this is for. Who it's not.</h2>
-    </div>
-
-    <div class="qual" style="margin-top:32px">
-      <div class="qual-col yes">
-        <h3>Pick olladns if&hellip;</h3>
-        <ul>
-          <li>Your engineers live in Claude / Cursor / Continue / Cline and would rather ask their editor to change a policy than open another dashboard.</li>
-          <li>You want to mint a token per workload (CI, SOC tooling, AI agent, partner integration) with explicit scope grants.</li>
-          <li>You need to explain to your auditor why a given lookup was blocked &mdash; and "the vendor said so" isn't acceptable.</li>
-          <li>You have a brand worth protecting and want typosquat scored against <em>your</em> protect-list, not a generic feed.</li>
-          <li>You're a small/mid security team that values transparency + control over vendor pedigree.</li>
-          <li>You're operating in India or APAC and DPDP / data-residency conversations are near-term.</li>
-        </ul>
+  <!-- ============================================ -->
+  <!-- WHO THIS IS FOR / NOT FOR -->
+  <!-- ============================================ -->
+  <section class="section" style="padding-top:0">
+    <div class="container">
+      <div class="section-head">
+        <span class="eyebrow">Self-disqualify gracefully</span>
+        <h2>Who this is for. Who it's not.</h2>
       </div>
-      <div class="qual-col no">
-        <h3>Don't pick us if&hellip;</h3>
-        <ul>
-          <li>You need a CISO-grade vendor name today. We don't have brand recognition. Wait 12 months or pick NextDNS.</li>
-          <li>You need anycast from 100+ PoPs. Single US region. Pick NextDNS or Cloudflare Gateway.</li>
-          <li>Your procurement gate is SOC 2 Type II report. We're in observation; not landing until Q3 2026.</li>
-          <li>You need a native macOS / Windows / iOS / Android installer today. Manual DoH setup until the ctrld fork ships.</li>
-          <li>Your only operators are non-technical. The dashboard is read-only; config is API/MCP. If your humans don't write code or use AI editors, our product model is wrong for you.</li>
-        </ul>
+
+      <div class="qual" style="margin-top:32px">
+        <div class="qual-col yes">
+          <h3>Pick olladns if&hellip;</h3>
+          <ul>
+            <li>Your engineers live in Claude / Cursor / Continue / Cline and would rather ask their editor to change a
+              policy than open another dashboard.</li>
+            <li>You want to mint a token per workload (CI, SOC tooling, AI agent, partner integration) with explicit
+              scope grants.</li>
+            <li>You need to explain to your auditor why a given lookup was blocked &mdash; and "the vendor said so"
+              isn't acceptable.</li>
+            <li>You have a brand worth protecting and want typosquat scored against <em>your</em> protect-list, not a
+              generic feed.</li>
+            <li>You're a small/mid security team that values transparency + control over vendor pedigree.</li>
+            <li>You're operating in India or APAC and DPDP / data-residency conversations are near-term.</li>
+          </ul>
+        </div>
+        <div class="qual-col no">
+          <h3>Don't pick us if&hellip;</h3>
+          <ul>
+            <li>You need a CISO-grade vendor name today. We don't have brand recognition. Wait 12 months or pick
+              NextDNS.</li>
+            <li>You need anycast from 100+ PoPs. Single US region. Pick NextDNS or Cloudflare Gateway.</li>
+            <li>Your procurement gate is SOC 2 Type II report. We're in observation; not landing until Q3 2026.</li>
+            <li>You need a native macOS / Windows / iOS / Android installer today. Manual DoH setup until the ctrld fork
+              ships.</li>
+            <li>Your only operators are non-technical. The dashboard is read-only; config is API/MCP. If your humans
+              don't write code or use AI editors, our product model is wrong for you.</li>
+          </ul>
+        </div>
       </div>
     </div>
-  </div>
-</section>
+  </section>
 
-<!-- ============================================ -->
-<!-- CTA -->
-<!-- ============================================ -->
-<section class="section">
-  <div class="container">
-    <div class="cta-block">
-      <div style="font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);margin-bottom:12px">Design partner program · 3&ndash;5 spots</div>
-      <h2>Be early. Get a free Pro tier through 2026 and a real seat at the roadmap table.</h2>
-      <p class="lede">No demo theatre. A real evaluation: we set up your tenant, you point a single laptop or router at your DoH URL, and you tell us what's missing. Bring real DNS traffic if you can; the analytics populate within the hour. The first three teams who commit to weekly feedback get unlimited usage through end of 2026 plus quarterly roadmap input.</p>
-      <div class="cta">
-        <a class="btn primary lg" href="/contact.html">Apply to the program <span id="i-a4"></span></a>
-        <a class="btn lg" href="https://github.com/vikasswaminh/qdns">Read the source on GitHub</a>
+  <!-- ============================================ -->
+  <!-- CTA -->
+  <!-- ============================================ -->
+  <section class="section">
+    <div class="container">
+      <div class="cta-block">
+        <div
+          style="font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);margin-bottom:12px">
+          Design partner program · 3&ndash;5 spots</div>
+        <h2>Be early. Get a free Pro tier through 2026 and a real seat at the roadmap table.</h2>
+        <p class="lede">No demo theatre. A real evaluation: we set up your tenant, you point a single laptop or router
+          at your DoH URL, and you tell us what's missing. Bring real DNS traffic if you can; the analytics populate
+          within the hour. The first three teams who commit to weekly feedback get unlimited usage through end of 2026
+          plus quarterly roadmap input.</p>
+        <div class="cta">
+          <a class="btn primary lg" href="/contact.html">Apply to the program <span id="i-a4"></span></a>
+          <a class="btn lg" href="https://github.com/vikasswaminh/qdns">Read the source on GitHub</a>
+        </div>
+        <p class="muted" style="font-size:13px;margin-top:18px">Or just try the API yourself: <code
+            style="font-family:var(--mono);font-size:12px;background:var(--bg-2);padding:2px 7px;border-radius:4px">curl https://api.olladns.com/version</code>
+        </p>
       </div>
-      <p class="muted" style="font-size:13px;margin-top:18px">Or just try the API yourself: <code style="font-family:var(--mono);font-size:12px;background:var(--bg-2);padding:2px 7px;border-radius:4px">curl https://api.olladns.com/version</code></p>
     </div>
-  </div>
-</section>
+  </section>
 
-<div id="site-footer"></div>
+  <div id="site-footer"></div>
 
-<script src="/chrome.js?v=20260821"></script>
-<script>
-  mountChrome('home');
-  document.getElementById('i-arrow1').innerHTML = icon('arrow',{size:14});
-  for(const id of ['i-a4','i-api-arrow','i-mcp-arrow','i-wh-arrow']) document.getElementById(id).innerHTML = icon('arrow',{size:14});
-  document.getElementById('i-code-1').innerHTML = icon('code',{size:20});
-  document.getElementById('i-ai-1').innerHTML = icon('ai',{size:20});
-  document.getElementById('i-plug-1').innerHTML = icon('plug',{size:20});
-  document.getElementById('i-shield-status').innerHTML = icon('shield',{size:18});
-</script>
+  <script src="/chrome.js?v=20260821"></script>
+  <script>
+    mountChrome('home');
+    document.getElementById('i-arrow1').innerHTML = icon('arrow', { size: 14 });
+    for (const id of ['i-a4', 'i-api-arrow', 'i-mcp-arrow', 'i-wh-arrow']) document.getElementById(id).innerHTML = icon('arrow', { size: 14 });
+    document.getElementById('i-code-1').innerHTML = icon('code', { size: 20 });
+    document.getElementById('i-ai-1').innerHTML = icon('ai', { size: 20 });
+    document.getElementById('i-plug-1').innerHTML = icon('plug', { size: 20 });
+
+    // Hero DNS workflow diagram icons
+    document.getElementById('hd-ic-device').innerHTML = icon('devices', { size: 20 });
+    document.getElementById('hd-ic-shield').innerHTML = icon('shield-check', { size: 24, sw: 2.2 });
+    document.getElementById('hd-ic-lock').innerHTML = icon('lock', { size: 20 });
+    document.getElementById('hd-ic-globe').innerHTML = icon('globe', { size: 20 });
+    document.getElementById('hd-cap-resolve').innerHTML = icon('activity', { size: 12, sw: 2 }) + '<span>DNS Resolution</span>';
+    document.getElementById('hd-cap-block').innerHTML = icon('shield-alert', { size: 12, sw: 2 }) + '<span>Threat Blocking</span>';
+    document.getElementById('hd-cap-filter').innerHTML = icon('list', { size: 12, sw: 2 }) + '<span>Domain Filtering</span>';
+    document.getElementById('hd-cap-fast').innerHTML = icon('bolt', { size: 12, sw: 2 }) + '<span>Fast Response</span>';
+
+    // How OllaDNS works icons
+    document.getElementById('hiw-ic-device').innerHTML = icon('devices', { size: 20 });
+    document.getElementById('hiw-ic-shield').innerHTML = icon('shield-check', { size: 24, sw: 2.2 });
+    document.getElementById('hiw-ic-lock').innerHTML = icon('lock', { size: 20 });
+    document.getElementById('hiw-ic-globe').innerHTML = icon('globe', { size: 20 });
+    document.getElementById('hiw-cap-resolve').innerHTML = icon('activity', { size: 12, sw: 2 }) + '<span>DNS Resolution</span>';
+    document.getElementById('hiw-cap-block').innerHTML = icon('shield-alert', { size: 12, sw: 2 }) + '<span>Threat Blocking</span>';
+    document.getElementById('hiw-cap-filter').innerHTML = icon('list', { size: 12, sw: 2 }) + '<span>Domain Filtering</span>';
+    document.getElementById('hiw-cap-fast').innerHTML = icon('bolt', { size: 12, sw: 2 }) + '<span>Fast Response</span>';
+
+  </script>
 </body>
+
 </html>

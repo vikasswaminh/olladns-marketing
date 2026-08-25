@@ -22,7 +22,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;500;600;700;900&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="/site.css?v=20260822" />
+  <link rel="stylesheet" href="/site.css?v=20260821" />
   <style>
     .post-hero-desc {
       max-width: 68ch;
@@ -68,40 +68,15 @@
       top: 88px;
       max-height: calc(100vh - 120px);
       overflow: auto;
-      scrollbar-width: thin;
-      scrollbar-color: var(--line-2) transparent
-    }
-
-    .post-toc::-webkit-scrollbar {
-      width: 4px
-    }
-
-    .post-toc::-webkit-scrollbar-track {
-      background: transparent
-    }
-
-    .post-toc::-webkit-scrollbar-thumb {
-      background: var(--line-2);
-      border-radius: 4px
-    }
-
-    .post-toc-card {
-      background: var(--panel);
-      border: 1px solid var(--line);
-      border-radius: var(--r-lg);
-      padding: 20px 16px;
-      box-shadow: var(--shadow)
+      padding-right: 8px
     }
 
     .post-toc h4 {
-      font-size: 11px;
+      font-size: 12px;
       text-transform: uppercase;
-      letter-spacing: .14em;
-      color: var(--accent);
-      margin: 0 0 14px;
-      padding-bottom: 10px;
-      border-bottom: 1px solid var(--line);
-      font-weight: 700
+      letter-spacing: .1em;
+      color: var(--muted);
+      margin: 0 0 12px
     }
 
     .post-toc ul {
@@ -110,31 +85,21 @@
       padding: 0;
       display: flex;
       flex-direction: column;
-      gap: 2px
+      gap: 6px
     }
 
     .post-toc a {
       display: block;
       font-size: 13px;
       color: var(--text-2);
-      padding: 6px 10px;
+      padding: 5px 10px;
       border-radius: 6px;
-      border-left: 3px solid transparent;
-      transition: color var(--dur-fast) var(--ease), background var(--dur-fast) var(--ease), border-color var(--dur-fast) var(--ease);
-      text-decoration: none;
-      line-height: 1.45
+      border-left: 2px solid transparent
     }
 
     .post-toc a:hover {
       color: var(--accent);
-      background: var(--accent-soft)
-    }
-
-    .post-toc a.active {
-      color: var(--accent);
-      background: var(--accent-soft);
-      border-left-color: var(--accent);
-      font-weight: 600
+      background: var(--bg-2)
     }
 
     .post-body {
@@ -824,32 +789,7 @@
       }
 
       .post-toc {
-        position: static;
-        max-height: none;
-        overflow: visible
-      }
-
-      .post-toc-card {
-        padding: 16px
-      }
-
-      .post-toc ul {
-        flex-direction: row;
-        flex-wrap: wrap;
-        gap: 4px
-      }
-
-      .post-toc a {
-        font-size: 12px;
-        padding: 5px 8px;
-        border-left: none;
-        border: 1px solid var(--line);
-        border-radius: 999px
-      }
-
-      .post-toc a.active {
-        border-color: var(--accent-line);
-        background: var(--accent-soft)
+        display: none
       }
 
       .post-body {
@@ -907,31 +847,28 @@
     <div class="container">
       <div class="post-layout">
         <aside class="post-toc" aria-label="Table of contents">
-          <div class="post-toc-card">
-            <h4>On this page</h4>
-            <ul>
-              <li><a href="#key-takeaways-title">Key Takeaways</a></li>
-              <li><a href="#front-door">The Front Door Nobody Locks</a></li>
-              <li><a href="#what-dns-does">What DNS Actually Does</a></li>
-              <li><a href="#what-is-dns-firewall">What Is a DNS Firewall?</a></li>
-              <li><a href="#how-it-works">How It Works, Step by Step</a></li>
-              <li><a href="#rpz">Response Policy Zones (RPZ)</a></li>
-              <li><a href="#sinkholing">DNS Sinkholing</a></li>
-              <li><a href="#dga-detection">DGA Detection</a></li>
-              <li><a href="#phishing-lookalikes">Phishing and Lookalikes</a></li>
-              <li><a href="#tunneling-exfiltration">Tunneling and Exfiltration</a></li>
-              <li><a href="#vs-traditional-firewall">vs. Traditional Firewalls</a></li>
-              <li><a href="#vs-swg">vs. Secure Web Gateways</a></li>
-              <li><a href="#why-dns-target">Why DNS Is a Target</a></li>
-              <li><a href="#what-it-stops">What a DNS Firewall Stops</a></li>
-              <li><a href="#deployment">Deployment in Practice</a></li>
-              <li><a href="#checklist">Evaluating Providers</a></li>
-              <li><a href="#myths">Common Misconceptions</a></li>
-              <li><a href="#future">Where This Is Heading</a></li>
-              <li><a href="#faq">FAQ</a></li>
-              <li><a href="#conclusion">Conclusion</a></li>
-            </ul>
-          </div>
+          <h4>On this page</h4>
+          <ul>
+            <li><a href="#front-door">The Front Door Nobody Locks</a></li>
+            <li><a href="#what-dns-does">What DNS Actually Does</a></li>
+            <li><a href="#what-is-dns-firewall">What Is a DNS Firewall?</a></li>
+            <li><a href="#how-it-works">How It Works, Step by Step</a></li>
+            <li><a href="#rpz">Response Policy Zones (RPZ)</a></li>
+            <li><a href="#sinkholing">DNS Sinkholing</a></li>
+            <li><a href="#dga-detection">DGA Detection</a></li>
+            <li><a href="#phishing-lookalikes">Phishing and Lookalikes</a></li>
+            <li><a href="#tunneling-exfiltration">Tunneling and Exfiltration</a></li>
+            <li><a href="#vs-traditional-firewall">vs. Traditional Firewalls</a></li>
+            <li><a href="#vs-swg">vs. Secure Web Gateways</a></li>
+            <li><a href="#why-dns-target">Why DNS Is a Target</a></li>
+            <li><a href="#what-it-stops">What a DNS Firewall Stops</a></li>
+            <li><a href="#deployment">Deployment in Practice</a></li>
+            <li><a href="#checklist">Evaluating Providers</a></li>
+            <li><a href="#myths">Common Misconceptions</a></li>
+            <li><a href="#future">Where This Is Heading</a></li>
+            <li><a href="#faq">FAQ</a></li>
+            <li><a href="#conclusion">Conclusion</a></li>
+          </ul>
         </aside>
         <article class="post-body">
 
@@ -948,62 +885,6 @@
               intelligence feeds, <code>DGA</code> and behavioral detection, sinkholing), how they differ from
               traditional firewalls and secure web gateways, what a real deployment looks like, and how to tell a
               genuinely capable DNS firewall from a glorified blocklist wearing a marketing deck.</p>
-          </div>
-
-
-          <div class="kt-wrap" aria-labelledby="key-takeaways-title">
-            <div class="kt-head">
-              <span class="kt-icon" aria-hidden="true">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                  stroke-linejoin="round">
-                  <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
-                  <path d="m9 12 2 2 4-4"></path>
-                </svg>
-              </span>
-              <h2 class="kt-title" id="key-takeaways-title">Key Takeaways</h2>
-            </div>
-            <div class="kt-grid">
-              <div class="kt-item"><span class="kt-num">1</span>
-                <div class="kt-body">
-                  <h4>What Is a DNS Firewall and How Does It Work?</h4>
-                  <p>A DNS firewall inspects domain-name requests and blocks malicious domains before a connection is
-                    established, helping stop malware, phishing, ransomware, and command-and-control (C2) traffic at the
-                    DNS layer.</p>
-                </div>
-              </div>
-              <div class="kt-item"><span class="kt-num">2</span>
-                <div class="kt-body">
-                  <h4>DNS Firewall vs. Traditional Firewall</h4>
-                  <p>A traditional firewall primarily filters IP addresses, ports, and network traffic, while a DNS
-                    firewall evaluates domain names and DNS requests. Using both provides layered protection against
-                    threats that can evade IP-based blocking.</p>
-                </div>
-              </div>
-              <div class="kt-item"><span class="kt-num">3</span>
-                <div class="kt-body">
-                  <h4>DNS Firewalls Protect Against Modern Cyber Threats</h4>
-                  <p>Advanced DNS security can detect and block malware C2 domains, phishing websites, DGA-generated
-                    domains, DNS tunneling, botnets, and lookalike domains—including threats that may not yet appear on
-                    traditional blocklists.</p>
-                </div>
-              </div>
-              <div class="kt-item"><span class="kt-num">4</span>
-                <div class="kt-body">
-                  <h4>DNS Filtering and Protective DNS Stop Threats Early</h4>
-                  <p>Because DNS resolution happens before most network connections, DNS filtering can prevent users and
-                    infected devices from reaching malicious infrastructure. This provides broad protection across
-                    managed devices, IoT devices, BYOD, and roaming endpoints.</p>
-                </div>
-              </div>
-              <div class="kt-item"><span class="kt-num">5</span>
-                <div class="kt-body">
-                  <h4>Key DNS Firewall Features to Look For</h4>
-                  <p>A strong DNS firewall should offer real-time threat intelligence, DGA and behavioral detection, DNS
-                    tunneling detection, RPZ support, DNS sinkholing, roaming-device protection, SIEM integration,
-                    identity-based policies, and low-latency DNS resolution.</p>
-                </div>
-              </div>
-            </div>
           </div>
 
           <section class="post-section" id="front-door">
@@ -1189,8 +1070,7 @@
               such a genuinely critical differentiator between DNS firewall providers — the <code>RPZ</code> mechanism
               itself is fast, but it's only as protective as the intelligence feeding it. An <code>RPZ</code> populated
               by a threat feed that updates once a day is a very different product from one populated by a detection
-              engine flagging newly registered malicious infrastructure within minutes.
-            </p>
+              engine flagging newly registered malicious infrastructure within minutes.</p>
             <p><code>RPZ</code> is also flexible in a way that matters for real-world deployment. Policies can be
               layered — a base policy that applies to the whole organization, with more specific overrides for
               particular groups, sites, or device types — which is exactly how tiered security policy (stricter rules
@@ -1442,8 +1322,7 @@ reply-from-authoritative.evil.com</code></pre>
                   latency, less infrastructure, and coverage that extends to protocols beyond just web browsing —
                   <code>DNS</code> tunneling attempts and malware <code>C2</code> traffic that has nothing to do with
                   <code>HTTP</code> still get caught, because DNS resolution happens regardless of what the eventual
-                  connection is going to carry.
-                </p>
+                  connection is going to carry.</p>
               </div>
               <div class="concept-card">
                 <div class="concept-ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none"
@@ -1557,8 +1436,7 @@ reply-from-authoritative.evil.com</code></pre>
                 <p>Freshly registered, lookalike vendor and partner domains are the backbone of a huge share of
                   <code>BEC</code> attacks. Flagging newly registered domains that closely resemble known business
                   relationships, before an invoice-change email even lands convincingly, closes off one of the more
-                  financially damaging attack categories in circulation today.
-                </p>
+                  financially damaging attack categories in circulation today.</p>
               </div>
               <div class="tech-card">
                 <div class="tech-ic">🤖</div>
@@ -1762,8 +1640,7 @@ reply-from-authoritative.evil.com</code></pre>
                     legitimate immediately, tunneling patterns hidden inside otherwise unremarkable-looking queries. The
                     obviously bad domains were never really the hard problem; static blocklists have handled those
                     reasonably well for years. The genuinely dangerous threats are the ones engineered specifically to
-                    look unremarkable, and that's exactly where behavioral detection earns its keep.
-                  </p>
+                    look unremarkable, and that's exactly where behavioral detection earns its keep.</p>
                 </div>
               </details>
             </div>
@@ -1838,8 +1715,7 @@ reply-from-authoritative.evil.com</code></pre>
                     tools only see activity on devices that have the software installed, leaving guest devices,
                     <code>IoT</code> hardware, and unmanaged <code>BYOD</code> completely uncovered. A DNS firewall
                     protects any device making a DNS query, regardless of whether it has any security software on it at
-                    all.
-                  </p>
+                    all.</p>
                 </div>
               </details>
               <details>
@@ -1957,35 +1833,6 @@ reply-from-authoritative.evil.com</code></pre>
       window.scrollTo({ top, behavior: 'smooth' });
       if (history.pushState) history.pushState(null, '', link.getAttribute('href'));
     });
-
-    // Active section tracking for TOC
-    (function () {
-      var tocLinks = document.querySelectorAll('.post-toc a[href^="#"]');
-      if (!tocLinks.length) return;
-      var sections = [];
-      for (var i = 0; i < tocLinks.length; i++) {
-        var sec = document.querySelector(tocLinks[i].getAttribute('href'));
-        if (sec) sections.push(sec);
-        else sections.push(null);
-      }
-      var currentActive = null;
-      function setActive() {
-        var newActive = null;
-        for (var i = sections.length - 1; i >= 0; i--) {
-          if (sections[i] && sections[i].getBoundingClientRect().top <= 120) {
-            newActive = tocLinks[i];
-            break;
-          }
-        }
-        if (newActive !== currentActive) {
-          if (currentActive) currentActive.classList.remove('active');
-          if (newActive) newActive.classList.add('active');
-          currentActive = newActive;
-        }
-      }
-      window.addEventListener('scroll', setActive, { passive: true });
-      setActive();
-    })();
   </script>
 </body>
 

@@ -1419,3 +1419,126 @@ code,
     font-size: 13.5px;
   }
 }
+
+/* ===== Premium Terminal Setup Section ===== */
+.premium-terminal-section {
+  padding: 80px 0;
+  position: relative;
+}
+
+.premium-terminal-wrapper {
+  max-width: 1040px;
+  margin: 0 auto;
+  position: relative;
+}
+
+/* Glowing blur behind the terminal */
+.premium-terminal-wrapper::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 80%;
+  height: 80%;
+  background: radial-gradient(circle at 50% 50%, rgba(218, 41, 28, 0.15), rgba(31, 79, 216, 0.1), transparent 70%);
+  filter: blur(60px);
+  z-index: 0;
+  pointer-events: none;
+}
+
+.premium-terminal {
+  position: relative;
+  z-index: 1;
+  background: var(--panel); /* Match website background */
+  border-radius: 16px;
+  border: 1px solid var(--line);
+  box-shadow: var(--shadow-lg, 0 10px 30px rgba(0, 0, 0, 0.08));
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.terminal-header {
+  display: flex;
+  align-items: center;
+  padding: 14px 20px;
+  background: var(--bg-1);
+  border-bottom: 1px solid var(--line);
+}
+
+.terminal-dots {
+  display: flex;
+  gap: 8px;
+}
+
+.terminal-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+}
+
+.terminal-dot.r { background: #ff5f56; }
+.terminal-dot.y { background: #ffbd2e; }
+.terminal-dot.g { background: #27c93f; }
+
+.terminal-title {
+  margin: 0 auto;
+  font-family: var(--mono);
+  font-size: 13px;
+  color: var(--muted);
+  letter-spacing: 0.05em;
+  transform: translateX(-24px); /* offset for the dots */
+}
+
+.terminal-body {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  min-height: 380px;
+}
+
+@media (max-width: 900px) {
+  .terminal-body {
+    grid-template-columns: 1fr;
+  }
+}
+
+.terminal-pane {
+  padding: 32px;
+  font-family: var(--mono);
+  font-size: 14px;
+  line-height: 1.6;
+  color: var(--text);
+  overflow-x: auto;
+}
+
+.terminal-pane.request {
+  background: var(--bg-0);
+}
+
+.terminal-pane.response {
+  background: var(--panel);
+  border-left: 1px solid var(--line);
+}
+
+@media (max-width: 900px) {
+  .terminal-pane.response {
+    border-left: none;
+    border-top: 1px solid var(--line);
+  }
+}
+
+/* Syntax Highlighting (Light theme) */
+.t-prompt { color: var(--accent); font-weight: 600; margin-right: 12px; user-select: none; }
+.t-cmd { color: #005cc5; }
+.t-arg { color: #d73a49; }
+.t-str { color: #032f62; }
+.t-key { color: #22863a; }
+.t-val { color: #b31d28; }
+.t-num { color: #005cc5; }
+.t-comment { color: var(--muted); font-style: italic; }
+
+.terminal-pane pre {
+  margin: 0;
+  white-space: pre-wrap;
+}

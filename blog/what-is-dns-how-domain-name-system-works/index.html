@@ -21,441 +21,155 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;500;600;700;900&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="/site.css?v=20260822" />
+  <link rel="stylesheet" href="/site.css?v=20260821" />
   <style>
-    /* =====================================================
-       Blog Post — Premium Article Layout
-       Only scoped to this page; does not affect site.css
-       ===================================================== */
-
-    /* ── Hero ── */
-    .bp-hero {
-      background: #fff;
-      border-bottom: 1px solid var(--line);
-      padding: 52px 0 44px;
-    }
-
-    .bp-hero-inner {
-      max-width: 800px;
-      margin: 0 auto;
-      padding: 0 24px;
-    }
-
-    .bp-breadcrumb {
+    .post-meta {
       display: flex;
       align-items: center;
-      gap: 6px;
-      font-size: 13px;
+      gap: 18px;
+      flex-wrap: wrap;
+      margin-top: 18px;
       color: var(--muted);
-      margin-bottom: 20px;
+      font-size: 14px
     }
 
-    .bp-breadcrumb a {
-      color: var(--muted);
-      transition: color .15s;
-    }
-
-    .bp-breadcrumb a:hover {
-      color: var(--accent);
-    }
-
-    .bp-breadcrumb-sep {
-      color: var(--line-2);
-      font-size: 16px;
-      line-height: 1;
-    }
-
-    .bp-category-badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 5px;
-      padding: 3px 10px;
-      background: var(--accent-soft);
-      color: var(--accent);
-      border: 1px solid var(--accent-line);
-      border-radius: 999px;
+    .post-meta .tag {
       font-family: var(--mono);
       font-size: 11px;
-      font-weight: 600;
-      letter-spacing: .09em;
-      text-transform: uppercase;
-    }
-
-    .bp-title {
-      font-size: 48px;
-      line-height: 1.1;
-      letter-spacing: -.025em;
-      font-weight: 800;
-      color: var(--text-strong);
-      margin: 18px 0 0;
-      max-width: 22ch;
-    }
-
-    .bp-meta-row {
-      display: flex;
-      align-items: center;
-      flex-wrap: wrap;
-      gap: 6px 20px;
-      margin-top: 20px;
-    }
-
-    .bp-meta-item {
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      font-size: 13.5px;
-      color: var(--muted);
-    }
-
-    .bp-meta-dot {
-      width: 3px;
-      height: 3px;
-      border-radius: 50%;
-      background: var(--dim);
-    }
-
-    .bp-meta-item strong {
-      color: var(--text-2);
-      font-weight: 600;
-    }
-
-    /* ── Article + Sidebar two-column ── */
-    .bp-layout {
-      background: #fafafa;
-      padding: 56px 0 80px;
-    }
-
-    .bp-layout-inner {
-      max-width: 1100px;
-      margin: 0 auto;
-      padding: 0 24px;
-      display: grid;
-      grid-template-columns: 1fr 220px;
-      gap: 56px;
-      align-items: start;
-    }
-
-    /* ── Article body ── */
-    .bp-article {
-      background: #fff;
-      border: 1px solid var(--line);
-      border-radius: 12px;
-      padding: 48px 52px;
-      min-width: 0;
-    }
-
-    .bp-article p {
-      font-size: 17px;
-      line-height: 1.78;
-      color: #374151;
-      margin: 0 0 20px;
-    }
-
-    .bp-article .lede {
-      font-size: 19px;
-      line-height: 1.7;
-      color: var(--text);
-      margin-bottom: 32px;
-      font-weight: 400;
-    }
-
-    /* Heading hierarchy in article */
-    .bp-article h2 {
-      font-size: 28px;
-      font-weight: 700;
-      color: var(--text-strong);
-      letter-spacing: -.02em;
-      line-height: 1.25;
-      margin: 52px 0 16px;
-      padding-bottom: 10px;
-      border-bottom: 1px solid var(--line);
-    }
-
-    .bp-article h2:first-child {
-      margin-top: 0;
-    }
-
-    .bp-article h3 {
-      font-size: 20px;
-      font-weight: 700;
-      color: var(--text);
-      letter-spacing: -.015em;
-      line-height: 1.3;
-      margin: 36px 0 12px;
-    }
-
-    .bp-article h4 {
-      font-size: 16px;
-      font-weight: 700;
-      color: var(--text);
-      margin: 24px 0 8px;
-    }
-
-    /* Lists */
-    .bp-article ul,
-    .bp-article ol {
-      margin: 0 0 22px;
-      padding-left: 28px;
-      color: #374151;
-      font-size: 17px;
-      line-height: 1.78;
-    }
-
-    .bp-article li {
-      margin-bottom: 10px;
-    }
-
-    .bp-article li:last-child {
-      margin-bottom: 0;
-    }
-
-    /* Inline code */
-    .bp-article code {
-      font-family: var(--mono);
-      font-size: 13.5px;
-      background: #fdf2f2;
-      color: #b91c1c;
-      border: 1px solid rgba(218, 41, 28, .18);
-      padding: 2px 7px;
-      border-radius: 5px;
-    }
-
-    /* Code blocks */
-    .bp-article pre {
-      background: #0f172a;
-      border: 1px solid #1e293b;
-      border-radius: 10px;
-      padding: 22px 24px;
-      overflow-x: auto;
-      margin: 28px 0;
-      box-shadow: 0 4px 16px rgba(0, 0, 0, .15);
-    }
-
-    .bp-article pre code {
-      background: transparent;
-      color: #e2e8f0;
-      border: none;
-      padding: 0;
-      font-size: 13.5px;
-      line-height: 1.7;
-    }
-
-    /* Blockquote */
-    .bp-article blockquote {
-      border-left: 3px solid var(--accent);
-      margin: 28px 0;
-      padding: 14px 22px;
-      background: var(--accent-soft);
-      border-radius: 0 8px 8px 0;
-      color: var(--text-2);
-      font-style: italic;
-      font-size: 16.5px;
-    }
-
-    /* Links in article */
-    .bp-article a {
       color: var(--accent);
-      text-decoration: underline;
-      text-decoration-color: rgba(218, 41, 28, .3);
-      text-underline-offset: 2px;
-      transition: text-decoration-color .15s;
+      text-transform: uppercase;
+      letter-spacing: .08em
     }
 
-    .bp-article a:hover {
-      text-decoration-color: var(--accent);
+    .post-thumb {
+      aspect-ratio: 16/9;
+      background: var(--bg-2);
+      border-radius: var(--r-md);
+      overflow: hidden;
+      border: 1px solid var(--line);
+      margin-bottom: 36px
     }
 
-    /* Loose text nodes directly in article that aren't in a <p> */
-    .bp-article> :not(p):not(h2):not(h3):not(h4):not(ul):not(ol):not(pre):not(blockquote):not(div) {
-      font-size: 17px;
-      line-height: 1.78;
-      color: #374151;
-      display: block;
-      margin-bottom: 20px;
+    .post-thumb img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block
     }
 
-    /* ── Author strip ── */
-    .bp-author {
+    .post-body {
+      max-width: 720px;
+      margin: 0 auto
+    }
+
+    .post-body h2 {
+      font-size: 24px;
+      margin: 42px 0 16px;
+      color: var(--text)
+    }
+
+    .post-body h3 {
+      font-size: 18px;
+      margin: 32px 0 12px;
+      color: var(--text)
+    }
+
+    .post-body p {
+      font-size: 15.5px;
+      line-height: 1.7;
+      color: var(--text-2);
+      margin: 0 0 18px
+    }
+
+    .post-body .lede {
+      font-size: 18px;
+      color: var(--text);
+      line-height: 1.7;
+      margin-bottom: 28px
+    }
+
+    .post-body ul,
+    .post-body ol {
+      margin: 0 0 20px;
+      padding-left: 24px;
+      color: var(--text-2);
+      font-size: 15.5px;
+      line-height: 1.7
+    }
+
+    .post-body li {
+      margin-bottom: 8px
+    }
+
+    .post-body code {
+      font-family: var(--mono);
+      font-size: 13px;
+      background: var(--bg-2);
+      padding: 2px 6px;
+      border-radius: 4px;
+      color: var(--text)
+    }
+
+    .post-body pre {
+      background: var(--bg-1);
+      border: 1px solid var(--line);
+      border-radius: var(--r-md);
+      padding: 18px;
+      overflow-x: auto;
+      margin: 22px 0
+    }
+
+    .post-body pre code {
+      background: transparent;
+      padding: 0
+    }
+
+    .post-body blockquote {
+      border-left: 3px solid var(--accent);
+      margin: 24px 0;
+      padding-left: 20px;
+      color: var(--muted);
+      font-style: italic
+    }
+
+    .post-author {
       display: flex;
       align-items: center;
-      gap: 14px;
-      margin-top: 48px;
-      padding-top: 32px;
-      border-top: 1px solid var(--line);
+      gap: 12px;
+      margin-top: 32px;
+      color: var(--muted);
+      font-size: 14px
     }
 
-    .bp-author-avatar {
-      width: 40px;
-      height: 40px;
+    .post-author .dot {
+      width: 32px;
+      height: 32px;
       border-radius: 50%;
-      background: var(--accent);
-      color: #fff;
+      background: var(--accent-soft);
+      color: var(--accent);
       display: grid;
       place-items: center;
       font-weight: 700;
-      font-size: 14px;
-      flex-shrink: 0;
+      font-size: 13px
     }
 
-    .bp-author-name {
-      font-size: 14px;
-      color: var(--text-2);
-      line-height: 1.4;
-    }
-
-    .bp-author-name strong {
-      color: var(--text);
-      font-weight: 600;
-    }
-
-    /* ── Post navigation ── */
-    .bp-post-nav {
+    .post-nav {
       display: flex;
       justify-content: space-between;
       gap: 16px;
-      margin-top: 40px;
+      margin-top: 56px;
       padding-top: 24px;
-      border-top: 1px solid var(--line);
+      border-top: 1px solid var(--line)
     }
 
-    .bp-post-nav a {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
+    .post-nav a {
       color: var(--accent);
       font-size: 14px;
-      font-weight: 500;
-      text-decoration: none;
-      transition: gap .15s;
+      font-weight: 500
     }
 
-    .bp-post-nav a:hover {
-      text-decoration: underline;
-      gap: 9px;
-    }
-
-    /* ── Sidebar ── */
-    .bp-sidebar {
-      position: sticky;
-      top: 88px;
-    }
-
-    .bp-toc {
-      background: #fff;
-      border: 1px solid var(--line);
-      border-radius: 10px;
-      padding: 20px 22px;
-    }
-
-    .bp-toc-label {
-      font-size: 11px;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: .12em;
-      color: var(--muted);
-      margin-bottom: 14px;
-      display: block;
-    }
-
-    .bp-toc-list {
-      list-style: none;
-      margin: 0;
-      padding: 0;
-      display: flex;
-      flex-direction: column;
-      gap: 2px;
-    }
-
-    .bp-toc-list li a {
-      display: block;
-      font-size: 13px;
-      color: var(--text-2);
-      padding: 5px 8px;
-      border-radius: 5px;
-      text-decoration: none;
-      line-height: 1.4;
-      transition: background .12s, color .12s;
-    }
-
-    .bp-toc-list li a:hover {
-      background: var(--bg-2);
-      color: var(--accent);
-    }
-
-    .bp-toc-list li a.active {
-      background: var(--accent-soft);
-      color: var(--accent);
-      font-weight: 600;
-    }
-
-    /* ── Responsive ── */
-    @media (max-width: 1024px) {
-      .bp-layout-inner {
-        grid-template-columns: 1fr;
-        gap: 32px;
-        max-width: 800px;
-      }
-
-      .bp-sidebar {
-        position: static;
-        order: -1;
-      }
-
-      .bp-toc {
-        background: var(--bg-1);
-      }
-    }
-
-    @media (max-width: 768px) {
-      .bp-hero {
-        padding: 36px 0 30px;
-      }
-
-      .bp-title {
-        font-size: 34px;
-      }
-
-      .bp-article {
-        padding: 28px 22px;
-        border-radius: 8px;
-      }
-
-      .bp-article h2 {
-        font-size: 23px;
-        margin-top: 40px;
-      }
-
-      .bp-article h3 {
-        font-size: 18px;
-      }
-
-      .bp-article p,
-      .bp-article ul,
-      .bp-article ol {
-        font-size: 16px;
-      }
-
-      .bp-layout {
-        padding: 32px 0 56px;
-      }
-    }
-
-    @media (max-width: 480px) {
-      .bp-title {
-        font-size: 28px;
-      }
-
-      .bp-article {
-        padding: 20px 16px;
-      }
-
-      .bp-article h2 {
-        font-size: 21px;
-      }
-
-      .bp-meta-row {
-        gap: 6px 12px;
-      }
+    .post-nav a:hover {
+      text-decoration: underline
     }
   </style>
 </head>
@@ -464,116 +178,40 @@
 
   <div id="site-nav"></div>
 
-  <!-- ── Blog Hero ── -->
-  <header class="bp-hero">
-    <div class="bp-hero-inner">
-      <nav class="bp-breadcrumb" aria-label="Breadcrumb">
-        <a href="/blog/">Blog</a>
-        <span class="bp-breadcrumb-sep" aria-hidden="true">/</span>
-        <span>Guide</span>
-      </nav>
-      <span class="bp-category-badge">Guide</span>
-      <h1 class="bp-title">What Is DNS? How the Domain Name System Works</h1>
-      <div class="bp-meta-row">
-        <span class="bp-meta-item">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"
-            stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-            <rect x="3" y="4" width="18" height="18" rx="2" />
-            <line x1="16" y1="2" x2="16" y2="6" />
-            <line x1="8" y1="2" x2="8" y2="6" />
-            <line x1="3" y1="10" x2="21" y2="10" />
-          </svg>
-          Aug 20, 2026
-        </span>
-        <span class="bp-meta-dot" aria-hidden="true"></span>
-        <span class="bp-meta-item">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"
-            stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-            <circle cx="12" cy="12" r="10" />
-            <polyline points="12 6 12 12 16 14" />
-          </svg>
-          19 min read
-        </span>
-        <span class="bp-meta-dot" aria-hidden="true"></span>
-        <span class="bp-meta-item">by <strong>olladns Security Team</strong></span>
+
+  <section class="page-hero" style="padding-bottom:40px">
+    <div class="grid-bg"></div>
+    <div class="container" style="position:relative">
+      <span class="eyebrow"><a href="/blog/" style="color:inherit">Blog</a></span>
+      <h1 class="gradient-text">What Is DNS? How the Domain Name System Works</h1>
+      <div class="post-meta">
+        <span class="tag">Guide</span>
+        <span>Aug 20, 2026</span>
+        <span>19 min read</span>
+        <span>by olladns Security Team</span>
       </div>
     </div>
-  </header>
+  </section>
 
-  <!-- ── Article + Sidebar ── -->
-  <div class="bp-layout">
-    <div class="bp-layout-inner">
-
-      <!-- Article -->
-      <article class="bp-article" id="bp-article">
+  <section class="section" style="padding-top:0">
+    <div class="container">
+      <article class="post-body">
+        <div class="post-thumb">
+          <img
+            src="data:image/svg+xml,%3Csvg%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%20width%3D'1280'%20height%3D'720'%3E%3Crect%20fill%3D'%2523f4f4f5'%20width%3D'1280'%20height%3D'720'%2F%3E%3Ctext%20fill%3D'%2523DA291C'%20font-family%3D'sans-serif'%20font-size%3D'28'%20font-weight%3D'600'%20x%3D'640'%20y%3D'370'%20text-anchor%3D'middle'%3EDNS%3C%2Ftext%3E%3C%2Fsvg%3E"
+            alt="What Is DNS? How the Domain Name System Works" />
+        </div>
 
         <p>DNS (Domain Name System) is the internet's address book. It translates human-friendly names like
           <code>olladns.com</code> into the numeric IP addresses computers use to find each other. Every time you open a
           browser tab, DNS runs a lightning-fast relay through resolvers, root servers, TLD servers, and authoritative
           servers, usually finishing in under 100 milliseconds. Because almost nothing on the internet happens without a
           DNS lookup first, DNS is also one of the earliest, cheapest places to stop phishing, malware, and
-          command-and-control traffic before it reaches a device.
-        </p>
-
-
-        <div class="kt-wrap" aria-labelledby="key-takeaways-title">
-          <div class="kt-head">
-            <span class="kt-icon" aria-hidden="true">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                stroke-linejoin="round">
-                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
-                <path d="m9 12 2 2 4-4"></path>
-              </svg>
-            </span>
-            <h2 class="kt-title" id="key-takeaways-title">Key Takeaways</h2>
-          </div>
-          <div class="kt-grid">
-            <div class="kt-item"><span class="kt-num">1</span>
-              <div class="kt-body">
-                <h4>What Is DNS? The Domain Name System Explained</h4>
-                <p>DNS translates human-readable domain names such as olladns.com into IP addresses that computers use
-                  to locate and connect to servers.</p>
-              </div>
-            </div>
-            <div class="kt-item"><span class="kt-num">2</span>
-              <div class="kt-body">
-                <h4>How DNS Works: The DNS Lookup Process</h4>
-                <p>A DNS lookup typically moves through the DNS resolver, root server, TLD server, and authoritative
-                  name server to find the correct IP address. Understanding this process explains how websites are
-                  reached in milliseconds.</p>
-              </div>
-            </div>
-            <div class="kt-item"><span class="kt-num">3</span>
-              <div class="kt-body">
-                <h4>DNS Records & DNS Resolver: The Core of DNS Infrastructure</h4>
-                <p>DNS records such as A, AAAA, CNAME, MX, TXT, NS, and SOA provide different types of information,
-                  while recursive DNS resolvers retrieve and cache these records for faster future lookups.</p>
-              </div>
-            </div>
-            <div class="kt-item"><span class="kt-num">4</span>
-              <div class="kt-body">
-                <h4>DNS Caching, TTL & DNS Propagation Improve Internet Performance</h4>
-                <p>DNS caching stores lookup results according to their TTL (Time to Live), reducing repeated queries
-                  and speeding up connections. When DNS records change, TTL also determines how quickly those changes
-                  are reflected across resolvers.</p>
-              </div>
-            </div>
-            <div class="kt-item"><span class="kt-num">5</span>
-              <div class="kt-body">
-                <h4>DNS Security Protects Against Phishing, Malware & DNS Attacks</h4>
-                <p>DNS is more than an addressing system—it can be an important security layer. DNS filtering,
-                  protective DNS, DNSSEC, encrypted DNS (DoH/DoT/DoQ), and DNS monitoring can help detect or block
-                  phishing, malware, DNS cache poisoning, hijacking, and suspicious domains.</p>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <h2 id="sec-problem">The problem DNS was invented to solve</h2>
+          command-and-control traffic before it reaches a device.</p>
+        <h2>The problem DNS was invented to solve</h2>
         <p>Computers do not talk to each other using names. They use IP addresses — strings like
           <code>172.217.14.206</code> — that tell routers exactly where to send data. That addressing system is precise,
-          but humans are not built to memorize dotted strings of numbers.
-        </p>
+          but humans are not built to memorize dotted strings of numbers.</p>
         <p>In the early days of ARPANET, engineers maintained a single text file called <code>HOSTS.TXT</code> that
           mapped every machine's name to its number. Every computer periodically downloaded a fresh copy from a single
           machine at Stanford Research Institute. That approach worked for a few hundred hosts but collapsed at internet
@@ -582,8 +220,7 @@
           different parts of the namespace could be delegated across many servers. That proposal became the Domain Name
           System. Four decades later, it is still the same structure, resolving hundreds of billions of queries a day.
         </p>
-
-        <h2 id="sec-what-is-dns">What is DNS?</h2>
+        <h2>What is DNS?</h2>
         <p>At its simplest, DNS is a distributed directory service that maps human-readable domain names to the IP
           addresses computers use to route traffic. Type <code>olladns.com</code> into a browser, and DNS quietly
           answers the question "where, numerically, is that?" so your browser knows which server to connect to.</p>
@@ -592,60 +229,48 @@
           TXT records), and how to route subdomains (via NS records). It can also let one domain point to another
           without touching the destination server (via CNAME records). DNS is not just an address book — it is a full
           directory and routing layer for how the internet finds anything at all.</p>
-
-        <h2 id="sec-breakdown">Breaking down a domain name</h2>
+        <h2>Breaking down a domain name</h2>
         <p>Domain names are read from right to left, in the same order DNS processes them.</p>
         <p>Take <code>blog.olladns.com</code>:</p>
         <ul>
           <li><strong><code>.com</code></strong> is the top-level domain, or TLD. TLDs include <code>.com</code>,
             <code>.org</code>, <code>.net</code>, <code>.gov</code>, country codes like <code>.in</code> and
             <code>.uk</code>, and newer options like <code>.dev</code> and <code>.security</code>. Registries manage
-            TLDs, and ICANN coordinates the global namespace.
-          </li>
+            TLDs, and ICANN coordinates the global namespace.</li>
           <li><strong><code>olladns</code></strong> is the second-level domain. This is the part a business or
             individual registers through a domain registrar and carries the brand identity.</li>
           <li><strong><code>blog</code></strong> is a subdomain. The domain owner controls subdomains without additional
             registration. Companies use them constantly to separate services: <code>mail.company.com</code>,
-            <code>api.company.com</code>, <code>vpn.company.com</code>.
-          </li>
+            <code>api.company.com</code>, <code>vpn.company.com</code>.</li>
         </ul>
-        <p>This layered delegation is what makes DNS scale. Responsibility flows downward — ICANN and registries handle
-          TLDs, registrars and owners handle second-level domains, and owners handle their own subdomains.</p>
-
-        <h2 id="sec-lookup">Following one lookup, start to finish</h2>
+        This layered delegation is what makes DNS scale. Responsibility flows downward — ICANN and registries handle
+        TLDs, registrars and owners handle second-level domains, and owners handle their own subdomains.<h2>Following
+          one lookup, start to finish</h2>
         <p>DNS resolution feels like magic until you walk through it. Then it feels like a relay race.</p>
-
         <h3>Step one: local cache check</h3>
         <p>Your device checks whether it already knows the answer — first in the browser's DNS cache, then in the
           operating system's resolver cache. If you or someone on your network visited the domain recently, the answer
           may already be stored locally, and the rest of the process is skipped.</p>
-
         <h3>Step two: recursive resolver</h3>
         <p>If nothing is cached locally, the query is handed to a recursive resolver — a server whose job is to find the
           answer and bring it back. This might be your ISP's resolver, a public resolver like Cloudflare's
           <code>1.1.1.1</code> or Google's <code>8.8.8.8</code>, or a protective DNS resolver. Think of the recursive
           resolver as a determined assistant: you give it one question, and it does the legwork until it returns a final
-          answer.
-        </p>
-
+          answer.</p>
         <h3>Step three: root server</h3>
         <p>If the recursive resolver does not have the answer cached, it starts at the top of the hierarchy by querying
           a root server. There are only 13 root server addresses globally, though anycast routing means those addresses
           are served by hundreds of physical machines worldwide. The root server does not know where
           <code>olladns.com</code> lives. It only knows which server is responsible for the <code>.com</code> TLD, and
-          it points the resolver there.
-        </p>
-
+          it points the resolver there.</p>
         <h3>Step four: TLD server</h3>
         <p>The resolver now asks the <code>.com</code> TLD server. The TLD server also does not know the final answer,
           but it knows which name servers are authoritative for <code>olladns.com</code> because that information was
           registered when the domain was set up. It returns that referral.</p>
-
         <h3>Step five: authoritative name server</h3>
         <p>The resolver goes directly to the authoritative name server for <code>olladns.com</code>, typically run by
           the domain's DNS hosting provider. This server holds the actual DNS records and responds with the real IP
           address.</p>
-
         <h3>Step six: the answer returns</h3>
         <p>The recursive resolver hands the IP address back to your device. Your browser opens a connection to that
           address, and the page starts loading. Your device also caches the answer so the next lookup can skip some of
@@ -656,10 +281,8 @@
           expects a complete final answer. The resolver's queries to the root, TLD, and authoritative servers are
           <strong>iterative</strong> — each server may respond with "I don't know, but here's who to ask next." That
           division is deliberate. It keeps the root and TLD servers, which handle staggering global traffic, from doing
-          the heavy lifting of full recursive lookups themselves.
-        </p>
-
-        <h2 id="sec-caching">Why caching makes the internet faster</h2>
+          the heavy lifting of full recursive lookups themselves.</p>
+        <h2>Why caching makes the internet faster</h2>
         <p>If every DNS lookup ran that full relay from scratch, the internet would feel slower and the root and TLD
           servers would crumble under the load. Caching prevents that.</p>
         <p>Every DNS record carries a <strong>Time to Live (TTL)</strong> — a number in seconds that tells resolvers and
@@ -673,8 +296,7 @@
           its DNS record, that change propagates gradually as cached copies expire. This is why IT teams talk about "DNS
           propagation" taking anywhere from minutes to, in edge cases, a couple of days. Lowering a record's TTL before
           a planned migration shrinks the propagation window when you need it smallest.</p>
-
-        <h2 id="sec-records">The record types that make DNS work</h2>
+        <h2>The record types that make DNS work</h2>
         <p>A domain's DNS configuration is a collection of records, each answering a narrow question.</p>
         <ul>
           <li><strong>A record</strong>: Maps a domain to an IPv4 address.</li>
@@ -682,8 +304,7 @@
             migrating toward as IPv4's roughly 4.3 billion addresses run short.</li>
           <li><strong>CNAME record</strong>: Points a domain to another domain name instead of an IP. This lets
             <code>shop.company.com</code> quietly point to a third-party e-commerce platform without anyone needing to
-            update that platform's real IP address.
-          </li>
+            update that platform's real IP address.</li>
           <li><strong>MX record</strong>: Mail Exchange record. Tells the internet which mail server accepts email for a
             domain, with priority values so a primary and backups can be listed.</li>
           <li><strong>TXT record</strong>: Originally a general-purpose text field, now heavily used for security. SPF
@@ -701,10 +322,8 @@
           <li><strong>CAA record</strong>: Certificate Authority Authorization record. Specifies which certificate
             authorities are allowed to issue TLS certificates for the domain.</li>
         </ul>
-        <p>A, AAAA, CNAME, MX, TXT, NS, and SOA cover the overwhelming majority of day-to-day domain operations. PTR,
-          SRV, and CAA matter in more specialized cases.</p>
-
-        <h2 id="sec-resolvers">Who runs the resolvers you use</h2>
+        A, AAAA, CNAME, MX, TXT, NS, and SOA cover the overwhelming majority of day-to-day domain operations. PTR, SRV,
+        and CAA matter in more specialized cases.<h2>Who runs the resolvers you use</h2>
         <p>Every device needs a recursive resolver, and where it comes from matters.</p>
         <p>By default, most home and mobile connections use whatever resolver the ISP provides automatically. It
           requires no configuration, but the ISP can see every domain looked up, and there is usually no filtering or
@@ -712,15 +331,13 @@
         <p>Public resolvers changed that for many people. Cloudflare's <code>1.1.1.1</code>, Google's
           <code>8.8.8.8</code>, and Quad9's <code>9.9.9.9</code> are free, fast thanks to anycast infrastructure, and
           often advertise stronger privacy commitments than ISP resolvers. Some, like Quad9, also apply built-in
-          threat-intelligence filtering.
-        </p>
+          threat-intelligence filtering.</p>
         <p>Then there is the category that matters most in business: protective DNS resolvers, the category olladns
           operates in. These sit deliberately in the resolution path and treat every DNS query as a checkpoint. Because
           virtually nothing on a network happens without a DNS lookup — not a phishing page loading, not malware phoning
           home, not a browser being redirected to a lookalike login — that checkpoint is an efficient place to catch bad
           activity before any malicious payload reaches the device.</p>
-
-        <h2 id="sec-attack">DNS as an attack surface</h2>
+        <h2>DNS as an attack surface</h2>
         <p>DNS was designed in the early 1980s for a smaller, more trusting internet. Security was not the top priority.
           That history still has consequences.</p>
         <p><strong>DNS cache poisoning</strong> is one of the oldest attacks. An attacker forges a fake DNS response and
@@ -743,8 +360,7 @@
           malware phones home, before a phishing page loads, before data leaves a network — there is a DNS query. DNS is
           not just infrastructure that needs protection; it is one of the earliest, cheapest, highest-leverage places to
           stop an attack.</p>
-
-        <h2 id="sec-encryption">Encrypting DNS: DoH, DoT, and DoQ</h2>
+        <h2>Encrypting DNS: DoH, DoT, and DoQ</h2>
         <p>For most of DNS history, queries traveled in plain text. Anyone positioned on the network path could see
           which domains were being looked up, and in some cases tamper with responses. Three newer protocols close that
           gap.</p>
@@ -763,8 +379,7 @@
           protective DNS platforms solve this by natively supporting DoH, DoT, and DoQ themselves. The goal is not to
           fight encryption; it is to be the trusted, encrypted resolver that devices and managed clients are
           deliberately pointed at.</p>
-
-        <h2 id="sec-security-layer">DNS as a security layer, not just plumbing</h2>
+        <h2>DNS as a security layer, not just plumbing</h2>
         <p>DNS sits before almost everything else on a network. A firewall inspects traffic once a connection is
           underway. Endpoint protection inspects files once they have landed. An email gateway inspects a message once
           it has arrived. DNS, by contrast, is consulted before any of that — before the connection opens, before the
@@ -773,8 +388,7 @@
           or suspicious domain, stopping the connection before it opens. It is a low-friction control: point a network
           or fleet at a protective resolver and every device is covered, with nothing to install and no behavior change
           required.</p>
-
-        <h2 id="sec-breaks">When DNS breaks</h2>
+        <h2>When DNS breaks</h2>
         <p>DNS failures are deceptive because they tend to look like something else.</p>
         <p>A misconfigured DNS record can take a healthy website offline even though the server never went down. A DNS
           provider outage can knock out every domain that provider hosts at once. An expired domain registration can
@@ -784,16 +398,14 @@
           is down" or "I cannot get email." Diagnosing the real cause usually means checking DNS resolution directly
           with <code>dig</code> or <code>nslookup</code>, or a web-based DNS checker, before blaming a server, hosting
           provider, or application.</p>
-
-        <h2 id="sec-future">Where DNS is heading</h2>
+        <h2>Where DNS is heading</h2>
         <p>DNS is still fundamentally the same protocol Paul Mockapetris designed in 1983, but the layers built on it
           keep evolving. Encrypted DNS through DoH, DoT, and DoQ is becoming the default. DNSSEC is gaining adoption,
           adding cryptographic signing so resolvers can verify an answer came from the real authoritative source.
           Multi-signal protective DNS — combining real-time threat intelligence, domain-age signals, and behavioral
           detection — is becoming baseline for security-conscious organizations. And as more life moves through
           screenless connected devices, DNS remains the quiet mechanism figuring out where it all should connect.</p>
-
-        <h2 id="sec-myths">DNS myths worth retiring</h2>
+        <h2>DNS myths worth retiring</h2>
         <p>A few misconceptions circulate constantly. Clearing them up helps the whole picture click into place.</p>
         <ul>
           <li><strong>"DNS is just for websites."</strong> It never was. Email routing, certificate validation, load
@@ -812,8 +424,7 @@
             typically apply no security filtering, may log queries for advertising purposes, and were not designed with
             protective inspection in mind.</li>
         </ul>
-
-        <h2 id="sec-toolkit">A troubleshooting toolkit</h2>
+        <h2>A troubleshooting toolkit</h2>
         <p>When something DNS-shaped goes wrong, a small set of everyday tools does almost all the diagnostic work.</p>
         <p>Use <code>dig</code> or <code>nslookup</code> to query a specific DNS record directly and see what is being
           returned right now. Run a lookup against a specific resolver to check whether a change has propagated in one
@@ -821,60 +432,46 @@
           online propagation checkers to see whether an update has reached resolvers worldwide or whether some still
           hold stale cached answers. If you suspect unauthorized changes, check DNS settings at the registrar level
           directly — that is where core configuration changes are made.</p>
-
-        <h2 id="sec-faq">Frequently Asked Questions</h2>
-
+        <h2>Frequently Asked Questions</h2>
         <h3>What is DNS in simple terms?</h3>
         <p>DNS (Domain Name System) is the internet's address book. It translates human-friendly domain names like
-          <code>olladns.com</code> into the numeric IP addresses computers use to find and connect to each other.
-        </p>
-
+          <code>olladns.com</code> into the numeric IP addresses computers use to find and connect to each other.</p>
         <h3>What is a DNS server?</h3>
         <p>A DNS server stores or looks up DNS records. Recursive resolvers, root servers, TLD servers, and
           authoritative name servers each play different roles in answering a lookup.</p>
-
         <h3>What is the difference between DNS and an IP address?</h3>
         <p>An IP address is the actual numeric location of a device on the internet. DNS maps a human-readable name to
           that IP address so people do not have to memorize numbers.</p>
-
         <h3>What is a DNS resolver?</h3>
         <p>A DNS resolver, also called a recursive resolver, receives your device's query and does the work of tracking
           down the final answer, checking root, TLD, and authoritative servers as needed.</p>
-
         <h3>What are the main types of DNS records?</h3>
         <p>The most common are A (IPv4 address), AAAA (IPv6 address), CNAME (alias to another domain), MX (email
           routing), TXT (text data, often SPF/DKIM/DMARC), NS (authoritative name servers), and SOA (administrative zone
           info).</p>
-
         <h3>What is DNS caching and why does it matter?</h3>
         <p>Caching lets resolvers and devices temporarily store a DNS answer based on a record's TTL, instead of looking
           it up fresh every time. It is why the internet feels fast — most lookups are served from memory rather than
           running the full resolution chain.</p>
-
         <h3>What is DNS propagation and how long does it take?</h3>
         <p>Propagation is the time it takes a DNS change to reach every resolver worldwide, since each refreshes its
           cached copy only after the TTL expires. It typically takes a few minutes to 24–48 hours.</p>
-
         <h3>What is DNS cache poisoning?</h3>
         <p>An attacker sneaks a fake DNS response into a resolver's cache, redirecting users to a malicious server
           instead of the real one — often without any visible warning.</p>
-
         <h3>What is DNS hijacking?</h3>
         <p>DNS hijacking happens when an attacker alters a domain's actual DNS settings or a network's router
           configuration to redirect traffic maliciously, usually for a longer window than a single poisoned cache entry.
         </p>
-
         <h3>Is DNS a security risk?</h3>
         <p>DNS itself is not inherently risky, but because nearly every online action starts with a DNS lookup, it is a
           common target and one of the earliest points where phishing, malware callbacks, and lookalike domains can be
           caught.</p>
-
         <h3>Can DNS be used for security protection?</h3>
         <p>Yes. Protective DNS resolvers inspect and can block malicious or suspicious domains before a device connects
           to them, stopping phishing pages, malware command-and-control traffic, and lookalike domains at the earliest
           possible point.</p>
-
-        <h2 id="sec-takeaway">The takeaway</h2>
+        <h2>The takeaway</h2>
         <p>DNS is foundational yet almost invisible. It turns names into numbers through an elegantly delegated
           hierarchy, usually in the time it takes to blink. Because it happens before almost anything else on a network,
           it is also one of the highest-leverage places to catch trouble early: a phishing domain that never resolves, a
@@ -883,63 +480,22 @@
           tends to be one of the simplest, fastest, and most quietly effective controls a security team can put in
           place.</p>
 
-        <!-- Author -->
-        <div class="bp-author">
-          <div class="bp-author-avatar" aria-hidden="true">OS</div>
-          <div class="bp-author-name">
-            Written by <strong>olladns Security Team</strong> · Guide
-          </div>
+
+        <div class="post-author">
+          <span class="dot">OS</span>
+          <span>Written by <strong style="color:var(--text)">olladns Security Team</strong> · Guide</span>
         </div>
 
-        <!-- Post navigation -->
-        <nav class="bp-post-nav" aria-label="Post navigation">
-          <a href="/blog/what-is-dns-security-a-complete-guide-to-protecting-your-network-in-2026/">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-              stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-              <line x1="19" y1="12" x2="5" y2="12" />
-              <polyline points="12 19 5 12 12 5" />
-            </svg>
-            What Is DNS Security? A Complete Guide to Protecting Your Network in 2026
-          </a>
-          <a href="/blog/dns-firewall-explained-how-dns-firewalls-protect-networks/">
-            DNS Firewall Explained: How DNS Firewalls Protect Networks
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-              stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-              <line x1="5" y1="12" x2="19" y2="12" />
-              <polyline points="12 5 19 12 12 19" />
-            </svg>
-          </a>
-        </nav>
+        <div class="post-nav">
+          <a href="/blog/what-is-dns-security-a-complete-guide-to-protecting-your-network-in-2026/">← What Is DNS
+            Security? A Complete Guide to Protecting Your Network in 2026</a>
+          <a href="/blog/dns-firewall-explained-how-dns-firewalls-protect-networks/">DNS Firewall Explained: How DNS
+            Firewalls Protect Networks →</a>
+        </div>
       </article>
-
-      <!-- Sidebar -->
-      <aside class="bp-sidebar" aria-label="Table of contents">
-        <nav class="bp-toc" id="post-toc">
-          <span class="bp-toc-label">On This Page</span>
-          <ul class="bp-toc-list">
-            <li><a href="#key-takeaways-title">Key Takeaways</a></li>
-            <li><a href="#sec-problem">The problem DNS solved</a></li>
-            <li><a href="#sec-what-is-dns">What is DNS?</a></li>
-            <li><a href="#sec-breakdown">Breaking down a domain</a></li>
-            <li><a href="#sec-lookup">Following one lookup</a></li>
-            <li><a href="#sec-caching">Why caching matters</a></li>
-            <li><a href="#sec-records">Record types</a></li>
-            <li><a href="#sec-resolvers">Who runs the resolvers</a></li>
-            <li><a href="#sec-attack">DNS as attack surface</a></li>
-            <li><a href="#sec-encryption">DoH, DoT, and DoQ</a></li>
-            <li><a href="#sec-security-layer">DNS as security layer</a></li>
-            <li><a href="#sec-breaks">When DNS breaks</a></li>
-            <li><a href="#sec-future">Where DNS is heading</a></li>
-            <li><a href="#sec-myths">DNS myths</a></li>
-            <li><a href="#sec-toolkit">Troubleshooting toolkit</a></li>
-            <li><a href="#sec-faq">FAQ</a></li>
-            <li><a href="#sec-takeaway">The takeaway</a></li>
-          </ul>
-        </nav>
-      </aside>
-
     </div>
-  </div>
+  </section>
+
 
   <div id="site-footer"></div>
 
@@ -947,9 +503,8 @@
   <script>
     mountChrome('blog');
 
-    // Smooth scroll for TOC links
     document.addEventListener('click', function (e) {
-      const link = e.target.closest('#post-toc a[href^="#"]');
+      const link = e.target.closest('.post-toc a[href^="#"]');
       if (!link) return;
       const target = document.querySelector(link.getAttribute('href'));
       if (!target) return;
@@ -958,24 +513,6 @@
       window.scrollTo({ top, behavior: 'smooth' });
       if (history.pushState) history.pushState(null, '', link.getAttribute('href'));
     });
-
-    // Active TOC link highlight
-    (function () {
-      const tocLinks = document.querySelectorAll('#post-toc a[href^="#"]');
-      const headings = Array.from(tocLinks).map(l => document.querySelector(l.getAttribute('href'))).filter(Boolean);
-
-      function onScroll() {
-        const scrollY = window.scrollY + 120;
-        let active = headings[0];
-        for (const h of headings) {
-          if (h.getBoundingClientRect().top + window.scrollY <= scrollY) active = h;
-        }
-        tocLinks.forEach(l => l.classList.toggle('active', l.getAttribute('href') === '#' + active.id));
-      }
-
-      window.addEventListener('scroll', onScroll, { passive: true });
-      onScroll();
-    })();
   </script>
 </body>
 

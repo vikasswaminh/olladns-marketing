@@ -41,28 +41,311 @@
     .int-row .lo{width:36px;height:36px;border-radius:8px;background:var(--bg-3);display:grid;place-items:center;color:var(--accent);font-family:var(--mono);font-weight:600;font-size:13px;flex:none}
     .int-row .nm{font-weight:500;color:var(--text);font-size:14px}
     .int-row .su{color:var(--muted);font-size:12.5px;margin-top:1px}
+    /* Product Redesign CSS */
+    .arch-diag {
+      display: flex; flex-direction: column; align-items: center;
+      padding: 32px 20px; background: var(--bg-1);
+      border: 1px solid var(--line); border-radius: 12px;
+      font-family: var(--mono);
+    }
+    .ad-control { display: flex; gap: 10px; margin-bottom: 4px; }
+    .ad-c-box {
+      font-size: 11px; font-weight: 600; padding: 4px 12px;
+      background: var(--bg-2); border: 1px solid var(--line-2);
+      border-radius: 4px; color: var(--text-2); letter-spacing: 0.05em;
+    }
+    .ad-line-v { width: 1px; height: 20px; background: var(--line-2); }
+    .ad-req {
+      font-size: 11px; font-weight: 600; color: var(--text-2);
+      margin: 4px 0; letter-spacing: 0.05em;
+    }
+    .ad-node {
+      border: 1px solid var(--accent-line); background: var(--accent-soft);
+      padding: 18px 24px; border-radius: 8px; text-align: center;
+      width: 100%; max-width: 280px; margin: 4px 0;
+    }
+    .ad-node-title {
+      font-family: var(--font); font-size: 17px; font-weight: 700;
+      color: var(--text); margin-bottom: 14px;
+    }
+    .ad-caps { display: flex; gap: 8px; justify-content: center; flex-wrap: wrap; }
+    .ad-cap {
+      font-size: 10.5px; padding: 4px 10px; background: var(--bg-0);
+      border: 1px solid var(--line); border-radius: 4px; color: var(--muted);
+    }
+    .ad-decision {
+      font-size: 11px; font-weight: 600; padding: 8px 20px;
+      border: 1px solid var(--line); border-radius: 4px;
+      background: var(--bg-2); color: var(--text-2); margin: 4px 0;
+    }
+    .ad-res, .ad-internet {
+      font-size: 11px; font-weight: 600; color: var(--text-2); margin: 4px 0;
+    }
+    
+    .diff-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px;
+      padding-top: 40px;
+    }
+    @media (max-width: 768px) { .diff-grid { grid-template-columns: 1fr; gap: 20px; padding-top: 32px; } }
+    .diff-card {
+      display: flex; flex-direction: column; gap: 14px;
+      padding: 28px 24px; background: var(--bg-1);
+      border: 1px solid var(--line); border-radius: 16px;
+      transition: transform 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.25s ease, border-color 0.25s ease;
+      position: relative;
+      overflow: hidden;
+    }
+    .diff-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 16px 40px rgba(0, 0, 0, 0.05);
+      border-color: var(--accent-line);
+      background: var(--panel);
+    }
+    .diff-num {
+      font-family: var(--mono); font-size: 12px; font-weight: 700;
+      color: var(--accent); letter-spacing: 0.08em;
+      background: var(--accent-soft); padding: 6px 12px;
+      border-radius: 99px; border: 1px solid var(--accent-line);
+      align-self: flex-start;
+      display: inline-flex; align-items: center; gap: 6px;
+    }
+    .diff-desc { font-size: 15px; color: var(--text); line-height: 1.6; font-weight: 500; }
+    
+    .cap-progression {
+      display: flex; align-items: stretch; justify-content: space-between; gap: 16px;
+      padding: 32px 36px;
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.6), rgba(255, 255, 255, 0.1));
+      backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+      border: 1px solid var(--line); border-radius: 20px;
+      box-shadow: inset 0 2px 4px rgba(255,255,255,0.7), 0 12px 32px rgba(0,0,0,0.03);
+    }
+    @media (max-width: 768px) {
+      .cap-progression { flex-direction: column; align-items: stretch; gap: 16px; padding: 24px; }
+      .cap-arrow { display: none !important; }
+    }
+    .cap-step {
+      flex: 1; padding: 20px; border-radius: 12px;
+      transition: all 0.3s ease;
+      border: 1px solid transparent;
+      cursor: default;
+    }
+    .cap-step:hover {
+      background: rgba(255, 255, 255, 0.7);
+      border-color: var(--line);
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.04);
+      transform: translateY(-2px);
+    }
+    .cap-num {
+      font-family: var(--mono); font-size: 13px; font-weight: 700;
+      color: var(--text); margin-bottom: 12px; letter-spacing: 0.04em;
+      text-transform: uppercase;
+      display: flex; align-items: center; gap: 8px;
+    }
+    .cap-num::before {
+      content: ""; display: block; width: 6px; height: 6px;
+      background: var(--accent); border-radius: 50%;
+    }
+    .cap-desc { font-size: 14px; color: var(--text-2); line-height: 1.55; }
+    .cap-arrow {
+      flex: none; display: flex; align-items: center; justify-content: center;
+      color: var(--muted); font-size: 20px; padding: 0 4px;
+      opacity: 0.5;
+    }
+    .cap-progression:hover .cap-step:not(:hover) {
+      opacity: 0.6; filter: grayscale(20%);
+    }
   </style>
 </head>
 <body data-screen-label="Marketing — Product">
 
 <div id="site-nav"></div>
 
-<section class="page-hero">
+<!-- SECTION 1: HERO -->
+<section class="page-hero" style="padding-top: 20px; padding-bottom: 32px;">
   <div class="grid-bg"></div>
   <div class="container" style="position:relative">
-    <span class="eyebrow">The product</span>
-    <h1 class="gradient-text">One console. Every device. Every DNS query.</h1>
-    <p class="lede" style="font-size:19px">From the resolver to the SOC, olladns is the modern DNS security platform. Six interconnected surfaces — built for teams who care about milliseconds and audit trails.</p>
-    <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:24px">
-      <a class="pill" href="#api">API &amp; MCP</a>
-      <a class="pill" href="#devices">Per-device</a>
-      <a class="pill" href="#threats">Threat Intel v2</a>
-      <a class="pill" href="#querylog">Query Log</a>
-      <a class="pill" href="#ai">AI Detection</a>
-      <a class="pill" href="#policies">Policies</a>
-      <a class="pill" href="#audit">Audit + Webhooks</a>
-      <a class="pill" href="#privacy">Privacy controls</a>
-      <a class="pill" href="#integrations">Integrations</a>
+    <h1 class="gradient-text">DNS infrastructure,<br/>built to be controlled.</h1>
+    <p class="lede" style="font-size:19px; max-width: 640px; margin-top: 18px;">OllaDNS makes DNS resolution, protection, filtering, and management fully programmable. Built for teams who care about milliseconds and audit trails.</p>
+  </div>
+</section>
+
+<style>
+  .hw-flow {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 16px;
+    padding: 32px 40px;
+    background: var(--bg-1);
+    border: 1px solid var(--line);
+    border-radius: 16px;
+    margin-top: 32px;
+  }
+  .hw-step {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 12px;
+  }
+  .hw-ic {
+    width: 48px;
+    height: 48px;
+    border-radius: 12px;
+    background: var(--bg-0);
+    border: 1px solid var(--line);
+    display: grid;
+    place-items: center;
+    color: var(--text-2);
+    box-shadow: 0 1px 4px rgba(0,0,0,0.03);
+  }
+  .hw-ic.olla {
+    background: var(--accent-soft);
+    border: 1px solid var(--accent-line);
+    color: var(--accent);
+  }
+  .hw-title {
+    font-size: 13px;
+    font-weight: 700;
+    font-family: var(--mono);
+    letter-spacing: 0.04em;
+    color: var(--text);
+    text-transform: uppercase;
+  }
+  .hw-desc {
+    font-size: 13.5px;
+    color: var(--muted);
+    line-height: 1.4;
+  }
+  .hw-arrow {
+    color: var(--line-2);
+    font-size: 24px;
+    line-height: 1;
+    margin-top: 12px;
+  }
+  @media (max-width: 880px) {
+    .hw-flow {
+      flex-direction: column;
+      align-items: center;
+      padding: 24px 20px;
+      gap: 20px;
+    }
+    .hw-arrow {
+      transform: rotate(90deg);
+      margin: 0;
+    }
+  }
+</style>
+
+<!-- SECTION 2: HOW OLLADNS WORKS -->
+<section class="section" id="how-it-works" style="padding-top: 0; padding-bottom: 40px;">
+  <div class="container">
+    <div style="text-align: center; max-width: 600px; margin: 0 auto;">
+      <span class="eyebrow">HOW OLLADNS WORKS</span>
+      <h2 style="margin-top:14px; font-size: 24px;">From your DNS request to the website — OllaDNS helps keep the connection secure.</h2>
+    </div>
+
+    <div class="hw-flow">
+      <!-- Step 1 -->
+      <div class="hw-step">
+        <div class="hw-ic" data-ic="devices"></div>
+        <div>
+          <div class="hw-title">Your Device</div>
+          <div class="hw-desc">Requests a website</div>
+        </div>
+      </div>
+      
+      <div class="hw-arrow">&rarr;</div>
+
+      <!-- Step 2 -->
+      <div class="hw-step">
+        <div class="hw-ic olla" data-ic="shield-check"></div>
+        <div>
+          <div class="hw-title">OllaDNS</div>
+          <div class="hw-desc">Receives and processes the DNS request</div>
+        </div>
+      </div>
+      
+      <div class="hw-arrow">&rarr;</div>
+
+      <!-- Step 3 -->
+      <div class="hw-step">
+        <div class="hw-ic" data-ic="lock"></div>
+        <div>
+          <div class="hw-title">Security Check</div>
+          <div class="hw-desc">Blocks unsafe or unwanted domains</div>
+        </div>
+      </div>
+      
+      <div class="hw-arrow">&rarr;</div>
+
+      <!-- Step 4 -->
+      <div class="hw-step">
+        <div class="hw-ic" data-ic="server"></div>
+        <div>
+          <div class="hw-title">DNS Resolution</div>
+          <div class="hw-desc">Finds the correct destination</div>
+        </div>
+      </div>
+      
+      <div class="hw-arrow">&rarr;</div>
+
+      <!-- Step 5 -->
+      <div class="hw-step">
+        <div class="hw-ic" data-ic="globe"></div>
+        <div>
+          <div class="hw-title">Website</div>
+          <div class="hw-desc">Connects you safely</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 3: DIFFERENTIATORS -->
+<section class="section" style="padding-top:20px; padding-bottom: 20px;">
+  <div class="container">
+    <div class="diff-grid">
+      <div class="diff-card">
+        <div class="diff-num">01 &mdash; API-FIRST</div>
+        <div class="diff-desc">Configure DNS policies through REST APIs.</div>
+      </div>
+      <div class="diff-card">
+        <div class="diff-num">02 &mdash; MCP-NATIVE</div>
+        <div class="diff-desc">Control DNS through MCP-compatible tooling.</div>
+      </div>
+      <div class="diff-card">
+        <div class="diff-num">03 &mdash; AUDITABLE</div>
+        <div class="diff-desc">Track configuration and policy changes clearly.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 4: CAPABILITIES -->
+<section class="section" style="padding-top:20px; padding-bottom: 60px;">
+  <div class="container">
+    <div class="cap-progression">
+      <div class="cap-step">
+        <div class="cap-num">01 Resolve</div>
+        <div class="cap-desc">Global Anycast network for low-latency lookups.</div>
+      </div>
+      <div class="cap-arrow">&rarr;</div>
+      <div class="cap-step">
+        <div class="cap-num">02 Protect</div>
+        <div class="cap-desc">Block malware, C2, and phishing inline.</div>
+      </div>
+      <div class="cap-arrow">&rarr;</div>
+      <div class="cap-step">
+        <div class="cap-num">03 Filter</div>
+        <div class="cap-desc">Enforce category and custom rules instantly.</div>
+      </div>
+      <div class="cap-arrow">&rarr;</div>
+      <div class="cap-step">
+        <div class="cap-num">04 Observe</div>
+        <div class="cap-desc">Stream query logs to your SIEM natively.</div>
+      </div>
     </div>
   </div>
 </section>
