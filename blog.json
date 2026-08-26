@@ -1,5 +1,17 @@
 [
   {
+    "title": "DNS Filtering Explained: How It Stops Phishing and Malware",
+    "slug": "dns-filtering-explained",
+    "category": "Guide",
+    "date": "2026-08-25",
+    "displayDate": "Aug 25, 2026",
+    "author": "olladns Security Team",
+    "readTime": "21 min read",
+    "excerpt": "DNS filtering blocks malicious domains before a connection ever forms. Here's exactly how it stops phishing and malware, how it's built, and how to deploy it right.",
+    "image": "",
+    "imageLabel": "DNS Filtering"
+  },
+  {
     "title": "DNS Firewall Explained: How DNS Firewalls Protect Networks",
     "slug": "dns-firewall-explained-how-dns-firewalls-protect-networks",
     "category": "Guide",

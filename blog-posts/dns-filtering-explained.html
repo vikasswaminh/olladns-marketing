@@ -1,0 +1,1062 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <title>DNS Filtering Explained: How It Stops Phishing and Malware · olladns Blog</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="description"
+    content="DNS filtering blocks malicious domains before a connection ever forms. Here's exactly how it stops phishing and malware, how it's built, and how to deploy it right." />
+  <meta property="og:title" content="What Is DNS? How the Domain Name System Works · olladns Blog" />
+  <meta property="og:description"
+    content="DNS is the internet&#039;s address book — it turns human-friendly names into the numeric IP addresses computers use to find each other. Here&#039;s how it works, step by step, and why it&#039;s also one of the most underrated security layers on the internet." />
+  <meta property="og:type" content="article" />
+  <meta property="og:url" content="https://olladns.com/blog/what-is-dns-how-domain-name-system-works/" />
+  <meta property="og:image"
+    content="data:image/svg+xml,%3Csvg%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%20width%3D'1280'%20height%3D'720'%3E%3Crect%20fill%3D'%2523f4f4f5'%20width%3D'1280'%20height%3D'720'%2F%3E%3Ctext%20fill%3D'%2523DA291C'%20font-family%3D'sans-serif'%20font-size%3D'28'%20font-weight%3D'600'%20x%3D'640'%20y%3D'370'%20text-anchor%3D'middle'%3EDNS%3C%2Ftext%3E%3C%2Fsvg%3E" />
+  <meta property="article:published_time" content="2026-08-20" />
+  <meta property="article:author" content="olladns Security Team" />
+  <meta property="article:section" content="Guide" />
+  <link rel="canonical" href="https://olladns.com/blog/what-is-dns-how-domain-name-system-works/" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;500;600;700;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/site.css?v=20260821" />
+  <style>
+    .post-meta {
+      display: flex;
+      align-items: center;
+      gap: 18px;
+      flex-wrap: wrap;
+      margin-top: 18px;
+      color: var(--muted);
+      font-size: 14px
+    }
+
+    .post-meta .tag {
+      font-family: var(--mono);
+      font-size: 11px;
+      color: var(--accent);
+      text-transform: uppercase;
+      letter-spacing: .08em
+    }
+
+    .post-thumb {
+      aspect-ratio: 16/9;
+      background: var(--bg-2);
+      border-radius: var(--r-md);
+      overflow: hidden;
+      border: 1px solid var(--line);
+      margin-bottom: 36px
+    }
+
+    .post-thumb img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block
+    }
+
+    .post-body {
+      max-width: 720px;
+      margin: 0 auto
+    }
+
+    .post-body h2 {
+      font-size: 24px;
+      margin: 42px 0 16px;
+      color: var(--text)
+    }
+
+    .post-body h3 {
+      font-size: 18px;
+      margin: 32px 0 12px;
+      color: var(--text)
+    }
+
+    .post-body p {
+      font-size: 15.5px;
+      line-height: 1.7;
+      color: var(--text-2);
+      margin: 0 0 18px
+    }
+
+    .post-body .lede {
+      font-size: 18px;
+      color: var(--text);
+      line-height: 1.7;
+      margin-bottom: 28px
+    }
+
+    .post-body ul,
+    .post-body ol {
+      margin: 0 0 20px;
+      padding-left: 24px;
+      color: var(--text-2);
+      font-size: 15.5px;
+      line-height: 1.7
+    }
+
+    .post-body li {
+      margin-bottom: 8px
+    }
+
+    .post-body code {
+      font-family: var(--mono);
+      font-size: 13px;
+      background: var(--bg-2);
+      padding: 2px 6px;
+      border-radius: 4px;
+      color: var(--text)
+    }
+
+    .post-body pre {
+      background: var(--bg-1);
+      border: 1px solid var(--line);
+      border-radius: var(--r-md);
+      padding: 18px;
+      overflow-x: auto;
+      margin: 22px 0
+    }
+
+    .post-body pre code {
+      background: transparent;
+      padding: 0
+    }
+
+    .post-body blockquote {
+      border-left: 3px solid var(--accent);
+      margin: 24px 0;
+      padding-left: 20px;
+      color: var(--muted);
+      font-style: italic
+    }
+
+    .post-author {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-top: 32px;
+      color: var(--muted);
+      font-size: 14px
+    }
+
+    .post-author .dot {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: var(--accent-soft);
+      color: var(--accent);
+      display: grid;
+      place-items: center;
+      font-weight: 700;
+      font-size: 13px
+    }
+
+    .post-nav {
+      display: flex;
+      justify-content: space-between;
+      gap: 16px;
+      margin-top: 56px;
+      padding-top: 24px;
+      border-top: 1px solid var(--line)
+    }
+
+    .post-nav a {
+      color: var(--accent);
+      font-size: 14px;
+      font-weight: 500
+    }
+
+    .post-nav a:hover {
+      text-decoration: underline
+    }
+  </style>
+</head>
+
+<body data-screen-label="Marketing — Blog Post">
+
+  <div id="site-nav"></div>
+
+
+  <section class="page-hero" style="padding-bottom:40px">
+    <div class="grid-bg"></div>
+    <div class="container" style="position:relative">
+      <span class="eyebrow"><a href="/blog/" style="color:inherit">Blog</a></span>
+      <h1 class="gradient-text">DNS Filtering Explained: How It Stops Phishing and Malware</h1>
+      <div class="post-meta">
+        <span class="tag">Guide</span>
+        <span>Aug 20, 2026</span>
+        <span>19 min read</span>
+        <span>by olladns Security Team</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" style="padding-top:0">
+    <div class="container">
+
+      <div class="post-layout">
+        <aside class="post-toc" aria-label="Table of contents">
+          <div class="toc-box">
+            <h4>On this page</h4>
+            <ul>
+              <li><a href="#the-split-second-before-everything-goes-wrong">The Split Second Before Everything Goes
+                  Wrong</a></li>
+              <li><a href="#a-thirty-second-refresher-on-dns-because-the-mechanism-matters">A Thirty-Second Refresher on
+                  DNS (Because the Mechanism Matters)</a></li>
+              <li><a href="#what-dns-filtering-actually-is-mechanically">What DNS Filtering Actually Is Mechanically</a>
+              </li>
+              <li><a href="#how-dns-filtering-stops-phishing">How DNS Filtering Stops Phishing</a></li>
+              <li><a href="#why-this-is-also-a-good-place-to-stop-malware">Why This Is Also a Good Place to Stop
+                  Malware</a></li>
+              <li><a href="#the-building-blocks-what-s-actually-inside-a-filtering-decision">The Building Blocks: What's
+                  Actually Inside a Filtering Decision</a></li>
+              <li><a href="#what-happens-concretely-when-something-gets-blocked">What Happens, Concretely, When
+                  Something Gets Blocked</a></li>
+              <li><a href="#where-dns-filtering-sits-relative-to-your-other-defenses">Where DNS Filtering Sits Relative
+                  to Your Other Defenses</a></li>
+              <li><a href="#deploying-dns-filtering-without-breaking-everyone-s-workday">Deploying DNS Filtering Without
+                  Breaking Everyone's Workday</a></li>
+              <li><a href="#common-objections-addressed-honestly">Common Objections, Addressed Honestly</a></li>
+              <li><a href="#what-to-actually-look-for-when-evaluating-a-provider">What to Actually Look for When
+                  Evaluating a Provider</a></li>
+              <li><a href="#frequently-asked-questions">Frequently Asked Questions</a></li>
+              <li><a href="#the-bigger-picture">The Bigger Picture</a></li>
+            </ul>
+          </div>
+        </aside>
+        <article class="post-body">
+
+          <style>
+            .post-layout {
+              display: grid;
+              grid-template-columns: 240px 1fr;
+              gap: 48px;
+              align-items: start;
+            }
+
+            .post-toc {
+              position: sticky;
+              top: 88px;
+              max-height: calc(100vh - 120px);
+              overflow: auto;
+              padding-right: 8px;
+            }
+
+            .toc-box {
+              background: var(--panel);
+              border: 1px solid var(--line);
+              border-radius: var(--r-lg);
+              padding: 20px;
+              box-shadow: var(--shadow);
+            }
+
+            .post-toc h4 {
+              font-size: 12px;
+              text-transform: uppercase;
+              letter-spacing: .1em;
+              color: var(--muted);
+              margin: 0 0 12px;
+            }
+
+            .post-toc ul {
+              list-style: none;
+              margin: 0;
+              padding: 0;
+              display: flex;
+              flex-direction: column;
+              gap: 6px;
+            }
+
+            .post-toc a {
+              display: block;
+              font-size: 13px;
+              color: var(--text-2);
+              padding: 5px 10px;
+              border-radius: 6px;
+              border-left: 2px solid transparent;
+            }
+
+            .post-toc a:hover {
+              color: var(--accent);
+              background: var(--bg-2);
+            }
+
+            @media (max-width:1000px) {
+              .post-layout {
+                grid-template-columns: minmax(0, 1fr);
+              }
+
+              .post-toc {
+                display: none;
+              }
+            }
+
+            .post-section {
+              position: relative;
+              margin-bottom: 72px;
+              padding-top: 8px;
+              scroll-margin-top: 92px;
+            }
+
+            .section-num {
+              display: block;
+              font-family: var(--mono);
+              font-size: 12px;
+              color: var(--accent);
+              margin-bottom: 10px;
+              letter-spacing: .06em;
+              font-weight: 600;
+            }
+
+            .post-tldr {
+              background: linear-gradient(180deg, var(--accent-soft), rgba(218, 41, 28, .02));
+              border: 1px solid var(--accent-line);
+              border-radius: var(--r-lg);
+              padding: 28px;
+              margin-bottom: 56px;
+            }
+
+            .tldr-head {
+              display: flex;
+              align-items: center;
+              gap: 12px;
+              margin-bottom: 14px;
+              flex-wrap: wrap;
+            }
+
+            .tldr-label {
+              font-family: var(--mono);
+              font-size: 11px;
+              font-weight: 700;
+              text-transform: uppercase;
+              letter-spacing: .08em;
+              background: var(--accent);
+              color: #fff;
+              padding: 5px 12px;
+              border-radius: 999px;
+            }
+
+            .post-tldr h3 {
+              font-size: 22px;
+              margin: 0;
+              color: var(--text);
+            }
+
+            .tldr-list {
+              list-style: none;
+              margin: 0;
+              padding: 0;
+              display: flex;
+              flex-direction: column;
+              gap: 11px;
+            }
+
+            .tldr-list li {
+              display: flex;
+              gap: 12px;
+              align-items: flex-start;
+              font-size: 15px;
+              line-height: 1.55;
+              color: var(--text-2);
+            }
+
+            .tldr-list .ck {
+              width: 20px;
+              height: 20px;
+              border-radius: 50%;
+              background: var(--accent);
+              color: #fff;
+              display: grid;
+              place-items: center;
+              font-size: 11px;
+              flex: none;
+              margin-top: 1px;
+            }
+
+            .what-found {
+              background: var(--panel);
+              border: 1px solid var(--line);
+              border-radius: var(--r-lg);
+              padding: 26px;
+              margin: 28px 0 0px;
+              box-shadow: var(--shadow);
+            }
+
+            .what-found-head {
+              display: flex;
+              align-items: center;
+              gap: 10px;
+              margin-bottom: 14px;
+            }
+
+            /* FAQ Box Styles */
+            .faq-box {
+              background: var(--panel);
+              border: 1px solid var(--line);
+              border-radius: var(--r-lg);
+              padding: 32px;
+              box-shadow: var(--shadow);
+              margin-top: 48px;
+              margin-bottom: 48px;
+            }
+
+            .faq-item {
+              border-bottom: 1px solid var(--line);
+              padding: 16px 0;
+            }
+
+            .faq-item:last-child {
+              border-bottom: none;
+            }
+
+            .faq-summary {
+              font-size: 16px;
+              font-weight: 600;
+              cursor: pointer;
+              list-style: none;
+              display: flex;
+              justify-content: space-between;
+              align-items: center;
+              color: var(--text);
+              margin: 0;
+              padding-right: 16px;
+            }
+
+            .faq-summary::-webkit-details-marker {
+              display: none;
+            }
+
+            .faq-summary::after {
+              content: '+';
+              font-size: 24px;
+              line-height: 1;
+              color: var(--accent);
+              font-weight: 400;
+            }
+
+            details[open] .faq-summary::after {
+              content: '−';
+            }
+
+            .faq-answer {
+              font-size: 15px;
+              line-height: 1.6;
+              color: var(--text-2);
+              margin-top: 12px;
+              margin-bottom: 0;
+              padding-right: 24px;
+            }
+
+            /* Boxed sections 01-11 */
+            .content-box {
+              background: var(--panel);
+              border: 1px solid var(--line);
+              border-radius: var(--r-lg);
+              padding: 32px;
+              box-shadow: var(--shadow);
+              margin-top: 48px;
+              margin-bottom: 48px;
+            }
+            .content-box .post-section {
+              margin-bottom: 48px;
+            }
+            .content-box .post-section:last-child {
+              margin-bottom: 0;
+            }
+            /* FAQ section box */
+            .faq-section-box {
+              background: var(--panel);
+              border: 1px solid var(--line);
+              border-radius: var(--r-lg);
+              padding: 32px;
+              box-shadow: var(--shadow);
+              margin-top: 48px;
+              margin-bottom: 48px;
+            }
+            .faq-section-box .faq-box {
+              background: transparent;
+              border: none;
+              border-radius: 0;
+              box-shadow: none;
+              padding: 0;
+              margin: 0;
+            }
+          </style>
+
+          <div class="post-tldr" style="margin-bottom: 24px;">
+            <div class="tldr-head">
+              <span class="tldr-label">TL;DR</span>
+              <h3 id="tldr">DNS is security's earliest intervention point</h3>
+            </div>
+            <p style="font-size: 15.5px; line-height: 1.7; margin: 0 0 16px; color: var(--text-2)">DNS filtering blocks
+              malicious domains before a connection is established, providing an essential layer of protection against
+              phishing and malware.</p>
+
+            <ul class="tldr-list">
+              <li><span class="ck">✓ </span><span><strong>Earliest stop:</strong> DNS lookups happen before malicious
+                  payloads download or phishing pages load.</span></li>
+              <li><span class="ck">✓ </span><span><strong>Universal coverage:</strong> every device must resolve domains
+                  to communicate.</span></li>
+            </ul>
+          </div>
+
+          <div class="what-found" style="margin-top: 0; margin-bottom: 56px;">
+            <div class="what-found-head">
+              <span class="tldr-label">Key Takeaways</span>
+              <h3 id="key-takeaways-title" style="font-size: 18px; margin: 0; color: var(--text);">Essential Points</h3>
+            </div>
+            <ul class="tldr-list">
+              <li><span class="ck">✓ </span><span><strong>DNS filtering blocks malicious domains before a connection is
+                    established:</strong> It checks DNS requests against threat intelligence, reputation data, and
+                  security policies.</span></li>
+              <li><span class="ck">✓ </span><span><strong>DNS filtering provides an important layer of phishing
+                    protection:</strong> It can block malicious links regardless of whether they arrive through email,
+                  SMS, QR codes, or social media.</span></li>
+              <li><span class="ck">✓ </span><span><strong>Modern DNS filtering goes beyond simple blocklists:</strong>
+                  Advanced solutions use DGA detection, typosquatting and homoglyph detection, and behavioral
+                  analysis.</span></li>
+              <li><span class="ck">✓ </span><span><strong>DNS filtering can disrupt malware
+                    command-and-control:</strong> It prevents malware from reaching C2 infrastructure and helps identify
+                  attempts to exfiltrate data through DNS.</span></li>
+              <li><span class="ck">✓ </span><span><strong>DNS filtering works best as part of a layered security
+                    strategy:</strong> It does not replace firewalls or endpoint protection, but perfectly complements
+                  them.</span></li>
+            </ul>
+          </div>
+
+          <p>DNS filtering works by intercepting the domain lookup that happens before almost every phishing click and
+            malware connection, checking it against threat intelligence, and simply refusing to answer if the domain is
+            dangerous. No answer, no connection, no infection. This guide walks through exactly how that mechanism works
+            under the hood, why it catches phishing kits and malware command-and-control traffic that other tools miss,
+            the different filtering methods (blocklists, categories, behavioral detection, DGA scoring, typosquat
+            matching), what a good deployment looks like in practice, and the honest limitations you should know about
+            before you rely on it as your only line of defense.</p>
+          <div class="content-box">
+            <section class="post-section" id="the-split-second-before-everything-goes-wrong">
+            <span class="section-num">01</span>
+            <h2>The Split Second Before Everything Goes Wrong</h2>
+            <p>Picture the moment right before a phishing attack works. Not the email landing in the inbox — that part
+              is basically free and happens constantly. Not even the moment someone reads it and feels that little
+              flicker of urgency ("your account will be suspended," "invoice overdue," "click to verify"). The moment
+              that matters, the one where the attack either succeeds or dies quietly, is the click.</p>
+            <p>Someone clicks the link. And in the fraction of a second between that click and the fake login page
+              rendering on their screen, something must happen first: their device must ask, "where is this domain,
+              actually?" That question — a DNS lookup — is the single narrowest chokepoint in the entire attack. It is
+              also, weirdly, one of the least defended.</p>
+            <p>That's the whole premise behind DNS filtering. It's a security control that sits exactly at that
+              chokepoint and asks one question of its own before answering: is this domain safe to go to? If the answer
+              is no, the lookup simply fails. The phishing page never loads. The malware never reaches its command
+              server. The user's browser just... stalls, like the link was broken. No malicious code must be caught
+              mid-execution. No antivirus signature must match. The connection was never allowed to exist in the first
+              place.</p>
+            <p>This piece is entirely about that mechanism — how it works, why it's effective against phishing and
+              malware specifically, what's actually happening under the hood when a "blocked" page shows up instead of a
+              real one, and where the real trade-offs and blind spots are, because no single control is a silver bullet
+              and anyone telling you otherwise is selling something.</p>
+            <p>Let's get into it properly.</p>
+          </section>
+
+          <section class="post-section" id="a-thirty-second-refresher-on-dns-because-the-mechanism-matters">
+            <span class="section-num">02</span>
+            <h2>A Thirty-Second Refresher on DNS (Because the Mechanism Matters)</h2>
+            <p>You already know, roughly, that DNS turns names into numbers. Type olladns.com into a browser, and
+              somewhere behind the scenes that name gets translated into an IP address a computer can route traffic to.
+              That's true, but it undersells how central this process is to literally everything a device does on a
+              network.</p>
+            <p>Every app phoning home, every background sync, every ad network your browser is quietly talking to, every
+              piece of malware trying to reach its operator — all of it, without exception, starts with a DNS lookup.
+              Not most of it. All of it. There is no meaningful category of internet-connected software that skips this
+              step, because IP addresses change, get rotated, get load-balanced across data centers, and get reassigned
+              constantly. Names are the stable reference points. Numbers are the implementation detail underneath.</p>
+            <p>That single fact — that everything asks DNS first — is what makes filtering at this layer so unusually
+              powerful. You're not trying to inspect every possible protocol, every file type, every payload format an
+              attacker might dream up. You're watching one narrow, universal choke point that every single connection,
+              malicious or otherwise, is contractually obligated to pass through before it can do anything at all.</p>
+            <p>DNS filtering exploits that universality. It doesn't need to understand what a piece of malware does once
+              it's running. It doesn't need to unpack a phishing kit's HTML to know it's a fake login page. It just
+              needs to determine, at the time of the lookup, whether the domain has a track record—or a structure—that
+              suggests it's dangerous.</p>
+          </section>
+
+          <section class="post-section" id="what-dns-filtering-actually-is-mechanically">
+            <span class="section-num">03</span>
+            <h2>What DNS Filtering Actually Is Mechanically</h2>
+            <p>Here's the plain version: DNS filtering is the practice of routing your DNS queries through a resolver
+              that checks each one against a set of rules — threat intelligence, category policies, custom lists —
+              before deciding whether to return the real answer, a blocked response, or nothing at all.</p>
+            <p>Under normal circumstances, a DNS resolver's entire job is to be a fast, honest phonebook. You ask, it
+              answers, end of transaction. A filtering resolver adds exactly one extra step into that transaction: a
+              decision point. Before it hands back the IP address for the domain you asked about, it checks that domain
+              against everything it currently knows.</p>
+            <p>That "everything it currently knows" is doing a lot of work in that sentence, and it's worth unpacking,
+              because this is where the real differences between a decent filtering setup and a mediocre one show up.
+            </p>
+            <p>At the simplest level, the check is a look up against a blocklist — a known list of bad domains, compiled
+              from threat intelligence feeds, phishing reports, malware sandboxes, and community submissions. If the
+              requested domain matches an entry on that list, the resolver refuses to answer with the real IP and
+              instead returns something else: an NXDOMAIN response (telling the device the domain doesn't exist at all),
+              a redirect to a "this site was blocked" warning page, or a null response that simply goes nowhere.</p>
+            <p>But static blocklists, on their own, are a blunt instrument, and any filtering provider that stops there
+              is fighting yesterday's war. Modern DNS filtering layers in several other kinds of checks: category
+              classification (is this domain generally understood to be gambling, adult content, social media, or a
+              known-malicious category?), reputation scoring based on domain age and registration patterns, structural
+              analysis of the domain name itself (does it look like it was algorithmically generated, or does it look
+              suspiciously similar to a well-known brand?), and behavioral signals drawn from the query pattern itself,
+              not just the domain name in isolation.</p>
+            <p>All of that happens in the time it takes to resolve a normal DNS query — which is to say, it must happen
+              in single-digit milliseconds, because nobody will tolerate security control that makes every single web
+              page load feel sluggish. That speed requirement is a genuinely hard engineering problem, and it's a big
+              part of why "good DNS filtering" and "DNS filtering that technically exists" are such different things in
+              practice.</p>
+          </section>
+
+          <section class="post-section" id="how-dns-filtering-stops-phishing">
+            <span class="section-num">04</span>
+            <h2>How DNS Filtering Stops Phishing</h2>
+            <p>Phishing is, at its core, a con game that depends entirely on getting a victim to a fake page that looks
+              real enough to fool them. Email is just the delivery mechanism — increasingly, it isn't even email
+              anymore; it's SMS, it's a QR code on a parking meter, it's a fake job offer in a chat app, it's a comment
+              on a social post. The delivery channel keeps changing because attackers know that email filters have
+              gotten reasonably good. But the destination, the part that does the damage, is still almost always a
+              domain the victim's device must resolve before the fake page can load.</p>
+            <p>This is the detail that makes DNS filtering such a clean match for phishing defense: it doesn't care how
+              the link arrived. An email filter only sees email. An SMS spam filter only sees texts. A DNS filter sees
+              the lookup regardless of which app or channel triggered it, because at the DNS layer, a link is a link is
+              a link. If the domain behind a QR code sticker slapped onto a parking meter resolves to something
+              known-bad, DNS filtering catches it the same way it would catch a link buried in a phishing email. The
+              delivery channel becomes irrelevant, which is a genuinely rare property in security tooling.</p>
+            <p>There's a second reason DNS filtering fits phishing so well, and it's about timing rather than coverage.
+              Phishing infrastructure today is disposable by design. A phishing-as-a-service kit spins up a fresh
+              domain, points it at a convincing cloned login page, blasts out a wave of messages, harvests whatever
+              credentials come in during the first few hours, and abandons the domain before most traditional reputation
+              systems have even logged its existence. Speed is the entire game on the attacker's side. A blocklist that
+              updates once a day is nearly worthless against a domain with a six-hour operational lifespan — by the time
+              it's flagged, the campaign is already over, and the attacker has moved to the next disposable domain.</p>
+            <p>This is exactly why the more advanced DNS filtering systems don't wait for a domain to be reported before
+              flagging it. They look at signals available the moment a domain becomes visible: how recently was it
+              registered, does its structure closely resemble a well-known brand (a technique called typosquatting or
+              homoglyph impersonation — think "0lladns.com" with a zero instead of an "o", or a Cyrillic character that
+              renders identically to a Latin one), does the certificate and hosting pattern match known phishing
+              infrastructure templates, is the query volume behaving the way a mass phishing campaign behaves rather
+              than the way normal traffic behaves. A domain doesn't need a confirmed victim report to get flagged if
+              enough of these structural signals line up on their own.</p>
+            <p>That's the difference between "we caught this because someone else got burned first and reported it" and
+              "we caught this because it looked wrong the moment it appeared" and in a world where phishing kits live
+              for hours, that difference is the entire ballgame.</p>
+          </section>
+
+          <section class="post-section" id="why-this-is-also-a-good-place-to-stop-malware">
+            <span class="section-num">05</span>
+            <h2>Why This Is Also a Good Place to Stop Malware</h2>
+            <p>Phishing gets most of the popular attention, but DNS filtering earns just as much of its keep against
+              malware, and for a related but slightly different reason: almost nothing malicious runs in total isolation
+              anymore. Modern malware calls home.</p>
+            <p>Once a piece of malware lands on a machine — through a phishing attachment, a drive-by download, a
+              compromised USB stick, whatever the initial vector happened to be — it typically needs to talk to
+              infrastructure the attacker controls. It needs instructions on what to do next. It needs a place to send
+              stolen data. It needs to check in periodically to prove it's still alive and under control. All that
+              communication, across nearly every malware family in wide circulation, is coordinated through domain
+              names, not hardcoded IP addresses, precisely because domains are flexible and IPs get burned quickly.</p>
+            <p>This gives defenders a genuinely valuable second chance. Even if the initial infection succeeds — even if
+              the phishing email got through, even if the user clicked, even if the payload executed — the malware still
+              must ask DNS where its command server lives before it can do anything useful. If that lookup fails, the
+              malware is functionally stranded. It's running on the machine, technically "successful" in the sense that
+              it is executed, but it has no way to receive instructions, exfiltrate anything, or coordinate with the
+              rest of whatever campaign it's part of. It's a burglar standing in an empty room with the phone line cut.
+            </p>
+            <p>This is particularly important against a specific and nasty category of malware built around domain
+              generation algorithms, often abbreviated DGA. Rather than hardcoding a single command-and-control domain
+              that defenders could simply blocklist and be done with it, DGA-based malware and its operator both
+              independently run the same algorithm to generate large batches of pseudo-random candidate domains —
+              sometimes thousands per day — and cycle through them until one resolve to a live server. This is
+              specifically designed to outrun static defenses. You cannot blocklist your way out of a threat that
+              generates a thousand new domains before breakfast.</p>
+            <p>Catching this reliably requires a different kind of detection: not "is this specific domain on a list"
+              but "does this domain look like it was generated by an algorithm rather than chosen by a human." That's a
+              statistical and structural judgment — unusual letter entropy, characteristic length distributions, a lack
+              of any real linguistic pattern, combined with the telltale sign of a device generating a rapid burst of
+              failed lookups (NXDOMAIN responses) as the malware cycles through candidate domains that haven't been
+              registered yet. A resolver that's watching for that pattern can flag and block the entire family of
+              generated domains as a class, rather than chasing them one at a time as they appear — which, given the
+              volume involved, is the only approach that scales.</p>
+            <p>There's also DNS tunneling, which deserves a mention because it's such an elegant abuse of trust. Because
+              DNS traffic is almost universally permitted through firewalls — blocking port 53 outright would break the
+              internet for that network — attackers sometimes encode stolen data directly inside DNS queries themselves,
+              smuggling it out one query at a time through a channel nobody's watching closely. A filtering layer that's
+              analyzing query patterns, rather than just checking domain names against a list, can spot the tell-tale
+              signs: unusually long subdomain labels, high query volume to a single unfamiliar domain, entropy in the
+              subdomain that doesn't look like normal traffic. It's a subtler catch than a straightforward phishing
+              block, but it's exactly the kind of thing that traditional network monitoring, which mostly ignores DNS
+              content, tends to miss entirely.</p>
+          </section>
+
+          <section class="post-section" id="the-building-blocks-what-s-actually-inside-a-filtering-decision">
+            <span class="section-num">06</span>
+            <h2>The Building Blocks: What's Actually Inside a Filtering Decision</h2>
+            <p>It's worth pulling back the curtain a bit further, because "DNS filtering" as a phrase can hide a huge
+              range of actual sophistication, and the differences matter enormously in practice.</p>
+            <p>The most basic layer is category and reputation blocklisting — community-maintained or vendor-maintained
+              lists of domains known to be associated with malware, phishing, spam, or policy-violating categories like
+              adult content or gambling. This is the floor, not the ceiling. It's necessary, cheap to implement, and
+              catches a meaningful share of low-effort threats, but it is fundamentally reactive: something has to be
+              identified as bad before it lands on the list, which means there's always a window, however small, between
+              a domain going live and a domain being blocked.</p>
+            <p>Layered on top of that is structural and behavioral analysis, which doesn't wait for a domain to be
+              reported at all. This is where DGA detection lives — a classifier trained to recognize the statistical
+              fingerprint of algorithmically generated names, looking at things like character entropy, n-gram frequency
+              (how often certain letter combinations show up in real human-chosen words versus randomly generated
+              strings), and vowel-to-consonant ratios that tend to look "off" in machine-generated names even when a
+              human glancing at the string wouldn't immediately flag it. This kind of classifier can run inline, scoring
+              every query in real time, without needing to have ever seen that exact domain before.</p>
+            <p>A closely related technique targets typosquatting and brand impersonation directly — domains deliberately
+              built to look like a trusted brand immediately. This includes classic typos (a transposed letter, a
+              missing character), but also homoglyph attacks, where an attacker swaps in a visually identical character
+              from a different alphabet — a Cyrillic "а" standing in for a Latin "a", for instance — producing a domain
+              that looks completely legitimate to the human eye while being an entirely different string to a computer.
+              Catching these reliably takes an algorithm built for exactly this kind of near-match detection
+              (Damerau-Levenshtein distance, for the technical curious, measures how many single-character edits
+              separate two strings, and a proper implementation normalizes homoglyphs first so a Cyrillic lookalike
+              doesn't slip past as "different enough"). Increasingly, this is done per-tenant, meaning an organization
+              can feed in its own brand names and logos and have the system specifically watch for lookalikes of its own
+              domain, rather than relying purely on generic threat feeds that have no idea your company exists.</p>
+            <p>Then there's freshness and registration analysis, treating a domain's age and registration
+              characteristics as a genuine risk signal, not proof of guilt on its own, but a meaningful input alongside
+              everything else. Attackers overwhelmingly favor freshly registered domains precisely because reputation
+              systems haven't had time to build a track record for them yet. A domain registered fourteen minutes ago,
+              hosted on infrastructure previously associated with phishing kits, with a name that's one character off
+              from a well-known bank, is a very different risk than a domain that's been quietly resolving the same way
+              for six years.</p>
+            <p>Finally, there's query pattern and volume analysis — watching not just what's being asked, but how, and
+              how often, and from where. A sudden burst of NXDOMAIN responses from a single device, cycling through
+              dozens of nonsense-looking domains in a few seconds, looks nothing like normal human browsing behavior and
+              quite a lot like DGA-based malware trying to find its command server. A steady, low-volume trickle of
+              unusually long DNS queries to one obscure domain looks nothing like normal traffic and quite a lot like
+              tunneling. These are patterns you can only see if you're paying attention to the traffic as a stream, not
+              just checking each query against a list in isolation.</p>
+            <p>The honest takeaway here is that not one of these techniques is sufficient on its own. Blocklists alone
+              are always a step behind. Behavioral detection alone can generate noise without the grounding of known-bad
+              reputation data. The strongest filtering systems layer all these together, so that a domain missing one
+              check still gets caught by another.</p>
+          </section>
+
+          <section class="post-section" id="what-happens-concretely-when-something-gets-blocked">
+            <span class="section-num">07</span>
+            <h2>What Happens, Concretely, When Something Gets Blocked</h2>
+            <p>It's worth walking through this moment specifically, because the mechanics are simpler and less dramatic
+              than people sometimes expect, and that simplicity is the whole point.</p>
+            <p>A user's device sends out a DNS query for a domain. The filtering resolver checks it against its threat
+              intelligence and classification systems, in the single-digit milliseconds that a normal DNS response would
+              otherwise take. If the domain is flagged, the resolver doesn't return the real IP address. Instead, one of
+              a few things typically happens: it can return NXDOMAIN, telling the device the domain simply doesn't
+              exist, which is often the cleanest outcome because most software just treats it as a dead link and moves
+              on quietly. It can redirect to a warning page hosted by the filtering provider, explaining that the
+              destination was blocked and why, which is more useful in an office setting where an employee might
+              otherwise assume their internet is broken and call the help desk. Or, less commonly, it can return to a
+              null or unrouteable address that simply goes nowhere.</p>
+            <p>Notice what didn't happen in any of these scenarios: no malicious code executed on the device. No payload
+              was downloaded and then caught by an antivirus signature after the fact. No credential-harvesting page
+              ever rendered in the browser for the user to potentially type something out of habit, before a warning
+              banner popped up too late. The connection was refused at the earliest possible moment, before it ever
+              really began. That's the entire proposition in one sentence — this is prevention at the address-lookup
+              stage, not detection-and-cleanup after something has already run.</p>
+            <p>This is also why DNS filtering tends to be relatively invisible in daily use when it's working correctly.
+              Most of the time, nothing happens, because most domains most people visit all day are entirely legitimate
+              and resolve exactly as normal. The filtering layer is only ever noticeable in the moments it's actively
+              protecting someone — and even then, from the user's side, it usually just looks like a broken link rather
+              than an obvious security intervention. That invisibility is a feature, not a gap; a security control that
+              constantly interrupts people with dramatic warnings trains them to click through warnings faster, which
+              defeats the purpose.</p>
+          </section>
+
+          <section class="post-section" id="where-dns-filtering-sits-relative-to-your-other-defenses">
+            <span class="section-num">08</span>
+            <h2>Where DNS Filtering Sits Relative to Your Other Defenses</h2>
+            <p>It's worth being direct about this, because it's a common point of confusion: DNS filtering is not a
+              replacement for a firewall, endpoint protection, or email security. It's a complementary layer that
+              happens to sit somewhere those other tools structurally can't reach.</p>
+            <p>A firewall makes decisions based primarily on IP addresses and ports. That's useful, but attackers rotate
+              IP infrastructure constantly, specifically to dodge IP-based rules, while keeping domain names — which are
+              cheaper and easier to swap than entire hosting setups — as the more stable reference point in their
+              campaigns. Filtering by domain name catches a category of evasion that pure IP-based rules structurally
+              cannot.</p>
+            <p>Endpoint protection and antivirus only see what's happening on devices that the agent has installed. That
+              leaves an enormous and growing category of devices uncovered by definition: guest Wi-Fi users, personal
+              phones on a bring-your-own-device policy, smart TVs in a conference room, printers, IoT sensors on a
+              factory floor, the office thermostat that somehow has a network stack now. Every one of those devices
+              still must make DNS lookups to function, which means DNS-layer protection covers all of them uniformly,
+              without needing an agent installed on each one individually — a genuinely different and broader net than
+              device-based tools can cast.</p>
+            <p>Email security is excellent at what it's built for, but its entire field of view is email. It has nothing
+              to say about a malicious link sent over SMS, embedded in a QR code, dropped into a Slack channel, or
+              discovered through a compromised legitimate website that a search engine happily surfaced. DNS filtering
+              intervenes at the moment of resolution regardless of the delivery channel, which means it picks up threats that
+              never touched an inbox at all.</p>
+            <p>The honest way to think about this is a layered model, the way a bank doesn't rely on just the vault door
+              — it has cameras, guards, alarms, and a vault door, each covering a different failure mode of the others.
+              Firewalls cover network-level traffic patterns. Endpoint tools cover what happens on the device itself
+              once something runs. Email security covers the inbox. DNS filtering covers the address-lookup stage,
+              universally, across every device and every delivery channel, and it does so earlier in the attack chain
+              than almost anything else in the stack — which is exactly why it tends to catch things the other layers
+              miss, and vice versa. None of them make the others obsolete.</p>
+          </section>
+
+          <section class="post-section" id="deploying-dns-filtering-without-breaking-everyone-s-workday">
+            <span class="section-num">09</span>
+            <h2>Deploying DNS Filtering Without Breaking Everyone's Workday</h2>
+            <p>Understanding the mechanism is one thing. Rolling it out across a real organization with real people who
+              will absolutely notice and complain if something legitimate suddenly stops working is another matter
+              entirely, and it's where a lot of otherwise sound security initiatives quietly stumble.</p>
+            <p>Start in monitoring mode, not blocking mode. The instinct with any new security control is to flip
+              enforcement on immediately, and with DNS filtering specifically, that instinct is worth resisting for at
+              least a couple of weeks. Running in a log-and-classify-only mode first shows you two critical things
+              before anyone gets locked out of anything: what your actual baseline traffic looks like, including all the
+              SaaS tools, internal services, and background processes constantly making DNS calls that nobody documented
+              anywhere, and roughly how much genuinely risky traffic is already flowing through your network unnoticed.
+              Both of those inform how aggressively you can safely turn on enforcement without a VP's favorite tool
+              suddenly breaking on day one.</p>
+            <p>Cover roaming devices, not just the office network. A meaningful share of work now happens on laptops
+              that spend more time on home WiFi, coffee shop networks, and airport lounges than they ever spend
+              physically inside the building. If your DNS filtering only applies while a device sits on the corporate
+              network, you're protecting a shrinking fraction of the actual attack surface. A roaming client that
+              travels with the device — deployed silently through whatever device management platform you already run,
+              whether that's Jamf, Intune, Kandji, or Workspace ONE — closes that gap without asking anyone to remember
+              to turn something on manually, which is important because nobody ever remembers to turn something on
+              manually.</p>
+            <p>Tier your policy instead of applying one blanket rule everywhere. A finance team processing wire
+              transfers has a genuinely different risk profile than a general office network, and a policy that's
+              appropriately strict for one can be needlessly disruptive for the other. Build sensible defaults for the
+              broad organization, tighter enforcement for higher-risk groups, and — critically — a fast, clear exception
+              process for when a legitimate business need collides with a block, because it will happen, and a clunky
+              exception process is exactly how shadow IT workarounds and "just disable it for me" requests get born.</p>
+            <p>Feed the logs into wherever your team already watches for threats. DNS query logs are a genuinely
+              underused data source for detection and incident response and leaving them siloed in a separate console
+              that nobody opens defeats a huge part of their value. Streaming that data into your existing SIEM —
+              Splunk, Sentinel, Datadog, Elastic, whatever your team lives in day to day — means DNS-layer signals get
+              correlated with everything else you're already watching, instead of sitting in isolation as one more tab
+              nobody checks.</p>
+            <p>Manage policy as code where you can. Manually clicking through a console to update blocklists across
+              dozens of sites and hundreds of devices is a process that scales poorly and makes audits worse. Managing
+              policies, sites, and lists through something like a Terraform provider — with drift detection so you know
+              immediately if a policy changed outside of a reviewed commit, and version history so you can see exactly
+              who changed what and when — brings the same operational discipline to DNS security policy that most teams
+              already demand of their infrastructure elsewhere. It also turns "who approved this exception, and when"
+              from an awkward Slack archaeology exercise into a one-line git blame.</p>
+            <p>Plan the rollback before you need it. Any change to something as foundational as DNS resolution deserves
+              a tested fallback plan. What happens if the filtering resolver has an outage? Who has the authority to
+              revert, and how quickly can they do it? Teams that skip this step and hit a snag in production tend to
+              develop a lasting, and honestly somewhat unfair, grudge against DNS filtering as a category, when the real
+              gap was a missing runbook rather than anything wrong with the filtering itself.</p>
+            <p>Review your exceptions with real cadence. Every filtering deployment accumulates exceptions over time — a
+              domain allowed because someone needed it for a one-off project eighteen months ago, a category loosened
+              for a team that complained loudly enough. Left unattended, that list quietly becomes its own form of
+              security debt, eroding the policy back toward "basically nothing is actually blocked" one forgotten
+              exception at a time. A quarterly review, pruning what's no longer needed, keeps the policy honest.</p>
+          </section>
+
+          <section class="post-section" id="common-objections-addressed-honestly">
+            <span class="section-num">10</span>
+            <h2>Common Objections, Addressed Honestly</h2>
+            <p>A handful of pushbacks come up often enough with DNS filtering that they're worth answering directly,
+              without the marketing gloss.</p>
+            <p>"Won't this slow down browsing for everyone?" This was a legitimate concern with some early, poorly
+              engineered filtering products, but a well-built filtering resolver typically responds in single-digit
+              milliseconds, which is often faster than whatever default resolver an ISP handed out, because dedicated
+              security resolvers tend to be better engineered and better peered than consumer-grade defaults. Where
+              people do notice slowdowns, it's almost always a symptom of a specific misconfiguration or an
+              under-provisioned deployment, not an inherent property of filtering itself.</p>
+            <p>"We're too small to be worth targeting." Phishing-as-a-service kits and automated malware campaigns
+              aren't hand-selecting victims based on company size — they're casting wide, largely automated nets and
+              seeing what bites. A nine-person office is exactly as reachable by a mass phishing campaign as a large
+              enterprise; the meaningful difference tends to be which one has any defense at this layer at all.</p>
+            <p>"Encrypted DNS makes filtering pointless, right?" This one comes up a lot and it's a genuine point of
+              confusion worth clearing up carefully. Protocols like DNS-over-HTTPS and DNS-over-TLS encrypt the query in
+              transit, protecting it from being read or tampered with by anyone sitting on the network path in between.
+              What they don't do is prevent the resolver you've deliberately chosen to send that query to from applying
+              policy once it arrives. Encryption and filtering aren’t tense with each other; they happen at the same
+              trusted endpoint, and a properly built filtering service supports encrypted transport while still applying
+              full inspection and policy.</p>
+            <p>"Doesn't this just create a false sense of security?" Only if it's deployed and then forgotten about,
+              which is a fair risk with almost any security tool, not something unique to DNS filtering. Treated as one
+              deliberate layer among several — reviewed, tuned, integrated with the rest of the security stack — it
+              earns its keep. Treated as a box that's been checked and never revisited, sure, it can quietly stop being
+              useful while everyone assumes it's still doing its job.</p>
+            <p>"What about traffic that bypasses our configured DNS entirely?" This is a real and honest limitation, not
+              a myth to be debunked. A sufficiently motivated piece of malware, or a user who deliberately changes their
+              device's DNS settings, can route around a filtering setup. This is exactly why layered defense matters so
+              much, and why DNS filtering is described here as one piece of the picture rather than the whole thing —
+              network-level enforcement that restricts outbound DNS to only the sanctioned resolver, alongside endpoint
+              and firewall controls, closes most of this gap, but "most" is doing real work in that sentence and it's
+              worth knowing that going in.</p>
+          </section>
+
+          <section class="post-section" id="what-to-actually-look-for-when-evaluating-a-provider">
+            <span class="section-num">11</span>
+            <h2>What to Actually Look for When Evaluating a Provider</h2>
+            <p>If you're comparing options rather than taking any single vendor's word for it, a handful of questions
+              separate the genuinely strong choices from the merely adequate ones.</p>
+            <p>Ask specifically how fast the detection engine flags newly registered malicious infrastructure, not just
+              how large its overall blocklist is. Given how briefly phishing kits and DGA-based command infrastructure
+              typically stay live, a provider that can show you median detection measured in minutes operating in a
+              fundamentally different tier than one leaning primarily on static reputation feeds that update once or
+              twice a day.</p>
+            <p>Push on false-positive rates specifically, and ask how they're measured, not just claimed. A filter that
+              blocks aggressively but constantly flags legitimate business traffic will get quietly disabled by a
+              frustrated IT team within weeks of rollout — the most technically sophisticated filtering engine in the
+              world is worthless the moment someone turns it off because the help desk can't keep up with complaints
+              about broken vendor portals.</p>
+            <p>Check whether protection genuinely follows roaming devices or evaporates the moment someone leaves the
+              office network. Confirm the deployment story for whatever device management platform your organization
+              runs, because a rollout that requires manually touching every laptop is a project that quietly stalls out
+              around device number thirty.</p>
+            <p>Look at whether logs integrate with the tools your security team already lives in day to day, and whether
+              policy can be tied to identity — through Entra ID, Okta, or Google Workspace — rather than IP ranges that
+              shift every time someone moves desks or reconnects to Wi-Fi.</p>
+            <p>Ask directly about behavioral and structural detection, not just blocklist matching, since that's the
+              single clearest line between filtering that keeps pace with how threats operate today and filtering that's
+              a well-organized list running a few months behind.</p>
+            <p>And read the provider's actual trust and security posture rather than the marketing page alone. What's
+              the real state of their compliance certifications — completed, or "in progress," and since when? What do
+              they retain, for how long, and where does it physically live? You're routing a meaningful share of your
+              organization's sensitive traffic metadata through this provider's infrastructure, so their own security
+              discipline matters just as much as their feature list.</p>
+          </section></div>
+
+          </div>
+
+          <section class="post-section faq-section-box" id="frequently-asked-questions">
+            <span class="section-num">12</span>
+            <h2>Frequently Asked Questions</h2>
+            <div class="faq-box">
+              <details class="faq-item">
+                <summary class="faq-summary">Is DNS filtering the same thing as DNS security?</summary>
+                <p class="faq-answer">Not quite — filtering is one major piece of the broader DNS security discipline,
+                  not the whole of it. DNS security also covers things like protecting the DNS infrastructure itself
+                  against spoofing and tampering and encrypting queries in transit. Filtering specifically refers to the
+                  part where a resolver decides whether to answer a given lookup.</p>
+              </details>
+              <details class="faq-item">
+                <summary class="faq-summary">Does DNS filtering stop zero-day malware it's never seen before?</summary>
+                <p class="faq-answer">It can, though, not through recognition of the specific malware sample itself.
+                  Behavioral and structural detection — recognizing DGA patterns, unusual query volumes, or a domain's
+                  suspicious registration characteristics — can catch previously unseen command-and-control
+                  infrastructure even when the malware binary itself has never been analyzed by anyone.</p>
+              </details>
+              <details class="faq-item">
+                <summary class="faq-summary">Will DNS filtering block legitimate websites by mistake?</summary>
+                <p class="faq-answer">Occasionally, yes, and this is exactly why false-positive rate is such an
+                  important question when choosing a provider. A well-tuned system combining multiple signals, rather
+                  than relying on one blunt category list, keeps this rate low, and a fast, clear exception process
+                  handles the cases that do slip through.</p>
+              </details>
+              <details class="faq-item">
+                <summary class="faq-summary">Can DNS filtering work if my organization uses encrypted DNS (DoH or DoT)?
+                </summary>
+                <p class="faq-answer">Yes. Encryption protects the query from being read or altered on its way to the
+                  resolver; it has no bearing on whether the resolver you've chosen applies policy once the query
+                  arrives. A properly built filtering service supports encrypted transport and still fully inspects and
+                  filters the traffic.</p>
+              </details>
+              <details class="faq-item">
+                <summary class="faq-summary">Does DNS filtering replace the need for a firewall or antivirus?</summary>
+                <p class="faq-answer">No, and it isn't meant to. Each of those tools sees a different slice of the
+                  problem — a firewall watches IPs and ports, antivirus watches device behavior, DNS filtering watches
+                  domain lookups across every device on the network regardless of whether it has an agent installed.
+                  They're complementary layers.</p>
+              </details>
+              <details class="faq-item">
+                <summary class="faq-summary">How quickly can DNS filtering catch a brand-new phishing domain?</summary>
+                <p class="faq-answer">This varies significantly by provider and is worth pressing on directly during
+                  evaluation. Reputation-based lists that update once daily are close to useless against phishing
+                  infrastructure that lives for a matter of hours. Systems built around registration-age analysis,
+                  structural brand-similarity scoring, and behavioral signals can flag malicious domains within minutes
+                  of them going live, well before any human report exists.</p>
+              </details>
+              <details class="faq-item">
+                <summary class="faq-summary">What happens on a user's screen when a domain gets blocked?</summary>
+                <p class="faq-answer">Most commonly, either the page simply fails to load, appearing to the user like a
+                  broken or dead link, or the resolver redirects to a plain warning page explaining that the destination
+                  was blocked and why. There's typically no dramatic pop-up or interruption — the connection is quietly
+                  declined before it ever really starts.</p>
+              </details>
+              <details class="faq-item">
+                <summary class="faq-summary">Does DNS filtering cover devices that aren't managed by IT, like guest
+                  Wi-Fi or IoT devices?</summary>
+                <p class="faq-answer">Yes, when it's deployed at the network or resolver level rather than only through
+                  a device-specific agent. Every device that connects to the network still must perform DNS lookups to
+                  function, which means resolver-level filtering covers unmanaged and guest devices the same way it
+                  covers managed laptops.</p>
+              </details>
+              <details class="faq-item">
+                <summary class="faq-summary">Can attackers just bypass DNS filtering entirely?</summary>
+                <p class="faq-answer">To some degree, yes, and it's worth being upfront about this rather than
+                  overselling the control. A device or piece of malware that's configured to ignore the network's
+                  assigned DNS resolver and query a different one directly can route around filtering. This is exactly
+                  why organizations pair DNS filtering with network-level rules that restrict outbound DNS traffic to
+                  only the sanctioned resolver, closing off most — though realistically not literally all — of that
+                  bypass path.</p>
+              </details>
+              <details class="faq-item">
+                <summary class="faq-summary">Is DNS filtering only useful for blocking phishing and malware, or does it
+                  do more?</summary>
+                <p class="faq-answer">Threat blocking tends to get the most attention, but the same mechanism supports
+                  content and category policy too — restricting access to specific categories of sites for compliance
+                  reasons, managing acceptable use on a school or corporate network, and giving security teams a
+                  genuinely rich, otherwise-underused stream of visibility into what every device on the network is
+                  actually trying to reach.</p>
+              </details>
+            </div>
+          </section>
+
+          <section class="post-section" id="the-bigger-picture">
+            <span class="section-num">13</span>
+            <h2>The Bigger Picture</h2>
+            <p>Step back far enough and DNS filtering is just a bet on timing. Every attack, no matter how sophisticated
+              the payload eventually becomes, must ask a simple question first: where does this domain live? That
+              question happens before the fake login page renders, before the ransomware payload downloads, before
+              stolen data starts leaking out one encoded query at a time. It is, structurally, one of the earliest and
+              most universal points at which a defender gets a genuine shot at saying no.</p>
+            <p>That doesn't make it sufficient on its own, and nothing in this piece should be read as suggesting it is.
+              A determined attacker with time and resources can find ways around any single layer, and DNS filtering has
+              real, honestly-stated limits — it can be bypassed by traffic that ignores the configured resolver
+              entirely, it depends heavily on the quality and speed of the threat intelligence behind it, and it says
+              nothing about threats that don't touch domain resolution at all, like an attacker already inside the
+              network moving laterally between machines that already trust each other. It's one deliberate layer in a
+              stack, not a replacement for the rest of that stack.</p>
+            <p>But as one layer among several, it's a remarkably efficient one, precisely because of where it sits and
+              how little it asks of the rest of your environment to be effective. It doesn't require every single device
+              to run a heavy agent. It doesn't require inspecting the contents of every file that crosses the network.
+              It requires pointing to your resolvers somewhere that's paying attention and treating a protocol most
+              organizations still think of as invisible plumbing with the seriousness that its role in nearly every
+              modern attack chain genuinely warrants.</p>
+            <p>The lookup happens whether anyone's watching or not. DNS filtering is simply the decision to be the one
+              watching.</p>
+          </section>
+
+        </article>
+      </div>
+    </div>
+  </section>
+
+
+  <div id="site-footer"></div>
+
+  <script src="/chrome.js?v=20260821"></script>
+  <script>
+    mountChrome('blog');
+
+    document.addEventListener('click', function (e) {
+      const link = e.target.closest('.post-toc a[href^="#"]');
+      if (!link) return;
+      const target = document.querySelector(link.getAttribute('href'));
+      if (!target) return;
+      e.preventDefault();
+      const top = target.getBoundingClientRect().top + window.scrollY - 88;
+      window.scrollTo({ top, behavior: 'smooth' });
+      if (history.pushState) history.pushState(null, '', link.getAttribute('href'));
+    });
+  </script>
+</body>
+
+</html>
