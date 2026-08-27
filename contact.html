@@ -44,8 +44,8 @@
 
         <div class="form-card" style="margin-top:32px">
           <div id="success" class="success">
-            <div class="who"><span data-ic="check" style="width:20px;height:20px;border-radius:50%;background:var(--good);color:#fff50a;display:grid;place-items:center"></span>Thanks — we&rsquo;ll be in touch within one business day.</div>
-            <div class="muted" style="font-size:13.5px">Our security engineering team will email you from <span class="mono" style="color:var(--accent)">team@olladns.com</span> with a calendar link and the requested materials.</div>
+            <div class="who"><span data-ic="check" style="width:20px;height:20px;border-radius:50%;background:var(--good);color:#fff50a;display:grid;place-items:center"></span>Your message is ready to send.</div>
+            <div class="muted" style="font-size:13.5px">Your mail client should have opened with this enquiry addressed to <span class="mono" style="color:var(--accent)">sales@olladns.com</span>. It is not sent until you send it — if nothing opened, email that address directly.</div>
           </div>
 
           <div style="margin-bottom:22px">
@@ -63,27 +63,27 @@
             <div class="field-row">
               <div class="field">
                 <label>First name</label>
-                <input type="text" placeholder="Riley" required/>
+                <input type="text" id="cf-first" placeholder="Riley" required/>
               </div>
               <div class="field">
                 <label>Last name</label>
-                <input type="text" placeholder="Singh" required/>
+                <input type="text" id="cf-last" placeholder="Singh" required/>
               </div>
             </div>
             <div class="field-row">
               <div class="field">
                 <label>Work email</label>
-                <input type="email" placeholder="riley@yourcompany.com" required/>
+                <input type="email" id="cf-email" placeholder="riley@yourcompany.com" required/>
               </div>
               <div class="field">
                 <label>Company</label>
-                <input type="text" placeholder="Acme Corp" required/>
+                <input type="text" id="cf-company" placeholder="Acme Corp" required/>
               </div>
             </div>
             <div class="field-row">
               <div class="field">
                 <label>Role</label>
-                <select>
+                <select id="cf-role">
                   <option>Security analyst / SOC</option>
                   <option>Security engineer / DFIR</option>
                   <option>CISO / Director of Security</option>
@@ -95,7 +95,7 @@
               </div>
               <div class="field">
                 <label>Devices to protect</label>
-                <select>
+                <select id="cf-devices">
                   <option>Under 50</option>
                   <option>50 – 250</option>
                   <option>250 – 1,000</option>
@@ -107,7 +107,7 @@
             </div>
             <div class="field">
               <label>Anything else we should know?</label>
-              <textarea rows="4" placeholder="Existing tools, the timeline you're working against, the compliance frameworks you care about, the question that keeps you up at 3am…"></textarea>
+              <textarea id="cf-notes" rows="4" placeholder="Existing tools, the timeline you're working against, the compliance frameworks you care about, the question that keeps you up at 3am…"></textarea>
             </div>
 
             <div style="display:flex;align-items:center;gap:14px;flex-wrap:wrap">
@@ -224,14 +224,38 @@
   });
 
   // Form submit
-  document.getElementById('contact-form').addEventListener('submit', (e)=>{
-    e.preventDefault();
-    const ok = document.getElementById('success');
-    ok.classList.add('show');
-    ok.scrollIntoView ? null : null; // intentionally do nothing
-    window.scrollTo({top: document.querySelector('.form-card').getBoundingClientRect().top + window.scrollY - 100, behavior:'smooth'});
-    e.target.reset();
-  });
+    // Form submit.
+    //
+    // This used to show the success panel and reset the form without making any
+    // network call - no action, no fetch, no XHR. Every enquiry was discarded
+    // while the sender was told it had been received.
+    //
+    // There is no backend endpoint for this form, so rather than fake one it
+    // composes the message and hands it to the visitor's mail client. Nothing
+    // is claimed to have been sent that was not.
+    document.getElementById('contact-form').addEventListener('submit', (e)=>{
+      e.preventDefault();
+      const val = id => (document.getElementById(id)||{}).value || '';
+      const interest = ((document.querySelector('.seg button.active')||{}).textContent || 'General').trim();
+      const name = (val('cf-first') + ' ' + val('cf-last')).trim();
+      const body = [
+        'Name:     ' + name,
+        'Email:    ' + val('cf-email'),
+        'Company:  ' + val('cf-company'),
+        'Role:     ' + val('cf-role'),
+        'Devices:  ' + val('cf-devices'),
+        'Interest: ' + interest,
+        '',
+        val('cf-notes')
+      ].join('\n');
+      const href = 'mailto:sales@olladns.com'
+        + '?subject=' + encodeURIComponent('olladns enquiry - ' + (val('cf-company') || name))
+        + '&body=' + encodeURIComponent(body);
+      const ok = document.getElementById('success');
+      ok.classList.add('show');
+      window.scrollTo({top: document.querySelector('.form-card').getBoundingClientRect().top + window.scrollY - 100, behavior:'smooth'});
+      window.location.href = href;
+    });
 </script>
 </body>
 </html>

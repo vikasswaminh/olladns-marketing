@@ -476,27 +476,25 @@
         <div class="pf-bar"><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="url">/ai-detection</span></div>
         <div style="padding:22px;background:var(--bg-1)">
           <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-bottom:14px">
-            <div class="card" style="padding:14px"><div class="muted" style="font-size:10px;letter-spacing:.08em;text-transform:uppercase">Detections / 24h</div><div style="font-family:var(--mono);font-size:28px;margin-top:4px;color:var(--mag)">744</div></div>
-            <div class="card" style="padding:14px"><div class="muted" style="font-size:10px;letter-spacing:.08em;text-transform:uppercase">FP rate</div><div style="font-family:var(--mono);font-size:28px;margin-top:4px;color:var(--accent)">0.04%</div></div>
+            <div class="card" style="padding:14px"><div class="muted" style="font-size:10px;letter-spacing:.08em;text-transform:uppercase">Classifiers</div><div style="font-family:var(--mono);font-size:28px;margin-top:4px;color:var(--mag)">2</div></div>
+            <div class="card" style="padding:14px"><div class="muted" style="font-size:10px;letter-spacing:.08em;text-transform:uppercase">Vendor feeds</div><div style="font-family:var(--mono);font-size:28px;margin-top:4px;color:var(--accent)">0</div></div>
           </div>
           <div class="card" style="padding:14px">
-            <div style="font-weight:600;font-size:13px;margin-bottom:12px">Models</div>
-            <div class="model-row"><div><div style="font-weight:500;font-size:12.5px">Phishing lookalike</div><div class="muted tiny mono">v4.2.1 · 99.6%</div></div><div class="sw on"><div class="d"></div></div></div>
-            <div class="model-row"><div><div style="font-weight:500;font-size:12.5px">DGA detector</div><div class="muted tiny mono">v3.8.0 · 97.2%</div></div><div class="sw on"><div class="d"></div></div></div>
-            <div class="model-row"><div><div style="font-weight:500;font-size:12.5px">Newly registered domain</div><div class="muted tiny mono">v2.4.4 · 94.1%</div></div><div class="sw on"><div class="d"></div></div></div>
-            <div class="model-row"><div><div style="font-weight:500;font-size:12.5px">Typosquat</div><div class="muted tiny mono">v3.0.2 · 98.4%</div></div><div class="sw on"><div class="d"></div></div></div>
-            <div class="model-row"><div><div style="font-weight:500;font-size:12.5px">C2 beacon timing</div><div class="muted tiny mono">v1.2.0 · 89.7%</div></div><div class="sw off"><div class="d"></div></div></div>
+            <div style="font-weight:600;font-size:13px;margin-bottom:12px">Classifiers</div>
+              <div class="model-row"><div><div style="font-weight:500;font-size:12.5px">DGA detector</div><div class="muted tiny mono">n-gram + entropy</div></div><div class="sw on"><div class="d"></div></div></div>
+              <div class="model-row"><div><div style="font-weight:500;font-size:12.5px">Typosquat</div><div class="muted tiny mono">edit distance + homoglyph</div></div><div class="sw on"><div class="d"></div></div></div>
+              <div class="model-row"><div><div style="font-weight:500;font-size:12.5px">AI tool detection</div><div class="muted tiny mono">curated catalogue</div></div><div class="sw on"><div class="d"></div></div></div>
           </div>
         </div>
       </div>
       <div>
         <span class="eyebrow">AI Detection</span>
-        <h2 style="margin-top:14px">Five models. One verdict. Zero day-zero excuses.</h2>
-        <p class="lede" style="margin-top:18px">Our models are trained on 180+ billion daily queries across thousands of customers. They see new threats before threat-intel vendors finish writing the report.</p>
+        <h2 style="margin-top:14px">Two classifiers you can actually inspect.</h2>
+        <p class="lede" style="margin-top:18px">No vendor feeds and no black box. Both classifiers are transparent by design, so when a domain is flagged you can see the reason — and disagree with it.</p>
         <div style="margin-top:32px;display:flex;flex-direction:column;gap:18px">
-          <div class="feat"><div class="ck" data-ic="check"></div><div><div class="ti">Phishing lookalike</div><div class="bo">Visual + structural similarity to your protected brands. Catches login-m1crosoft-secure.cf within an hour of registration.</div></div></div>
+          <div class="feat"><div class="ck" data-ic="check"></div><div><div class="ti">Typosquat</div><div class="bo">Damerau-Levenshtein distance and homoglyph substitution against a protect-list of your own domains. Catches Cyrillic lookalikes and single-character swaps.</div></div></div>
           <div class="feat"><div class="ck" data-ic="check"></div><div><div class="ti">DGA &amp; algorithmic C2</div><div class="bo">Statistical n-gram + entropy classifier. Blocks malware command-and-control even when the hostname has never been seen.</div></div></div>
-          <div class="feat"><div class="ck" data-ic="check"></div><div><div class="ti">Feedback loop</div><div class="bo">One click confirms or rejects a detection. Models retrain nightly with your verdicts.</div></div></div>
+          <div class="feat"><div class="ck" data-ic="check"></div><div><div class="ti">Shadow AI discovery</div><div class="bo">Surfaces AI tools in use on your network from a curated catalogue, and separates what is worth knowing about from what is safe to block.</div></div></div>
         </div>
       </div>
     </div>
