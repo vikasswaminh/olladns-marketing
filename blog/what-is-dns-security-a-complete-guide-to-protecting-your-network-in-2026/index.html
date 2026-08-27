@@ -93,7 +93,7 @@
 
     .post-layout {
       display: grid;
-      grid-template-columns: 260px minmax(0, 1fr);
+      grid-template-columns: 240px 1fr;
       gap: 64px;
       align-items: start;
       padding-top: 56px
@@ -101,10 +101,14 @@
 
     .post-toc {
       position: sticky;
-      top: 88px;
+      top: 100px;
       max-height: calc(100vh - 120px);
       overflow: auto;
-      padding-right: 10px
+      background: var(--bg-1);
+      border: 1px solid var(--line);
+      border-radius: var(--r-lg);
+      padding: 24px;
+      box-shadow: var(--shadow-sm);
     }
 
     .post-toc h4 {
@@ -147,7 +151,7 @@
     }
 
     .post-body {
-      max-width: 780px;
+      max-width: none;
       margin: 0;
       min-width: 0
     }
@@ -185,7 +189,7 @@
 
     .post-section {
       position: relative;
-      margin-bottom: 72px;
+      margin-bottom: 40px;
       padding-top: 8px;
       scroll-margin-top: 92px
     }
@@ -463,8 +467,11 @@
       grid-template-columns: 1fr 300px;
       gap: 32px;
       align-items: center;
-      margin: 40px 0;
-      padding: 28px;
+      grid-template-columns: 1fr 280px;
+      gap: 28px;
+      align-items: start;
+      margin: 36px 0;
+      padding: 26px;
       background: var(--bg-1);
       border: 1px solid var(--line);
       border-radius: var(--r-lg)
@@ -480,6 +487,8 @@
     }
 
     .technique-visual {
+      position: sticky;
+      top: 120px;
       display: grid;
       place-items: center
     }
@@ -964,14 +973,15 @@
       }
 
       .post-toc {
-        position: static;
-        max-height: none;
-        overflow: visible;
-        background: var(--bg-1);
-        border: 1px solid var(--line);
-        border-radius: var(--r-md);
-        padding: 18px
-      }
+          position: static;
+          max-height: none;
+          overflow: visible;
+          background: var(--bg-1);
+          border: 1px solid var(--line);
+          border-radius: var(--r-lg);
+          padding: 24px;
+          margin-bottom: 32px;
+        }
 
       .post-toc h4 {
         margin-bottom: 10px
@@ -1047,21 +1057,20 @@
 
     </style>
 </head>
-
 <body data-screen-label="Marketing — Blog Post">
   <div id="site-nav"></div>
 
-  <section class="page-hero">
+  <section class="page-hero" style="padding-top: 40px;">
     <div class="grid-bg"></div>
-    <div class="container" style="position:relative">
+    <div class="container" style="position:relative; text-align: center; display: flex; flex-direction: column; align-items: center;">
       <span class="eyebrow"><a href="/blog/" style="color:inherit">DNS Security</a></span>
-      <h1>What Is DNS Security? A Complete Guide to Protecting Your Network in 2026</h1>
+      <h1 style="max-width: none;">What Is DNS Security?<br>A Complete Guide to Protecting Your Network in 2026</h1>
       <p class="post-hero-desc">DNS is the layer every attacker must touch and almost nobody watches. Here's what DNS
         security means, how attacks exploit it, and how to close the gap — without slowing your team down.</p>
       <div class="post-meta">
         <span class="tag">Guide</span>
         <span class="sep">•</span>
-        <span>Aug 19, 2026</span>
+        <span>Aug 20, 2026</span>
         <span class="sep">•</span>
         <span>24 min read</span>
         <span class="sep">•</span>
@@ -1114,6 +1123,11 @@
                   lookalike phishing all abuse DNS.</span></li>
               <li><span class="ck">✓</span><span><strong>Modern stack:</strong> protective DNS + DNSSEC + DoH/DoT/DoQ +
                   RPZ + behavioral intelligence.</span></li>
+            </ul>
+
+            </div>
+
+
             <!-- Key Takeaways -->
 <div class="what-found">
   <div class="what-found-head">
@@ -1126,12 +1140,11 @@
     <li><span class="ck">✓</span><span>Deployable across all devices, including IoT.</span></li>
     <li><span class="ck">✓</span><span>Modern stack reduces phishing, ransomware, and data exfiltration.</span></li>
   </ul>
-</div>
-        </div>
-      </section>
 
-          <div class="section-box">
-<section class="post-section" id="the-layer-nobody-watches">
+    </div>
+
+
+    <section class="post-section" id="the-layer-nobody-watches">
             <span class="section-num">01</span>
             <h2>The Layer Nobody Watches</h2>
             <p>Here's a question worth sitting with for a second: what's the one thing a phishing email, a ransomware
@@ -1156,10 +1169,8 @@
                 Every single time.</p>
             </blockquote>
           </section>
-</div>
 
-          <div class="section-box">
-<section class="post-section" id="what-dns-does">
+          <section class="post-section" id="what-dns-does">
             <span class="section-num">02</span>
             <h2>First, a Quick Refresher: What DNS Actually Does</h2>
             <p>Before we can talk about securing DNS, it helps to remember what DNS is doing every single time you open
@@ -1211,27 +1222,11 @@
               </div>
             </div>
           </section>
-</div>
 
-          <div class="what-found">
-            <div class="what-found-head">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                stroke-linejoin="round">
-                <path d="M2 12s5-9 10-9 10 9 10 9-5 9-10 9-10-9-10-9Z"></path>
-                <circle cx="12" cy="12" r="3"></circle>
-              </svg>
-              <h4>What We Found</h4>
-            </div>
-            <p>Most organizations inspect email, endpoints, and web traffic closely — but treat DNS as invisible
-              plumbing. That gap is exactly what attackers exploit. The teams that close it gain an early, high-coverage
-              layer of defense that firewalls and antivirus can't replicate.</p>
-            <p>DNS security isn't another siloed tool; it's a control point that sits in front of nearly every outbound
-              connection in your environment.</p>
-          </div>
+          
 
 
-          <div class="section-box">
-<section class="post-section" id="what-is-dns-security">
+          <section class="post-section" id="what-is-dns-security">
             <span class="section-num">03</span>
             <h2>So, What Is DNS Security?</h2>
             <p>DNS security refers to the practices, protocols, and technologies used to protect the DNS infrastructure
@@ -1267,10 +1262,8 @@
             <p>A mature DNS security program does both. It hardens the protocol against manipulation, and it uses the
               protocol's visibility to stop threats before they land.</p>
           </section>
-</div>
 
-          <div class="section-box">
-<section class="post-section" id="why-dns-attack-surface">
+          <section class="post-section" id="why-dns-attack-surface">
             <span class="section-num">04</span>
             <h2>Why DNS Became a Favorite Attack Surface</h2>
             <p>DNS wasn't designed with security as a first-class concern. It was designed in the early 1980s, at a time
@@ -1376,16 +1369,16 @@
                 <p>DNS tunneling is used for both command-and-control communication and outright data exfiltration, and
                   it's notoriously difficult to catch with traditional network monitoring because, again, DNS traffic is
                   rarely scrutinized at the level of individual query content.</p>
-              </div>
-            </div>
 
-            <div class="code-box">
-              <div class="code-head"><span>DNS tunneling query pattern</span></div>
-              <pre><code>subdomain.payload.attacker-domain.com
+                <div class="code-box" style="margin-top: 24px; margin-bottom: 0;">
+                  <div class="code-head"><span>DNS tunneling query pattern</span></div>
+                  <pre><code>subdomain.payload.attacker-domain.com
 c2f9a8b1e2.exfil.evil.com
 reply-from-authoritative.evil.com</code></pre>
-              <p class="code-caption">Data encoded in subdomain labels; the attacker's authoritative server decodes each
-                query and replies with hidden commands.</p>
+                  <p class="code-caption">Data encoded in subdomain labels; the attacker's authoritative server decodes each
+                    query and replies with hidden commands.</p>
+                </div>
+              </div>
             </div>
 
             <div class="technique-row">
@@ -1462,10 +1455,8 @@ reply-from-authoritative.evil.com</code></pre>
               </div>
             </div>
           </section>
-</div>
 
-          <div class="section-box">
-<section class="post-section" id="firewall-not-enough">
+          <section class="post-section" id="firewall-not-enough">
             <span class="section-num">06</span>
             <h2>Why Your Firewall and Antivirus Aren't Enough</h2>
             <p>If you're running a firewall, endpoint detection and response, and email security, you might reasonably
@@ -1514,10 +1505,8 @@ reply-from-authoritative.evil.com</code></pre>
               leaves the ground, that its destination airport has been flagged as unsafe — and simply not letting the
               flight take off. It's an earlier, cheaper intervention point.</p>
           </section>
-</div>
 
-          <div class="section-box">
-<section class="post-section" id="building-blocks">
+          <section class="post-section" id="building-blocks">
             <span class="section-num">07</span>
             <h2>The Core Building Blocks of DNS Security</h2>
             <p>Now that we've covered the "why," let's get into the "how." A serious DNS security posture is built from
@@ -1608,10 +1597,8 @@ reply-from-authoritative.evil.com</code></pre>
               baseline hygiene, closing off an entire category of eavesdropping and manipulation attacks that plaintext
               DNS is simply defenseless against.</p>
           </section>
-</div>
 
-          <div class="section-box">
-<section class="post-section" id="real-world-stakes">
+          <section class="post-section" id="real-world-stakes">
             <span class="section-num">08</span>
             <h2>Real-World Stakes: Why This Isn't Theoretical</h2>
             <p>It's easy for a topic like this to feel abstract — protocols, acronyms, cryptographic signatures. So,
@@ -1745,10 +1732,8 @@ reply-from-authoritative.evil.com</code></pre>
               </li>
             </ol>
           </section>
-</div>
 
-          <div class="section-box">
-<section class="post-section" id="checklist">
+          <section class="post-section" id="checklist">
             <span class="section-num">10</span>
             <h2>A Practical Checklist for Evaluating DNS Security Solutions</h2>
             <p>If you're in the market for a DNS security tool, a few things genuinely separate the strong options from
@@ -1790,10 +1775,8 @@ reply-from-authoritative.evil.com</code></pre>
                   set.</span></li>
             </ul>
           </section>
-</div>
 
-          <div class="section-box">
-<section class="post-section" id="myths">
+          <section class="post-section" id="myths">
             <span class="section-num">11</span>
             <h2>Common Myths About DNS Security, Debunked</h2>
             <p>A few misconceptions come up often enough that they're worth addressing directly.</p>
@@ -1848,7 +1831,6 @@ reply-from-authoritative.evil.com</code></pre>
               </details>
             </div>
           </section>
-</div>
 
           <section class="post-section" id="future">
             <span class="section-num">12</span>
