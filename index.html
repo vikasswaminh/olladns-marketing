@@ -6,7 +6,7 @@
   <title>olladns — DNS security you configure from code</title>
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <meta name="description"
-    content="Multi-tenant DNS filtering platform, built API-first and MCP-native. 57 REST endpoints, 54 MCP tools, transparent classifiers, HMAC-signed webhooks. Dashboard is read-only on purpose." />
+    content="Multi-tenant DNS filtering platform, built API-first and MCP-native. 106 REST operations, 94 MCP tools, transparent classifiers, HMAC-signed webhooks. Dashboard is read-only on purpose." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;500;600;700;900&display=swap" rel="stylesheet" />
@@ -460,8 +460,8 @@
           <a class="btn lg" href="/contact.html">Apply to design partner program</a>
         </div>
         <div class="meta">
-          <div class="item"><span class="dot"></span> 57 REST endpoints · 54 MCP tools</div>
-          <div class="item">DoH · DoT · DoQ at <code
+          <div class="item"><span class="dot"></span> 106 REST operations · 94 MCP tools</div>
+          <div class="item">DoH at <code
               style="font-family:var(--mono);font-size:12px">dns.olladns.com</code></div>
           <div class="item">Single US region · EU-West next</div>
         </div>
@@ -670,12 +670,12 @@
           <tbody>
             <tr>
               <th>Resolvers</th>
-              <td>DoH, DoT, DoQ at <code>dns.olladns.com</code> · per-tenant routing via path UUID · per-device routing
+              <td>DoH at <code>dns.olladns.com</code> · per-tenant routing via path UUID · per-device routing
                 via <code>&lt;uuid&gt;--&lt;slug&gt;</code></td>
             </tr>
             <tr>
               <th>REST API</th>
-              <td>57 endpoints at <code>api.olladns.com/api/v1</code> · OpenAPI 3.1 spec at <code>/openapi.json</code> ·
+              <td>106 operations across 81 paths at <code>api.olladns.com/api/v1</code> · OpenAPI 3.1 spec at <code>/openapi.json</code> ·
                 <code>x-required-scopes</code> on every secured op · <code>/version</code> returns git SHA
               </td>
             </tr>
@@ -686,14 +686,14 @@
             </tr>
             <tr>
               <th>Auth</th>
-              <td>JWT for humans (admin / viewer roles) · scoped API keys for agents · 16 scopes
+              <td>JWT for humans (admin / viewer roles) · scoped API keys for agents · 18 scopes
                 (<code>analytics:read</code>, <code>policies:write</code>, …) · per-key expiry · last-used timestamps
               </td>
             </tr>
             <tr>
               <th>Policies</th>
               <td>Custom rules (block / allow with wildcards) · DNS rewrites (A/AAAA/CNAME/NXDOMAIN/REFUSED) ·
-                safe-search · parental · blocked-services · NRD blocking · TLD blocking · allowlist-only mode ·
+                safe-search · parental · blocked-services · TLD blocking · allowlist-only mode ·
                 per-tenant protect-list</td>
             </tr>
             <tr>

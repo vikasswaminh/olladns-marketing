@@ -53,7 +53,7 @@
 
       <div class="pick-card us">
         <h3>2. Scoped agent tokens with explicit resource:action grants</h3>
-        <p>Our API keys carry an explicit scope list (<code>analytics:read</code>, <code>policies:write</code>, etc. — 16 scopes total) and per-key expiry. Mint one for your CI bot with just the scopes it needs. Audit log tags every change with the specific token that made it (not just "a user did this"). NextDNS has API keys but they're full-capability — there's no per-key scope dispatch.</p>
+        <p>Our API keys carry an explicit scope list (<code>analytics:read</code>, <code>policies:write</code>, etc. — 18 scopes total) and per-key expiry. Mint one for your CI bot with just the scopes it needs. Audit log tags every change with the specific token that made it (not just "a user did this"). NextDNS has API keys but they're full-capability — there's no per-key scope dispatch.</p>
       </div>
 
       <div class="pick-card us">
@@ -118,7 +118,7 @@
       </ul>
 
       <h2>Where we agree</h2>
-      <p>Both products do per-tenant routing via DoH path, both support DoT/DoQ, both have per-tenant blocklist subscriptions, both have safe-search enforcement, parental controls, custom block/allow rules with wildcards, DNS rewrites, schedule-based blocking, query log + analytics, NRD blocking, TLD blocking. The 80% overlap is real — DNS filtering has converged on a known shape. The 20% is where each product places its bets.</p>
+      <p>Both products do per-tenant routing via DoH path, both have safe-search enforcement, parental controls, custom block/allow rules where a bare domain also covers its subdomains, DNS rewrites, schedule-based blocking, query log + analytics, TLD blocking. The 80% overlap is real — DNS filtering has converged on a known shape. The 20% is where each product places its bets.</p>
 
       <p><a href="/comparison.html">See the full feature matrix →</a></p>
     </div>

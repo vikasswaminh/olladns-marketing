@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <title>Page not found · olladns</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <meta name="robots" content="noindex"/>
+  <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;500;600;700;900&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="/site.css?v=20260827"/>
+  <style>
+    .nf-wrap{max-width:640px;margin:0 auto;padding:120px 24px 140px;text-align:center}
+    .nf-code{font-family:var(--mono);font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);margin-bottom:18px}
+    .nf-wrap h1{font-size:38px;line-height:1.15;margin:0 0 14px}
+    .nf-wrap p{color:var(--muted);font-size:16.5px;line-height:1.65;margin:0 auto 30px;max-width:520px}
+    .nf-links{display:flex;flex-wrap:wrap;gap:10px;justify-content:center}
+    .nf-links a{padding:9px 16px;border:1px solid var(--line);border-radius:8px;font-size:14px;color:var(--text);background:var(--panel)}
+    .nf-links a:hover{border-color:var(--accent-line);color:var(--accent)}
+    @media (max-width:600px){.nf-wrap{padding:80px 20px 100px}.nf-wrap h1{font-size:30px}}
+  </style>
+</head>
+<body data-screen-label="Marketing — 404">
+
+<div id="site-nav"></div>
+
+<div class="nf-wrap">
+  <div class="nf-code">404</div>
+  <h1>That page does not exist</h1>
+  <p>
+    The link may be out of date, or the address may have a typo. Nothing is
+    broken on the resolver &mdash; DNS filtering is unaffected by this page.
+  </p>
+  <div class="nf-links">
+    <a href="/">Home</a>
+    <a href="/product.html">Product</a>
+    <a href="/developers.html">Developers</a>
+    <a href="/pricing.html">Pricing</a>
+    <a href="/changelog.html">Changelog</a>
+    <a href="/contact.html">Contact</a>
+  </div>
+</div>
+
+<div id="site-footer"></div>
+
+<script src="/chrome.js?v=20260827"></script>
+<script>
+  mountChrome();
+</script>
+</body>
+</html>
