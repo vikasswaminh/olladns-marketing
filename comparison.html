@@ -51,7 +51,7 @@
         <tbody>
           <tr><td>OpenAPI 3.1 spec served at runtime<span class="note">api.olladns.com/api/v1/openapi.json — 106 operations, x-required-scopes on every secured op</span></td><td class="center me yes">✓</td><td class="center no">—</td><td class="center no">—</td></tr>
           <tr><td>MCP server (Anthropic spec)<span class="note">Configure DNS from Claude / Cursor / Continue without leaving the editor</span></td><td class="center me yes">✓ <span class="note">49 auto-generated + 5 hand-curated workflows (54 total)</span></td><td class="center no">—</td><td class="center no">—</td></tr>
-          <tr><td>Scoped API tokens (resource:action)<span class="note">e.g. analytics:read, policies:write</span></td><td class="center me yes">✓ <span class="note">18 scopes</span></td><td class="center partial">single capability</td><td class="center partial">single capability</td></tr>
+          <tr><td>Scoped API tokens (resource:action)<span class="note">e.g. analytics:read, policies:write</span></td><td class="center me yes">✓ <span class="note">19 scopes</span></td><td class="center partial">single capability</td><td class="center partial">single capability</td></tr>
           <tr><td>Actor-attributed audit log<span class="note">Every change tagged 'user #N' or 'agent #N'</span></td><td class="center me yes">✓</td><td class="center partial">user only</td><td class="center partial">user only</td></tr>
           <tr><td>Outbound webhooks (HMAC-signed)</td><td class="center me yes">✓</td><td class="center yes">✓</td><td class="center partial">via integrations</td></tr>
         </tbody>
@@ -63,12 +63,12 @@
       <table class="cmp-table">
         <thead><tr><th class="feat">Feature</th><th class="product me-strong">olladns</th><th class="product">NextDNS</th><th class="product">ControlD</th></tr></thead>
         <tbody>
-          <tr><td>Curated blocklists<span class="note">Ads, malware, phishing, trackers, NRD, AI scrapers, etc.</span></td><td class="center me yes">67 across 14 categories</td><td class="center yes">~100</td><td class="center yes">~40</td></tr>
+          <tr><td>Curated blocklists<span class="note">Ads, malware, phishing, trackers, AI scrapers, etc.</span></td><td class="center me yes">60 across 14 categories</td><td class="center yes">~100</td><td class="center yes">~40</td></tr>
           <tr><td>DGA classifier (algorithmic-domain detection)<span class="note">olladns: transparent feature-based, open source, 0 USD/yr</span></td><td class="center me yes">✓ <span class="note">explainable</span></td><td class="center yes">✓ <span class="note">opaque</span></td><td class="center yes">✓ <span class="note">opaque</span></td></tr>
           <tr><td>Typosquat detection (per-tenant protect list)</td><td class="center me yes">✓ <span class="note">Damerau-Levenshtein + Cyrillic homoglyphs</span></td><td class="center no">—</td><td class="center no">—</td></tr>
-          <tr><td>NRD (newly-registered domains) blocking</td><td class="center me yes">✓ <span class="note">snapshot feed</span></td><td class="center yes">✓ <span class="note">real-time</span></td><td class="center yes">✓ <span class="note">real-time</span></td></tr>
+          <tr><td>NRD (newly-registered domains) blocking</td><td class="center no">— <span class="note">no feed installed</span></td><td class="center yes">✓ <span class="note">real-time</span></td><td class="center yes">✓ <span class="note">real-time</span></td></tr>
           <tr><td>Parked-domain detection<span class="note">olladns: deferred, needs paid passive-DNS feed</span></td><td class="center partial">roadmap</td><td class="center yes">✓</td><td class="center yes">✓</td></tr>
-          <tr><td>DoH/VPN/proxy bypass blocking<span class="note">Block known evasion endpoints</span></td><td class="center me yes">✓</td><td class="center partial">via lists</td><td class="center partial">via lists</td></tr>
+          <tr><td>DoH/VPN/proxy bypass blocking<span class="note">Block known evasion endpoints</span></td><td class="center no">— <span class="note">roadmap</span></td><td class="center partial">via lists</td><td class="center partial">via lists</td></tr>
         </tbody>
       </table>
     </div>
