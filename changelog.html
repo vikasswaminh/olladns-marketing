@@ -41,6 +41,349 @@
   <div class="container" style="max-width:880px">
 
     <div class="release">
+      <div class="ver">v0.72<span class="date">2026-08-26</span></div>
+      <div>
+        <h3><span class="tag fix">fix</span> Session revocation &mdash; a token now dies with its subject</h3>
+        <div class="body">
+          <p>A JWT stayed valid for its full 24 hours no matter what happened to the user behind it. Deleting them did not revoke it, changing their password did not revoke it, and demoting an admin did not revoke it. The account-recovery path was the worst of the five cases: resetting a password invalidated other reset tokens and left the intruder's session running.</p>
+          <p>Fixed at the request extractor with a per-user session generation, so it applies to every endpoint rather than to the one handler that had guarded against it by hand. Measured in both directions: before the fix, a deleted user's token minted a working API key; after, it is refused.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="release">
+      <div class="ver">v0.71.2<span class="date">2026-08-19</span></div>
+      <div>
+        <h3><span class="tag fix">fix</span> Device enrolment under concurrency</h3>
+        <div class="body">
+          <p>Twenty machines imaged from one Windows image all picked the same device name, and a deterministic retry let exactly one through per round &mdash; a 20-machine rollout needed 20 rounds. Now a single atomic insert that picks a random free suffix on retry.</p>
+          <p>Join-code use limits were enforced by the query and never written by the API, so every code was unlimited-use. Wired end to end, and a use is refunded on any failure after consumption so a bounded code does not shrink on a lost race or a hostname typo.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="release">
+      <div class="ver">v0.70<span class="date">2026-08-19</span></div>
+      <div>
+        <h3><span class="tag feat">feat</span> Corporate device enrolment</h3>
+        <div class="body">
+          <p>Join codes let a machine register itself and wait for an administrator to approve it. The endpoint's DNS is untouched until approval, so waiting costs the employee nothing, and the code grants nothing except the right to ask.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="release">
+      <div class="ver">v0.69<span class="date">2026-08-18</span></div>
+      <div>
+        <h3><span class="tag fix">fix</span> Production-readiness P0s</h3>
+        <div class="body">
+          <p>Change-password never verified the current password &mdash; proven on the running build: a wrong password returned 200 and rotated it anyway. Separately, a device whose resolver mapping failed was still admitted and resolved on the global filter set forever, and the config renderer would overwrite a populated resolver config, wiping tenant routing in one command.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="release">
+      <div class="ver">v0.68<span class="date">2026-08-18</span></div>
+      <div>
+        <h3><span class="tag fix">fix</span> External QA report &mdash; 10 of 14 findings were real</h3>
+        <div class="body">
+          <p>Webhook event names are validated against an allowlist (any string was accepted, so a typo was a silent dead subscription). Sessions became revocable, and password policy became a breach list rather than composition rules.</p>
+          <p>The edge access log was recording customer browsing history: an RFC 8484 GET puts the whole DNS question in the query string, and the DoH path is itself the device credential. Both are now redacted at the proxy. Two of the report's three &ldquo;High&rdquo; findings were false.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="release">
+      <div class="ver">v0.67<span class="date">2026-08-17</span></div>
+      <div>
+        <h3><span class="tag fix">fix</span> Stop advertising transports that answer nothing</h3>
+        <div class="body">
+          <p>The API now reports DoT and plain DNS as unavailable rather than naming endpoints. Plain DNS was closed in v0.57, and DoT stopped carrying tenant identity at the v0.66 admission cutover. Tenant identity is the DoH path component, and DoT and DoQ have no path.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="release">
+      <div class="ver">v0.66<span class="date">2026-08-17</span></div>
+      <div>
+        <h3><span class="tag fix">fix</span> Admission control &mdash; an unknown resolver path is refused</h3>
+        <div class="body">
+          <p>An empty allow-list in the resolver means &ldquo;all clients&rdquo;, not &ldquo;no clients&rdquo;. Any fabricated DoH path resolved, served with the global filter set &mdash; including a deleted device's. Deleting a device returned 200 and revoked nothing.</p>
+          <p>One module is now the sole writer of that access document, and it refuses rather than guesses: it will not empty the list, will not remove more than half the clients in a single run, and records every decision to a table.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="release">
+      <div class="ver">v0.65<span class="date">2026-08-15</span></div>
+      <div>
+        <h3><span class="tag feat">feat</span> Per-tenant compiled category feeds</h3>
+      </div>
+    </div>
+
+    <div class="release">
+      <div class="ver">v0.64<span class="date">2026-08-14</span></div>
+      <div>
+        <h3><span class="tag fix">fix</span> Triage of an external QA report, and the defects underneath it</h3>
+        <div class="body">
+          <p>The report's headline finding was self-inflicted by its own test harness, and its tenant-isolation claim was disproved by measurement. What was real and not in the report: a workflow tool that advertised category blocking it never called, wildcard block rules that failed on every call because the API's own documentation promised syntax it rejects, and any device name over 25 characters producing a DoH URL that could never resolve.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="release">
+      <div class="ver">v0.63<span class="date">2026-08-13</span></div>
+      <div>
+        <h3><span class="tag feat">feat</span> Last-known-good blocklist mirror</h3>
+        <div class="body">
+          <p>A major upstream blocklist account disappeared for 36 hours and then came back. Upstream is now an input rather than a dependency: fetch conditionally, validate, store an immutable snapshot named by its own hash, and serve the promoted one. A failed or refused fetch leaves what is being served byte-identical.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="release">
+      <div class="ver">v0.62<span class="date">2026-08-10</span></div>
+      <div>
+        <h3><span class="tag fix">fix</span> SSO sign-in completes in the browser</h3>
+        <div class="body">
+          <p>The OIDC flow was correct end to end and finished by handing the browser a token in a URL fragment that nothing read. Every server-side step logged success and the user got a blank page with a valid session thrown away.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="release">
+      <div class="ver">v0.61<span class="date">2026-08-10</span></div>
+      <div>
+        <h3><span class="tag feat">feat</span> Shadow AI discovery</h3>
+        <div class="body">
+          <p>A detection dictionary of AI services, an endpoint that surfaces unclassified AI-looking traffic, and AI as a blockable category. Detecting a tool and being able to block it are different questions and are now different fields &mdash; blocking a shared cloud API host would take unrelated services down with it.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="release">
+      <div class="ver">v0.60<span class="date">2026-08-09</span></div>
+      <div>
+        <h3><span class="tag feat">feat</span> Analytics dashboard bundle</h3>
+      </div>
+    </div>
+
+    <div class="release">
+      <div class="ver">v0.59<span class="date">2026-08-08</span></div>
+      <div>
+        <h3><span class="tag fix">fix</span> Protection categories become real</h3>
+        <div class="body">
+          <p>Nothing had ever written the readiness column, so all five categories reported unavailable and every attempt to enable one returned 400. The feature was unreachable by construction. Categories are now an operator opt-in, because the resolver's filter list is global and every registered feed slows policy enforcement for every tenant.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="release">
+      <div class="ver">v0.58<span class="date">2026-08-07</span></div>
+      <div>
+        <h3><span class="tag fix">fix</span> Blocklist catalog truth-up</h3>
+        <div class="body">
+          <p>The newly-registered-domain toggle was a live feature backed by nothing; it now reports unavailable and refuses to be enabled. Region-branded entries that pointed at generic lists were deleted, five were repointed against their upstream titles, and a liveness checker records health per list. It found two lists that return HTTP 200 and are useless.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="release">
+      <div class="ver">v0.57<span class="date">2026-08-06</span></div>
+      <div>
+        <h3><span class="tag fix">fix</span> Closed the open resolver on port 53</h3>
+        <div class="body">
+          <p>Plain DNS was being used for reflection: 16.4 million queries for a single record from 7,665 source addresses, peaking at 12,209 queries a minute. It served no customer, because tenant identity requires the DoH path, so it is closed.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="release">
+      <div class="ver">v0.56<span class="date">2026-08-03</span></div>
+      <div>
+        <h3><span class="tag feat">feat</span> Protection profiles</h3>
+      </div>
+    </div>
+
+    <div class="release">
+      <div class="ver">v0.55<span class="date">2026-08-01</span></div>
+      <div>
+        <h3><span class="tag fix">fix</span> Production safety after a filtering outage</h3>
+        <div class="body">
+          <p>An environment variable that is set but empty is not unset, so the fallback never fired. The resulting URL was schemeless, every filter list failed to install, and the cleanup phase then removed the ones that were working. Tenants resolved unfiltered until it was caught.</p>
+          <p>Reconcile is now fail-closed, serialised on a database lock, and records every run with counts and a reason &mdash; container logs do not survive the recreate that is the first thing anyone does during an incident.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="release">
+      <div class="ver">v0.54<span class="date">2026-08-01</span></div>
+      <div>
+        <h3><span class="tag feat">feat</span> Per-tenant compiled blocklist feed, behind a flag</h3>
+      </div>
+    </div>
+
+    <div class="release">
+      <div class="ver">v0.53<span class="date">2026-08-01</span></div>
+      <div>
+        <h3><span class="tag fix">fix</span> Platform matrix rebuilt, and two server errors it found</h3>
+        <div class="body">
+          <p>An unparseable date reached the analytics store verbatim, and an absurd hours value produced a negative year. Both now return 400 or clamp.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="release">
+      <div class="ver">v0.52<span class="date">2026-08-01</span></div>
+      <div>
+        <h3><span class="tag test">test</span> Licence gate, and 46 rescued dashboard assertions</h3>
+        <div class="body">
+          <p>A dependency licence, advisory and provenance check runs as a build step, before the tests, so a policy violation cannot reach a deploy. Also fixed a blocked-services schedule that had never worked.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="release">
+      <div class="ver">v0.51<span class="date">2026-07-30</span></div>
+      <div>
+        <h3><span class="tag feat">feat</span> Setup screen and published client downloads</h3>
+      </div>
+    </div>
+
+    <div class="release">
+      <div class="ver">v0.50<span class="date">2026-07-30</span></div>
+      <div>
+        <h3><span class="tag feat">feat</span> Endpoint clients for Windows</h3>
+        <div class="body">
+          <p>A local DoH forwarder for Windows 10 and a configurator for Windows 11's built-in DoH client. The DoH URL is the device credential, so no API key goes on an end-user machine: a lost laptop leaks one device identity, revocable by deleting that device.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="release">
+      <div class="ver">v0.49<span class="date">2026-07-30</span></div>
+      <div>
+        <h3><span class="tag feat">feat</span> Client-testable API</h3>
+        <div class="body">
+          <p>Per-credential rate limits, a self-service DNS check endpoint, and coherent version reporting across the API, the spec and the binary.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="release">
+      <div class="ver">v0.48<span class="date">2026-07-30</span></div>
+      <div>
+        <h3><span class="tag fix">fix</span> Tenant-isolation hardening</h3>
+        <div class="body">
+          <p>The DoH identifier is a bearer credential for the data plane, so it is now rotatable: rotation retires the old identifier, mints a new one and rewrites every device URL. Analytics survives, but only for queries logged before the rotation, so a leaked identifier cannot keep injecting rows into the victim's reports.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="release">
+      <div class="ver">v0.47<span class="date">2026-07-29</span></div>
+      <div>
+        <h3><span class="tag fix">fix</span> Deep audit &mdash; backups, webhook SSRF, logo XSS, auth rate limiting</h3>
+        <div class="body">
+          <p>Nightly backups had been silently producing nothing for a day: one unquoted value in an environment file killed the script before its first dump, while the API read the same file through a different parser and looked healthy. Webhook targets are tenant-controlled and are now resolved and rejected for private address space, with redirects disabled.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="release">
+      <div class="ver">v0.46<span class="date">2026-07-29</span></div>
+      <div>
+        <h3><span class="tag feat">feat</span> API Keys screen &mdash; the one config surface in the dashboard</h3>
+        <div class="body">
+          <p>The dashboard is read-only on purpose. Credential management is the single exception, because without it a self-serve tenant cannot reach the API at all except by reading a token out of browser devtools.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="release">
+      <div class="ver">v0.45<span class="date">2026-07-29</span></div>
+      <div>
+        <h3><span class="tag fix">fix</span> Cross-tenant leak on the tenants endpoint</h3>
+        <div class="body">
+          <p>A scope says what kind of thing a caller may touch, never whose. Listing tenants had only a scope check, so every tenant admin &mdash; and a key literally named read-only &mdash; could read every tenant's resolver identifier, which is the credential that identifies them on the wire.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="release">
+      <div class="ver">v0.44<span class="date">2026-07-29</span></div>
+      <div>
+        <h3><span class="tag feat">feat</span> Self-serve signup and password reset</h3>
+      </div>
+    </div>
+
+    <div class="release">
+      <div class="ver">v0.43<span class="date">2026-07-29</span></div>
+      <div>
+        <h3><span class="tag feat">feat</span> Per-tenant rules in Postgres; rule rendering became a pure function</h3>
+      </div>
+    </div>
+
+    <div class="release">
+      <div class="ver">v0.42<span class="date">2026-07-28</span></div>
+      <div>
+        <h3><span class="tag fix">fix</span> Five defects from a full dashboard sweep</h3>
+      </div>
+    </div>
+
+    <div class="release">
+      <div class="ver">v0.41<span class="date">2026-06-08</span></div>
+      <div>
+        <h3><span class="tag feat">feat</span> Per-tenant branded block page</h3>
+      </div>
+    </div>
+
+    <div class="release">
+      <div class="ver">v0.40<span class="date">2026-06-07</span></div>
+      <div>
+        <h3><span class="tag feat">feat</span> Per-tenant OIDC single sign-on</h3>
+      </div>
+    </div>
+
+    <div class="release">
+      <div class="ver">v0.39<span class="date">2026-06-07</span></div>
+      <div>
+        <h3><span class="tag feat">feat</span> Compliance plumbing</h3>
+      </div>
+    </div>
+
+    <div class="release">
+      <div class="ver">v0.38<span class="date">2026-06-06</span></div>
+      <div>
+        <h3><span class="tag feat">feat</span> Five-gap DNS-layer sprint</h3>
+      </div>
+    </div>
+
+    <div class="release">
+      <div class="ver">v0.37<span class="date">2026-06-05</span></div>
+      <div>
+        <h3><span class="tag feat">feat</span> DNS Stamps (sdns://) endpoints</h3>
+      </div>
+    </div>
+
+    <div class="release">
+      <div class="ver">v0.36<span class="date">2026-06-05</span></div>
+      <div>
+        <h3><span class="tag feat">feat</span> Anycast for the API, Redis auth cache, dashboard bundle</h3>
+        <div class="body">
+          <p>Partially reversed since. Terminating TLS for the API at a third-party edge meant it could see analytics responses and API keys in cleartext, and it overwrote the real caller address in the audit trail. The edge now serves only DNS and the static site.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="release">
+      <div class="ver">v0.35<span class="date">2026-06-03</span></div>
+      <div>
+        <h3><span class="tag fix">fix</span> Security and correctness pass</h3>
+      </div>
+    </div>
+
+    <div class="release">
       <div class="ver">v0.34<span class="date">2026-05-29</span></div>
       <div>
         <h3><span class="tag feat">feat</span> Blocklist catalog 30 &rarr; 86 + marketing-claim integrity pass</h3>

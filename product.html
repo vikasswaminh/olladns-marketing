@@ -359,8 +359,8 @@
         <h2 style="margin-top:14px">Configure DNS from code, CI, or your AI editor.</h2>
         <p class="lede" style="margin-top:18px">Every setting is a REST endpoint or an MCP tool. The dashboard is read-only on purpose — config changes have to be versionable, diff-able, and auditable.</p>
         <div style="margin-top:32px;display:flex;flex-direction:column;gap:18px">
-          <div class="feat"><div class="ck" data-ic="check"></div><div><div class="ti">57 REST endpoints</div><div class="bo"><code>api.olladns.com</code> · OpenAPI 3.1 with <code>x-required-scopes</code> · auth via JWT or scoped API key.</div></div></div>
-          <div class="feat"><div class="ck" data-ic="check"></div><div><div class="ti">54 MCP tools</div><div class="bo"><code>mcp.olladns.com</code> · auto-generated from OpenAPI via FastMCP. Connect Claude, Cursor, Continue, Goose, any MCP client.</div></div></div>
+          <div class="feat"><div class="ck" data-ic="check"></div><div><div class="ti">106 REST operations</div><div class="bo"><code>api.olladns.com</code> · OpenAPI 3.1 with <code>x-required-scopes</code> · auth via JWT or scoped API key.</div></div></div>
+          <div class="feat"><div class="ck" data-ic="check"></div><div><div class="ti">94 MCP tools</div><div class="bo"><code>mcp.olladns.com</code> · auto-generated from OpenAPI via FastMCP. Connect Claude, Cursor, Continue, Goose, any MCP client.</div></div></div>
           <div class="feat"><div class="ck" data-ic="check"></div><div><div class="ti">16 granular scopes</div><div class="bo">Mint a read-only key for your SIEM, a write key for CI, a tool-specific key per AI agent. Revoke independently.</div></div></div>
           <div class="feat"><div class="ck" data-ic="check"></div><div><div class="ti">HMAC-signed webhooks</div><div class="bo">Every audit event fans out to your SIEM. SHA-256 signed bodies, timestamp + replay protection, wildcard event subscriptions.</div></div></div>
         </div>
@@ -550,7 +550,7 @@
       <div>
         <span class="eyebrow">Roaming Clients</span>
         <h2 style="margin-top:14px">Protected anywhere. Felt nowhere.</h2>
-        <p class="lede" style="margin-top:18px">Lightweight clients for every major platform. Encrypted DoH/DoT to the nearest POP. Same policy whether the laptop is on the office Wi-Fi, an airport, or a hotel.</p>
+        <p class="lede" style="margin-top:18px">Lightweight clients for every major platform. Encrypted DoH to the resolver. Same policy whether the laptop is on the office Wi-Fi, an airport, or a hotel.</p>
         <div style="margin-top:32px;display:flex;gap:14px;flex-wrap:wrap">
           <div class="card platform" style="padding:14px 18px"><div style="font-weight:600">macOS</div><div class="muted tiny">Intel · Apple Silicon</div></div>
           <div class="card platform" style="padding:14px 18px"><div style="font-weight:600">Windows</div><div class="muted tiny">10 · 11</div></div>

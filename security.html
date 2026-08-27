@@ -41,7 +41,7 @@
       <p class="muted">No marketing-speak. If a control is amber it means we're working on it and have a target month.</p>
     </div>
     <div style="max-width:880px;margin:32px auto 0">
-      <div class="status-row"><span class="dot green"></span><span class="lbl">DNS encryption: DoH, DoT, DoQ on standard ports</span><span class="meta">live</span></div>
+      <div class="status-row"><span class="dot green"></span><span class="lbl">DNS encryption: DoH</span><span class="meta">live</span></div>
       <div class="status-row"><span class="dot green"></span><span class="lbl">DNSSEC validation enabled on every resolver</span><span class="meta">live</span></div>
       <div class="status-row"><span class="dot green"></span><span class="lbl">TLS 1.3 only, modern ciphers, HSTS preloaded</span><span class="meta">live</span></div>
       <div class="status-row"><span class="dot green"></span><span class="lbl">Scoped API keys with 12 resource:action scopes, optional expiry, instant rotation/revocation</span><span class="meta">live</span></div>
@@ -69,7 +69,7 @@
       <div class="ctrl-card">
         <div class="num">DATA PLANE</div>
         <h3>Resolver isolation</h3>
-        <p class="muted">Per-tenant DoH paths route queries to per-tenant AdGuard Home client configs. Tenants never see each other's queries. DoT uses SNI to carry tenant id. Plain Do53 is intentionally not exposed on the public LXC.</p>
+        <p class="muted">Per-tenant DoH paths route queries to per-tenant AdGuard Home client configs. Tenants never see each other's queries. Tenant identity is the DoH path component; DoT and DoQ carry no path and are refused. Plain Do53 is intentionally not exposed on the public LXC.</p>
       </div>
       <div class="ctrl-card">
         <div class="num">CONTROL PLANE</div>
