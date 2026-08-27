@@ -1,5 +1,18 @@
 [
   {
+    "title": "DNS Over HTTPS (DoH): Complete Guide to Secure DNS",
+    "slug": "dns-over-https-doh-complete-guide",
+    "category": "Guide",
+    "date": "2026-08-26",
+    "displayDate": "Aug 26, 2026",
+    "author": "olladns Security Team",
+    "readTime": "22 min read",
+    "excerpt": "DNS Over HTTPS encrypts DNS queries so ISPs and network operators can't see your domain lookups. Learn how DoH works, why it matters, deployment challenges, and how it compares to DoT and DoQ.",
+    "image": "",
+    "imageLabel": "DoH",
+    "content": ""
+  },
+  {
     "title": "DNS Filtering Explained: How It Stops Phishing and Malware",
     "slug": "dns-filtering-explained",
     "category": "Guide",
@@ -53,8 +66,8 @@
     "title": "What Is DNS Security? A Complete Guide to Protecting Your Network in 2026",
     "slug": "what-is-dns-security-a-complete-guide-to-protecting-your-network-in-2026",
     "category": "Guide",
-    "date": "2026-08-19",
-    "displayDate": "Aug 19, 2026",
+    "date": "2026-08-20",
+    "displayDate": "Aug 20, 2026",
     "author": "olladns Security Team",
     "readTime": "24 min read",
     "excerpt": "DNS is the layer every attacker must touch and almost nobody watches. Here's what DNS security means, how attacks exploit it, and how to close the gap — without slowing your team down.",

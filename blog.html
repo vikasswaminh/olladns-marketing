@@ -1,118 +1,215 @@
 ﻿<!doctype html>
 <html lang="en">
+
 <head>
-  <meta charset="utf-8"/>
-  <title>Blog &middot; olladns</title>
-  <meta name="viewport" content="width=device-width,initial-scale=1"/>
-  <meta name="description" content="The olladns blog &mdash; threat research, product updates, and practical guides for security teams."/>
-  <link rel="preconnect" href="https://fonts.googleapis.com"/>
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
-  <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;500;600;700;900&display=swap" rel="stylesheet"/>
-  <link rel="stylesheet" href="/site.css?v=20260821"/>
+  <meta charset="utf-8" />
+  <title>Blog · olladns</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="description"
+    content="The olladns blog — threat research, product updates, and practical guides for security teams." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;500;600;700;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/site.css?v=20260821" />
   <style>
-    .blog-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
-    .blog-card{padding:22px;border:1px solid var(--line);border-radius:var(--r-md);background:var(--panel);display:flex;flex-direction:column;transition:.15s;overflow:hidden}
-    .blog-card:hover{border-color:var(--line-2)}
-    .blog-card .body{display:flex;flex-direction:column;gap:12px;flex:1}
-    .blog-card .tag{font-family:var(--mono);font-size:11px;color:var(--accent);text-transform:uppercase;letter-spacing:.08em}
-    .blog-card h4{font-size:18px;line-height:1.35;margin:0;color:var(--text)}
-    .blog-card p{font-size:13.5px;color:var(--muted);line-height:1.6;margin:0}
-    .blog-card .foot{display:flex;align-items:center;justify-content:space-between;margin-top:auto;gap:12px}
-    .blog-card .date{font-size:12.5px;color:var(--muted)}
-    .blog-card .more{color:var(--accent);font-size:13px;font-weight:500;display:inline-flex;align-items:center;gap:5px}
-    .blog-card .more:hover{text-decoration:underline}
-    @media (max-width:900px){.blog-grid{grid-template-columns:repeat(2,1fr)}}
-    @media (max-width:600px){.blog-grid{grid-template-columns:1fr}}
+    .blog-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px
+    }
+
+    .blog-card {
+      padding: 22px;
+      border: 1px solid var(--line);
+      border-radius: var(--r-md);
+      background: var(--panel);
+      display: flex;
+      flex-direction: column;
+      transition: .15s;
+      overflow: hidden
+    }
+
+    .blog-card:hover {
+      border-color: var(--line-2)
+    }
+
+    .blog-card .body {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      flex: 1
+    }
+
+    .blog-card .tag {
+      font-family: var(--mono);
+      font-size: 11px;
+      color: var(--accent);
+      text-transform: uppercase;
+      letter-spacing: .08em
+    }
+
+    .blog-card h4 {
+      font-size: 18px;
+      line-height: 1.35;
+      margin: 0;
+      color: var(--text)
+    }
+
+    .blog-card p {
+      font-size: 13.5px;
+      color: var(--muted);
+      line-height: 1.6;
+      margin: 0
+    }
+
+    .blog-card .foot {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-top: auto;
+      gap: 12px
+    }
+
+    .blog-card .date {
+      font-size: 12.5px;
+      color: var(--muted)
+    }
+
+    .blog-card .more {
+      color: var(--accent);
+      font-size: 13px;
+      font-weight: 500;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px
+    }
+
+    .blog-card .more:hover {
+      text-decoration: underline
+    }
+
+    @media (max-width:900px) {
+      .blog-grid {
+        grid-template-columns: repeat(2, 1fr)
+      }
+    }
+
+    @media (max-width:600px) {
+      .blog-grid {
+        grid-template-columns: 1fr
+      }
+    }
   </style>
 </head>
-<body data-screen-label="Marketing &mdash; Blog">
 
-<div id="site-nav"></div>
+<body data-screen-label="Marketing — Blog">
 
-<section class="page-hero">
-  <div class="grid-bg"></div>
-  <div class="container" style="position:relative">
-    <span class="eyebrow">Blog</span>
-    <h1 class="gradient-text">Threat research, product notes, and field guides.</h1>
-    <p class="lede" style="font-size:19px">What we&rsquo;re learning while building DNS security for AI-native teams.</p>
-  </div>
-</section>
+  <div id="site-nav"></div>
 
-<section class="section" style="padding-top:48px">
-  <div class="container">
-    <div class="blog-grid">
-
-      <a class="blog-card" href="/blog/dns-filtering-explained/">
-        <div class="body">
-          <div class="tag">Guide</div>
-          <h4>DNS Filtering Explained: How It Stops Phishing and Malware</h4>
-          <p>DNS filtering blocks malicious domains before a connection ever forms. Here's exactly how it stops phishing and malware, how it's built, and how to deploy it right.</p>
-          <div class="foot">
-            <span class="date">Aug 25, 2026</span>
-            <span class="more">Read more <span data-ic="arrow" style="width:12px;height:12px"></span></span>
-          </div>
-        </div>
-      </a>
-
-      <a class="blog-card" href="/blog/dns-firewall-explained-how-dns-firewalls-protect-networks/">
-        <div class="body">
-          <div class="tag">Guide</div>
-          <h4>DNS Firewall Explained: How DNS Firewalls Protect Networks</h4>
-          <p>A DNS firewall stops threats before a single packet reaches your network. Here's exactly how DNS firewalls work, what they block, and how to deploy one without slowing your team down.</p>
-          <div class="foot">
-            <span class="date">Aug 24, 2026</span>
-            <span class="more">Read more <span data-ic="arrow" style="width:12px;height:12px"></span></span>
-          </div>
-        </div>
-      </a>
-
-      <a class="blog-card" href="/blog/what-is-dns-how-domain-name-system-works/">
-        <div class="body">
-          <div class="tag">Guide</div>
-          <h4>What Is DNS? How the Domain Name System Works</h4>
-          <p>DNS is the internet's address book &mdash; it turns human-friendly names into the numeric IP addresses computers use to find each other. Here's how it works, step by step, and why it's also one of the most underrated security layers on the internet.</p>
-          <div class="foot">
-            <span class="date">Aug 21, 2026</span>
-            <span class="more">Read more <span data-ic="arrow" style="width:12px;height:12px"></span></span>
-          </div>
-        </div>
-      </a>
-
-      <a class="blog-card" href="/blog/what-is-dns-security-a-complete-guide-to-protecting-your-network-in-2026/">
-        <div class="body">
-          <div class="tag">Guide</div>
-          <h4>What Is DNS Security? A Complete Guide to Protecting Your Network in 2026</h4>
-          <p>DNS is the layer every attacker must touch and almost nobody watches. Here's what DNS security means, how attacks exploit it, and how to close the gap &mdash; without slowing your team down.</p>
-          <div class="foot">
-            <span class="date">Aug 20, 2026</span>
-            <span class="more">Read more <span data-ic="arrow" style="width:12px;height:12px"></span></span>
-          </div>
-        </div>
-      </a>
+  <section class="page-hero">
+    <div class="grid-bg"></div>
+    <div class="container" style="position:relative">
+      <span class="eyebrow">Blog</span>
+      <h1 class="gradient-text">Threat research, product notes, and field guides.</h1>
+      <p class="lede" style="font-size:19px">What we&rsquo;re learning while building DNS security for AI-native teams.
+      </p>
     </div>
-  </div>
-</section>
+  </section>
 
-<section class="section">
-  <div class="container">
-    <div class="cta-block">
-      <h2>Want new posts in your inbox?</h2>
-      <p class="lede">A short email when we ship something worth reading. No roundups, no recycled press releases.</p>
-      <div class="cta">
-        <a class="btn primary lg" href="/contact.html">Subscribe <span data-ic="arrow"></span></a>
+  <section class="section" style="padding-top:48px">
+    <div class="container">
+      <div class="blog-grid">
+
+        <a class="blog-card" href="/blog/dns-over-https-doh-complete-guide/">
+          <div class="body">
+            <div class="tag">Guide</div>
+            <h4>DNS Over HTTPS (DoH): Complete Guide to Secure DNS</h4>
+            <p>DNS Over HTTPS encrypts DNS queries so ISPs and network operators can't see your domain lookups. Learn
+              how DoH works, why it matters, deployment challenges, and how it compares to DoT and DoQ.</p>
+            <div class="foot">
+              <span class="date">Aug 26, 2026</span>
+              <span class="more">Read more <span data-ic="arrow" style="width:12px;height:12px"></span></span>
+            </div>
+          </div>
+        </a>
+
+        <a class="blog-card" href="/blog/dns-filtering-explained/">
+          <div class="body">
+            <div class="tag">Guide</div>
+            <h4>DNS Filtering Explained: How It Stops Phishing and Malware</h4>
+            <p>DNS filtering blocks malicious domains before a connection ever forms. Here's exactly how it stops
+              phishing and malware, how it's built, and how to deploy it right.</p>
+            <div class="foot">
+              <span class="date">Aug 25, 2026</span>
+              <span class="more">Read more <span data-ic="arrow" style="width:12px;height:12px"></span></span>
+            </div>
+          </div>
+        </a>
+
+        <a class="blog-card" href="/blog/dns-firewall-explained-how-dns-firewalls-protect-networks/">
+          <div class="body">
+            <div class="tag">Guide</div>
+            <h4>DNS Firewall Explained: How DNS Firewalls Protect Networks</h4>
+            <p>A DNS firewall stops threats before a single packet reaches your network. Here's exactly how DNS
+              firewalls work, what they block, and how to deploy one without slowing your team down.</p>
+            <div class="foot">
+              <span class="date">Aug 24, 2026</span>
+              <span class="more">Read more <span data-ic="arrow" style="width:12px;height:12px"></span></span>
+            </div>
+          </div>
+        </a>
+
+        <a class="blog-card" href="/blog/what-is-dns-how-domain-name-system-works/">
+          <div class="body">
+            <div class="tag">Guide</div>
+            <h4>What Is DNS? How the Domain Name System Works</h4>
+            <p>DNS is the internet&#039;s address book — it turns human-friendly names into the numeric IP addresses
+              computers use to find each other. Here's how it works, step by step, and why it's also one of the
+              most underrated security layers on the internet.</p>
+            <div class="foot">
+              <span class="date">Aug 21, 2026</span>
+              <span class="more">Read more <span data-ic="arrow" style="width:12px;height:12px"></span></span>
+            </div>
+          </div>
+        </a>
+
+        <a class="blog-card" href="/blog/what-is-dns-security-a-complete-guide-to-protecting-your-network-in-2026/">
+          <div class="body">
+            <div class="tag">Guide</div>
+            <h4>What Is DNS Security? A Complete Guide to Protecting Your Network in 2026</h4>
+            <p>DNS is the layer every attacker must touch and almost nobody watches. Here's what DNS security
+              means, how attacks exploit it, and how to close the gap — without slowing your team down.</p>
+            <div class="foot">
+              <span class="date">Aug 20, 2026</span>
+              <span class="more">Read more <span data-ic="arrow" style="width:12px;height:12px"></span></span>
+            </div>
+          </div>
+        </a>
       </div>
     </div>
-  </div>
-</section>
+  </section>
 
-<div id="site-footer"></div>
+  <section class="section">
+    <div class="container">
+      <div class="cta-block">
+        <h2>Want new posts in your inbox?</h2>
+        <p class="lede">A short email when we ship something worth reading. No roundups, no recycled press releases.</p>
+        <div class="cta">
+          <a class="btn primary lg" href="/contact.html">Subscribe <span data-ic="arrow"></span></a>
+        </div>
+      </div>
+    </div>
+  </section>
 
-<script src="/chrome.js?v=20260821"></script>
-<script>
-  mountChrome('blog');
-  document.querySelectorAll('[data-ic]').forEach(el=>{
-    el.innerHTML = icon(el.getAttribute('data-ic'),{size:12,sw:1.8});
-  });
-</script>
+  <div id="site-footer"></div>
+
+  <script src="/chrome.js?v=20260821"></script>
+  <script>
+    mountChrome('blog');
+    document.querySelectorAll('[data-ic]').forEach(el => {
+      el.innerHTML = icon(el.getAttribute('data-ic'), { size: 12, sw: 1.8 });
+    });
+  </script>
 </body>
+
 </html>
