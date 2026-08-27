@@ -1,34 +1,61 @@
-<!doctype html>
-<html lang="en">
-
-<head>
-  <meta charset="utf-8" />
+<!DOCTYPE html><html lang="en"><head>
+  <meta charset="utf-8">
   <title>What Is DNS? How the Domain Name System Works · olladns Blog</title>
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <meta name="description"
-    content="DNS is the internet&#039;s address book — it turns human-friendly names into the numeric IP addresses computers use to find each other. Here&#039;s how it works, step by step, and why it&#039;s also one of the most underrated security layers on the internet." />
-  <meta property="og:title" content="What Is DNS? How the Domain Name System Works · olladns Blog" />
-  <meta property="og:description"
-    content="DNS is the internet&#039;s address book — it turns human-friendly names into the numeric IP addresses computers use to find each other. Here&#039;s how it works, step by step, and why it&#039;s also one of the most underrated security layers on the internet." />
-  <meta property="og:type" content="article" />
-  <meta property="og:url" content="https://olladns.com/blog/what-is-dns-how-domain-name-system-works/" />
-  <meta property="og:image"
-    content="data:image/svg+xml,%3Csvg%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%20width%3D'1280'%20height%3D'720'%3E%3Crect%20fill%3D'%2523f4f4f5'%20width%3D'1280'%20height%3D'720'%2F%3E%3Ctext%20fill%3D'%2523DA291C'%20font-family%3D'sans-serif'%20font-size%3D'28'%20font-weight%3D'600'%20x%3D'640'%20y%3D'370'%20text-anchor%3D'middle'%3EDNS%3C%2Ftext%3E%3C%2Fsvg%3E" />
-  <meta property="article:published_time" content="2026-08-20" />
-  <meta property="article:author" content="olladns Security Team" />
-  <meta property="article:section" content="Guide" />
-  <link rel="canonical" href="https://olladns.com/blog/what-is-dns-how-domain-name-system-works/" />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;500;600;700;900&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="/site.css?v=20260821" />
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="DNS is the internet's address book — it turns human-friendly names into the numeric IP addresses computers use to find each other. Here's how it works, step by step, and why it's also one of the most underrated security layers on the internet.">
+  <meta property="og:title" content="What Is DNS? How the Domain Name System Works · olladns Blog">
+  <meta property="og:description" content="DNS is the internet's address book — it turns human-friendly names into the numeric IP addresses computers use to find each other. Here's how it works, step by step, and why it's also one of the most underrated security layers on the internet.">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://olladns.com/blog/what-is-dns-how-domain-name-system-works/">
+  <meta property="og:image" content="data:image/svg+xml,%3Csvg%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%20width%3D'1280'%20height%3D'720'%3E%3Crect%20fill%3D'%2523f4f4f5'%20width%3D'1280'%20height%3D'720'%2F%3E%3Ctext%20fill%3D'%2523DA291C'%20font-family%3D'sans-serif'%20font-size%3D'28'%20font-weight%3D'600'%20x%3D'640'%20y%3D'370'%20text-anchor%3D'middle'%3EDNS%3C%2Ftext%3E%3C%2Fsvg%3E">
+  <meta property="article:published_time" content="2026-08-21">
+  <meta property="article:author" content="olladns Security Team">
+  <meta property="article:section" content="Guide">
+  <link rel="canonical" href="https://olladns.com/blog/what-is-dns-how-domain-name-system-works/">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+  <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;500;600;700;900&amp;display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/site.css?v=20260821">
   <style>
+    /* Premium editorial layout for OllaDNS blog posts */
+    .post-hero {
+      padding: 80px 0 56px;
+      border-bottom: 1px solid var(--line);
+      position: relative;
+      overflow: hidden;
+      background: radial-gradient(60% 40% at 50% 0%, rgba(218, 41, 28, .06), transparent 60%)
+    }
+
+    .post-hero .eyebrow {
+      margin-bottom: 16px
+    }
+
+    .post-hero .eyebrow a:hover {
+      text-decoration: underline
+    }
+
+    .post-hero h1 {
+      font-size: clamp(34px, 5vw, 56px);
+      line-height: 1.08;
+      letter-spacing: -.03em;
+      max-width: 18ch;
+      margin-top: 0
+    }
+
+    .post-hero-desc {
+      max-width: 64ch;
+      margin-top: 18px;
+      font-size: 19px;
+      color: var(--text-2);
+      line-height: 1.65
+    }
+
     .post-meta {
       display: flex;
       align-items: center;
-      gap: 18px;
+      gap: 14px;
       flex-wrap: wrap;
-      margin-top: 18px;
+      margin-top: 22px;
       color: var(--muted);
       font-size: 14px
     }
@@ -38,119 +65,873 @@
       font-size: 11px;
       color: var(--accent);
       text-transform: uppercase;
-      letter-spacing: .08em
+      letter-spacing: .08em;
+      background: var(--accent-soft);
+      border: 1px solid var(--accent-line);
+      padding: 3px 10px;
+      border-radius: 999px
     }
 
-    .post-thumb {
-      aspect-ratio: 16/9;
-      background: var(--bg-2);
-      border-radius: var(--r-md);
-      overflow: hidden;
+    .post-meta .sep {
+      color: var(--dim);
+      user-select: none
+    }
+
+    .post-meta .author {
+      font-weight: 600;
+      color: var(--text)
+    }
+
+    .post-layout {
+      display: grid;
+      grid-template-columns: 240px 1fr;
+      gap: 64px;
+      align-items: start;
+      padding-top: 56px
+    }
+
+    .post-toc {
+      position: sticky;
+      top: 100px;
+      max-height: calc(100vh - 120px);
+      overflow: auto;
+      background: var(--bg-1);
       border: 1px solid var(--line);
-      margin-bottom: 36px
+      border-radius: var(--r-lg);
+      padding: 24px;
+      box-shadow: var(--shadow-sm);
     }
 
-    .post-thumb img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      display: block
+    .post-toc h4 {
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: .12em;
+      color: var(--muted);
+      margin: 0 0 14px
+    }
+
+    .post-toc ul {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 4px
+    }
+
+    .post-toc a {
+      display: block;
+      font-size: 13.5px;
+      color: var(--text-2);
+      padding: 7px 12px;
+      border-radius: 6px;
+      border-left: 2px solid transparent;
+      transition: .15s
+    }
+
+    .post-toc a:hover {
+      color: var(--accent);
+      background: var(--bg-2)
+    }
+
+    .post-toc a.active {
+      color: var(--accent);
+      background: var(--accent-soft);
+      border-left-color: var(--accent);
+      font-weight: 600
     }
 
     .post-body {
-      max-width: 720px;
-      margin: 0 auto
+      max-width: none;
+      margin: 0;
+      min-width: 0
     }
 
     .post-body h2 {
-      font-size: 24px;
-      margin: 42px 0 16px;
+      font-size: 32px;
+      line-height: 1.15;
+      letter-spacing: -.02em;
+      margin: 0 0 18px;
       color: var(--text)
     }
 
     .post-body h3 {
-      font-size: 18px;
-      margin: 32px 0 12px;
+      font-size: 21px;
+      line-height: 1.25;
+      margin: 0 0 14px;
       color: var(--text)
     }
 
     .post-body p {
-      font-size: 15.5px;
-      line-height: 1.7;
+      font-size: 16.5px;
+      line-height: 1.75;
       color: var(--text-2);
-      margin: 0 0 18px
-    }
-
-    .post-body .lede {
-      font-size: 18px;
-      color: var(--text);
-      line-height: 1.7;
-      margin-bottom: 28px
-    }
-
-    .post-body ul,
-    .post-body ol {
-      margin: 0 0 20px;
-      padding-left: 24px;
-      color: var(--text-2);
-      font-size: 15.5px;
-      line-height: 1.7
-    }
-
-    .post-body li {
-      margin-bottom: 8px
+      margin: 0 0 20px
     }
 
     .post-body code {
       font-family: var(--mono);
       font-size: 13px;
       background: var(--bg-2);
-      padding: 2px 6px;
-      border-radius: 4px;
+      padding: 2px 7px;
+      border-radius: 5px;
       color: var(--text)
     }
 
-    .post-body pre {
+    .post-section {
+      position: relative;
+      margin-bottom: 40px;
+      padding-top: 8px;
+      scroll-margin-top: 92px
+    }
+
+    .section-num {
+      display: block;
+      font-family: var(--mono);
+      font-size: 12px;
+      color: var(--accent);
+      margin-bottom: 10px;
+      letter-spacing: .06em;
+      font-weight: 600
+    }
+
+    .post-tldr {
+      background: linear-gradient(180deg, var(--accent-soft), rgba(218, 41, 28, .02));
+      border: 1px solid var(--accent-line);
+      border-radius: var(--r-lg);
+      padding: 28px;
+      margin-bottom: 56px
+    }
+
+    .tldr-head {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 14px;
+      flex-wrap: wrap
+    }
+
+    .tldr-label {
+      font-family: var(--mono);
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .08em;
+      background: var(--accent);
+      color: #fff;
+      padding: 5px 12px;
+      border-radius: 999px
+    }
+
+    .post-tldr h3 {
+      font-size: 22px;
+      margin: 0;
+      color: var(--text)
+    }
+
+    .post-tldr p {
+      font-size: 15.5px;
+      line-height: 1.7;
+      margin: 0 0 16px;
+      color: var(--text-2)
+    }
+
+    .tldr-list {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 11px
+    }
+
+    .tldr-list li {
+      display: flex;
+      gap: 12px;
+      align-items: flex-start;
+      font-size: 15px;
+      line-height: 1.55;
+      color: var(--text-2)
+    }
+
+    .tldr-list .ck {
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background: var(--accent);
+      color: #fff;
+      display: grid;
+      place-items: center;
+      font-size: 11px;
+      flex: none;
+      margin-top: 1px
+    }
+
+    .what-found {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: var(--r-lg);
+      padding: 26px;
+      margin: 28px 0 36px;
+      box-shadow: var(--shadow)
+    }
+
+    .what-found-head {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 14px
+    }
+
+    .what-found-head svg {
+      width: 22px;
+      height: 22px;
+      color: var(--accent)
+    }
+
+    .what-found h4 {
+      font-size: 13px;
+      text-transform: uppercase;
+      letter-spacing: .1em;
+      color: var(--accent);
+      margin: 0
+    }
+
+    .what-found p {
+      font-size: 15.5px;
+      line-height: 1.7;
+      margin: 0;
+      color: var(--text-2)
+    }
+
+    .what-found p+p {
+      margin-top: 12px
+    }
+
+    .post-quote {
+      border-left: 3px solid var(--accent);
+      margin: 28px 0;
+      padding: 6px 0 6px 24px;
+      background: transparent
+    }
+
+    .post-quote p {
+      font-size: 20px;
+      color: var(--text);
+      font-style: italic;
+      margin: 0;
+      line-height: 1.55
+    }
+
+    .dns-flow {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin: 28px 0;
+      padding: 26px;
       background: var(--bg-1);
       border: 1px solid var(--line);
+      border-radius: var(--r-lg)
+    }
+
+    .flow-step {
+      display: flex;
+      align-items: center;
+      gap: 16px
+    }
+
+    .flow-dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: var(--accent);
+      box-shadow: 0 0 0 4px var(--accent-soft);
+      flex: none
+    }
+
+    .flow-card {
+      flex: 1;
+      background: var(--panel);
+      border: 1px solid var(--line);
       border-radius: var(--r-md);
-      padding: 18px;
-      overflow-x: auto;
-      margin: 22px 0
+      padding: 16px 18px
     }
 
-    .post-body pre code {
-      background: transparent;
-      padding: 0
+    .flow-card h4 {
+      margin: 0 0 4px;
+      font-size: 15px
     }
 
-    .post-body blockquote {
-      border-left: 3px solid var(--accent);
-      margin: 24px 0;
-      padding-left: 20px;
+    .flow-card p {
+      margin: 0;
+      font-size: 14px;
       color: var(--muted);
-      font-style: italic
+      line-height: 1.55
     }
+
+    .flow-arrow {
+      padding-left: 5px;
+      color: var(--dim);
+      font-size: 14px
+    }
+
+    .concept-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 18px;
+      margin: 24px 0
+    }
+
+    .concept-card,
+    .surface-card,
+    .tech-card,
+    .proto-card {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: var(--r-md);
+      padding: 24px;
+      transition: .15s
+    }
+
+    .concept-card:hover,
+    .surface-card:hover,
+    .tech-card:hover,
+    .proto-card:hover {
+      border-color: var(--accent-line);
+      box-shadow: var(--shadow)
+    }
+
+    .concept-ic {
+      width: 42px;
+      height: 42px;
+      border-radius: 10px;
+      background: var(--accent-soft);
+      color: var(--accent);
+      display: grid;
+      place-items: center;
+      border: 1px solid var(--accent-line);
+      margin-bottom: 14px
+    }
+
+    .concept-card h4,
+    .surface-card h4,
+    .tech-card h4,
+    .proto-card h4 {
+      margin: 0 0 10px;
+      font-size: 16px
+    }
+
+    .concept-card p,
+    .surface-card p,
+    .tech-card p,
+    .proto-card p {
+      margin: 0;
+      font-size: 15px;
+      color: var(--text-2);
+      line-height: 1.65
+    }
+
+    .attack-surface-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 18px;
+      margin: 26px 0
+    }
+
+    .surface-card {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      aspect-ratio: 1/1
+    }
+
+    .surface-num {
+      font-family: var(--mono);
+      font-size: 24px;
+      font-weight: 700;
+      color: var(--accent);
+      margin-bottom: 10px
+    }
+
+    .technique-row {
+      display: grid;
+      grid-template-columns: 1fr 300px;
+      gap: 32px;
+      align-items: center;
+      grid-template-columns: 1fr 280px;
+      gap: 28px;
+      align-items: start;
+      margin: 36px 0;
+      padding: 26px;
+      background: var(--bg-1);
+      border: 1px solid var(--line);
+      border-radius: var(--r-lg)
+    }
+
+    .technique-row.reverse {
+      grid-template-columns: 300px 1fr
+    }
+
+    .technique-text h3 {
+      margin-top: 0;
+      font-size: 21px
+    }
+
+    .technique-visual {
+      position: sticky;
+      top: 120px;
+      display: grid;
+      place-items: center
+    }
+
+    .visual-card {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: var(--r-md);
+      padding: 20px;
+      text-align: center;
+      width: 100%
+    }
+
+    .visual-label {
+      font-size: 13px;
+      color: var(--muted);
+      margin-bottom: 6px
+    }
+
+    .visual-domain {
+      font-family: var(--mono);
+      font-size: 13px;
+      color: var(--text);
+      background: var(--bg-2);
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      padding: 8px 10px;
+      margin-bottom: 8px;
+      word-break: break-all
+    }
+
+    .visual-arrow {
+      color: var(--accent);
+      font-size: 13px;
+      margin: 4px 0
+    }
+
+    .visual-label.poisoned {
+      color: var(--accent);
+      font-weight: 600
+    }
+
+    .code-box {
+      background: var(--bg-1);
+      border: 1px solid var(--line);
+      border-radius: var(--r-lg);
+      overflow: hidden;
+      margin: 28px 0
+    }
+
+    .code-head {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 16px;
+      background: var(--bg-2);
+      border-bottom: 1px solid var(--line);
+      font-family: var(--mono);
+      font-size: 11px;
+      color: var(--muted)
+    }
+
+    .code-box pre {
+      margin: 0;
+      padding: 20px;
+      background: var(--bg-1);
+      overflow-x: auto
+    }
+
+    .code-box pre code {
+      color: var(--text);
+      background: transparent;
+      font-size: 13px;
+      line-height: 1.75
+    }
+
+    .code-caption {
+      padding: 14px 18px;
+      margin: 0;
+      font-size: 14px;
+      color: var(--muted);
+      background: var(--panel);
+      border-top: 1px solid var(--line)
+    }
+
+    .table-wrap {
+      width: 100%;
+      overflow-x: auto;
+      margin: 26px 0;
+      border-radius: var(--r-md);
+      border: 1px solid var(--line)
+    }
+
+    .post-table {
+      width: 100%;
+      border-collapse: separate;
+      border-spacing: 0;
+      background: var(--panel);
+      font-size: 15px;
+      min-width: 680px
+    }
+
+    .post-table th,
+    .post-table td {
+      padding: 15px 18px;
+      text-align: left;
+      border-bottom: 1px solid var(--line)
+    }
+
+    .post-table thead th {
+      background: var(--bg-1);
+      font-size: 12px;
+      letter-spacing: .02em;
+      color: var(--muted);
+      text-transform: uppercase;
+      font-weight: 600
+    }
+
+    .post-table tbody tr:last-child td {
+      border-bottom: 0
+    }
+
+    .tech-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+      margin: 26px 0
+    }
+
+    .tech-card {
+      display: flex;
+      flex-direction: column
+    }
+
+    .tech-ic {
+      width: 42px;
+      height: 42px;
+      border-radius: 10px;
+      background: var(--accent-soft);
+      color: var(--accent);
+      display: grid;
+      place-items: center;
+      border: 1px solid var(--accent-line);
+      margin-bottom: 14px;
+      font-size: 20px
+    }
+
+    .proto-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+      margin: 26px 0
+    }
+
+    .proto-sub {
+      font-family: var(--mono);
+      font-size: 11px;
+      color: var(--accent);
+      text-transform: uppercase;
+      letter-spacing: .06em;
+      margin: -8px 0 12px
+    }
+
+    .timeline {
+      position: relative;
+      margin: 26px 0;
+      padding-left: 28px
+    }
+
+    .timeline::before {
+      content: "";
+      position: absolute;
+      left: 8px;
+      top: 6px;
+      bottom: 6px;
+      width: 2px;
+      background: var(--line)
+    }
+
+    .timeline-item {
+      position: relative;
+      display: grid;
+      grid-template-columns: 120px 1fr;
+      gap: 18px;
+      margin-bottom: 26px
+    }
+
+    .timeline-item::before {
+      content: "";
+      position: absolute;
+      left: -24px;
+      top: 6px;
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: var(--accent);
+      border: 2px solid var(--bg-0)
+    }
+
+    .timeline-date {
+      font-family: var(--mono);
+      font-size: 13px;
+      color: var(--accent);
+      font-weight: 600
+    }
+
+    .timeline-body h4 {
+      margin: 0 0 6px;
+      font-size: 16px
+    }
+
+    .timeline-body p {
+      margin: 0
+    }
+
+    .roadmap {
+      list-style: none;
+      margin: 26px 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 16px
+    }
+
+    .roadmap>li {
+      display: flex;
+      gap: 16px;
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: var(--r-md);
+      padding: 22px
+    }
+
+    .roadmap-num {
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      background: var(--accent-soft);
+      color: var(--accent);
+      display: grid;
+      place-items: center;
+      font-family: var(--mono);
+      font-size: 14px;
+      font-weight: 700;
+      flex: none
+    }
+
+    .roadmap h4 {
+      margin: 0 0 6px;
+      font-size: 16px
+    }
+
+    .roadmap p {
+      margin: 0;
+      font-size: 15px;
+      color: var(--text-2);
+      line-height: 1.65
+    }
+
+    .checklist {
+      list-style: none;
+      margin: 26px 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 12px
+    }
+
+    .checklist>li {
+      display: flex;
+      gap: 14px;
+      align-items: flex-start;
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: var(--r-md);
+      padding: 18px
+    }
+
+    .check-ck {
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      background: var(--accent);
+      color: #fff;
+      display: grid;
+      place-items: center;
+      font-size: 12px;
+      flex: none;
+      margin-top: 1px
+    }
+
+    .accordion {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin: 26px 0
+    }
+
+    .accordion details {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: var(--r-md);
+      overflow: hidden
+    }
+
+    .accordion summary {
+      cursor: pointer;
+      padding: 18px 20px;
+      font-weight: 600;
+      color: var(--text);
+      font-size: 16px;
+      list-style: none;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+      transition: .15s
+    }
+
+    .accordion summary:hover {
+      background: var(--bg-1)
+    }
+
+    .accordion summary::-webkit-details-marker {
+      display: none
+    }
+
+    .accordion summary::after {
+      content: "+";
+      font-family: var(--mono);
+      color: var(--accent);
+      font-size: 20px;
+      flex: none
+    }
+
+    .accordion details[open] summary::after {
+      content: "−"
+    }
+
+    .accordion-q {
+      flex: 1;
+      min-width: 0;
+      display: inline
+    }
+
+    .accordion-q code {
+      margin: 0 1px
+    }
+
+    .accordion-body {
+      padding: 0 20px 20px
+    }
+
+    .accordion-body p {
+      margin: 0;
+      font-size: 15.5px;
+      line-height: 1.7
+    }
+
+    .trend-list {
+      list-style: none;
+      margin: 26px 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 14px
+    }
+
+    .trend-list>li {
+      display: flex;
+      gap: 16px;
+      align-items: flex-start;
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: var(--r-md);
+      padding: 20px
+    }
+
+    .trend-num {
+      font-family: var(--mono);
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--accent);
+      flex: none;
+      width: 32px
+    }
+
+    .trend-list p {
+      margin: 0
+    }
+
+    .conclusion-box {
+      background: linear-gradient(180deg, var(--accent-soft), rgba(218, 41, 28, .02));
+      border: 1px solid var(--accent-line);
+      border-radius: var(--r-lg);
+      padding: 32px
+    }
+
+    .conclusion-box p:last-child {
+      margin-bottom: 0
+    }
+
+    .conclusion-cta {
+      margin-top: 32px;
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap
+    }
+
+    .faq-section .accordion {
+      margin-bottom: 0
+    }
+
+    .faq-box {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: var(--r-lg);
+      padding: 28px 32px;
+      box-shadow: var(--shadow-sm)
+    }
+
+    .faq-box h2 {
+      margin: 0 0 16px;
+      text-align: center
+    }
+
+    .faq-section {
+      padding-top: 16px;
+      padding-bottom: 16px
+    }
+
 
     .post-author {
       display: flex;
       align-items: center;
-      gap: 12px;
-      margin-top: 32px;
+      gap: 14px;
+      margin-top: 56px;
       color: var(--muted);
       font-size: 14px
     }
 
     .post-author .dot {
-      width: 32px;
-      height: 32px;
+      width: 40px;
+      height: 40px;
       border-radius: 50%;
       background: var(--accent-soft);
       color: var(--accent);
       display: grid;
       place-items: center;
       font-weight: 700;
-      font-size: 13px
+      font-size: 14px;
+      border: 1px solid var(--accent-line)
     }
 
     .post-nav {
@@ -171,7 +952,105 @@
     .post-nav a:hover {
       text-decoration: underline
     }
-  </style>
+
+    .final-cta {
+      margin-top: 72px
+    }
+
+    @media (max-width:1000px) {
+      .post-layout {
+        grid-template-columns: minmax(0, 1fr);
+        gap: 40px
+      }
+
+      .post-toc {
+          position: static;
+          max-height: none;
+          overflow: visible;
+          background: var(--bg-1);
+          border: 1px solid var(--line);
+          border-radius: var(--r-lg);
+          padding: 24px;
+          margin-bottom: 32px;
+        }
+
+      .post-toc h4 {
+        margin-bottom: 10px
+      }
+
+      .post-body {
+        max-width: none
+      }
+
+      .concept-grid,
+      .attack-surface-grid,
+      .tech-grid,
+      .proto-grid {
+        grid-template-columns: 1fr
+      }
+
+      .technique-row,
+      .technique-row.reverse {
+        grid-template-columns: 1fr
+      }
+
+      .timeline-item {
+        grid-template-columns: 90px 1fr
+      }
+    }
+
+    @media (max-width:640px) {
+      .post-hero h1 {
+        font-size: 32px
+      }
+
+      .post-hero-desc {
+        font-size: 17px
+      }
+
+      .post-body h2 {
+        font-size: 26px
+      }
+
+      .post-body h3 {
+        font-size: 19px
+      }
+
+      .attack-surface-grid {
+        grid-template-columns: 1fr
+      }
+
+      .post-meta {
+        gap: 10px
+      }
+
+      .timeline-item {
+        grid-template-columns: 1fr;
+        gap: 8px
+      }
+
+      .timeline-date {
+        font-size: 12px
+      }
+    }
+  
+      .faq-cta {
+        background: var(--bg-1);
+        border: 1px solid var(--line);
+        border-radius: var(--r-lg);
+        padding: 28px 32px;
+        margin-top: 28px;
+        text-align: center
+      }
+      .faq-cta h3 { margin: 0 0 10px }
+      .faq-cta p { margin: 0 0 18px; color: var(--text-2) }
+      .faq-cta .btn { margin: 0 6px }
+
+    
+        .faq-item summary::-webkit-details-marker { display: none; }
+        .faq-item[open] .faq-icon { transform: rotate(45deg); transition: 0.2s; }
+        .faq-item:not([open]) .faq-icon { transform: rotate(0deg); transition: 0.2s; }
+      </style>
 </head>
 
 <body data-screen-label="Marketing — Blog Post">
@@ -179,14 +1058,14 @@
   <div id="site-nav"></div>
 
 
-  <section class="page-hero" style="padding-bottom:40px">
+  <section class="page-hero" style="padding-bottom: 40px; padding-top: 40px;">
     <div class="grid-bg"></div>
-    <div class="container" style="position:relative">
+    <div class="container" style="position:relative; text-align: center; display: flex; flex-direction: column; align-items: center;">
       <span class="eyebrow"><a href="/blog/" style="color:inherit">Blog</a></span>
-      <h1 class="gradient-text">What Is DNS? How the Domain Name System Works</h1>
+      <h1 class="gradient-text" style="max-width: none;">What Is DNS?<br>How the Domain Name System Works</h1>
       <div class="post-meta">
         <span class="tag">Guide</span>
-        <span>Aug 20, 2026</span>
+        <span>Aug 21, 2026</span>
         <span>19 min read</span>
         <span>by olladns Security Team</span>
       </div>
@@ -195,304 +1074,1144 @@
 
   <section class="section" style="padding-top:0">
     <div class="container">
+      
+    <div class="post-layout">
+      <aside class="post-toc" aria-label="Table of contents">
+        <h4>On this page</h4>
+        <ul>
+          <li><a href="#the-problem-dns-was-invented-to-solve">The problem DNS was invented to solve</a></li>
+          <li><a href="#what-is-dns">What is DNS?</a></li>
+          <li><a href="#breaking-down-a-domain-name">Breaking down a domain name</a></li>
+          <li><a href="#following-one-lookup-start-to-finish">Following
+          one lookup, start to finish</a></li>
+          <li><a href="#why-caching-makes-the-internet-faster">Why caching makes the internet faster</a></li>
+          <li><a href="#the-record-types-that-make-dns-work">The record types that make DNS work</a></li>
+          <li><a href="#who-runs-the-resolvers-you-use">Who runs the resolvers you use</a></li>
+          <li><a href="#dns-as-an-attack-surface">DNS as an attack surface</a></li>
+          <li><a href="#encrypting-dns-doh-dot-and-doq">Encrypting DNS: DoH, DoT, and DoQ</a></li>
+          <li><a href="#dns-as-a-security-layer-not-just-plumbing">DNS as a security layer, not just plumbing</a></li>
+          <li><a href="#when-dns-breaks">When DNS breaks</a></li>
+          <li><a href="#where-dns-is-heading">Where DNS is heading</a></li>
+          <li><a href="#dns-myths-worth-retiring">DNS myths worth retiring</a></li>
+          <li><a href="#a-troubleshooting-toolkit">A troubleshooting toolkit</a></li>
+          <li><a href="#frequently-asked-questions">Frequently Asked Questions</a></li>
+          
+        </ul>
+      </aside>
       <article class="post-body">
-        <div class="post-thumb">
-          <img
-            src="data:image/svg+xml,%3Csvg%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%20width%3D'1280'%20height%3D'720'%3E%3Crect%20fill%3D'%2523f4f4f5'%20width%3D'1280'%20height%3D'720'%2F%3E%3Ctext%20fill%3D'%2523DA291C'%20font-family%3D'sans-serif'%20font-size%3D'28'%20font-weight%3D'600'%20x%3D'640'%20y%3D'370'%20text-anchor%3D'middle'%3EDNS%3C%2Ftext%3E%3C%2Fsvg%3E"
-            alt="What Is DNS? How the Domain Name System Works" />
+      
+      <div class="post-tldr">
+        <div class="tldr-head">
+          <span class="tldr-label">TL;DR</span>
+          <h3 id="tldr">The Internet's Address Book</h3>
         </div>
-
-        <p>DNS (Domain Name System) is the internet's address book. It translates human-friendly names like
+      <p>DNS (Domain Name System) is the internet's address book. It translates human-friendly names like
           <code>olladns.com</code> into the numeric IP addresses computers use to find each other. Every time you open a
           browser tab, DNS runs a lightning-fast relay through resolvers, root servers, TLD servers, and authoritative
           servers, usually finishing in under 100 milliseconds. Because almost nothing on the internet happens without a
           DNS lookup first, DNS is also one of the earliest, cheapest places to stop phishing, malware, and
-          command-and-control traffic before it reaches a device.</p>
-        <h2>The problem DNS was invented to solve</h2>
-        <p>Computers do not talk to each other using names. They use IP addresses — strings like
+          command-and-control traffic before it reaches a device.</p></div><div class="what-found" style="margin-top: 48px; margin: 0 0 56px 0;"><div class="what-found-head">
+          <span class="tldr-label">Key Takeaways</span>
+          <h3 id="key-takeaways-title">Essential Points</h3>
+        </div>
+      <ul style="margin: 0; padding-left: 20px; font-size: 15.5px; line-height: 1.7; color: var(--text-2);">
+        <li style="margin-bottom: 8px;"><strong>Foundational &amp; Fast:</strong> DNS is the internet's invisible address book, translating names to numbers via an elegantly delegated hierarchy in milliseconds.</li>
+        <li style="margin-bottom: 8px;"><strong>Earliest Intervention:</strong> Because a DNS lookup happens before almost anything else on a network, it is a high-leverage chokepoint for catching trouble.</li>
+        <li style="margin: 0 0 8px 0;"><strong>Stops Threats Pre-Connection:</strong> It can block phishing sites, command-and-control callbacks, and lookalike domains before a device even connects.</li>
+        <li style="margin-bottom: 8px;"><strong>Crucial Context:</strong> Understanding the mechanics of DNS is the essential foundation for grasping why DNS-layer security exists in the first place.</li>
+        <li style="margin-bottom: 0;"><strong>Simple &amp; Effective:</strong> Implementing DNS security controls tends to be one of the simplest, fastest, and most quietly effective strategies a security team can deploy.</li>
+      </ul>
+    </div>
+    
+        
+
+        
+        <section class="post-section" id="the-problem-dns-was-invented-to-solve" style="background: var(--panel); border: 1px solid var(--line); border-radius: var(--r-lg); padding: 32px 36px; margin-bottom: 24px; padding-top: 28px;"><span class="section-num">01</span><h2>The problem DNS was invented to solve</h2>
+        <div style="
+          background: var(--bg-1);
+          border: 1px solid var(--line);
+          border-radius: var(--r-lg);
+          padding: 28px 32px;
+          margin: 24px 0;
+        ">
+          <div style="font-size: 12px; font-family: var(--mono); color: var(--accent); text-transform: uppercase; letter-spacing: .1em; font-weight: 700; margin-bottom: 20px;">Origin Story</div>
+      
+          <div style="display: flex; gap: 20px; margin-bottom: 24px; position: relative;">
+            <div style="flex: none; width: 80px;">
+              <div style="
+                font-family: var(--mono);
+                font-size: 12px;
+                color: var(--accent);
+                font-weight: 700;
+                background: var(--accent-soft);
+                border: 1px solid var(--accent-line);
+                border-radius: 6px;
+                padding: 5px 8px;
+                text-align: center;
+              ">~1970s</div>
+            </div>
+            <div style="border-bottom: 1px dashed var(--line); padding-bottom: 24px; flex: 1;">
+              <h4 style="margin: 0 0 8px; font-size: 16px; color: var(--text);">The HOSTS.TXT Era</h4>
+              <p style="margin: 0; font-size: 15px; line-height: 1.65; color: var(--text-2);">Computers do not talk to each other using names. They use IP addresses — strings like
           <code>172.217.14.206</code> — that tell routers exactly where to send data. That addressing system is precise,
           but humans are not built to memorize dotted strings of numbers.</p>
-        <p>In the early days of ARPANET, engineers maintained a single text file called <code>HOSTS.TXT</code> that
+            </div>
+          </div>
+        
+          <div style="display: flex; gap: 20px; margin-bottom: 24px; position: relative;">
+            <div style="flex: none; width: 80px;">
+              <div style="
+                font-family: var(--mono);
+                font-size: 12px;
+                color: var(--accent);
+                font-weight: 700;
+                background: var(--accent-soft);
+                border: 1px solid var(--accent-line);
+                border-radius: 6px;
+                padding: 5px 8px;
+                text-align: center;
+              ">~1980s</div>
+            </div>
+            <div style="border-bottom: 1px dashed var(--line); padding-bottom: 24px; flex: 1;">
+              <h4 style="margin: 0 0 8px; font-size: 16px; color: var(--text);">ARPANET Hits a Wall</h4>
+              <p style="margin: 0; font-size: 15px; line-height: 1.65; color: var(--text-2);">In the early days of ARPANET, engineers maintained a single text file called <code>HOSTS.TXT</code> that
           mapped every machine's name to its number. Every computer periodically downloaded a fresh copy from a single
           machine at Stanford Research Institute. That approach worked for a few hundred hosts but collapsed at internet
           scale.</p>
-        <p>In 1983, Paul Mockapetris proposed a distributed, hierarchical naming system where responsibility for
+            </div>
+          </div>
+        
+          <div style="display: flex; gap: 20px; margin-bottom: 0; position: relative;">
+            <div style="flex: none; width: 80px;">
+              <div style="
+                font-family: var(--mono);
+                font-size: 12px;
+                color: var(--accent);
+                font-weight: 700;
+                background: var(--accent-soft);
+                border: 1px solid var(--accent-line);
+                border-radius: 6px;
+                padding: 5px 8px;
+                text-align: center;
+              ">1983</div>
+            </div>
+            <div style=" flex: 1;">
+              <h4 style="margin: 0 0 8px; font-size: 16px; color: var(--text);">DNS is Born</h4>
+              <p style="margin: 0; font-size: 15px; line-height: 1.65; color: var(--text-2);">In 1983, Paul Mockapetris proposed a distributed, hierarchical naming system where responsibility for
           different parts of the namespace could be delegated across many servers. That proposal became the Domain Name
           System. Four decades later, it is still the same structure, resolving hundreds of billions of queries a day.
         </p>
-        <h2>What is DNS?</h2>
-        <p>At its simplest, DNS is a distributed directory service that maps human-readable domain names to the IP
+            </div>
+          </div>
+        </div></section>
+        
+        
+        
+        <section class="post-section" id="what-is-dns" style="background: var(--panel); border: 1px solid var(--line); border-radius: var(--r-lg); padding: 32px 36px; margin-bottom: 24px; padding-top: 28px;"><span class="section-num">02</span><h2>What is DNS?</h2><p>At its simplest, DNS is a distributed directory service that maps human-readable domain names to the IP
           addresses computers use to route traffic. Type <code>olladns.com</code> into a browser, and DNS quietly
-          answers the question "where, numerically, is that?" so your browser knows which server to connect to.</p>
-        <p>The phonebook analogy is apt but incomplete. DNS does more than name-to-number lookups. It tells the internet
+          answers the question "where, numerically, is that?" so your browser knows which server to connect to.</p><p>The phonebook analogy is apt but incomplete. DNS does more than name-to-number lookups. It tells the internet
           where to deliver your email (via MX records), which servers can send mail on your behalf (via SPF and DKIM in
           TXT records), and how to route subdomains (via NS records). It can also let one domain point to another
           without touching the destination server (via CNAME records). DNS is not just an address book — it is a full
-          directory and routing layer for how the internet finds anything at all.</p>
-        <h2>Breaking down a domain name</h2>
-        <p>Domain names are read from right to left, in the same order DNS processes them.</p>
-        <p>Take <code>blog.olladns.com</code>:</p>
-        <ul>
-          <li><strong><code>.com</code></strong> is the top-level domain, or TLD. TLDs include <code>.com</code>,
+          directory and routing layer for how the internet finds anything at all.</p></section>
+        
+        
+        <section class="post-section" id="breaking-down-a-domain-name" style="background: var(--panel); border: 1px solid var(--line); border-radius: var(--r-lg); padding: 32px 36px; margin-bottom: 24px; padding-top: 28px;"><span class="section-num">03</span><h2>Breaking down a domain name</h2><p>Domain names are read from right to left, in the same order DNS processes them.</p><p>Take <code>blog.olladns.com</code>:</p><div class="concept-grid">
+          <div class="concept-card">
+            <div class="concept-ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><path d="M2 12h20"></path><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg></div>
+            <h4><code>.com</code></h4>
+            <p>Top-level domain, or TLD. TLDs include <code>.com</code>,
             <code>.org</code>, <code>.net</code>, <code>.gov</code>, country codes like <code>.in</code> and
             <code>.uk</code>, and newer options like <code>.dev</code> and <code>.security</code>. Registries manage
-            TLDs, and ICANN coordinates the global namespace.</li>
-          <li><strong><code>olladns</code></strong> is the second-level domain. This is the part a business or
-            individual registers through a domain registrar and carries the brand identity.</li>
-          <li><strong><code>blog</code></strong> is a subdomain. The domain owner controls subdomains without additional
+            TLDs, and ICANN coordinates the global namespace.</p>
+          </div>
+        
+          <div class="concept-card">
+            <div class="concept-ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><path d="M22 6l-10 7L2 6"></path></svg></div>
+            <h4><code>olladns</code></h4>
+            <p>Second-level domain. This is the part a business or
+            individual registers through a domain registrar and carries the brand identity.</p>
+          </div>
+        
+          <div class="concept-card">
+            <div class="concept-ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg></div>
+            <h4><code>blog</code></h4>
+            <p>Is a subdomain. The domain owner controls subdomains without additional
             registration. Companies use them constantly to separate services: <code>mail.company.com</code>,
-            <code>api.company.com</code>, <code>vpn.company.com</code>.</li>
-        </ul>
+            <code><a href="https://olladns.com/developers.html" target="_blank" rel="noopener noreferrer" title="olladns Developer API" style="color: var(--accent); text-decoration: underline; text-underline-offset: 3px; text-decoration-color: var(--accent-line);">api</a>.company.com</code>, <code>vpn.company.com</code>.</p>
+          </div>
+        </div></section>
+        
+        
+        
         This layered delegation is what makes DNS scale. Responsibility flows downward — ICANN and registries handle
-        TLDs, registrars and owners handle second-level domains, and owners handle their own subdomains.<h2>Following
-          one lookup, start to finish</h2>
-        <p>DNS resolution feels like magic until you walk through it. Then it feels like a relay race.</p>
-        <h3>Step one: local cache check</h3>
-        <p>Your device checks whether it already knows the answer — first in the browser's DNS cache, then in the
+        TLDs, registrars and owners handle second-level domains, and owners handle their own subdomains.<section class="post-section" id="following-one-lookup-start-to-finish" style="background: var(--panel); border: 1px solid var(--line); border-radius: var(--r-lg); padding: 32px 36px; margin-bottom: 24px; padding-top: 28px;"><span class="section-num">04</span><h2>Following
+          one lookup, start to finish</h2><p>DNS resolution feels like magic until you walk through it. Then it feels like a relay race.</p><p>That is five separate servers cooperating across potentially five physical locations, usually completing in
+          well under 100 milliseconds.</p><p>Two query styles are at work here. Your device's query to the resolver is <strong>recursive</strong> — it
+          expects a complete final answer. The resolver's queries to the root, TLD, and authoritative servers are
+          <strong>iterative</strong> — each server may respond with "I don't know, but here's who to ask next." That
+          division is deliberate. It keeps the root and TLD servers, which handle staggering global traffic, from doing
+          the heavy lifting of full recursive lookups themselves.</p><div class="dns-flow">
+          <div class="flow-step"><span class="flow-dot"></span>
+            <div class="flow-card">
+              <h4>Step one: local cache check</h4>
+              <p>Your device checks whether it already knows the answer — first in the browser's DNS cache, then in the
           operating system's resolver cache. If you or someone on your network visited the domain recently, the answer
           may already be stored locally, and the rest of the process is skipped.</p>
-        <h3>Step two: recursive resolver</h3>
-        <p>If nothing is cached locally, the query is handed to a recursive resolver — a server whose job is to find the
+            </div>
+          </div>
+        <div class="flow-arrow" aria-hidden="true">↓</div>
+          <div class="flow-step"><span class="flow-dot"></span>
+            <div class="flow-card">
+              <h4>Step two: recursive resolver</h4>
+              <p>If nothing is cached locally, the query is handed to a recursive resolver — a server whose job is to find the
           answer and bring it back. This might be your ISP's resolver, a public resolver like Cloudflare's
-          <code>1.1.1.1</code> or Google's <code>8.8.8.8</code>, or a protective DNS resolver. Think of the recursive
+          <code>1.1.1.1</code> or Google's <code>8.8.8.8</code>, or a <a href="https://olladns.com/product.html" target="_blank" rel="noopener noreferrer" title="See olladns Protective DNS" style="color: var(--accent); text-decoration: underline; text-underline-offset: 3px; text-decoration-color: var(--accent-line);">protective DNS resolver</a>. Think of the recursive
           resolver as a determined assistant: you give it one question, and it does the legwork until it returns a final
           answer.</p>
-        <h3>Step three: root server</h3>
-        <p>If the recursive resolver does not have the answer cached, it starts at the top of the hierarchy by querying
+            </div>
+          </div>
+        <div class="flow-arrow" aria-hidden="true">↓</div>
+          <div class="flow-step"><span class="flow-dot"></span>
+            <div class="flow-card">
+              <h4>Step three: root server</h4>
+              <p>If the recursive resolver does not have the answer cached, it starts at the top of the hierarchy by querying
           a root server. There are only 13 root server addresses globally, though anycast routing means those addresses
           are served by hundreds of physical machines worldwide. The root server does not know where
           <code>olladns.com</code> lives. It only knows which server is responsible for the <code>.com</code> TLD, and
           it points the resolver there.</p>
-        <h3>Step four: TLD server</h3>
-        <p>The resolver now asks the <code>.com</code> TLD server. The TLD server also does not know the final answer,
+            </div>
+          </div>
+        <div class="flow-arrow" aria-hidden="true">↓</div>
+          <div class="flow-step"><span class="flow-dot"></span>
+            <div class="flow-card">
+              <h4>Step four: TLD server</h4>
+              <p>The resolver now asks the <code>.com</code> TLD server. The TLD server also does not know the final answer,
           but it knows which name servers are authoritative for <code>olladns.com</code> because that information was
           registered when the domain was set up. It returns that referral.</p>
-        <h3>Step five: authoritative name server</h3>
-        <p>The resolver goes directly to the authoritative name server for <code>olladns.com</code>, typically run by
+            </div>
+          </div>
+        <div class="flow-arrow" aria-hidden="true">↓</div>
+          <div class="flow-step"><span class="flow-dot"></span>
+            <div class="flow-card">
+              <h4>Step five: authoritative name server</h4>
+              <p>The resolver goes directly to the authoritative name server for <code>olladns.com</code>, typically run by
           the domain's DNS hosting provider. This server holds the actual DNS records and responds with the real IP
           address.</p>
-        <h3>Step six: the answer returns</h3>
-        <p>The recursive resolver hands the IP address back to your device. Your browser opens a connection to that
+            </div>
+          </div>
+        <div class="flow-arrow" aria-hidden="true">↓</div>
+          <div class="flow-step"><span class="flow-dot"></span>
+            <div class="flow-card">
+              <h4>Step six: the answer returns</h4>
+              <p>The recursive resolver hands the IP address back to your device. Your browser opens a connection to that
           address, and the page starts loading. Your device also caches the answer so the next lookup can skip some of
           these steps.</p>
-        <p>That is five separate servers cooperating across potentially five physical locations, usually completing in
-          well under 100 milliseconds.</p>
-        <p>Two query styles are at work here. Your device's query to the resolver is <strong>recursive</strong> — it
-          expects a complete final answer. The resolver's queries to the root, TLD, and authoritative servers are
-          <strong>iterative</strong> — each server may respond with "I don't know, but here's who to ask next." That
-          division is deliberate. It keeps the root and TLD servers, which handle staggering global traffic, from doing
-          the heavy lifting of full recursive lookups themselves.</p>
-        <h2>Why caching makes the internet faster</h2>
-        <p>If every DNS lookup ran that full relay from scratch, the internet would feel slower and the root and TLD
-          servers would crumble under the load. Caching prevents that.</p>
-        <p>Every DNS record carries a <strong>Time to Live (TTL)</strong> — a number in seconds that tells resolvers and
+            </div>
+          </div>
+        </div></section>
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        <section class="post-section" id="why-caching-makes-the-internet-faster" style="background: var(--panel); border: 1px solid var(--line); border-radius: var(--r-lg); padding: 32px 36px; margin-bottom: 24px; padding-top: 28px;"><span class="section-num">05</span><h2>Why caching makes the internet faster</h2><p>If every DNS lookup ran that full relay from scratch, the internet would feel slower and the root and TLD
+          servers would crumble under the load. Caching prevents that.</p><p>Every DNS record carries a <strong>Time to Live (TTL)</strong> — a number in seconds that tells resolvers and
           devices how long they may reuse a cached answer before asking again. Typical TTLs range from one hour
           (<code>3,600</code> seconds) to one day (<code>86,400</code> seconds), depending on how often the domain owner
-          expects the record to change.</p>
-        <p>Caching means popular domains get looked up once by a resolver and then served instantly from memory to
+          expects the record to change.</p><p>Caching means popular domains get looked up once by a resolver and then served instantly from memory to
           everyone else who asks during that window. It dramatically reduces load on authoritative servers and cuts real
-          time off page loads.</p>
-        <p>TTL also matters whenever something changes. If a company migrates its website to a new server and updates
+          time off page loads.</p><p>TTL also matters whenever something changes. If a company migrates its website to a new server and updates
           its DNS record, that change propagates gradually as cached copies expire. This is why IT teams talk about "DNS
           propagation" taking anywhere from minutes to, in edge cases, a couple of days. Lowering a record's TTL before
-          a planned migration shrinks the propagation window when you need it smallest.</p>
-        <h2>The record types that make DNS work</h2>
-        <p>A domain's DNS configuration is a collection of records, each answering a narrow question.</p>
-        <ul>
-          <li><strong>A record</strong>: Maps a domain to an IPv4 address.</li>
-          <li><strong>AAAA record</strong>: Maps a domain to an IPv6 address, the newer address format the internet is
-            migrating toward as IPv4's roughly 4.3 billion addresses run short.</li>
-          <li><strong>CNAME record</strong>: Points a domain to another domain name instead of an IP. This lets
+          a planned migration shrinks the propagation window when you need it smallest.</p></section>
+        
+        
+        
+        
+        <section class="post-section" id="the-record-types-that-make-dns-work" style="background: var(--panel); border: 1px solid var(--line); border-radius: var(--r-lg); padding: 32px 36px; margin-bottom: 24px; padding-top: 28px;"><span class="section-num">06</span><h2>The record types that make DNS work</h2><p>A domain's DNS configuration is a collection of records, each answering a narrow question.</p>
+          <div class="technique-row" style="background: transparent; border: none; padding: 0; box-shadow: none;">
+            <div class="technique-visual">
+              <div class="visual-card">
+                <div class="visual-label">A record</div>
+                <div class="code-box">
+                  <pre style="margin:0; padding:12px; font-size:12px;"><code>example.com. 3600 IN A ...</code></pre>
+                </div>
+              </div>
+            </div>
+            <div class="technique-text">
+              <h3>A record</h3>
+              <p>Maps a domain to an IPv4 address.</p>
+            </div>
+          </div>
+        
+          <div class="technique-row reverse" style="background: transparent; border: none; padding: 0; box-shadow: none;">
+            <div class="technique-visual">
+              <div class="visual-card">
+                <div class="visual-label">AAAA record</div>
+                <div class="code-box">
+                  <pre style="margin:0; padding:12px; font-size:12px;"><code>example.com. 3600 IN A ...</code></pre>
+                </div>
+              </div>
+            </div>
+            <div class="technique-text">
+              <h3>AAAA record</h3>
+              <p>Maps a domain to an IPv6 address, the newer address format the internet is
+            migrating toward as IPv4's roughly 4.3 billion addresses run short.</p>
+            </div>
+          </div>
+        
+          <div class="technique-row" style="background: transparent; border: none; padding: 0; box-shadow: none;">
+            <div class="technique-visual">
+              <div class="visual-card">
+                <div class="visual-label">CNAME record</div>
+                <div class="code-box">
+                  <pre style="margin:0; padding:12px; font-size:12px;"><code>example.com. 3600 IN A ...</code></pre>
+                </div>
+              </div>
+            </div>
+            <div class="technique-text">
+              <h3>CNAME record</h3>
+              <p>Points a domain to another domain name instead of an IP. This lets
             <code>shop.company.com</code> quietly point to a third-party e-commerce platform without anyone needing to
-            update that platform's real IP address.</li>
-          <li><strong>MX record</strong>: Mail Exchange record. Tells the internet which mail server accepts email for a
-            domain, with priority values so a primary and backups can be listed.</li>
-          <li><strong>TXT record</strong>: Originally a general-purpose text field, now heavily used for security. SPF
+            update that platform's real IP address.</p>
+            </div>
+          </div>
+        
+          <div class="technique-row reverse" style="background: transparent; border: none; padding: 0; box-shadow: none;">
+            <div class="technique-visual">
+              <div class="visual-card">
+                <div class="visual-label">MX record</div>
+                <div class="code-box">
+                  <pre style="margin:0; padding:12px; font-size:12px;"><code>example.com. 3600 IN A ...</code></pre>
+                </div>
+              </div>
+            </div>
+            <div class="technique-text">
+              <h3>MX record</h3>
+              <p>Mail Exchange record. Tells the internet which mail server accepts email for a
+            domain, with priority values so a primary and backups can be listed.</p>
+            </div>
+          </div>
+        
+          <div class="technique-row" style="background: transparent; border: none; padding: 0; box-shadow: none;">
+            <div class="technique-visual">
+              <div class="visual-card">
+                <div class="visual-label">TXT record</div>
+                <div class="code-box">
+                  <pre style="margin:0; padding:12px; font-size:12px;"><code>example.com. 3600 IN A ...</code></pre>
+                </div>
+              </div>
+            </div>
+            <div class="technique-text">
+              <h3>TXT record</h3>
+              <p>Originally a general-purpose text field, now heavily used for security. SPF
             records list authorized mail servers, DKIM records hold public keys for email authentication, and DMARC
-            records tell receiving servers what to do when authentication fails.</li>
-          <li><strong>NS record</strong>: Name Server record. Identifies which servers are authoritative for a domain.
-          </li>
-          <li><strong>SOA record</strong>: Start of Authority record. Sits at the top of every DNS zone and holds
+            records tell receiving servers what to do when authentication fails.</p>
+            </div>
+          </div>
+        
+          <div class="technique-row reverse" style="background: transparent; border: none; padding: 0; box-shadow: none;">
+            <div class="technique-visual">
+              <div class="visual-card">
+                <div class="visual-label">NS record</div>
+                <div class="code-box">
+                  <pre style="margin:0; padding:12px; font-size:12px;"><code>example.com. 3600 IN A ...</code></pre>
+                </div>
+              </div>
+            </div>
+            <div class="technique-text">
+              <h3>NS record</h3>
+              <p>Name Server record. Identifies which servers are authoritative for a domain.</p>
+            </div>
+          </div>
+        
+          <div class="technique-row" style="background: transparent; border: none; padding: 0; box-shadow: none;">
+            <div class="technique-visual">
+              <div class="visual-card">
+                <div class="visual-label">SOA record</div>
+                <div class="code-box">
+                  <pre style="margin:0; padding:12px; font-size:12px;"><code>example.com. 3600 IN A ...</code></pre>
+                </div>
+              </div>
+            </div>
+            <div class="technique-text">
+              <h3>SOA record</h3>
+              <p>Start of Authority record. Sits at the top of every DNS zone and holds
             administrative metadata, including the primary source of truth server and timing values that control how
-            secondary servers refresh their copies.</li>
-          <li><strong>PTR record</strong>: Pointer record. Used for reverse DNS — mapping an IP address back to a domain
-            name. Especially useful for verifying mail server legitimacy.</li>
-          <li><strong>SRV record</strong>: Service record. Locates specific services, such as SIP or XMPP, by hostname
-            and port.</li>
-          <li><strong>CAA record</strong>: Certificate Authority Authorization record. Specifies which certificate
-            authorities are allowed to issue TLS certificates for the domain.</li>
-        </ul>
+            secondary servers refresh their copies.</p>
+            </div>
+          </div>
+        
+          <div class="technique-row reverse" style="background: transparent; border: none; padding: 0; box-shadow: none;">
+            <div class="technique-visual">
+              <div class="visual-card">
+                <div class="visual-label">PTR record</div>
+                <div class="code-box">
+                  <pre style="margin:0; padding:12px; font-size:12px;"><code>example.com. 3600 IN A ...</code></pre>
+                </div>
+              </div>
+            </div>
+            <div class="technique-text">
+              <h3>PTR record</h3>
+              <p>Pointer record. Used for reverse DNS — mapping an IP address back to a domain
+            name. Especially useful for verifying mail server legitimacy.</p>
+            </div>
+          </div>
+        
+          <div class="technique-row" style="background: transparent; border: none; padding: 0; box-shadow: none;">
+            <div class="technique-visual">
+              <div class="visual-card">
+                <div class="visual-label">SRV record</div>
+                <div class="code-box">
+                  <pre style="margin:0; padding:12px; font-size:12px;"><code>example.com. 3600 IN A ...</code></pre>
+                </div>
+              </div>
+            </div>
+            <div class="technique-text">
+              <h3>SRV record</h3>
+              <p>Service record. Locates specific services, such as SIP or XMPP, by hostname
+            and port.</p>
+            </div>
+          </div>
+        
+          <div class="technique-row reverse" style="background: transparent; border: none; padding: 0; box-shadow: none;">
+            <div class="technique-visual">
+              <div class="visual-card">
+                <div class="visual-label">CAA record</div>
+                <div class="code-box">
+                  <pre style="margin:0; padding:12px; font-size:12px;"><code>example.com. 3600 IN A ...</code></pre>
+                </div>
+              </div>
+            </div>
+            <div class="technique-text">
+              <h3>CAA record</h3>
+              <p>Certificate Authority Authorization record. Specifies which certificate
+            authorities are allowed to issue TLS certificates for the domain.</p>
+            </div>
+          </div>
+        </section>
+        
+        
         A, AAAA, CNAME, MX, TXT, NS, and SOA cover the overwhelming majority of day-to-day domain operations. PTR, SRV,
-        and CAA matter in more specialized cases.<h2>Who runs the resolvers you use</h2>
-        <p>Every device needs a recursive resolver, and where it comes from matters.</p>
-        <p>By default, most home and mobile connections use whatever resolver the ISP provides automatically. It
+        and CAA matter in more specialized cases.<section class="post-section" id="who-runs-the-resolvers-you-use" style="background: var(--panel); border: 1px solid var(--line); border-radius: var(--r-lg); padding: 32px 36px; margin-bottom: 24px; padding-top: 28px;"><span class="section-num">07</span><h2>Who runs the resolvers you use</h2><p>Every device needs a recursive resolver, and where it comes from matters.</p><div class="concept-grid">
+        <div class="concept-card">
+          <h4>ISP Resolvers</h4>
+          <p>It
           requires no configuration, but the ISP can see every domain looked up, and there is usually no filtering or
           security inspection.</p>
-        <p>Public resolvers changed that for many people. Cloudflare's <code>1.1.1.1</code>, Google's
+        </div>
+      
+        <div class="concept-card">
+          <h4>Public Resolvers</h4>
+          <p>Cloudflare's <code>1.1.1.1</code>, Google's
           <code>8.8.8.8</code>, and Quad9's <code>9.9.9.9</code> are free, fast thanks to anycast infrastructure, and
           often advertise stronger privacy commitments than ISP resolvers. Some, like Quad9, also apply built-in
           threat-intelligence filtering.</p>
-        <p>Then there is the category that matters most in business: protective DNS resolvers, the category olladns
+        </div>
+      
+        <div class="concept-card" style="grid-column: 1 / -1; border-color: var(--accent-line); background: var(--bg-1);">
+          <h4 style="color: var(--accent);">Protective Resolvers (olladns)</h4>
+          <p>Then there is the category that matters most in business: <a href="https://olladns.com/product.html" target="_blank" rel="noopener noreferrer" title="See olladns Protective DNS" style="color: var(--accent); text-decoration: underline; text-underline-offset: 3px; text-decoration-color: var(--accent-line);">protective DNS resolvers</a>, the category olladns
           operates in. These sit deliberately in the resolution path and treat every DNS query as a checkpoint. Because
-          virtually nothing on a network happens without a DNS lookup — not a phishing page loading, not malware phoning
+          virtually nothing on a network happens without a DNS lookup — not a <a href="https://olladns.com/security.html" target="_blank" rel="noopener noreferrer" title="olladns DNS Security" style="color: var(--accent); text-decoration: underline; text-underline-offset: 3px; text-decoration-color: var(--accent-line);">phishing page</a> loading, not malware phoning
           home, not a browser being redirected to a lookalike login — that checkpoint is an efficient place to catch bad
           activity before any malicious payload reaches the device.</p>
-        <h2>DNS as an attack surface</h2>
-        <p>DNS was designed in the early 1980s for a smaller, more trusting internet. Security was not the top priority.
-          That history still has consequences.</p>
-        <p><strong>DNS cache poisoning</strong> is one of the oldest attacks. An attacker forges a fake DNS response and
+        </div>
+      </div></section>
+        
+        
+        
+        
+        <section class="post-section" id="dns-as-an-attack-surface" style="background: var(--panel); border: 1px solid var(--line); border-radius: var(--r-lg); padding: 32px 36px; margin-bottom: 24px; padding-top: 28px;"><span class="section-num">08</span><h2>DNS as an attack surface</h2><p>DNS was designed in the early 1980s for a smaller, more trusting internet. Security was not the top priority.
+          That history still has consequences.</p><p><strong>DNS cache poisoning</strong> is one of the oldest attacks. An attacker forges a fake DNS response and
           tries to slip it into a resolver's cache before the legitimate answer arrives. If it succeeds, everyone who
           queries that resolver is sent to the attacker's server instead of the real one — for banking, webmail,
           anything — with no obvious warning. The browser's padlock icon does not help, because from the browser's
-          perspective it is simply connecting to whatever address DNS provided.</p>
-        <p><strong>DNS hijacking</strong> operates one level up. Rather than poisoning a single resolver's cache, an
+          perspective it is simply connecting to whatever address DNS provided.</p><p><strong>DNS hijacking</strong> operates one level up. Rather than poisoning a single resolver's cache, an
           attacker compromises the actual DNS settings for a domain or the router settings on a network, redirecting
-          traffic structurally for a longer window before anyone notices.</p>
-        <p><strong>DNS tunneling</strong> is used by attackers who already have a foothold inside a network. Because DNS
+          traffic structurally for a longer window before anyone notices.</p><p><strong>DNS tunneling</strong> is used by attackers who already have a foothold inside a network. Because DNS
           traffic is routine and rarely inspected closely, attackers encode stolen data inside DNS queries themselves
-          and quietly exfiltrate it, or use a steady drip of DNS lookups as a covert command-and-control channel. To a
-          casual observer, it looks like ordinary DNS traffic.</p>
-        <p><strong>Typosquatting and lookalike domains</strong> rely less on technical cleverness and more on human
+          and quietly exfiltrate it, or use a steady drip of DNS lookups as a covert <a href="https://olladns.com/security.html" target="_blank" rel="noopener noreferrer" title="Block C2 Traffic with olladns" style="color: var(--accent); text-decoration: underline; text-underline-offset: 3px; text-decoration-color: var(--accent-line);">command-and-control</a> channel. To a
+          casual observer, it looks like ordinary DNS traffic.</p><p><strong>Typosquatting and <a href="https://olladns.com/blog/cyrillic-homoglyphs/" target="_blank" rel="noopener noreferrer" title="How Lookalike Domains Work" style="color: var(--accent); text-decoration: underline; text-underline-offset: 3px; text-decoration-color: var(--accent-line);">lookalike domains</a></strong> rely less on technical cleverness and more on human
           pattern matching. Attackers register domains like <code>oll4dns.com</code> or <code>amaz0n-support.com</code>,
           close enough that a tired employee glances at them and misses the difference before clicking. This is
-          overwhelmingly how modern phishing campaigns get started.</p>
-        <p>The unifying operational fact is simple: DNS is the first network event in almost every attack chain. Before
+          overwhelmingly how modern phishing campaigns get started.</p><p>The unifying operational fact is simple: DNS is the first network event in almost every attack chain. Before
           malware phones home, before a phishing page loads, before data leaves a network — there is a DNS query. DNS is
           not just infrastructure that needs protection; it is one of the earliest, cheapest, highest-leverage places to
-          stop an attack.</p>
-        <h2>Encrypting DNS: DoH, DoT, and DoQ</h2>
-        <p>For most of DNS history, queries traveled in plain text. Anyone positioned on the network path could see
+          stop an attack.</p></section>
+        
+        
+        
+        
+        
+        
+        <section class="post-section" id="encrypting-dns-doh-dot-and-doq" style="background: var(--panel); border: 1px solid var(--line); border-radius: var(--r-lg); padding: 32px 36px; margin-bottom: 24px; padding-top: 28px;"><span class="section-num">09</span><h2>Encrypting DNS: DoH, DoT, and DoQ</h2><p>For most of DNS history, queries traveled in plain text. Anyone positioned on the network path could see
           which domains were being looked up, and in some cases tamper with responses. Three newer protocols close that
           gap.</p>
-        <p><strong>DNS over HTTPS (DoH)</strong> wraps DNS queries inside standard encrypted HTTPS traffic, the same
+          <div class="technique-row" style="background: transparent; border: none; padding: 0; box-shadow: none;">
+            <div class="technique-visual">
+              <div class="visual-card">
+                <div class="visual-label">Protocol</div>
+                <div class="concept-ic" style="margin: 0 auto 10px auto;"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg></div>
+                <h4 style="margin:0; font-size:18px;">DNS over HTTPS (DoH)</h4>
+              </div>
+            </div>
+            <div class="technique-text">
+              <p>wraps DNS queries inside standard encrypted HTTPS traffic, the same
           protocol used for secure web browsing. The practical effect is that DNS traffic becomes very hard to
           distinguish from ordinary web traffic on the wire.</p>
-        <p><strong>DNS over TLS (DoT)</strong> also encrypts queries using TLS, but keeps them on a dedicated port
+            </div>
+          </div>
+        
+          <div class="technique-row reverse" style="background: transparent; border: none; padding: 0; box-shadow: none;">
+            <div class="technique-visual">
+              <div class="visual-card">
+                <div class="visual-label">Protocol</div>
+                <div class="concept-ic" style="margin: 0 auto 10px auto;"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg></div>
+                <h4 style="margin:0; font-size:18px;">DNS over TLS (DoT)</h4>
+              </div>
+            </div>
+            <div class="technique-text">
+              <p>also encrypts queries using TLS, but keeps them on a dedicated port
           rather than blending in with HTTPS. This makes it easier for network administrators to identify and manage DNS
           traffic deliberately.</p>
-        <p><strong>DNS over QUIC (DoQ)</strong> is the newest option, built on Google's QUIC transport. It combines
-          encryption with faster connection setup and better performance on unreliable, high-latency mobile networks.
-        </p>
+            </div>
+          </div>
+        
+          <div class="technique-row" style="background: transparent; border: none; padding: 0; box-shadow: none;">
+            <div class="technique-visual">
+              <div class="visual-card">
+                <div class="visual-label">Protocol</div>
+                <div class="concept-ic" style="margin: 0 auto 10px auto;"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg></div>
+                <h4 style="margin:0; font-size:18px;">DNS over QUIC (DoQ)</h4>
+              </div>
+            </div>
+            <div class="technique-text">
+              <p>is the newest option, built on Google's QUIC transport. It combines
+          encryption with faster connection setup and better performance on unreliable, high-latency mobile networks.</p>
+            </div>
+          </div>
         <p>Encryption matters for privacy — it stops casual eavesdropping on browsing habits. But it also creates a real
           tension for enterprise security: encrypted DNS can make it harder for protective tooling to inspect and filter
           queries centrally, because standard DoH traffic blends invisibly into encrypted web browsing. Modern
           protective DNS platforms solve this by natively supporting DoH, DoT, and DoQ themselves. The goal is not to
           fight encryption; it is to be the trusted, encrypted resolver that devices and managed clients are
-          deliberately pointed at.</p>
-        <h2>DNS as a security layer, not just plumbing</h2>
-        <p>DNS sits before almost everything else on a network. A firewall inspects traffic once a connection is
+          deliberately pointed at.</p></section>
+        
+        
+        
+        
+        
+        <section class="post-section" id="dns-as-a-security-layer-not-just-plumbing" style="background: var(--panel); border: 1px solid var(--line); border-radius: var(--r-lg); padding: 32px 36px; margin-bottom: 24px; padding-top: 28px;"><span class="section-num">10</span><h2>DNS as a security layer, not just plumbing</h2><p>DNS sits before almost everything else on a network.</p><blockquote class="post-quote"><p>A firewall inspects traffic once a connection is
           underway. Endpoint protection inspects files once they have landed. An email gateway inspects a message once
           it has arrived. DNS, by contrast, is consulted before any of that — before the connection opens, before the
-          file downloads, before the phishing page renders.</p>
-        <p>That timing makes DNS-layer security efficient. A protective resolver can refuse to resolve a known-malicious
+          file downloads, before the phishing page renders.</p></blockquote><p>That timing makes DNS-layer security efficient. A <a href="https://olladns.com/product.html" target="_blank" rel="noopener noreferrer" title="olladns Protective DNS Resolver" style="color: var(--accent); text-decoration: underline; text-underline-offset: 3px; text-decoration-color: var(--accent-line);">protective resolver</a> can refuse to resolve a known-malicious
           or suspicious domain, stopping the connection before it opens. It is a low-friction control: point a network
           or fleet at a protective resolver and every device is covered, with nothing to install and no behavior change
-          required.</p>
-        <h2>When DNS breaks</h2>
-        <p>DNS failures are deceptive because they tend to look like something else.</p>
-        <p>A misconfigured DNS record can take a healthy website offline even though the server never went down. A DNS
+          required.</p></section>
+        
+        
+        <section class="post-section" id="when-dns-breaks" style="background: var(--panel); border: 1px solid var(--line); border-radius: var(--r-lg); padding: 32px 36px; margin-bottom: 24px; padding-top: 28px;"><span class="section-num">11</span><h2>When DNS breaks</h2><blockquote class="post-quote" style="border-left-color: var(--muted);"><p style="color: var(--muted);">DNS failures are deceptive because they tend to look like something else.</p></blockquote><p>A misconfigured DNS record can take a healthy website offline even though the server never went down. A DNS
           provider outage can knock out every domain that provider hosts at once. An expired domain registration can
           silently break a domain the moment it lapses. Redundancy across providers and careful renewal discipline are
-          standard defenses.</p>
-        <p>The common thread is that DNS problems rarely announce themselves as DNS problems. Users report "the website
+          standard defenses.</p><p>The common thread is that DNS problems rarely announce themselves as DNS problems. Users report "the website
           is down" or "I cannot get email." Diagnosing the real cause usually means checking DNS resolution directly
           with <code>dig</code> or <code>nslookup</code>, or a web-based DNS checker, before blaming a server, hosting
-          provider, or application.</p>
-        <h2>Where DNS is heading</h2>
-        <p>DNS is still fundamentally the same protocol Paul Mockapetris designed in 1983, but the layers built on it
+          provider, or application.</p></section>
+        
+        
+        
+        <section class="post-section" id="where-dns-is-heading" style="background: var(--panel); border: 1px solid var(--line); border-radius: var(--r-lg); padding: 32px 36px; margin-bottom: 24px; padding-top: 28px;"><span class="section-num">12</span><h2>Where DNS is heading</h2><p>DNS is still fundamentally the same protocol Paul Mockapetris designed in 1983, but the layers built on it
           keep evolving. Encrypted DNS through DoH, DoT, and DoQ is becoming the default. DNSSEC is gaining adoption,
           adding cryptographic signing so resolvers can verify an answer came from the real authoritative source.
           Multi-signal protective DNS — combining real-time threat intelligence, domain-age signals, and behavioral
           detection — is becoming baseline for security-conscious organizations. And as more life moves through
-          screenless connected devices, DNS remains the quiet mechanism figuring out where it all should connect.</p>
-        <h2>DNS myths worth retiring</h2>
-        <p>A few misconceptions circulate constantly. Clearing them up helps the whole picture click into place.</p>
-        <ul>
-          <li><strong>"DNS is just for websites."</strong> It never was. Email routing, certificate validation, load
+          screenless connected devices, DNS remains the quiet mechanism figuring out where it all should connect.</p></section>
+        
+        <section class="post-section" id="dns-myths-worth-retiring" style="background: var(--panel); border: 1px solid var(--line); border-radius: var(--r-lg); padding: 32px 36px; margin-bottom: 24px; padding-top: 28px;"><span class="section-num">13</span><h2>DNS myths worth retiring</h2><p>A few misconceptions circulate constantly. Clearing them up helps the whole picture click into place.</p><div class="concept-grid">
+          <div class="concept-card">
+            <div class="concept-ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="15" y1="9" x2="9" y2="15"></line><line x1="9" y1="9" x2="15" y2="15"></line></svg></div>
+            <h4 style="color: var(--accent);">DNS is just for websites.</h4>
+            <p>It never was. Email routing, certificate validation, load
             balancing, content delivery networks, VoIP setup, even the way your phone finds the nearest game server —
-            all depend on DNS somewhere.</li>
-          <li><strong>"Changing DNS settings is risky and technical."</strong> For most people, changing which resolver
+            all depend on DNS somewhere.</p>
+          </div>
+        
+          <div class="concept-card">
+            <div class="concept-ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="15" y1="9" x2="9" y2="15"></line><line x1="9" y1="9" x2="15" y2="15"></line></svg></div>
+            <h4 style="color: var(--accent);">Changing DNS settings is risky and technical.</h4>
+            <p>For most people, changing which resolver
             a device or router uses is one of the lowest-risk, highest-impact changes available. It is a setting, not a
-            rebuild.</li>
-          <li><strong>"HTTPS means I am safe, DNS does not matter."</strong> The padlock confirms that a connection is
+            rebuild.</p>
+          </div>
+        
+          <div class="concept-card">
+            <div class="concept-ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="15" y1="9" x2="9" y2="15"></line><line x1="9" y1="9" x2="15" y2="15"></line></svg></div>
+            <h4 style="color: var(--accent);">HTTPS means I am safe, DNS does not matter.</h4>
+            <p>The padlock confirms that a connection is
             encrypted. It says nothing about whether the server is the legitimate one you meant to reach. A phishing
             site behind a valid HTTPS certificate is trivially easy to set up, and DNS decides which server you connect
-            to before that padlock appears.</li>
-          <li><strong>"DNS outages are rare, so planning is unnecessary."</strong> Because so much infrastructure
-            depends on DNS resolving correctly, a DNS failure tends to cascade sideways faster than expected.</li>
-          <li><strong>"My ISP's default DNS is basically the same as anything else."</strong> Default ISP resolvers
+            to before that padlock appears.</p>
+          </div>
+        
+          <div class="concept-card">
+            <div class="concept-ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="15" y1="9" x2="9" y2="15"></line><line x1="9" y1="9" x2="15" y2="15"></line></svg></div>
+            <h4 style="color: var(--accent);">DNS outages are rare, so planning is unnecessary.</h4>
+            <p>Because so much infrastructure
+            depends on DNS resolving correctly, a DNS failure tends to cascade sideways faster than expected.</p>
+          </div>
+        
+          <div class="concept-card">
+            <div class="concept-ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="15" y1="9" x2="9" y2="15"></line><line x1="9" y1="9" x2="15" y2="15"></line></svg></div>
+            <h4 style="color: var(--accent);">My ISP's default DNS is basically the same as anything else.</h4>
+            <p>Default ISP resolvers
             typically apply no security filtering, may log queries for advertising purposes, and were not designed with
-            protective inspection in mind.</li>
-        </ul>
-        <h2>A troubleshooting toolkit</h2>
-        <p>When something DNS-shaped goes wrong, a small set of everyday tools does almost all the diagnostic work.</p>
-        <p>Use <code>dig</code> or <code>nslookup</code> to query a specific DNS record directly and see what is being
+            protective inspection in mind.</p>
+          </div>
+        </div></section>
+        
+        
+        <section class="post-section" id="a-troubleshooting-toolkit" style="background: var(--panel); border: 1px solid var(--line); border-radius: var(--r-lg); padding: 32px 36px; margin-bottom: 24px; padding-top: 28px;"><span class="section-num">14</span><h2>A troubleshooting toolkit</h2><p>When something DNS-shaped goes wrong, a small set of everyday tools does almost all the diagnostic work.</p><p>Use <code>dig</code> or <code>nslookup</code> to query a specific DNS record directly and see what is being
           returned right now. Run a lookup against a specific resolver to check whether a change has propagated in one
           place but not another. Lower TTL values a day or two before a migration to shrink the propagation window. Use
           online propagation checkers to see whether an update has reached resolvers worldwide or whether some still
           hold stale cached answers. If you suspect unauthorized changes, check DNS settings at the registrar level
-          directly — that is where core configuration changes are made.</p>
-        <h2>Frequently Asked Questions</h2>
-        <h3>What is DNS in simple terms?</h3>
-        <p>DNS (Domain Name System) is the internet's address book. It translates human-friendly domain names like
+          directly — that is where core configuration changes are made.</p></section>
+        
+        
+        <section class="post-section" id="frequently-asked-questions" style="background: var(--panel); border: 1px solid var(--line); border-radius: var(--r-lg); padding: 32px 36px; margin-bottom: 24px; padding-top: 28px;"><span class="section-num">15</span><h2>Frequently Asked Questions</h2><div style="display: flex; flex-direction: column; gap: 12px; margin-top: 32px;">
+          <details class="faq-item" style="background: var(--bg-1); border: 1px solid var(--line); border-radius: var(--r-md); padding: 0; overflow: hidden; transition: border-color .15s;">
+            <summary style="
+              font-size: 16px;
+              font-weight: 600;
+              cursor: pointer;
+              list-style: none;
+              display: flex;
+              justify-content: space-between;
+              align-items: center;
+              color: var(--text);
+              padding: 18px 22px;
+            ">
+              <span>What is DNS in simple terms?</span>
+              <span class="faq-icon" style="
+                color: var(--accent);
+                font-size: 24px;
+                font-weight: 300;
+                line-height: 1;
+                flex: none;
+                width: 28px;
+                height: 28px;
+                border: 1.5px solid var(--accent-line);
+                border-radius: 50%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                background: var(--accent-soft);
+                font-size: 18px;
+                transition: transform .2s;
+              ">+</span>
+            </summary>
+            <div style="
+              padding: 0 22px 18px;
+              font-size: 15.5px;
+              line-height: 1.7;
+              color: var(--text-2);
+              border-top: 1px solid var(--line);
+              padding-top: 14px;
+            ">
+              <p style="margin: 0;">DNS (Domain Name System) is the internet's address book. It translates human-friendly domain names like
           <code>olladns.com</code> into the numeric IP addresses computers use to find and connect to each other.</p>
-        <h3>What is a DNS server?</h3>
-        <p>A DNS server stores or looks up DNS records. Recursive resolvers, root servers, TLD servers, and
+            </div>
+          </details>
+        
+          <details class="faq-item" style="background: var(--bg-1); border: 1px solid var(--line); border-radius: var(--r-md); padding: 0; overflow: hidden; transition: border-color .15s;">
+            <summary style="
+              font-size: 16px;
+              font-weight: 600;
+              cursor: pointer;
+              list-style: none;
+              display: flex;
+              justify-content: space-between;
+              align-items: center;
+              color: var(--text);
+              padding: 18px 22px;
+            ">
+              <span>What is a DNS server?</span>
+              <span class="faq-icon" style="
+                color: var(--accent);
+                font-size: 24px;
+                font-weight: 300;
+                line-height: 1;
+                flex: none;
+                width: 28px;
+                height: 28px;
+                border: 1.5px solid var(--accent-line);
+                border-radius: 50%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                background: var(--accent-soft);
+                font-size: 18px;
+                transition: transform .2s;
+              ">+</span>
+            </summary>
+            <div style="
+              padding: 0 22px 18px;
+              font-size: 15.5px;
+              line-height: 1.7;
+              color: var(--text-2);
+              border-top: 1px solid var(--line);
+              padding-top: 14px;
+            ">
+              <p style="margin: 0;">A DNS server stores or looks up DNS records. Recursive resolvers, root servers, TLD servers, and
           authoritative name servers each play different roles in answering a lookup.</p>
-        <h3>What is the difference between DNS and an IP address?</h3>
-        <p>An IP address is the actual numeric location of a device on the internet. DNS maps a human-readable name to
+            </div>
+          </details>
+        
+          <details class="faq-item" style="background: var(--bg-1); border: 1px solid var(--line); border-radius: var(--r-md); padding: 0; overflow: hidden; transition: border-color .15s;">
+            <summary style="
+              font-size: 16px;
+              font-weight: 600;
+              cursor: pointer;
+              list-style: none;
+              display: flex;
+              justify-content: space-between;
+              align-items: center;
+              color: var(--text);
+              padding: 18px 22px;
+            ">
+              <span>What is the difference between DNS and an IP address?</span>
+              <span class="faq-icon" style="
+                color: var(--accent);
+                font-size: 24px;
+                font-weight: 300;
+                line-height: 1;
+                flex: none;
+                width: 28px;
+                height: 28px;
+                border: 1.5px solid var(--accent-line);
+                border-radius: 50%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                background: var(--accent-soft);
+                font-size: 18px;
+                transition: transform .2s;
+              ">+</span>
+            </summary>
+            <div style="
+              padding: 0 22px 18px;
+              font-size: 15.5px;
+              line-height: 1.7;
+              color: var(--text-2);
+              border-top: 1px solid var(--line);
+              padding-top: 14px;
+            ">
+              <p style="margin: 0;">An IP address is the actual numeric location of a device on the internet. DNS maps a human-readable name to
           that IP address so people do not have to memorize numbers.</p>
-        <h3>What is a DNS resolver?</h3>
-        <p>A DNS resolver, also called a recursive resolver, receives your device's query and does the work of tracking
+            </div>
+          </details>
+        
+          <details class="faq-item" style="background: var(--bg-1); border: 1px solid var(--line); border-radius: var(--r-md); padding: 0; overflow: hidden; transition: border-color .15s;">
+            <summary style="
+              font-size: 16px;
+              font-weight: 600;
+              cursor: pointer;
+              list-style: none;
+              display: flex;
+              justify-content: space-between;
+              align-items: center;
+              color: var(--text);
+              padding: 18px 22px;
+            ">
+              <span>What is a DNS resolver?</span>
+              <span class="faq-icon" style="
+                color: var(--accent);
+                font-size: 24px;
+                font-weight: 300;
+                line-height: 1;
+                flex: none;
+                width: 28px;
+                height: 28px;
+                border: 1.5px solid var(--accent-line);
+                border-radius: 50%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                background: var(--accent-soft);
+                font-size: 18px;
+                transition: transform .2s;
+              ">+</span>
+            </summary>
+            <div style="
+              padding: 0 22px 18px;
+              font-size: 15.5px;
+              line-height: 1.7;
+              color: var(--text-2);
+              border-top: 1px solid var(--line);
+              padding-top: 14px;
+            ">
+              <p style="margin: 0;">A DNS resolver, also called a recursive resolver, receives your device's query and does the work of tracking
           down the final answer, checking root, TLD, and authoritative servers as needed.</p>
-        <h3>What are the main types of DNS records?</h3>
-        <p>The most common are A (IPv4 address), AAAA (IPv6 address), CNAME (alias to another domain), MX (email
+            </div>
+          </details>
+        
+          <details class="faq-item" style="background: var(--bg-1); border: 1px solid var(--line); border-radius: var(--r-md); padding: 0; overflow: hidden; transition: border-color .15s;">
+            <summary style="
+              font-size: 16px;
+              font-weight: 600;
+              cursor: pointer;
+              list-style: none;
+              display: flex;
+              justify-content: space-between;
+              align-items: center;
+              color: var(--text);
+              padding: 18px 22px;
+            ">
+              <span>What are the main types of DNS records?</span>
+              <span class="faq-icon" style="
+                color: var(--accent);
+                font-size: 24px;
+                font-weight: 300;
+                line-height: 1;
+                flex: none;
+                width: 28px;
+                height: 28px;
+                border: 1.5px solid var(--accent-line);
+                border-radius: 50%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                background: var(--accent-soft);
+                font-size: 18px;
+                transition: transform .2s;
+              ">+</span>
+            </summary>
+            <div style="
+              padding: 0 22px 18px;
+              font-size: 15.5px;
+              line-height: 1.7;
+              color: var(--text-2);
+              border-top: 1px solid var(--line);
+              padding-top: 14px;
+            ">
+              <p style="margin: 0;">The most common are A (IPv4 address), AAAA (IPv6 address), CNAME (alias to another domain), MX (email
           routing), TXT (text data, often SPF/DKIM/DMARC), NS (authoritative name servers), and SOA (administrative zone
           info).</p>
-        <h3>What is DNS caching and why does it matter?</h3>
-        <p>Caching lets resolvers and devices temporarily store a DNS answer based on a record's TTL, instead of looking
+            </div>
+          </details>
+        
+          <details class="faq-item" style="background: var(--bg-1); border: 1px solid var(--line); border-radius: var(--r-md); padding: 0; overflow: hidden; transition: border-color .15s;">
+            <summary style="
+              font-size: 16px;
+              font-weight: 600;
+              cursor: pointer;
+              list-style: none;
+              display: flex;
+              justify-content: space-between;
+              align-items: center;
+              color: var(--text);
+              padding: 18px 22px;
+            ">
+              <span>What is DNS caching and why does it matter?</span>
+              <span class="faq-icon" style="
+                color: var(--accent);
+                font-size: 24px;
+                font-weight: 300;
+                line-height: 1;
+                flex: none;
+                width: 28px;
+                height: 28px;
+                border: 1.5px solid var(--accent-line);
+                border-radius: 50%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                background: var(--accent-soft);
+                font-size: 18px;
+                transition: transform .2s;
+              ">+</span>
+            </summary>
+            <div style="
+              padding: 0 22px 18px;
+              font-size: 15.5px;
+              line-height: 1.7;
+              color: var(--text-2);
+              border-top: 1px solid var(--line);
+              padding-top: 14px;
+            ">
+              <p style="margin: 0;">Caching lets resolvers and devices temporarily store a DNS answer based on a record's TTL, instead of looking
           it up fresh every time. It is why the internet feels fast — most lookups are served from memory rather than
           running the full resolution chain.</p>
-        <h3>What is DNS propagation and how long does it take?</h3>
-        <p>Propagation is the time it takes a DNS change to reach every resolver worldwide, since each refreshes its
+            </div>
+          </details>
+        
+          <details class="faq-item" style="background: var(--bg-1); border: 1px solid var(--line); border-radius: var(--r-md); padding: 0; overflow: hidden; transition: border-color .15s;">
+            <summary style="
+              font-size: 16px;
+              font-weight: 600;
+              cursor: pointer;
+              list-style: none;
+              display: flex;
+              justify-content: space-between;
+              align-items: center;
+              color: var(--text);
+              padding: 18px 22px;
+            ">
+              <span>What is DNS propagation and how long does it take?</span>
+              <span class="faq-icon" style="
+                color: var(--accent);
+                font-size: 24px;
+                font-weight: 300;
+                line-height: 1;
+                flex: none;
+                width: 28px;
+                height: 28px;
+                border: 1.5px solid var(--accent-line);
+                border-radius: 50%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                background: var(--accent-soft);
+                font-size: 18px;
+                transition: transform .2s;
+              ">+</span>
+            </summary>
+            <div style="
+              padding: 0 22px 18px;
+              font-size: 15.5px;
+              line-height: 1.7;
+              color: var(--text-2);
+              border-top: 1px solid var(--line);
+              padding-top: 14px;
+            ">
+              <p style="margin: 0;">Propagation is the time it takes a DNS change to reach every resolver worldwide, since each refreshes its
           cached copy only after the TTL expires. It typically takes a few minutes to 24–48 hours.</p>
-        <h3>What is DNS cache poisoning?</h3>
-        <p>An attacker sneaks a fake DNS response into a resolver's cache, redirecting users to a malicious server
+            </div>
+          </details>
+        
+          <details class="faq-item" style="background: var(--bg-1); border: 1px solid var(--line); border-radius: var(--r-md); padding: 0; overflow: hidden; transition: border-color .15s;">
+            <summary style="
+              font-size: 16px;
+              font-weight: 600;
+              cursor: pointer;
+              list-style: none;
+              display: flex;
+              justify-content: space-between;
+              align-items: center;
+              color: var(--text);
+              padding: 18px 22px;
+            ">
+              <span>What is DNS cache poisoning?</span>
+              <span class="faq-icon" style="
+                color: var(--accent);
+                font-size: 24px;
+                font-weight: 300;
+                line-height: 1;
+                flex: none;
+                width: 28px;
+                height: 28px;
+                border: 1.5px solid var(--accent-line);
+                border-radius: 50%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                background: var(--accent-soft);
+                font-size: 18px;
+                transition: transform .2s;
+              ">+</span>
+            </summary>
+            <div style="
+              padding: 0 22px 18px;
+              font-size: 15.5px;
+              line-height: 1.7;
+              color: var(--text-2);
+              border-top: 1px solid var(--line);
+              padding-top: 14px;
+            ">
+              <p style="margin: 0;">An attacker sneaks a fake DNS response into a resolver's cache, redirecting users to a malicious server
           instead of the real one — often without any visible warning.</p>
-        <h3>What is DNS hijacking?</h3>
-        <p>DNS hijacking happens when an attacker alters a domain's actual DNS settings or a network's router
+            </div>
+          </details>
+        
+          <details class="faq-item" style="background: var(--bg-1); border: 1px solid var(--line); border-radius: var(--r-md); padding: 0; overflow: hidden; transition: border-color .15s;">
+            <summary style="
+              font-size: 16px;
+              font-weight: 600;
+              cursor: pointer;
+              list-style: none;
+              display: flex;
+              justify-content: space-between;
+              align-items: center;
+              color: var(--text);
+              padding: 18px 22px;
+            ">
+              <span>What is DNS hijacking?</span>
+              <span class="faq-icon" style="
+                color: var(--accent);
+                font-size: 24px;
+                font-weight: 300;
+                line-height: 1;
+                flex: none;
+                width: 28px;
+                height: 28px;
+                border: 1.5px solid var(--accent-line);
+                border-radius: 50%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                background: var(--accent-soft);
+                font-size: 18px;
+                transition: transform .2s;
+              ">+</span>
+            </summary>
+            <div style="
+              padding: 0 22px 18px;
+              font-size: 15.5px;
+              line-height: 1.7;
+              color: var(--text-2);
+              border-top: 1px solid var(--line);
+              padding-top: 14px;
+            ">
+              <p style="margin: 0;">DNS hijacking happens when an attacker alters a domain's actual DNS settings or a network's router
           configuration to redirect traffic maliciously, usually for a longer window than a single poisoned cache entry.
         </p>
-        <h3>Is DNS a security risk?</h3>
-        <p>DNS itself is not inherently risky, but because nearly every online action starts with a DNS lookup, it is a
+            </div>
+          </details>
+        
+          <details class="faq-item" style="background: var(--bg-1); border: 1px solid var(--line); border-radius: var(--r-md); padding: 0; overflow: hidden; transition: border-color .15s;">
+            <summary style="
+              font-size: 16px;
+              font-weight: 600;
+              cursor: pointer;
+              list-style: none;
+              display: flex;
+              justify-content: space-between;
+              align-items: center;
+              color: var(--text);
+              padding: 18px 22px;
+            ">
+              <span>Is DNS a security risk?</span>
+              <span class="faq-icon" style="
+                color: var(--accent);
+                font-size: 24px;
+                font-weight: 300;
+                line-height: 1;
+                flex: none;
+                width: 28px;
+                height: 28px;
+                border: 1.5px solid var(--accent-line);
+                border-radius: 50%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                background: var(--accent-soft);
+                font-size: 18px;
+                transition: transform .2s;
+              ">+</span>
+            </summary>
+            <div style="
+              padding: 0 22px 18px;
+              font-size: 15.5px;
+              line-height: 1.7;
+              color: var(--text-2);
+              border-top: 1px solid var(--line);
+              padding-top: 14px;
+            ">
+              <p style="margin: 0;">DNS itself is not inherently risky, but because nearly every online action starts with a DNS lookup, it is a
           common target and one of the earliest points where phishing, malware callbacks, and lookalike domains can be
           caught.</p>
-        <h3>Can DNS be used for security protection?</h3>
-        <p>Yes. Protective DNS resolvers inspect and can block malicious or suspicious domains before a device connects
-          to them, stopping phishing pages, malware command-and-control traffic, and lookalike domains at the earliest
+            </div>
+          </details>
+        
+          <details class="faq-item" style="background: var(--bg-1); border: 1px solid var(--line); border-radius: var(--r-md); padding: 0; overflow: hidden; transition: border-color .15s;">
+            <summary style="
+              font-size: 16px;
+              font-weight: 600;
+              cursor: pointer;
+              list-style: none;
+              display: flex;
+              justify-content: space-between;
+              align-items: center;
+              color: var(--text);
+              padding: 18px 22px;
+            ">
+              <span>Can DNS be used for security protection?</span>
+              <span class="faq-icon" style="
+                color: var(--accent);
+                font-size: 24px;
+                font-weight: 300;
+                line-height: 1;
+                flex: none;
+                width: 28px;
+                height: 28px;
+                border: 1.5px solid var(--accent-line);
+                border-radius: 50%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                background: var(--accent-soft);
+                font-size: 18px;
+                transition: transform .2s;
+              ">+</span>
+            </summary>
+            <div style="
+              padding: 0 22px 18px;
+              font-size: 15.5px;
+              line-height: 1.7;
+              color: var(--text-2);
+              border-top: 1px solid var(--line);
+              padding-top: 14px;
+            ">
+              <p style="margin: 0;">Yes. Protective DNS resolvers inspect and can block malicious or suspicious domains before a device connects
+          to them, stopping <a href="https://olladns.com/security.html" target="_blank" rel="noopener noreferrer" title="olladns DNS Security" style="color: var(--accent); text-decoration: underline; text-underline-offset: 3px; text-decoration-color: var(--accent-line);">phishing pages</a>, <a href="https://olladns.com/security.html" target="_blank" rel="noopener noreferrer" title="Block C2 with olladns" style="color: var(--accent); text-decoration: underline; text-underline-offset: 3px; text-decoration-color: var(--accent-line);">malware command-and-control</a> traffic, and lookalike domains at the earliest
           possible point.</p>
-        <h2>The takeaway</h2>
-        <p>DNS is foundational yet almost invisible. It turns names into numbers through an elegantly delegated
-          hierarchy, usually in the time it takes to blink. Because it happens before almost anything else on a network,
-          it is also one of the highest-leverage places to catch trouble early: a phishing domain that never resolves, a
-          command-and-control callback that goes nowhere, a lookalike domain flagged before anyone types a password.
-          Understanding how DNS works is the foundation for understanding why DNS-layer security exists — and why it
-          tends to be one of the simplest, fastest, and most quietly effective controls a security team can put in
-          place.</p>
+            </div>
+          </details>
+        </div></section>
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
 
 
-        <div class="post-author">
-          <span class="dot">OS</span>
-          <span>Written by <strong style="color:var(--text)">olladns Security Team</strong> · Guide</span>
-        </div>
+        
 
-        <div class="post-nav">
-          <a href="/blog/what-is-dns-security-a-complete-guide-to-protecting-your-network-in-2026/">← What Is DNS
-            Security? A Complete Guide to Protecting Your Network in 2026</a>
-          <a href="/blog/dns-firewall-explained-how-dns-firewalls-protect-networks/">DNS Firewall Explained: How DNS
-            Firewalls Protect Networks →</a>
-        </div>
+        
       </article>
+    </div>
+  
     </div>
   </section>
 
@@ -514,6 +2233,6 @@
       if (history.pushState) history.pushState(null, '', link.getAttribute('href'));
     });
   </script>
-</body>
 
-</html>
+
+</body></html>
