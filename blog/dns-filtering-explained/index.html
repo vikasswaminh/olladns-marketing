@@ -1,27 +1,21 @@
-<!doctype html>
-<html lang="en">
-
-<head>
-  <meta charset="utf-8" />
+<!DOCTYPE html><html lang="en"><head>
+  <meta charset="utf-8">
   <title>DNS Filtering Explained: How It Stops Phishing and Malware · olladns Blog</title>
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <meta name="description"
-    content="DNS filtering blocks malicious domains before a connection ever forms. Here's exactly how it stops phishing and malware, how it's built, and how to deploy it right." />
-  <meta property="og:title" content="What Is DNS? How the Domain Name System Works · olladns Blog" />
-  <meta property="og:description"
-    content="DNS is the internet&#039;s address book — it turns human-friendly names into the numeric IP addresses computers use to find each other. Here&#039;s how it works, step by step, and why it&#039;s also one of the most underrated security layers on the internet." />
-  <meta property="og:type" content="article" />
-  <meta property="og:url" content="https://olladns.com/blog/what-is-dns-how-domain-name-system-works/" />
-  <meta property="og:image"
-    content="data:image/svg+xml,%3Csvg%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%20width%3D'1280'%20height%3D'720'%3E%3Crect%20fill%3D'%2523f4f4f5'%20width%3D'1280'%20height%3D'720'%2F%3E%3Ctext%20fill%3D'%2523DA291C'%20font-family%3D'sans-serif'%20font-size%3D'28'%20font-weight%3D'600'%20x%3D'640'%20y%3D'370'%20text-anchor%3D'middle'%3EDNS%3C%2Ftext%3E%3C%2Fsvg%3E" />
-  <meta property="article:published_time" content="2026-08-20" />
-  <meta property="article:author" content="olladns Security Team" />
-  <meta property="article:section" content="Guide" />
-  <link rel="canonical" href="https://olladns.com/blog/what-is-dns-how-domain-name-system-works/" />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;500;600;700;900&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="/site.css?v=20260821" />
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="DNS filtering blocks malicious domains before a connection ever forms. Here's exactly how it stops phishing and malware, how it's built, and how to deploy it right.">
+  <meta property="og:title" content="DNS Filtering Explained: How It Stops Phishing and Malware · olladns Blog">
+  <meta property="og:description" content="DNS filtering blocks malicious domains before a connection ever forms. Here's exactly how it stops phishing and malware, how it's built, and how to deploy it right.">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://olladns.com/blog/dns-filtering-explained/">
+  <meta property="og:image" content="data:image/svg+xml,%3Csvg%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%20width%3D'1280'%20height%3D'720'%3E%3Crect%20fill%3D'%2523f4f4f5'%20width%3D'1280'%20height%3D'720'%2F%3E%3Ctext%20fill%3D'%2523DA291C'%20font-family%3D'sans-serif'%20font-size%3D'28'%20font-weight%3D'600'%20x%3D'640'%20y%3D'370'%20text-anchor%3D'middle'%3EDNS%3C%2Ftext%3E%3C%2Fsvg%3E">
+  <meta property="article:published_time" content="2026-08-20">
+  <meta property="article:author" content="olladns Security Team">
+  <meta property="article:section" content="Guide">
+  <link rel="canonical" href="https://olladns.com/blog/dns-filtering-explained/">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+  <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;500;600;700;900&amp;display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/site.css?v=20260821">
   <style>
     .post-meta {
       display: flex;
@@ -181,9 +175,9 @@
 
   <section class="page-hero" style="padding-top: 24px; padding-bottom:40px">
     <div class="grid-bg"></div>
-    <div class="container" style="position:relative">
+    <div class="container" style="position: relative; text-align: center; display: flex; flex-direction: column; align-items: center;">
       <span class="eyebrow"><a href="/blog/" style="color:inherit">Blog</a></span>
-      <h1 class="gradient-text">DNS Filtering Explained: How It Stops Phishing and Malware</h1>
+      <h1 class="gradient-text" style="font-size: clamp(26px, 3.8vw, 46px); line-height: 1.2; max-width: 700px;">DNS Filtering Explained:<br>How It Stops Phishing and Malware</h1>
       <div class="post-meta">
         <span class="tag">Guide</span>
         <span>Aug 25, 2026</span>
@@ -744,48 +738,116 @@
             }
             .eval-body h4 { font-size: 14px; font-weight: 700; color: var(--text); margin: 0 0 5px; }
             .eval-body p { font-size: 13.5px; color: var(--muted); line-height: 1.55; margin: 0; }
-          </style>
+          
+    /* Premium Blog 3 styles */
+    .post-section {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: var(--r-lg);
+      padding: 32px 36px;
+      margin-bottom: 24px;
+      scroll-margin-top: 92px;
+    }
+    .concept-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 18px;
+      margin: 24px 0;
+    }
+    .concept-card, .surface-card, .tech-card {
+      background: var(--bg-1);
+      border: 1px solid var(--line);
+      border-radius: var(--r-md);
+      padding: 24px;
+      transition: border-color .15s;
+    }
+    .concept-card:hover, .surface-card:hover, .tech-card:hover {
+      border-color: var(--accent-line);
+    }
+    .concept-ic {
+      width: 42px; height: 42px;
+      border-radius: 10px;
+      background: var(--accent-soft);
+      color: var(--accent);
+      display: grid;
+      place-items: center;
+      border: 1px solid var(--accent-line);
+      margin-bottom: 14px;
+    }
+    .concept-card h4, .surface-card h4, .tech-card h4 {
+      margin: 0 0 10px; font-size: 16px;
+    }
+    .concept-card p, .surface-card p, .tech-card p {
+      margin: 0; font-size: 15px; color: var(--text-2); line-height: 1.65;
+    }
+    .attack-surface-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 18px;
+      margin: 26px 0;
+    }
+    .surface-num {
+      font-family: var(--mono);
+      font-size: 24px; font-weight: 700;
+      color: var(--accent); margin-bottom: 10px;
+    }
+    .dns-flow {
+      display: flex; flex-direction: column; gap: 12px;
+      margin: 28px 0; padding: 26px;
+      background: var(--bg-1);
+      border: 1px solid var(--line);
+      border-radius: var(--r-lg);
+    }
+    .flow-step { display: flex; align-items: center; gap: 16px; }
+    .flow-dot {
+      width: 12px; height: 12px; border-radius: 50%;
+      background: var(--accent);
+      box-shadow: 0 0 0 4px var(--accent-soft);
+      flex: none;
+    }
+    .flow-card {
+      flex: 1; background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: var(--r-md); padding: 16px 18px;
+    }
+    .flow-card h4 { margin: 0 0 4px; font-size: 15px; }
+    .flow-card p { margin: 0; font-size: 14px; color: var(--muted); line-height: 1.55; }
+    .flow-arrow { padding-left: 5px; color: var(--dim); font-size: 14px; }
+    .post-quote {
+      border-left: 3px solid var(--accent);
+      margin: 28px 0; padding: 6px 0 6px 24px;
+    }
+    .post-quote p {
+      font-size: 20px; color: var(--text);
+      font-style: italic; margin: 0; line-height: 1.55;
+    }
+    .what-found {
+      background: var(--panel); border: 1px solid var(--line);
+      border-radius: var(--r-lg); padding: 26px;
+      margin: 28px 0 36px; box-shadow: var(--shadow);
+    }
+    .what-found-head {
+      display: flex; align-items: center;
+      gap: 10px; margin-bottom: 14px;
+    }
+    .tldr-label {
+      font-family: var(--mono); font-size: 11px;
+      font-weight: 700; text-transform: uppercase;
+      letter-spacing: .08em; background: var(--accent);
+      color: #fff; padding: 5px 12px; border-radius: 999px;
+    }
+    .faq-item summary::-webkit-details-marker { display: none; }
+    .faq-item[open] .faq-icon { transform: rotate(45deg); }
+    .faq-item:not([open]) .faq-icon { transform: rotate(0deg); }
+    @media (max-width: 768px) {
+      .concept-grid, .attack-surface-grid { grid-template-columns: 1fr; }
+      .post-section { padding: 20px; }
+    }
+  </style>
 
-          <div class="post-tldr" style="margin-bottom: 24px;">
-            <div class="tldr-head">
-              <span class="tldr-label">TL;DR</span>
-              <h3 id="tldr">DNS is security's earliest intervention point</h3>
-            </div>
-            <p style="font-size: 15.5px; line-height: 1.7; margin: 0 0 16px; color: var(--text-2)">DNS filtering blocks
-              malicious domains before a connection is established, providing an essential layer of protection against
-              phishing and malware.</p>
+          
 
-            <ul class="tldr-list">
-              <li><span class="ck">✓ </span><span><strong>Earliest stop:</strong> DNS lookups happen before malicious
-                  payloads download or phishing pages load.</span></li>
-              <li><span class="ck">✓ </span><span><strong>Universal coverage:</strong> every device must resolve domains
-                  to communicate.</span></li>
-            </ul>
-          </div>
-
-          <div class="what-found" style="margin-top: 0; margin-bottom: 56px;">
-            <div class="what-found-head">
-              <span class="tldr-label">Key Takeaways</span>
-              <h3 id="key-takeaways-title" style="font-size: 18px; margin: 0; color: var(--text);">Essential Points</h3>
-            </div>
-            <ul class="tldr-list">
-              <li><span class="ck">✓ </span><span><strong>DNS filtering blocks malicious domains before a connection is
-                    established:</strong> It checks DNS requests against threat intelligence, reputation data, and
-                  security policies.</span></li>
-              <li><span class="ck">✓ </span><span><strong>DNS filtering provides an important layer of phishing
-                    protection:</strong> It can block malicious links regardless of whether they arrive through email,
-                  SMS, QR codes, or social media.</span></li>
-              <li><span class="ck">✓ </span><span><strong>Modern DNS filtering goes beyond simple blocklists:</strong>
-                  Advanced solutions use DGA detection, typosquatting and homoglyph detection, and behavioral
-                  analysis.</span></li>
-              <li><span class="ck">✓ </span><span><strong>DNS filtering can disrupt malware
-                    command-and-control:</strong> It prevents malware from reaching C2 infrastructure and helps identify
-                  attempts to exfiltrate data through DNS.</span></li>
-              <li><span class="ck">✓ </span><span><strong>DNS filtering works best as part of a layered security
-                    strategy:</strong> It does not replace firewalls or endpoint protection, but perfectly complements
-                  them.</span></li>
-            </ul>
-          </div>
+          
 
           <p>DNS filtering works by intercepting the domain lookup that happens before almost every phishing click and
             malware connection, checking it against threat intelligence, and simply refusing to answer if the domain is
@@ -796,7 +858,34 @@
             before you rely on it as your only line of defense.</p>
 
           <!-- ═══════════ SECTION 01 ═══════════ -->
-          <section class="post-section" id="the-split-second-before-everything-goes-wrong">
+    <div class="post-tldr" style="margin-bottom: 24px;">
+      <div class="tldr-head">
+        <span class="tldr-label">TL;DR</span>
+        <h3 style="font-size: 20px; margin: 0; color: var(--text);">DNS Filtering in 60 Seconds</h3>
+      </div>
+      <ul class="tldr-list">
+        <li><span class="ck">✓</span> DNS filtering intercepts every lookup before a connection opens — stopping threats at the earliest possible point.</li>
+        <li><span class="ck">✓</span> It works by resolving queries through a protective resolver that checks each domain against threat intelligence in milliseconds.</li>
+        <li><span class="ck">✓</span> Phishing sites, malware C2 servers, and lookalike domains are blocked before the browser ever loads a byte.</li>
+        <li><span class="ck">✓</span> Unlike endpoint tools, DNS filtering covers every device on a network with zero software to install.</li>
+        <li><span class="ck">✓</span> It complements firewalls and EDR — it doesn't replace them — but it catches threats earlier.</li>
+      </ul>
+    </div>
+  
+    <div class="what-found" style="margin: 0 0 40px 0;">
+      <div class="what-found-head">
+        <span class="tldr-label">Key Takeaways</span>
+        <h3 style="font-size: 20px; margin: 0; color: var(--text);">What You'll Learn</h3>
+      </div>
+      <ul style="margin: 0; padding-left: 20px; font-size: 15.5px; line-height: 1.7; color: var(--text-2);">
+        <li style="margin-bottom: 8px;"><strong>The Mechanism:</strong> Exactly how a filtering resolver intercepts and blocks a domain query before a connection ever opens.</li>
+        <li style="margin-bottom: 8px;"><strong>Phishing Defence:</strong> Why DNS is the single best choke point to stop phishing — before the page even renders.</li>
+        <li style="margin-bottom: 8px;"><strong>Malware C2 Blocking:</strong> How filtering cuts off malware's ability to call home to command-and-control servers.</li>
+        <li style="margin-bottom: 8px;"><strong>Deployment:</strong> A 6-step framework for rolling out filtering without disrupting your team's legitimate work.</li>
+        <li style="margin-bottom: 0;"><strong>Evaluation:</strong> The five questions to ask any DNS filtering provider before signing a contract.</li>
+      </ul>
+    </div>
+  <section class="post-section" id="the-split-second-before-everything-goes-wrong" style="">
             <span class="section-num">01</span>
             <h2>The Split Second Before Everything Goes Wrong</h2>
             <p>Picture the moment right before a phishing attack works. Not the email landing in the inbox — that part
@@ -807,7 +896,7 @@
               rendering on their screen, something must happen first: their device must ask, "where is this domain,
               actually?" That question — a DNS lookup — is the single narrowest chokepoint in the entire attack. It is
               also, weirdly, one of the least defended.</p>
-            <p>That's the whole premise behind DNS filtering. It sits exactly at that chokepoint and asks one question
+            <p>That's the whole premise behind <a href="https://olladns.com/product.html" title="olladns DNS Filtering" target="_blank" rel="noopener noreferrer" style="color: var(--accent); text-decoration: underline; text-underline-offset: 3px; text-decoration-color: var(--accent-line);">DNS filtering</a>. It sits exactly at that chokepoint and asks one question
               of its own before answering: <em>is this domain safe to go to?</em> If the answer is no, the lookup simply fails.
               The phishing page never loads. The malware never reaches its command server. The user's browser just…
               stalls, like the link was broken. No antivirus signature must match. The connection was never allowed to
@@ -818,8 +907,7 @@
           </section>
 
           <!-- ═══════════ SECTION 02 — Split text + stat cards ═══════════ -->
-          <div class="s02-split">
-            <section class="post-section" id="a-thirty-second-refresher-on-dns-because-the-mechanism-matters">
+                      <section class="post-section" id="a-thirty-second-refresher-on-dns-because-the-mechanism-matters" style="padding-bottom: 28px;">
               <span class="section-num">02</span>
               <h2>A Thirty-Second Refresher on DNS</h2>
               <p>You already know, roughly, that DNS turns names into numbers. Type olladns.com into a browser and that
@@ -833,26 +921,26 @@
                 powerful. You're not trying to inspect every possible protocol or payload format an attacker might dream
                 up. You're watching one narrow, universal chokepoint that every single connection, malicious or
                 otherwise, is contractually obligated to pass through before it can do anything at all.</p>
+              <div class="s02-stats" style="display:grid; grid-template-columns: repeat(3,1fr); gap:16px; margin-top:24px;">
+                <div class="stat-card">
+                  <div class="stat-val">100%</div>
+                  <div class="stat-label">of internet connections start with a DNS lookup</div>
+                </div>
+                <div class="stat-card">
+                  <div class="stat-val">&lt;5ms</div>
+                  <div class="stat-label">median DNS resolution time — filtering adds virtually none</div>
+                </div>
+                <div class="stat-card">
+                  <div class="stat-val">1st</div>
+                  <div class="stat-label">DNS is the earliest intervention point in any attack chain</div>
+                </div>
+              </div>
             </section>
-            <div class="s02-stats">
-              <div class="stat-card">
-                <div class="stat-val">100%</div>
-                <div class="stat-label">of internet connections start with a DNS lookup</div>
-              </div>
-              <div class="stat-card">
-                <div class="stat-val">&lt;5ms</div>
-                <div class="stat-label">median DNS resolution time — filtering adds virtually none</div>
-              </div>
-              <div class="stat-card">
-                <div class="stat-val">1st</div>
-                <div class="stat-label">DNS is the earliest intervention point in any attack chain</div>
-              </div>
-            </div>
-          </div>
+
 
           <!-- ═══════════ SECTION 03 — Three pillars ═══════════ -->
           <div class="s03-pillars">
-            <section class="post-section" id="what-dns-filtering-actually-is-mechanically" style="margin-bottom:24px">
+            <section class="post-section" id="what-dns-filtering-actually-is-mechanically" style="">
               <span class="section-num">03</span>
               <h2>What DNS Filtering Actually Is, Mechanically</h2>
               <p>DNS filtering routes your DNS queries through a resolver that checks each one against a set of rules —
@@ -863,7 +951,29 @@
                 decision point. Before it hands back the IP address, it checks that domain against everything it
                 currently knows — in single-digit milliseconds, because nobody will tolerate a security control that
                 makes every web page feel sluggish.</p>
-            </section>
+            
+      <div class="dns-flow" style="margin-top: 24px;">
+        <div class="flow-step"><span class="flow-dot"></span>
+          <div class="flow-card"><h4>Device sends a DNS query</h4><p>User types a URL or clicks a link. The device queries its configured DNS resolver.</p></div>
+        </div>
+        <div class="flow-arrow">↓</div>
+        <div class="flow-step"><span class="flow-dot"></span>
+          <div class="flow-card"><h4>Filtering resolver receives the query</h4><p>Instead of a plain ISP resolver, the query lands at a <a href="https://olladns.com/product.html" title="olladns Protective DNS Resolver" target="_blank" rel="noopener noreferrer" style="color: var(--accent); text-decoration: underline; text-underline-offset: 3px; text-decoration-color: var(--accent-line);">protective resolver</a> that checks every domain.</p></div>
+        </div>
+        <div class="flow-arrow">↓</div>
+        <div class="flow-step"><span class="flow-dot"></span>
+          <div class="flow-card"><h4>Domain is checked against threat intelligence</h4><p>The resolver cross-references the domain against blocklists, ML models, and reputation databases — in milliseconds.</p></div>
+        </div>
+        <div class="flow-arrow">↓</div>
+        <div class="flow-step"><span class="flow-dot"></span>
+          <div class="flow-card"><h4>Decision: Allow or Block</h4><p>Clean domains resolve normally. Malicious, suspicious, or policy-violating domains return a blocked response.</p></div>
+        </div>
+        <div class="flow-arrow">↓</div>
+        <div class="flow-step"><span class="flow-dot"></span>
+          <div class="flow-card"><h4>Connection never opens</h4><p>The browser receives a block page or empty response. No data is exchanged with the malicious server.</p></div>
+        </div>
+      </div>
+    </section>
             <div class="pillar-row">
               <div class="pillar-card">
                 <span class="pillar-icon">🚫</span>
@@ -887,7 +997,7 @@
           </div>
 
           <!-- ═══════════ SECTION 04 — Pull quote ═══════════ -->
-          <section class="post-section" id="how-dns-filtering-stops-phishing">
+          <section class="post-section" id="how-dns-filtering-stops-phishing" style="">
             <span class="section-num">04</span>
             <h2>How DNS Filtering Stops Phishing</h2>
             <p>Phishing is a con game that depends entirely on getting a victim to a fake page that looks real enough.
@@ -920,7 +1030,7 @@
           </section>
 
           <!-- ═══════════ SECTION 05 — Timeline steps ═══════════ -->
-          <section class="post-section" id="why-this-is-also-a-good-place-to-stop-malware">
+          <section class="post-section" id="why-this-is-also-a-good-place-to-stop-malware" style="">
             <span class="section-num">05</span>
             <h2>Why This Is Also a Good Place to Stop Malware</h2>
             <p>Phishing gets most of the popular attention, but DNS filtering earns just as much of its keep against
@@ -966,7 +1076,7 @@
           </section>
 
           <!-- ═══════════ SECTION 06 — Detection grid ═══════════ -->
-          <section class="post-section" id="the-building-blocks-what-s-actually-inside-a-filtering-decision">
+          <section class="post-section" id="the-building-blocks-what-s-actually-inside-a-filtering-decision" style="">
             <span class="section-num">06</span>
             <h2>The Building Blocks: What's Inside a Filtering Decision</h2>
             <p>"DNS filtering" as a phrase can hide a huge range of actual sophistication. The differences matter
@@ -1012,10 +1122,33 @@
             <p style="margin-top:20px">The honest takeaway: not one of these techniques is sufficient on its own.
               The strongest filtering systems layer all of them, so a domain missing one check still gets caught by
               another.</p>
-          </section>
+          
+      <div class="concept-grid" style="margin-top: 24px;">
+        <div class="concept-card">
+          <div class="concept-ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 11l3 3L22 4"></path><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"></path></svg></div>
+          <h4>Blocklists &amp; Allowlists</h4>
+          <p>Curated lists of known-malicious and known-safe domains. Updated continuously from threat intelligence feeds.</p>
+        </div>
+        <div class="concept-card">
+          <div class="concept-ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><path d="M12 8v4l3 3"></path></svg></div>
+          <h4>Domain Age &amp; Reputation</h4>
+          <p>Newly registered domains are treated with higher suspicion. Phishing infrastructure is typically freshly created.</p>
+        </div>
+        <div class="concept-card">
+          <div class="concept-ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline></svg></div>
+          <h4>ML Classifiers</h4>
+          <p>Machine learning models analyze domain patterns, query behaviour, and network signals to flag suspicious activity in real time.</p>
+        </div>
+        <div class="concept-card">
+          <div class="concept-ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"></rect><path d="M3 9h18M9 21V9"></path></svg></div>
+          <h4>Category Policies</h4>
+          <p>Admins can block entire categories (gambling, adult, social media) in addition to known threats — useful for compliance.</p>
+        </div>
+      </div>
+    </section>
 
           <!-- ═══════════ SECTION 07 — Outcome pills ═══════════ -->
-          <section class="post-section" id="what-happens-concretely-when-something-gets-blocked">
+          <section class="post-section" id="what-happens-concretely-when-something-gets-blocked" style="">
             <span class="section-num">07</span>
             <h2>What Happens, Concretely, When Something Gets Blocked</h2>
             <p>The mechanics are simpler and less dramatic than people sometimes expect — and that simplicity is the
@@ -1043,7 +1176,7 @@
           </section>
 
           <!-- ═══════════ SECTION 08 — Comparison table ═══════════ -->
-          <section class="post-section" id="where-dns-filtering-sits-relative-to-your-other-defenses">
+          <section class="post-section" id="where-dns-filtering-sits-relative-to-your-other-defenses" style="">
             <span class="section-num">08</span>
             <h2>Where DNS Filtering Sits Relative to Your Other Defenses</h2>
             <p>DNS filtering is not a replacement for a firewall, endpoint protection, or email security. It's a
@@ -1091,10 +1224,12 @@
             </table>
             <p style="margin-top:16px">Think of it like a bank's security: cameras, guards, alarms, and a vault door
               — each covering a different failure mode of the others. None of them make the rest obsolete.</p>
-          </section>
+          
+      
+    </section>
 
           <!-- ═══════════ SECTION 09 — Deploy checklist steps ═══════════ -->
-          <section class="post-section" id="deploying-dns-filtering-without-breaking-everyone-s-workday">
+          <section class="post-section" id="deploying-dns-filtering-without-breaking-everyone-s-workday" style="">
             <span class="section-num">09</span>
             <h2>Deploying DNS Filtering Without Breaking Everyone's Workday</h2>
             <p>Rolling it out across a real organization with real people who will absolutely notice and complain if
@@ -1142,7 +1277,7 @@
                 <div>
                   <h4>Manage policy as code where you can</h4>
                   <p>Managing policies through a Terraform provider — with drift detection and version history —
-                    brings the same operational discipline to DNS security that most teams already demand of their
+                    brings the same operational discipline to <a href="https://olladns.com/blog/what-is-dns-security-a-complete-guide-to-protecting-your-network-in-2026/" title="What Is DNS Security?" target="_blank" rel="noopener noreferrer" style="color: var(--accent); text-decoration: underline; text-underline-offset: 3px; text-decoration-color: var(--accent-line);">DNS security</a> that most teams already demand of their
                     infrastructure elsewhere. "Who approved this exception, and when" becomes a one-line git blame.</p>
                 </div>
               </div>
@@ -1159,7 +1294,7 @@
           </section>
 
           <!-- ═══════════ SECTION 10 — Objection cards ═══════════ -->
-          <section class="post-section" id="common-objections-addressed-honestly">
+          <section class="post-section" id="common-objections-addressed-honestly" style="">
             <span class="section-num">10</span>
             <h2>Common Objections, Addressed Honestly</h2>
             <p>A handful of pushbacks come up often enough that they're worth answering directly, without the marketing
@@ -1232,7 +1367,7 @@
           </section>
 
           <!-- ═══════════ SECTION 11 — Evaluation checklist ═══════════ -->
-          <section class="post-section" id="what-to-actually-look-for-when-evaluating-a-provider">
+          <section class="post-section" id="what-to-actually-look-for-when-evaluating-a-provider" style="">
             <span class="section-num">11</span>
             <h2>What to Actually Look for When Evaluating a Provider</h2>
             <p>If you're comparing options rather than taking any single vendor's word for it, a handful of questions
@@ -1285,7 +1420,7 @@
               discipline matters just as much as their feature list.</p>
 
 
-          <section class="post-section faq-section-box" id="frequently-asked-questions">
+          <section class="post-section faq-section-box" id="frequently-asked-questions" style="">
             <span class="section-num">12</span>
             <h2>Frequently Asked Questions</h2>
             <div class="faq-box">
@@ -1300,7 +1435,7 @@
                 <summary class="faq-summary">Does DNS filtering stop zero-day malware it's never seen before?</summary>
                 <p class="faq-answer">It can, though, not through recognition of the specific malware sample itself.
                   Behavioral and structural detection — recognizing DGA patterns, unusual query volumes, or a domain's
-                  suspicious registration characteristics — can catch previously unseen command-and-control
+                  suspicious registration characteristics — can catch previously unseen <a href="https://olladns.com/security.html" title="Block C2 with olladns" target="_blank" rel="noopener noreferrer" style="color: var(--accent); text-decoration: underline; text-underline-offset: 3px; text-decoration-color: var(--accent-line);">command-and-control</a>
                   infrastructure even when the malware binary itself has never been analyzed by anyone.</p>
               </details>
               <details class="faq-item">
@@ -1369,7 +1504,7 @@
             </div>
           </section>
 
-          <section class="post-section" id="the-bigger-picture">
+          <section class="post-section" id="the-bigger-picture" style="">
             <span class="section-num">13</span>
             <h2>The Bigger Picture</h2>
             <p>Step back far enough and DNS filtering is just a bet on timing. Every attack, no matter how sophisticated
@@ -1394,7 +1529,7 @@
               watching.</p>
           </section>
 
-        </article>
+        </section></article>
       </div>
     </div>
   </section>
@@ -1417,6 +1552,6 @@
       if (history.pushState) history.pushState(null, '', link.getAttribute('href'));
     });
   </script>
-</body>
 
-</html>
+
+</body></html>
