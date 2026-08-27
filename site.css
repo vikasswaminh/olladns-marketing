@@ -77,11 +77,11 @@ svg {
 }
 
 .section {
-  padding: 96px 0
+  padding: 48px 0
 }
 
 .section-sm {
-  padding: 56px 0
+  padding: 32px 0
 }
 
 .section+.section {
